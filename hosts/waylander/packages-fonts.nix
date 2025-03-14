@@ -35,6 +35,7 @@ in {
         killall
         libappindicator
         libnotify
+        nixd
         openssl #required by Rainbow borders
         pciutils
         ripgrep
@@ -130,7 +131,6 @@ in {
 
         waybar.enable = true;
         hyprlock.enable = true;
-        firefox.enable = true;
         git.enable = true;
         nm-applet.indicator = true;
         neovim.enable = true;

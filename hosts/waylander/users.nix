@@ -29,10 +29,14 @@ in
 
             # define user packages here
             packages = with pkgs; [
-                fishPlugins.tide
-                # com
                 element-desktop
+                fishPlugins.tide
+                supersonic
                 vesktop
+
+                # code
+                lua-language-server
+                vimPlugins.nvim-jdtls
             ];
         };
 

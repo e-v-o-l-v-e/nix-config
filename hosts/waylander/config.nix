@@ -115,10 +115,10 @@ in {
   services.tailscale.enable = true;
 
   # Set your time zone.
-  services.automatic-timezoned.enable = true; #based on IP location
+  # services.automatic-timezoned.enable = true; #based on IP location
 
   #https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  #time.timeZone = "Asia/Seoul"; # Set local timezone
+  time.timeZone = "Europe/Paris"; # Set local timezone
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
