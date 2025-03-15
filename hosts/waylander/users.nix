@@ -31,6 +31,8 @@ in
             packages = with pkgs; [
                 element-desktop
                 fishPlugins.tide
+                libsForQt5.kdeconnect-kde
+                nextcloud-client
                 supersonic
                 vesktop
 
