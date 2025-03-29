@@ -31,12 +31,19 @@ in
             packages = with pkgs; [
                 element-desktop
                 fishPlugins.tide
+                libreoffice-qt6-fresh
                 libsForQt5.kdeconnect-kde
+                localsend
                 nextcloud-client
+                remmina
+                steam
                 supersonic
                 vesktop
 
                 # code
+                jdk
+                jdt-language-server
+                jre
                 lua-language-server
                 vimPlugins.nvim-jdtls
             ];
