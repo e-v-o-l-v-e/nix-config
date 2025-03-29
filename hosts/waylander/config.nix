@@ -1,14 +1,14 @@
-# 💫 https://github.com/JaKooLit 💫 #
-# Main default config
-
-
-# NOTE!!! : Packages and Fonts are configured in packages-&-fonts.nix
-
-
-{ config, pkgs, host, username, options, lib, inputs, system, ...}: let
-
+{
+  config,
+  pkgs,
+  username,
+  options,
+  lib,
+  inputs,
+  system,
+  ...
+}: let
   inherit (import ./variables.nix) keyboardLayout;
-
 in {
   imports = [
     ./hardware.nix
@@ -22,12 +22,12 @@ in {
   # BOOT related stuff
   boot = {
     kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
-    #kernelPackages = pkgs.linuxPackages_latest; # Kernel 
+    #kernelPackages = pkgs.linuxPackages_latest; # Kernel
 
     kernelParams = [
       "systemd.mask=systemd-vconsole-setup.service"
       "systemd.mask=dev-tpmrm0.device" #this is to mask that stupid 1.5 mins systemd bug
-      "nowatchdog" 
+      "nowatchdog"
       "modprobe.blacklist=sp5100_tco" #watchdog for AMD
     ];
 
@@ -35,9 +35,9 @@ in {
     #kernelModules = [ "v4l2loopback" ];
     #  extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
 
-    initrd = { 
-      availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-      kernelModules = [ "amdgpu" ];
+    initrd = {
+      availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod"];
+      kernelModules = ["amdgpu"];
     };
 
     # Needed For Some Steam Games
@@ -45,7 +45,7 @@ in {
     #  "vm.max_map_count" = 2147483642;
     #};
 
-    ## BOOT LOADERS: NOTE USE ONLY 1. either systemd or grub  
+    ## BOOT LOADERS: NOTE USE ONLY 1. either systemd or grub
     # Bootloader SystemD
     loader.systemd-boot.enable = true;
 
@@ -54,7 +54,7 @@ in {
       canTouchEfiVariables = true;
     };
 
-    loader.timeout = 5;    
+    loader.timeout = 5;
 
     # Bootloader GRUB
     #loader.grub = {
@@ -63,11 +63,9 @@ in {
     #  efiSupport = true;
     #  gfxmodeBios = "auto";
     #  memtest86.enable = true;
-    #  extraGrubInstallArgs = [ "--bootloader-id=${host}" ];
-    #  configurationName = "${host}";
+    #  extraGrubInstallArgs = [ "--bootloader-id=waylander" ];
+    #  configurationName = "waylander";
     #	 };
-
-    # Bootloader GRUB theme, configure below
 
     ## -end of BOOTLOADERS----- ##
 
@@ -90,13 +88,6 @@ in {
     plymouth.enable = true;
   };
 
-  # GRUB Bootloader theme. Of course you need to enable GRUB above.. duh! and also, enable it on flake.nix
-  #distro-grub-themes = {
-  #  enable = true;
-  #  theme = "nixos";
-  #};
-
-
   # when lid is closed, if on power : ignore, else : suspend
   services.logind.lidSwitch = "suspend";
   services.logind.lidSwitchExternalPower = "ignore";
@@ -108,16 +99,15 @@ in {
 
   # networking
   networking.networkmanager.enable = true;
-  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
-  networking.hostName = "${host}";
-  networking.timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
+  networking.nameservers = ["1.1.1.1" "1.0.0.1"];
+  networking.hostName = "waylander";
+  networking.timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
 
   services.tailscale.enable = true;
 
   # Set your time zone.
   # services.automatic-timezoned.enable = true; #based on IP location
 
-  #https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time.timeZone = "Europe/Paris"; # Set local timezone
 
   # Select internationalisation properties.
@@ -224,14 +214,13 @@ in {
     #  dataDir = "/home/${username}";
     #  configDir = "/home/${username}/.config/syncthing";
     #};
-
   };
 
   systemd.services.flatpak-repo = {
-    path = [ pkgs.flatpak ];
+    path = [pkgs.flatpak];
     script = ''
       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-      '';
+    '';
   };
 
   # zram
@@ -307,8 +296,8 @@ in {
         "nix-command"
         "flakes"
       ];
-      substituters = [ "https://hyprland.cachix.org" ];
-      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+      substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
     gc = {
       automatic = true;
