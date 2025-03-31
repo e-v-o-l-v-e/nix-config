@@ -38,6 +38,7 @@
           inherit system;
           inherit inputs;
           inherit username;
+          inherit self;
         };
         modules = [
           ./hosts/waylander/config.nix
@@ -51,5 +52,7 @@
         modules = [./modules/nvf.nix];
       })
       .neovim;
+
+    defaultPackage.x86_64-linux = self.packages.x86_64-linux.my-neovim;
   };
 }

@@ -1,6 +1,7 @@
 # 💫 https://github.com/JaKooLit 💫 #
 # Packages and Fonts config including the "programs" options
 {
+  self,
   pkgs,
   inputs,
   system,
@@ -105,6 +106,7 @@ in {
     ++ [
       python-packages
       inputs.zen-browser.packages."${system}".default
+      self.packages."${system}".my-neovim
     ];
 
   # FONTS
@@ -139,7 +141,7 @@ in {
     hyprlock.enable = true;
     git.enable = true;
     nm-applet.indicator = true;
-    neovim.enable = true;
+    # neovim.enable = true;
 
     thunar.enable = true;
     thunar.plugins = with pkgs.xfce; [

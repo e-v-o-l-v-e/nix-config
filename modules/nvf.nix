@@ -19,7 +19,7 @@
 
     options = {
       cursorlineopt = "line";
-      shiftwitdh = 2;
+      shiftwidth = 2;
     };
 
     lsp = {
@@ -117,6 +117,7 @@
       enable = true;
       name = "tokyonight";
       transparent = true;
+      style = "night";
       # name = "catppuccin";
       # style = "mocha";
     };
@@ -184,13 +185,12 @@
         precognition.enable = true;
       };
       images = {
-        image-nvim.enable = true;
+        image-nvim.enable = false;
       };
     };
 
     notes = {
       neorg.enable = false;
-      obsidian.enable = false; # FIXME: neovim fails to build if obsidian is enabled
       orgmode.enable = false;
       todo-comments.enable = true;
     };
@@ -203,7 +203,7 @@
     };
 
     ui = {
-      borders.enable = false; # TEST: à tester
+      borders.enable = false;
       noice.enable = true;
       colorizer.enable = true;
       modes-nvim.enable = true; # the theme looks terrible with catppuccin # TEST: à tester
