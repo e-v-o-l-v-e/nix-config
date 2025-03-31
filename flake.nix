@@ -4,7 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,6 +25,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
+    home-manager,
     zen-browser,
     nvf,
     ags,
@@ -37,7 +41,7 @@
       };
     };
   in {
-    # waylander's nixos config
+    # Waylander's nixos config.
     nixosConfigurations = {
       "waylander" = nixpkgs.lib.nixosSystem rec {
         specialArgs = {
@@ -52,6 +56,17 @@
       };
     };
 
+    # Druss home-manager config.
+    homeConfigurations."jack" = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      modules = [./hosts/druss/home.nix];
+      extraSpecialArgs = {
+        inherit self;
+        inherit system;
+      };
+    };
+
+    # Neovim config.
     packages.x86_64-linux.my-neovim =
       (nvf.lib.neovimConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
