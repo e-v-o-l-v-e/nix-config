@@ -5,12 +5,18 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
-    nvf.url = "github:notashelf/nvf";
-    nvf.inputs.nixpkgs.follows = "nixpkgs";
-    ags.url = "github:aylur/ags/v1"; # aylurs-gtk-shell-v1
-    ags.inputs.nixpkgs.follows = "nixpkgs";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    ags = {
+      url = "github:aylur/ags/v1"; # aylurs-gtk-shell-v1
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
