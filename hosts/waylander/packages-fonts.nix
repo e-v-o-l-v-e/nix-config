@@ -3,6 +3,7 @@
 {
   pkgs,
   inputs,
+  system,
   ...
 }: let
   python-packages = pkgs.python3.withPackages (
@@ -103,6 +104,7 @@ in {
     ])
     ++ [
       python-packages
+      inputs.zen-browser.packages."${system}".default
     ];
 
   # FONTS

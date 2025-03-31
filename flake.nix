@@ -10,35 +10,35 @@
     ags.url = "github:aylur/ags/v1"; # aylurs-gtk-shell-v1
   };
 
-  outputs = 
-    inputs@{ self, nixpkgs, zen-browser, nixvim, ags, ... }:
-    let
-      system = "x86_64-linux";
-      username = "evolve";
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    zen-browser,
+    nixvim,
+    ags,
+    ...
+  }: let
+    system = "x86_64-linux";
+    username = "evolve";
 
-      pkgs = import nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-      };
-    in {
-      nixosConfigurations = {
-        "waylander" = nixpkgs.lib.nixosSystem rec {
-          specialArgs = {
-            inherit system;
-            inherit inputs;
-            inherit username;
-          };
-          modules = [
-            ./hosts/waylander/config.nix
-            {
-              environment.systemPackages = [
-                inputs.zen-browser.packages."${system}".default
-              ];
-            }
-          ];
-        };
+    pkgs = import nixpkgs {
+      inherit system;
+      config = {
+        allowUnfree = true;
       };
     };
+  in {
+    nixosConfigurations = {
+      "waylander" = nixpkgs.lib.nixosSystem rec {
+        specialArgs = {
+          inherit system;
+          inherit inputs;
+          inherit username;
+        };
+        modules = [
+          ./hosts/waylander/config.nix
+        ];
+      };
+    };
+  };
 }
