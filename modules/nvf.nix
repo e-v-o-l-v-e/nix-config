@@ -17,6 +17,7 @@
       enable = true;
     };
 
+    searchCase = "smart";
     options = {
       cursorlineopt = "line";
       shiftwidth = 2;
