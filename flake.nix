@@ -6,15 +6,18 @@
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    nixvim.url = "github:nix-community/nixvim/nixos-24.11";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+    nvf.url = "github:notashelf/nvf";
+    nvf.inputs.nixpkgs.follows = "nixpkgs";
     ags.url = "github:aylur/ags/v1"; # aylurs-gtk-shell-v1
+    ags.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
     self,
     nixpkgs,
     zen-browser,
-    nixvim,
+    nvf,
     ags,
     ...
   }: let
@@ -28,6 +31,7 @@
       };
     };
   in {
+    # waylander's nixos config
     nixosConfigurations = {
       "waylander" = nixpkgs.lib.nixosSystem rec {
         specialArgs = {
@@ -40,5 +44,12 @@
         ];
       };
     };
+
+    packages.x86_64-linux.my-neovim =
+      (nvf.lib.neovimConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        modules = [./modules/nvf.nix];
+      })
+      .neovim;
   };
 }
