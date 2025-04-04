@@ -56,23 +56,15 @@
       };
     };
 
-    # Druss home-manager config.
-    homeConfigurations."jack" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      modules = [./hosts/evolve/home.nix];
-      extraSpecialArgs = {
-        inherit self;
-        inherit system;
-      };
-    };
-
-    # delnoch home-manager config.
-    homeConfigurations."evolve" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      modules = [./hosts/evolve/home.nix];
-      extraSpecialArgs = {
-        inherit self;
-        inherit system;
+    # evolve home-manager config.
+    homeConfigurations = {
+      evolve = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [./hosts/evolve/home.nix];
+        extraSpecialArgs = {
+          inherit self;
+          inherit system;
+        };
       };
     };
 
@@ -84,6 +76,6 @@
       })
       .neovim;
 
-    defaultPackage.x86_64-linux = self.packages.x86_64-linux.my-neovim;
+    packages.x86_64-linux.default = self.packages.x86_64-linux.my-neovim;
   };
 }
