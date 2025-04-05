@@ -56,15 +56,14 @@
       };
     };
 
-    # evolve home-manager config.
-    homeConfigurations = {
-      evolve = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [./hosts/evolve/home.nix];
-        extraSpecialArgs = {
-          inherit self;
-          inherit system;
-        };
+    # home-manager config.
+    homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      modules = [./hosts/${username}/home.nix];
+      extraSpecialArgs = {
+        inherit self;
+        inherit system;
+        inherit username;
       };
     };
 
