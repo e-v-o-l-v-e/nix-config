@@ -4,6 +4,7 @@
   self,
   system,
   username,
+  inputs,
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
@@ -33,6 +34,7 @@
       # '')
 
       self.packages."${system}".my-neovim
+      inputs.zen-browser.packages."${system}".default
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage

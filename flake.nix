@@ -64,6 +64,7 @@
         inherit self;
         inherit system;
         inherit username;
+        inherit inputs;
       };
     };
 
