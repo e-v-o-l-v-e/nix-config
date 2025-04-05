@@ -76,6 +76,6 @@
       })
       .neovim;
 
-    defaultPackage.x86_64-linux = self.packages.x86_64-linux.my-neovim;
+    packages.x86_64-linux.default = self.packages.x86_64-linux.my-neovim;
   };
 }
