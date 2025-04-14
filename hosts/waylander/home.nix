@@ -1,0 +1,51 @@
+# Home Manager configuration for the user
+{
+  pkgs,
+  username,
+  inputs,
+  self,
+  ...
+}: let
+  inherit (import ./variables.nix) gitUsername;
+in {
+  home = {
+    username = username;
+    homeDirectory = "/home/${username}";
+  };
+
+  # Define user-specific packages
+  home.packages = with pkgs;
+    [
+      element-desktop
+      fishPlugins.tide
+      jellyfin-media-player
+      libreoffice-qt6-fresh
+      libsForQt5.kdeconnect-kde
+      localsend
+      nextcloud-client
+      remmina
+      steam
+      supersonic
+      vesktop
+
+      # Code-related packages
+      # jdk
+      # jdt-language-server
+      # jre
+      # lua-language-server
+      # vimPlugins.nvim-jdtls
+    ]
+    ++ [
+      inputs.zen-browser.packages."${system}".default
+      self.packages."${system}".my-neovim
+    ];
+
+  # Additional shell configurations
+  home.sessionVariables = {
+    HISTFILE = "$HOME/.fish_history";
+    HISTSIZE = "10000";
+  };
+
+  # System-level tools available in the shell
+  home.stateVersion = "24.11"; # Adjust this based on your Home Manager version
+}

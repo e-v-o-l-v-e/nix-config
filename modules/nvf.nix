@@ -3,7 +3,7 @@
 # an overview of nvf's module options. To find a complete and curated list of nvf module
 # options, examples, instruction tutorials and more; please visit the online manual.
 # https://notashelf.github.io/nvf/options.html
-{
+{lib, ...}: {
   config.vim = {
     viAlias = true;
     vimAlias = true;
@@ -21,6 +21,7 @@
     options = {
       cursorlineopt = "line";
       shiftwidth = 2;
+      scrolloff = 10;
     };
 
     lsp = {
@@ -125,7 +126,17 @@
 
     autopairs.nvim-autopairs.enable = true;
 
-    autocomplete.nvim-cmp.enable = true;
+    autocomplete.nvim-cmp = lib.mkForce {
+      enable = true;
+      setupOpts = {
+        sources = [
+          {name = "path";} # Path source for file and directory completion
+          {name = "buffer";} # Buffer completion
+          {name = "nvim_lsp";} # LSP-based completion
+        ];
+      };
+    };
+
     snippets.luasnip.enable = true;
 
     filetree = {

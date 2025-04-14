@@ -6,17 +6,20 @@
   lib,
   inputs,
   system,
+  hostname,
   ...
 }: let
   inherit (import ./variables.nix) keyboardLayout;
 in {
   imports = [
+    ../shared/common.nix
     ./hardware.nix
     ./users.nix
+    ./home.nix
     ./packages-fonts.nix
-    ../../modules/amd-drivers.nix
-    ../../modules/vm-guest-services.nix
-    ../../modules/local-hardware-clock.nix
+    ../../modules/hardware/amd-drivers.nix
+    ../../modules/hardware/vm-guest-services.nix
+    ../../modules/hardware/local-hardware-clock.nix
   ];
 
   # BOOT related stuff
@@ -100,7 +103,7 @@ in {
   # networking
   networking.networkmanager.enable = true;
   networking.nameservers = ["1.1.1.1" "1.0.0.1"];
-  networking.hostName = "waylander";
+  networking.hostName = "${hostname}";
   networking.timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
 
   services.tailscale.enable = true;

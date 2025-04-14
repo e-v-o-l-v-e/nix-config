@@ -33,6 +33,7 @@
   }: let
     system = "x86_64-linux";
     username = "evolve";
+    isNixos = false;
 
     pkgs = import nixpkgs {
       inherit system;
@@ -43,27 +44,55 @@
   in {
     # Waylander's nixos config.
     nixosConfigurations = {
-      "waylander" = nixpkgs.lib.nixosSystem rec {
+      waylander = nixpkgs.lib.nixosSystem rec {
         specialArgs = {
           inherit system;
           inherit inputs;
           inherit username;
           inherit self;
+          isNixos = true;
+          hostname = "waylander";
         };
         modules = [
-          ./hosts/waylander/config.nix
+          ./hosts/waylander
+        ];
+      };
+
+      druss = nixpkgs.lib.nixosSystem rec {
+        specialArgs = {
+          inherit system;
+          inherit inputs;
+          inherit username;
+          inherit self;
+          isNixos = true;
+          hostname = "druss";
+        };
+        modules = [
+          ./hosts/druss/config.nix
         ];
       };
     };
 
     # home-manager config.
-    homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations.waylander = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [./hosts/${username}/home.nix];
+      modules = [./hosts/waylander/home.nix];
       extraSpecialArgs = {
         inherit self;
-        inherit system;
         inherit username;
+        inherit isNixos;
+        inherit inputs;
+      };
+    };
+
+    # home-manager config.
+    homeConfigurations.druss = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      modules = [./hosts/druss/home.nix];
+      extraSpecialArgs = {
+        inherit self;
+        inherit username;
+        inherit isNixos;
       };
     };
 
