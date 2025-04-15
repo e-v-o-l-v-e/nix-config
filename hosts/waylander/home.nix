@@ -4,6 +4,7 @@
   username,
   inputs,
   self,
+  system,
   ...
 }: let
   inherit (import ./variables.nix) gitUsername;
@@ -28,6 +29,8 @@ in {
       supersonic
       vesktop
 
+      home-manager
+
       # Code-related packages
       # jdk
       # jdt-language-server
@@ -36,7 +39,7 @@ in {
       # vimPlugins.nvim-jdtls
     ]
     ++ [
-      inputs.zen-browser.packages."${system}".default
+      inputs.zen-browser.packages."${system}".twilight
       self.packages."${system}".my-neovim
     ];
 

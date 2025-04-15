@@ -32,8 +32,12 @@
       trouble.enable = true;
       lspSignature.enable = true;
       otter-nvim.enable = true;
-      lsplines.enable = true;
       nvim-docs-view.enable = false;
+    };
+
+    diagnostics.config = {
+      underline.enable = false;
+      virtual_lines.enable = true;
     };
 
     debugger = {
