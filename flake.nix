@@ -29,12 +29,11 @@
     nixpkgs,
     home-manager,
     nvf,
-    lib,
     ...
   }: let
     system = "x86_64-linux";
     username = "evolve";
-    isNixos = lib.mkDefault false;
+    isNixos = nixpkgs.lib.mkDefault false;
 
     pkgs = import nixpkgs {
       inherit system;
@@ -76,7 +75,7 @@
         specialArgs =
           sharedArgs
           // {
-            isNixos = lib.mkForce true;
+            isNixos = nixpkgs.lib.mkForce true;
             hostname = "druss";
           };
         modules = [
@@ -119,5 +118,8 @@
       .neovim;
 
     packages.x86_64-linux.default = self.packages.x86_64-linux.my-neovim;
+
+    # shells
+    devShells.${system} = import ./shells.nix {inherit pkgs;};
   };
 }
