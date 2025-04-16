@@ -29,11 +29,12 @@
     nixpkgs,
     home-manager,
     nvf,
+    lib,
     ...
   }: let
     system = "x86_64-linux";
     username = "evolve";
-    isNixos = false;
+    isNixos = lib.mkDefault false;
 
     pkgs = import nixpkgs {
       inherit system;
@@ -41,18 +42,24 @@
         allowUnfree = true;
       };
     };
+
+    sharedArgs = {
+      inherit system;
+      inherit inputs;
+      inherit username;
+      inherit self;
+      inherit isNixos;
+    };
   in {
     # Waylander's nixos config.
     nixosConfigurations = {
       waylander = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit system;
-          inherit inputs;
-          inherit username;
-          inherit self;
-          isNixos = true;
-          hostname = "waylander";
-        };
+        specialArgs =
+          sharedArgs
+          // {
+            isNixos = true;
+            hostname = "waylander";
+          };
         modules = [
           ./hosts/waylander
 
@@ -66,14 +73,12 @@
       };
 
       druss = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit system;
-          inherit inputs;
-          inherit username;
-          inherit self;
-          isNixos = true;
-          hostname = "druss";
-        };
+        specialArgs =
+          sharedArgs
+          // {
+            isNixos = lib.mkForce true;
+            hostname = "druss";
+          };
         modules = [
           ./hosts/druss/config.nix
         ];
@@ -81,29 +86,30 @@
     };
 
     # home-manager config.
-    homeConfigurations.waylander = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      modules = [./hosts/waylander/home.nix];
-      extraSpecialArgs = {
-        inherit self;
-        inherit username;
-        inherit isNixos;
-        inherit inputs;
-        inherit system;
+    homeConfigurations = {
+      waylander = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [./hosts/waylander/home.nix];
+        extraSpecialArgs =
+          sharedArgs
+          // {
+            inherit isNixos;
+            inherit inputs;
+            inherit system;
+          };
+      };
+
+      # home-manager config.
+      druss = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [./hosts/druss/home.nix];
+        extraSpecialArgs = {
+          inherit self;
+          inherit username;
+          inherit isNixos;
+        };
       };
     };
-
-    # home-manager config.
-    homeConfigurations.druss = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      modules = [./hosts/druss/home.nix];
-      extraSpecialArgs = {
-        inherit self;
-        inherit username;
-        inherit isNixos;
-      };
-    };
-
     # Neovim config.
     packages.x86_64-linux.my-neovim =
       (nvf.lib.neovimConfiguration {
