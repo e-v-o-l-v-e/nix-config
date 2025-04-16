@@ -47,6 +47,9 @@ in {
     enable = true;
     userName = gitUsername;
     userEmail = gitEmail;
+    extraConfig = {
+      push = {autoSetupRemote = true;};
+    };
   };
 
   programs.starship = {
