@@ -7,7 +7,7 @@
   system,
   ...
 }: let
-  inherit (import ./variables.nix) gitUsername;
+  inherit (import ./variables.nix) gitUsername gitEmail;
 in {
   home = {
     username = username;
@@ -42,6 +42,16 @@ in {
       inputs.zen-browser.packages."${system}".twilight
       self.packages."${system}".my-neovim
     ];
+
+  programs.git = {
+    enable = true;
+    userName = gitUsername;
+    userEmail = gitEmail;
+  };
+
+  programs.starship = {
+    enable = true;
+  };
 
   # Additional shell configurations
   home.sessionVariables = {

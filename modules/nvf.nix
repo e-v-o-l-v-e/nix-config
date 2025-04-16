@@ -17,6 +17,7 @@
       enable = true;
     };
 
+    undoFile.enable = true;
     searchCase = "smart";
     options = {
       cursorlineopt = "line";
@@ -57,6 +58,7 @@
 
       # Languages.
       nix.enable = true;
+      nix.lsp.server = "nixd";
       java.enable = true;
       csharp.enable = true;
       python.enable = true;
@@ -130,15 +132,18 @@
 
     autopairs.nvim-autopairs.enable = true;
 
-    autocomplete.nvim-cmp = lib.mkForce {
+    autocomplete.nvim-cmp = {
       enable = true;
-      setupOpts = {
-        sources = [
-          {name = "path";} # Path source for file and directory completion
-          {name = "buffer";} # Buffer completion
-          {name = "nvim_lsp";} # LSP-based completion
-        ];
-      };
+      # setupOpts = {
+      #   sources = lib.mkDefault [
+      #     # {name = lib.mkForce "path";} # Path source for file and directory completion
+      #     "lsp"
+      #     "path"
+      #     "snippets"
+      #     "buffer"
+      #     {name = "luasnip";}
+      #     {name = "path";}
+      #   ];
     };
 
     snippets.luasnip.enable = true;
