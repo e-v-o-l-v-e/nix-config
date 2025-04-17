@@ -63,6 +63,7 @@
       csharp.enable = true;
       python.enable = true;
       markdown.enable = true;
+      yaml.enable = true;
 
       lua.enable = false;
       bash.enable = true;
