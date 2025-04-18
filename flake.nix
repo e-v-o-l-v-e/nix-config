@@ -33,7 +33,6 @@
   }: let
     system = "x86_64-linux";
     username = "evolve";
-    isNixos = nixpkgs.lib.mkDefault false;
 
     pkgs = import nixpkgs {
       inherit system;
@@ -43,11 +42,10 @@
     };
 
     sharedArgs = {
-      inherit system;
       inherit inputs;
-      inherit username;
       inherit self;
-      inherit isNixos;
+      inherit system;
+      inherit username;
     };
   in {
     # Waylander's nixos config.
@@ -56,7 +54,6 @@
         specialArgs =
           sharedArgs
           // {
-            isNixos = true;
             hostname = "waylander";
           };
         modules = [
@@ -75,8 +72,9 @@
         specialArgs =
           sharedArgs
           // {
-            isNixos = nixpkgs.lib.mkForce true;
             hostname = "druss";
+            isNixos = nixpkgs.lib.mkForce true;
+            full = true;
           };
         modules = [
           ./hosts/druss/config.nix
@@ -86,29 +84,38 @@
 
     # home-manager config.
     homeConfigurations = {
-      waylander = home-manager.lib.homeManagerConfiguration {
+      hm-full = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [./hosts/waylander/home.nix];
+        modules = [./modules/HM];
         extraSpecialArgs =
           sharedArgs
           // {
-            inherit isNixos;
-            inherit inputs;
-            inherit system;
           };
       };
 
       # home-manager config.
-      druss = home-manager.lib.homeManagerConfiguration {
+      hm-min = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [./hosts/druss/home.nix];
-        extraSpecialArgs = {
-          inherit self;
-          inherit username;
-          inherit isNixos;
-        };
+        modules = [./modules/HM];
+        extraSpecialArgs =
+          sharedArgs
+          // {
+            inherit username;
+            hostname = "min";
+          };
+      };
+
+      server = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [./modules/HM];
+        extraSpecialArgs =
+          sharedArgs
+          // {
+            server = true;
+          };
       };
     };
+
     # Neovim config.
     packages.x86_64-linux.my-neovim =
       (nvf.lib.neovimConfiguration {

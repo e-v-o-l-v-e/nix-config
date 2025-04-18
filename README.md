@@ -1,12 +1,18 @@
 # My Flake
 
+modular config.
+
+HOST :
+
+- delnoch : server, cli and shell, docker
+- min : minimal, server without server specific
+- waylander : laptop config
+- druss : battlestation, maximal config
+
 TODO :
 
-- [x] mv les flakes en shells
-- [ ] faire la config pour delnoch
-  - [ ] home-manager
-  - [ ] nixos
-- [ ] faire une vraie config pour druss
+- [x] programming languages in nix shells
+- [ ] rewrite an modularize the whole config
   - [ ] home-manager
   - [ ] nixos
 - [ ] (optionel)ajouter une config nvf minimaliste
@@ -21,26 +27,23 @@ TODO :
 │   │   ├── packages-fonts.nix
 │   │   ├── users.nix
 │   │   └── variables.nix
-│   ├── shared
-│   │   └── common.nix
 │   └── waylander
-│       ├── configuration.nix
+│       ├── configuration.nix /td
 │       ├── default.nix
 │       ├── hardware.nix
-│       ├── home.nix
+│       ├── home.nix /td
 │       ├── kanata.nix
-│       ├── packages-fonts.nix
-│       ├── users.nix
-│       └── variables.nix
+│       ├── packages-fonts.nix /td
+│       ├── users.nix /td
+│       └── variables.nix /td
 ├── modules
 │   ├── HM
-│   │   ├── code.nix
-│   │   ├── common.nix
 │   │   ├── default.nix
-│   │   ├── delnoch.nix
-│   │   ├── druss.nix
+│   │   ├── env.nix
+│   │   ├── fish.nix
+│   │   ├── gaming.nix
 │   │   ├── home.nix
-│   │   └── waylander.nix
+│   │   └── packages.nix
 │   └── nixos
 │       ├── amd-drivers.nix
 │       ├── default.nix
@@ -50,5 +53,5 @@ TODO :
 ├── README.md
 └── shells.nix
 
-8 directories, 29 files
+7 directories, 27 files
 ```

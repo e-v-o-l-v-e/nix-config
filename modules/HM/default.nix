@@ -1,7 +1,8 @@
 {...}: {
   imports = [
-    ./common.nix
-
-    ./code.nix
+    ./env.nix
+    ./fish.nix
+    ./home.nix
+    ./pkgs-common.nix
   ];
 }

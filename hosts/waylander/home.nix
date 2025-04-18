@@ -18,26 +18,13 @@ in {
   home.packages = with pkgs;
     [
       element-desktop
-      fishPlugins.tide
       jellyfin-media-player
       libreoffice-qt6-fresh
       libsForQt5.kdeconnect-kde
       localsend
       nextcloud-client
-      remmina
-      steam
       supersonic
       vesktop
-
-      home-manager
-
-      flutter
-      # Code-related packages
-      # jdk
-      # jdt-language-server
-      # jre
-      # lua-language-server
-      # vimPlugins.nvim-jdtls
     ]
     ++ [
       inputs.zen-browser.packages."${system}".twilight
