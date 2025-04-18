@@ -113,7 +113,7 @@
     packages.x86_64-linux.my-neovim =
       (nvf.lib.neovimConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [./modules/nvf.nix];
+        modules = [./nvf.nix];
       })
       .neovim;
 
