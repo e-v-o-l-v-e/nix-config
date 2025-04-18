@@ -6,6 +6,6 @@
     ./home.nix
     ./packages-fonts.nix
     ./kanata.nix
-    ../../modules/hardware/default.nix
+    ../../modules/nixos
   ];
 }
