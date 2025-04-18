@@ -64,6 +64,7 @@
       python.enable = true;
       markdown.enable = true;
       yaml.enable = true;
+      dart.enable = true;
 
       lua.enable = false;
       bash.enable = true;
@@ -90,7 +91,6 @@
       scala.enable = false;
       r.enable = false;
       gleam.enable = false;
-      dart.enable = false;
       ocaml.enable = false;
       elixir.enable = false;
       haskell.enable = false;
