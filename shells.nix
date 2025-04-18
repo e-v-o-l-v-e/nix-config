@@ -1,47 +1,63 @@
-{pkgs}: {
+{pkgs}: let
+  useFish = ''
+    export SHELL=${pkgs.fish}/bin/fish
+    fish
+    exit
+  '';
+in {
   c = pkgs.mkShell {
     name = "c shell";
     nativeBuildInputs = with pkgs; [
-      getopt
-      flex
-      bison
-      gcc
-      gnumake
       bc
-      pkg-config
-      valgrind
       binutils
-    ];
-
-    buildInputs = with pkgs; [
+      bison
+      clang
       elfutils
+      fish
+      flex
+      gcc
+      getopt
+      gnumake
       ncurses
       openssl
+      pkg-config
+      valgrind
       zlib
-      fish
     ];
 
-    shellHook = ''
-      export SHELL=${pkgs.fish}/bin/fish
-      if [ -n "$IN_NIX_SHELL" ]; then
-        exec fish
-      fi
-    '';
+    shellHook = useFish;
+  };
+
+  dart = pkgs.mkShell {
+    nativeBuildInputs = with pkgs; [
+      flutter
+    ];
+  };
+
+  java = pkgs.mkShell {
+    nativeBuildInputs = with pkgs; [
+      jdk
+      jre
+    ];
+    shellHook = useFish;
+  };
+
+  lua = pkgs.mkShell {
+    nativeBuildInputs = with pkgs; [
+      lua-language-server
+      lua
+    ];
   };
 
   python = pkgs.mkShell {
     nativeBuildInputs = with pkgs; [
       python3
-      python3Packages.pip
-      python312Packages.pandas
-      python312Packages.numpy
       python312Packages.matplotlib
+      python312Packages.numpy
+      python312Packages.pandas
+      python3Packages.pip
     ];
 
-    shellHook = ''
-      export SHELL=${pkgs.fish}/bin/fish
-      fish
-      exit
-    '';
+    shellHook = useFish;
   };
 }
