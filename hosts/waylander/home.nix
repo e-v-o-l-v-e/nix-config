@@ -31,6 +31,7 @@ in {
 
       home-manager
 
+      flutter
       # Code-related packages
       # jdk
       # jdt-language-server
