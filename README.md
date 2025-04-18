@@ -15,11 +15,6 @@ TODO :
 .
 ├── flake.lock
 ├── flake.nix
-├── flakes
-│   └── eduroam
-│       ├── flake.lock
-│       ├── flake.nix
-│       └── README.md
 ├── hosts
 │   ├── druss
 │   │   ├── config.nix
@@ -38,20 +33,22 @@ TODO :
 │       ├── users.nix
 │       └── variables.nix
 ├── modules
-│   ├── code.nix
-│   ├── hardware
-│   │   ├── amd-drivers.nix
-│   │   ├── default.nix
-│   │   ├── local-hardware-clock.nix
-│   │   └── vm-guest-services.nix
 │   ├── HM
+│   │   ├── code.nix
 │   │   ├── common.nix
+│   │   ├── default.nix
 │   │   ├── delnoch.nix
 │   │   ├── druss.nix
+│   │   ├── home.nix
 │   │   └── waylander.nix
-│   └── nvf.nix
+│   └── nixos
+│       ├── amd-drivers.nix
+│       ├── default.nix
+│       ├── local-hardware-clock.nix
+│       └── vm-guest-services.nix
+├── nvf.nix
 ├── README.md
 └── shells.nix
 
-10 directories, 30 files
+8 directories, 29 files
 ```
