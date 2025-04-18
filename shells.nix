@@ -37,6 +37,7 @@ in {
   java = pkgs.mkShell {
     nativeBuildInputs = with pkgs; [
       jdk
+      jdt-language-server
       jre
     ];
     shellHook = useFish;
