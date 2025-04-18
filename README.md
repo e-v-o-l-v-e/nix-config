@@ -1,34 +1,57 @@
 # My Flake
 
 TODO :
-- mv les flakes en shells
-- faire une vraie config pour druss
-- faire la config pour delnoch
-- ajouter une config nvf minimaliste
+
+- [x] mv les flakes en shells
+- [ ] faire la config pour delnoch
+  - [ ] home-manager
+  - [ ] nixos
+- [ ] faire une vraie config pour druss
+  - [ ] home-manager
+  - [ ] nixos
+- [ ] (optionel)ajouter une config nvf minimaliste
 
 ```
-nix-config/
+.
 ├── flake.lock
 ├── flake.nix
 ├── flakes
+│   └── eduroam
+│       ├── flake.lock
+│       ├── flake.nix
+│       └── README.md
 ├── hosts
-│   ├── default
+│   ├── druss
 │   │   ├── config.nix
 │   │   ├── packages-fonts.nix
 │   │   ├── users.nix
 │   │   └── variables.nix
-│   ├── druss
-│   │   └── home.nix
+│   ├── shared
+│   │   └── common.nix
 │   └── waylander
-│       ├── config.nix
+│       ├── configuration.nix
+│       ├── default.nix
 │       ├── hardware.nix
+│       ├── home.nix
+│       ├── kanata.nix
 │       ├── packages-fonts.nix
 │       ├── users.nix
 │       └── variables.nix
-└── modules
-    ├── amd-drivers.nix
-    ├── local-hardware-clock.nix
-    ├── nvf.nix
-    └── vm-guest-services.nix
+├── modules
+│   ├── code.nix
+│   ├── hardware
+│   │   ├── amd-drivers.nix
+│   │   ├── default.nix
+│   │   ├── local-hardware-clock.nix
+│   │   └── vm-guest-services.nix
+│   ├── HM
+│   │   ├── common.nix
+│   │   ├── delnoch.nix
+│   │   ├── druss.nix
+│   │   └── waylander.nix
+│   └── nvf.nix
+├── README.md
+└── shells.nix
 
+10 directories, 30 files
 ```
