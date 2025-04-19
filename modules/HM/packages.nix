@@ -10,10 +10,11 @@
   home = {
     # The home.packages option allows you to install Nix packages into your environment.
     packages = with pkgs;
-      # common packages for all hosts
+    # common packages for all hosts
       [
         bat
         btop
+        cliphist
         curl
         dust
         fd
@@ -22,33 +23,40 @@
         git
         gnutar
         home-manager
+        loupe
         lsd
+        networkmanager
+        pamixer
+        pavucontrol
+        playerctl
         ripgrep
         starship
         tree
         unzip
         vget
         vim
+        wl-clipboard
         zip
         zoxide
       ]
       ++ self.packages."${system}".my-neovim
-
       # packages for personnals machine
-      ++ lib.mkIf (hostname == "waylander" || hostname == "druss") 
+      ++ lib.mkIf (hostname == "waylander" || hostname == "druss")
       (with pkgs; [
         element-desktop
+        imagemagick
         jellyfin-media-player
+        jq
         libreoffice-qt6-fresh
         libsForQt5.kdeconnect-kde
         localsend
         nextcloud-client
         supersonic
+        thunar
         vesktop
       ])
-
       # enable zen for non-server hosts
-      ++ lib.mkIf hostname != "delnoch" 
+      ++ lib.mkIf (hostname != "delnoch")
       inputs.zen-browser.packages."${system}".twilight;
   };
 }

@@ -79,7 +79,6 @@ in {
       pamixer
       pavucontrol
       playerctl
-      polkit_gnome
       pyprland
       libsForQt5.qt5ct
       kdePackages.qt6ct
@@ -88,7 +87,6 @@ in {
       rofi-wayland
       slurp
       swappy
-      swaynotificationcenter
       swww
       unzip
       wallust
@@ -128,9 +126,6 @@ in {
       enable = true;
       #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland; #hyprland-git
       #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland; #xdph-git
-
-      portalPackage = pkgs.xdg-desktop-portal-hyprland; # xdph none git
-      xwayland.enable = true;
     };
 
     waybar.enable = true;

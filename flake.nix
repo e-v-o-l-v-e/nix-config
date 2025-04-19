@@ -58,12 +58,18 @@
           };
         modules = [
           ./hosts/waylander
+          ./modules/nixos
 
           home-manager.nixosModules.home-manager.home-manager
           {
             userGlobalPkgs = true;
             useUserPackages = true;
-            users.evolve = import ./hosts/waylander/home.nix;
+            users.evolve = import ./modules/HM;
+            extraSpecialArgs =
+              sharedArgs
+              // {
+                hostname = "waylander";
+              };
           }
         ];
       };
@@ -73,7 +79,6 @@
           sharedArgs
           // {
             hostname = "druss";
-            isNixos = nixpkgs.lib.mkForce true;
             full = true;
           };
         modules = [
@@ -82,19 +87,30 @@
       };
     };
 
-    # home-manager config.
+    # home-manager configs.
     homeConfigurations = {
-      hm-full = home-manager.lib.homeManagerConfiguration {
+      waylander = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [./modules/HM];
         extraSpecialArgs =
           sharedArgs
           // {
+            hostname = "waylander";
+          };
+      };
+
+      druss = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [./modules/HM];
+        extraSpecialArgs =
+          sharedArgs
+          // {
+            hostname = "druss";
           };
       };
 
       # home-manager config.
-      hm-min = home-manager.lib.homeManagerConfiguration {
+      min = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [./modules/HM];
         extraSpecialArgs =
@@ -105,13 +121,13 @@
           };
       };
 
-      server = home-manager.lib.homeManagerConfiguration {
+      delnoch = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [./modules/HM];
         extraSpecialArgs =
           sharedArgs
           // {
-            server = true;
+            hostname = "delnoch";
           };
       };
     };
