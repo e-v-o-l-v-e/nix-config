@@ -2,7 +2,10 @@
   imports = [
     ./env.nix
     ./fish.nix
+    ./font.nix
+    ./gaming.nix
     ./home.nix
-    ./pkgs-common.nix
+    ./hypr.nix
+    ./packages.nix
   ];
 }

@@ -64,7 +64,7 @@
           {
             userGlobalPkgs = true;
             useUserPackages = true;
-            users.evolve = import ./modules/HM;
+            users.${username} = import ./modules/HM;
             extraSpecialArgs =
               sharedArgs
               // {

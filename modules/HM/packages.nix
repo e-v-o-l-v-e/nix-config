@@ -26,8 +26,10 @@
         loupe
         lsd
         networkmanager
+        nixd
         pamixer
         pavucontrol
+        pciutils
         playerctl
         ripgrep
         starship
@@ -47,6 +49,7 @@
         imagemagick
         jellyfin-media-player
         jq
+        libnotify
         libreoffice-qt6-fresh
         libsForQt5.kdeconnect-kde
         localsend
@@ -54,6 +57,8 @@
         supersonic
         thunar
         vesktop
+        xdg-user-dirs
+        xdg-utils
       ])
       # enable zen for non-server hosts
       ++ lib.mkIf (hostname != "delnoch")

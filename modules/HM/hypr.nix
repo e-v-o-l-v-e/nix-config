@@ -9,6 +9,7 @@ lib.mkIf (hostname == "waylander") {
     ags
     brightnessctl
     cava
+    cpufrequtils
     gnome-system-monitor
     grim
     gtk-engine-murrine
@@ -26,20 +27,37 @@ lib.mkIf (hostname == "waylander") {
     swappy
     swaynotificationcenter
     swww
+    wallust
     waybar
+    wlogout
   ];
 
-  programs.hyprland = {
-    enable = true;
-    portalPackage = pkgs.xdg-desktop-portal-hyprland; # xdph none git
-    xwayland.enable = true;
+  programs = {
+    hyprland = {
+      enable = true;
+      portalPackage = pkgs.xdg-desktop-portal-hyprland;
+      xwayland.enable = true;
+    };
+
+    waybar = {
+      enable = true;
+    };
+
+    hyprlock = {
+      enable = true;
+    };
   };
 
-  programs.waybar = {
+  # Extra Portal Configuration
+  xdg.portal = {
     enable = true;
-  };
-
-  programs.hyprlock = {
-    enable = true;
+    wlr.enable = false;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    configPackages = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal
+    ];
   };
 }

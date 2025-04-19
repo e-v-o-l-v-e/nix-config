@@ -147,9 +147,9 @@ in {
 
     #steam = {
     #  enable = true;
-    #  gamescopeSession.enable = true;
-    #  remotePlay.openFirewall = true;
-    #  dedicatedServer.openFirewall = true;
+    # gamescopeSession.enable = true;
+    # remotePlay.openFirewall = true;
+    # dedicatedServer.openFirewall = true;
     #};
 
     xwayland.enable = true;
