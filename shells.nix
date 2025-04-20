@@ -6,7 +6,7 @@
   '';
 in {
   c = pkgs.mkShell {
-    name = "c shell";
+    name = "c programming shell";
     nativeBuildInputs = with pkgs; [
       bc
       binutils
@@ -29,12 +29,14 @@ in {
   };
 
   dart = pkgs.mkShell {
+    name = "dart programming shell";
     nativeBuildInputs = with pkgs; [
       flutter
     ];
   };
 
   java = pkgs.mkShell {
+    name = "java programming shell";
     nativeBuildInputs = with pkgs; [
       jdk
       jdt-language-server
@@ -44,6 +46,7 @@ in {
   };
 
   lua = pkgs.mkShell {
+    name = "lua programming shell";
     nativeBuildInputs = with pkgs; [
       lua-language-server
       lua
@@ -51,6 +54,7 @@ in {
   };
 
   python = pkgs.mkShell {
+    name = "python programming shell";
     nativeBuildInputs = with pkgs; [
       python3
       python312Packages.matplotlib

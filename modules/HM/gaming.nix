@@ -11,13 +11,6 @@ lib.mkIf (hostname == "druss") {
     steam
     steam-run
   ];
-
-  programs.steam = {
-    enable = true;
-    gamescopeSession.enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-  };
 }
 # simpler gaming config
 lib.mkIf (hostname == "waylander") {

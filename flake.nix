@@ -60,16 +60,17 @@
           ./hosts/waylander
           ./modules/nixos
 
-          home-manager.nixosModules.home-manager.home-manager
           {
-            userGlobalPkgs = true;
-            useUserPackages = true;
-            users.${username} = import ./modules/HM;
-            extraSpecialArgs =
-              sharedArgs
-              // {
-                hostname = "waylander";
-              };
+            home-manager.nixosModules.home-manager.home-manager = {
+              userGlobalPkgs = true;
+              useUserPackages = true;
+              users.${username} = import ./modules/HM;
+              extraSpecialArgs =
+                sharedArgs
+                // {
+                  hostname = "waylander";
+                };
+            };
           }
         ];
       };
