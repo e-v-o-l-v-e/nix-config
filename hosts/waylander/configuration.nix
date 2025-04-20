@@ -93,7 +93,7 @@ in {
 
   # when lid is closed, if on power : ignore, else : suspend
   services.logind.lidSwitch = "suspend";
-  services.logind.lidSwitchExternalPower = "ignore";
+  services.logind.lidSwitchExternalPower = "suspend";
 
   # Extra Module Options
   drivers.amdgpu.enable = true;

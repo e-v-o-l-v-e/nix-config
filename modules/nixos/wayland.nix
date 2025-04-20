@@ -5,33 +5,6 @@
   ...
 }:
 lib.mkIf (hostname == "waylander") {
-  home.packages = with pkgs; [
-    ags
-    brightnessctl
-    cava
-    cpufrequtils
-    gnome-system-monitor
-    grim
-    gtk-engine-murrine
-    hypridle
-    hyprland
-    hyprlock
-    hyprpicker
-    hyprshade
-    inxi
-    nwg-displays
-    nwg-look
-    polkit_gnome
-    rofi-wayland
-    slurp
-    swappy
-    swaynotificationcenter
-    swww
-    wallust
-    waybar
-    wlogout
-  ];
-
   programs = {
     hyprland = {
       enable = true;
@@ -39,13 +12,13 @@ lib.mkIf (hostname == "waylander") {
       xwayland.enable = true;
     };
 
-    waybar = {
-      enable = true;
-    };
+    # waybar = {
+    #   enable = true;
+    # };
 
-    hyprlock = {
-      enable = true;
-    };
+    # hyprlock = {
+    #   enable = true;
+    # };
   };
 
   # Extra Portal Configuration

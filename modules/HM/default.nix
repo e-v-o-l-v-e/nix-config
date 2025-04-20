@@ -5,7 +5,7 @@
     ./font.nix
     ./gaming.nix
     ./home.nix
-    ./hypr.nix
+    ./hypr
     ./packages.nix
   ];
 }

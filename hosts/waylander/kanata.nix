@@ -1,19 +1,12 @@
 {
   pkgs,
-  lib,
   hostname,
   ...
 }: {
-  # ${
-  #   if isNixos
-  #   then "home.packages"
-  #   else "environment.systemPackages"
-  # } = [pkgs.kanata];
-
   environment.systemPackages = [pkgs.kanata];
 
   services.kanata = {
-    enable = lib.mkIf hostname == "waylander" true;
+    enable = hostname == "waylander";
     keyboards = {
       internalKeyboard = {
         devices = [
