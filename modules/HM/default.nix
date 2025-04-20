@@ -6,6 +6,7 @@
     ./gaming.nix
     ./home.nix
     ./hypr
+    ./keyboard.nix
     ./packages.nix
   ];
 }
