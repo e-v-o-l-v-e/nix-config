@@ -53,11 +53,7 @@
       waylander = nixpkgs.lib.nixosSystem {
         # system = system;
         inherit system;
-        specialArgs =
-          sharedArgs
-          // {
-            hostname = "waylander";
-          };
+        specialArgs = sharedArgs // {hostname = "waylander";};
         modules = [
           ./hosts/waylander
           ./modules/nixos

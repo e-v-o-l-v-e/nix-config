@@ -1,5 +1,5 @@
-{...}: {
+{hostname, ...}: {
   wayland.windowManager.hyprland = {
-    enable = false;
+    enable = hostname == "waylander";
   };
 }
