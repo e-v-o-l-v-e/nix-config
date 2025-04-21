@@ -4,8 +4,10 @@
     brightnessctl
     cava
     cpufrequtils
+    glib
     gnome-system-monitor
     grim
+    gsettings-qt
     gtk-engine-murrine
     hypridle
     hyprland
@@ -13,6 +15,7 @@
     hyprpicker
     hyprshade
     inxi
+    libappindicator
     nwg-displays
     nwg-look
     polkit_gnome

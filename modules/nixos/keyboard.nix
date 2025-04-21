@@ -1,4 +1,6 @@
 {...}: {
+  console.keyMap = "uk";
+
   services.xserver = {
     enable = true;
     xkb = {
