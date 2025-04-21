@@ -6,10 +6,16 @@
 }:
 lib.mkIf (hostname == "waylander" || hostname == "druss") {
   home.packages = with pkgs; [
-    DaddyTimeMono
-    FantasqueSansMono
-    nerdfonts.jetbrains-mono
+    nerd-fonts.daddy-time-mono
+    fantasque-sans-mono
+    jetbrains-mono
     font-awesome
     fira
   ];
+
+  fonts.fontconfig = {
+    defaultFonts = {
+      monospace = ["daddy-time-mono"];
+    };
+  };
 }

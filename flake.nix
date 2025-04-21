@@ -77,7 +77,6 @@
           sharedArgs
           // {
             hostname = "druss";
-            full = true;
           };
         modules = [
           ./hosts/druss/config.nix

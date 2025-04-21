@@ -9,5 +9,6 @@
     ./keyboard.nix
     ./packages.nix
     ./shell
+    ./zen.nix
   ];
 }
