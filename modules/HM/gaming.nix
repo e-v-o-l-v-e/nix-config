@@ -1,20 +1,18 @@
 {
   pkgs,
-  lib,
   hostname,
   ...
-}:
-# battlestation gaming config
-lib.mkIf (hostname == "druss") {
-  home.packages = with pkgs; [
-    heroic-unwrapped
-    steam
-    steam-run
-  ];
-}
-# simpler gaming config
-lib.mkIf (hostname == "waylander") {
-  home.packages = with pkgs; [
-    steam
-  ];
+}: let
+  pkgPerHost = {
+    druss = with pkgs; [
+      heroic-unwrapped
+      steam
+      steam-run
+    ];
+    waylander = with pkgs; [
+      steam
+    ];
+  };
+in {
+  home.packages = pkgPerHost.${hostname} or [];
 }

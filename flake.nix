@@ -51,6 +51,8 @@
     # Waylander's nixos config.
     nixosConfigurations = {
       waylander = nixpkgs.lib.nixosSystem {
+        # system = system;
+        inherit system;
         specialArgs =
           sharedArgs
           // {
@@ -60,17 +62,16 @@
           ./hosts/waylander
           ./modules/nixos
 
+          home-manager.nixosModules.home-manager
           {
-            home-manager.nixosModules.home-manager.home-manager = {
-              userGlobalPkgs = true;
-              useUserPackages = true;
-              users.${username} = import ./modules/HM;
-              extraSpecialArgs =
-                sharedArgs
-                // {
-                  hostname = "waylander";
-                };
-            };
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${username} = import ./modules/HM;
+            home-manager.extraSpecialArgs =
+              sharedArgs
+              // {
+                hostname = "waylander";
+              };
           }
         ];
       };
