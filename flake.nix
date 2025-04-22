@@ -47,11 +47,27 @@
       inherit system;
       inherit username;
     };
+    # mkSystemConfig = ;
+    # mk;
   in {
+    # package Neovim config (nvf)
+    packages.x86_64-linux.my-neovim =
+      (nvf.lib.neovimConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        modules = [./nvf.nix];
+      })
+      .neovim;
+
+    # set neovim config as default package
+    packages.x86_64-linux.default = self.packages.x86_64-linux.my-neovim;
+
+    # import shells
+    devShells.${system} = import ./shells.nix {inherit pkgs;};
+
+    # NIXOS CONFIGURATIONS
     # Waylander's nixos config.
     nixosConfigurations = {
       waylander = nixpkgs.lib.nixosSystem {
-        # system = system;
         inherit system;
         inherit pkgs;
         specialArgs = sharedArgs // {hostname = "waylander";};
@@ -61,27 +77,35 @@
 
           home-manager.nixosModules.home-manager
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.${username} = import ./modules/HM;
-            home-manager.backupFileExtension = "backup";
-            home-manager.extraSpecialArgs =
-              sharedArgs
-              // {
-                hostname = "waylander";
-              };
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.${username} = import ./modules/HM;
+              backupFileExtension = "backup";
+              extraSpecialArgs = sharedArgs // {hostname = "waylander";};
+            };
           }
         ];
       };
 
       druss = nixpkgs.lib.nixosSystem {
-        specialArgs =
-          sharedArgs
-          // {
-            hostname = "druss";
-          };
+        inherit system;
+        inherit pkgs;
+        specialArgs = sharedArgs // {hostname = "druss";};
         modules = [
-          ./hosts/druss/config.nix
+          ./hosts/druss
+          ./modules/nixos
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.${username} = import ./modules/HM;
+              backupFileExtension = "backup";
+              extraSpecialArgs = sharedArgs // {hostname = "druss";};
+            };
+          }
         ];
       };
 
@@ -106,7 +130,7 @@
       };
     };
 
-    # home-manager configs.
+    # HOME-MANAGER CONFIGURATIONS.
     homeConfigurations = {
       waylander = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
@@ -159,18 +183,5 @@
           };
       };
     };
-
-    # Neovim config.
-    packages.x86_64-linux.my-neovim =
-      (nvf.lib.neovimConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [./nvf.nix];
-      })
-      .neovim;
-
-    packages.x86_64-linux.default = self.packages.x86_64-linux.my-neovim;
-
-    # shells
-    devShells.${system} = import ./shells.nix {inherit pkgs;};
   };
 }
