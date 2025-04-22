@@ -7,6 +7,7 @@
   home.packages = lib.mkIf (hostname
     == "waylander") (with pkgs; [
     ags
+    bc
     brightnessctl
     cava
     cpufrequtils

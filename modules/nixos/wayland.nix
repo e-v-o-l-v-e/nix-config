@@ -33,4 +33,13 @@ lib.mkIf (hostname == "waylander") {
       pkgs.xdg-desktop-portal
     ];
   };
+
+  # For Electron apps to use wayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  # OpenGL
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 }

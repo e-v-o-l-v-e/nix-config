@@ -6,6 +6,10 @@
 }:
 lib.mkIf (hostname == "waylander" || hostname == "druss") {
   home.packages = with pkgs; [
+    noto-fonts
+    fira-code
+    terminus_font
+    victor-mono
     nerd-fonts.daddy-time-mono
     fantasque-sans-mono
     jetbrains-mono

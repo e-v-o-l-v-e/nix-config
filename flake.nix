@@ -53,6 +53,7 @@
       waylander = nixpkgs.lib.nixosSystem {
         # system = system;
         inherit system;
+        inherit pkgs;
         specialArgs = sharedArgs // {hostname = "waylander";};
         modules = [
           ./hosts/waylander
@@ -63,6 +64,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.${username} = import ./modules/HM;
+            home-manager.backupFileExtension = "backup";
             home-manager.extraSpecialArgs =
               sharedArgs
               // {

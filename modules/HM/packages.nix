@@ -22,7 +22,6 @@
         fzf
         git
         gnutar
-        home-manager
         loupe
         lsd
         networkmanager
@@ -58,9 +57,9 @@
         vesktop
         xdg-user-dirs
         xdg-utils
-      ]);
-    # enable zen for non-server hosts
-    # ++ lib.mkIf (hostname != "delnoch")
-    # [inputs.zen-browser.packages."${system}".twilight];
+      ])
+      # enable kitty for non-server hosts
+      ++ lib.optional (hostname != "delnoch" && hostname != "wsl")
+      pkgs.kitty;
   };
 }
