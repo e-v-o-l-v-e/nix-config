@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   ...
@@ -27,7 +28,7 @@
     #kernel.sysctl = {
     #  "vm.max_map_count" = 2147483642;
     #};
-    kernel.sysctl = lib.mkIf pkgs.steam.enable {
+    kernel.sysctl = lib.mkIf config.programs.steam.enable {
       "vm.max_map_count" = 2147483642;
     };
 

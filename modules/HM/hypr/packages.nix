@@ -1,6 +1,15 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
-    ags
+{
+  pkgs,
+  hostname,
+  lib,
+  system,
+  inputs,
+  ...
+}: {
+  home.packages = lib.mkIf (hostname
+    == "waylander") (with pkgs; [
+    inputs.ags.packages.${system}.default
+    bc
     brightnessctl
     cava
     cpufrequtils
@@ -27,5 +36,5 @@
     wallust
     waybar
     wlogout
-  ];
+  ]);
 }

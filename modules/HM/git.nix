@@ -4,7 +4,7 @@
     userName = username;
     userEmail = "elivanoa5@gmail.com";
     extraConfig = {
-      autoSetupRemote = true;
+      push.autoSetupRemote = true;
     };
   };
 }
