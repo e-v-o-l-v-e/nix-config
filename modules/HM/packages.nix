@@ -41,7 +41,7 @@
         zoxide
       ]
       ++ [self.packages."${system}".my-neovim]
-      # packages for personnals machine
+      # packages for personal machine
       ++ lib.optionals (hostname == "waylander" || hostname == "druss") (with pkgs; [
         element-desktop
         imagemagick
@@ -59,7 +59,7 @@
         xdg-utils
       ])
       # enable kitty for non-server hosts
-      ++ lib.optional (hostname != "delnoch" && hostname != "wsl")
-      pkgs.kitty;
+      ++ (lib.optional (hostname != "delnoch" && hostname != "wsl")
+        pkgs.kitty);
   };
 }

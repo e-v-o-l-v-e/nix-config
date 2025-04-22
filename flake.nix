@@ -45,7 +45,6 @@
 
     sharedArgs = {
       inherit inputs;
-      inherit pkgs;
       inherit self;
       inherit system;
       inherit username;
