@@ -36,5 +36,9 @@
       nl = "hyprshade toggle bluefilter";
       nl2 = "hyprshade toggle blue-light-filter";
     };
+
+    shellInit = ''
+      set -g fish_greeting ""
+    '';
   };
 }

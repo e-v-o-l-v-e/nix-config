@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./env.nix
-    ./font.nix
+    ./fonts.nix
     ./gaming.nix
     ./git.nix
     ./home.nix

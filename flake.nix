@@ -47,8 +47,21 @@
       inherit system;
       inherit username;
     };
-    # mkSystemConfig = ;
-    # mk;
+
+    mkHomeConfig = hostname:
+      home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [./modules/HM];
+        extraSpecialArgs = sharedArgs // {inherit hostname;};
+      };
+
+    mkSystemConfig = hostname:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        inherit pkgs;
+        inherit hostname;
+        specialArgs = sharedArgs;
+      };
   in {
     # package Neovim config (nvf)
     packages.x86_64-linux.my-neovim =
@@ -132,56 +145,11 @@
 
     # HOME-MANAGER CONFIGURATIONS.
     homeConfigurations = {
-      waylander = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [./modules/HM];
-        extraSpecialArgs =
-          sharedArgs
-          // {
-            hostname = "waylander";
-          };
-      };
-
-      druss = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [./modules/HM];
-        extraSpecialArgs =
-          sharedArgs
-          // {
-            hostname = "druss";
-          };
-      };
-
-      # home-manager config.
-      min = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [./modules/HM];
-        extraSpecialArgs =
-          sharedArgs
-          // {
-            inherit username;
-            hostname = "min";
-          };
-      };
-
-      delnoch = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [./modules/HM];
-        extraSpecialArgs =
-          sharedArgs
-          // {
-            hostname = "delnoch";
-          };
-      };
-      wsl = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [./modules/HM];
-        extraSpecialArgs =
-          sharedArgs
-          // {
-            hostname = "wsl";
-          };
-      };
+      waylander = mkHomeConfig "waylander";
+      druss = mkHomeConfig "druss";
+      delnoch = mkHomeConfig "delnoch";
+      wsl = mkHomeConfig "wsl";
+      min = mkHomeConfig "min";
     };
   };
 }
