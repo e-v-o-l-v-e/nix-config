@@ -2,11 +2,13 @@
   pkgs,
   hostname,
   lib,
+  system,
+  inputs,
   ...
 }: {
   home.packages = lib.mkIf (hostname
     == "waylander") (with pkgs; [
-    ags
+    inputs.ags.packages.${system}.default
     bc
     brightnessctl
     cava
