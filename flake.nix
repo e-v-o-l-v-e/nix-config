@@ -59,8 +59,22 @@
       nixpkgs.lib.nixosSystem {
         inherit system;
         inherit pkgs;
-        inherit hostname;
-        specialArgs = sharedArgs;
+        specialArgs = sharedArgs // {inherit hostname;};
+        modules = [
+          ./hosts/${hostname}
+          ./modules/nixos
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.${username} = import ./modules/HM;
+              backupFileExtension = "backup";
+              extraSpecialArgs = sharedArgs // {inherit hostname;};
+            };
+          }
+        ];
       };
   in {
     # package Neovim config (nvf)
@@ -80,26 +94,27 @@
     # NIXOS CONFIGURATIONS
     # Waylander's nixos config.
     nixosConfigurations = {
-      waylander = nixpkgs.lib.nixosSystem {
-        inherit system;
-        inherit pkgs;
-        specialArgs = sharedArgs // {hostname = "waylander";};
-        modules = [
-          ./hosts/waylander
-          ./modules/nixos
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.${username} = import ./modules/HM;
-              backupFileExtension = "backup";
-              extraSpecialArgs = sharedArgs // {hostname = "waylander";};
-            };
-          }
-        ];
-      };
+      waylander = mkSystemConfig "waylander";
+      # waylander = nixpkgs.lib.nixosSystem {
+      #   inherit system;
+      #   inherit pkgs;
+      #   specialArgs = sharedArgs // {hostname = "waylander";};
+      #   modules = [
+      #     ./hosts/waylander
+      #     ./modules/nixos
+      #
+      #     home-manager.nixosModules.home-manager
+      #     {
+      #       home-manager = {
+      #         useGlobalPkgs = true;
+      #         useUserPackages = true;
+      #         users.${username} = import ./modules/HM;
+      #         backupFileExtension = "backup";
+      #         extraSpecialArgs = sharedArgs // {hostname = "waylander";};
+      #       };
+      #     }
+      #   ];
+      # };
 
       druss = nixpkgs.lib.nixosSystem {
         inherit system;
