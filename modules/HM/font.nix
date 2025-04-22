@@ -1,10 +1,4 @@
-{
-  pkgs,
-  lib,
-  hostname,
-  ...
-}:
-lib.mkIf (hostname == "waylander" || hostname == "druss") {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     nerd-fonts.daddy-time-mono
     fantasque-sans-mono

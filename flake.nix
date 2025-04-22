@@ -82,6 +82,26 @@
           ./hosts/druss/config.nix
         ];
       };
+
+      wsl = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = sharedArgs // {hostmame = "wsl";};
+        modules = [
+          ./hosts/wsl
+          ./modules/nixos
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${username} = import ./modules/HM;
+            home-manager.extraSpecialArgs =
+              sharedArgs
+              // {
+                hostname = "wsl";
+              };
+          }
+        ];
+      };
     };
 
     # home-manager configs.

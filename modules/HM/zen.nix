@@ -6,6 +6,6 @@
   imports = [inputs.zen-browser.homeModules.twilight];
 
   programs.zen-browser = {
-    enable = hostname != "delnoch";
+    enable = (hostname != "delnoch" || hostname != "wsl");
   };
 }
