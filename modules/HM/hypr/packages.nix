@@ -1,5 +1,11 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
+{
+  pkgs,
+  hostname,
+  lib,
+  ...
+}: {
+  home.packages = lib.mkIf (hostname
+    == "waylander") (with pkgs; [
     ags
     brightnessctl
     cava
@@ -27,5 +33,5 @@
     wallust
     waybar
     wlogout
-  ];
+  ]);
 }
