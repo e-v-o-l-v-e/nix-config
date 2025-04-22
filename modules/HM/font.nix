@@ -12,6 +12,7 @@
   ];
 
   fonts.fontconfig = {
+    enable = true;
     defaultFonts = {
       monospace = ["daddy-time-mono"];
     };

@@ -2,9 +2,10 @@
   config,
   pkgs,
   lib,
+  hostname,
   ...
 }: {
-  boot = {
+  boot = lib.mkIf (hostname != "wsl") {
     kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
     #kernelPackages = pkgs.linuxPackages_latest; #linux Kernel
 

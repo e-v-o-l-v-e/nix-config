@@ -87,7 +87,7 @@
 
       wsl = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = sharedArgs // {hostmame = "wsl";};
+        specialArgs = sharedArgs // {hostname = "wsl";};
         modules = [
           ./hosts/wsl
           ./modules/nixos
@@ -147,6 +147,15 @@
           sharedArgs
           // {
             hostname = "delnoch";
+          };
+      };
+      wsl = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [./modules/HM];
+        extraSpecialArgs =
+          sharedArgs
+          // {
+            hostname = "wsl";
           };
       };
     };

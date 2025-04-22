@@ -2,7 +2,6 @@
   pkgs,
   hostname,
   username,
-  lib,
   ...
 }: {
   services = {
