@@ -1,18 +1,18 @@
 {
   pkgs,
-  hostname,
+  gaming,
   ...
 }: let
-  pkgPerHost = {
-    druss = with pkgs; [
+  gamingPkgs = {
+    full = with pkgs; [
       heroic-unwrapped
       steam
       steam-run
     ];
-    waylander = with pkgs; [
+    simple = with pkgs; [
       steam
     ];
   };
 in {
-  home.packages = pkgPerHost.${hostname} or [];
+  home.packages = gamingPkgs.${gaming} or [];
 }

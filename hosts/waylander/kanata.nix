@@ -1,12 +1,8 @@
-{
-  pkgs,
-  hostname,
-  ...
-}: {
+{pkgs, ...}: {
   environment.systemPackages = [pkgs.kanata];
 
   services.kanata = {
-    enable = hostname == "waylander";
+    enable = true;
     keyboards = {
       internalKeyboard = {
         devices = [

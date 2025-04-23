@@ -1,15 +1,14 @@
 {
   inputs,
-  hostname,
+  useZen,
   lib,
   ...
-}: let
-  useZen = hostname != "delnoch" && hostname != "wsl";
-in {
-  # imports = lib.optional useZen inputs.zen-browser.homeModules.twilight;
-  imports = [inputs.zen-browser.homeModules.twilight];
+}: {
+  imports = lib.optional useZen inputs.zen-browser.homeModules.twilight;
 
-  programs.zen-browser = {
-    enable = useZen;
+  programs = lib.mkIf useZen {
+    zen-browser = {
+      enable = useZen;
+    };
   };
 }

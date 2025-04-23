@@ -1,3 +1,3 @@
-{hostname, ...}: {
-  programs.steam.enable = hostname == "waylander" || hostname == "druss";
+{gaming, ...}: {
+  programs.steam.enable = gaming != "none";
 }

@@ -38,10 +38,10 @@
 
     pkgs = import nixpkgs {
       inherit system;
-      config = {
-        allowUnfree = true;
-      };
+      config = {allowUnfree = true;};
     };
+
+    variables = import ./variables.nix {lib = pkgs.lib;};
 
     sharedArgs = {
       inherit inputs;
@@ -54,14 +54,14 @@
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [./modules/HM];
-        extraSpecialArgs = sharedArgs // {inherit hostname;};
+        extraSpecialArgs = sharedArgs // variables.defaults // variables.${hostname} // {inherit hostname;};
       };
 
     mkSystemConfig = hostname:
       nixpkgs.lib.nixosSystem {
         inherit pkgs;
         inherit system;
-        specialArgs = sharedArgs // {inherit hostname;};
+        specialArgs = sharedArgs // variables.defaults // variables.${hostname} // {inherit hostname;};
 
         modules = [
           ./hosts/${hostname}
@@ -70,7 +70,7 @@
           {
             home-manager = {
               users.${username} = import ./modules/HM;
-              extraSpecialArgs = sharedArgs // {inherit hostname;};
+              extraSpecialArgs = sharedArgs // variables.defaults // variables.${hostname} // {inherit hostname;};
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "backup";

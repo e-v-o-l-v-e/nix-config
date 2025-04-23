@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  gpu,
   hostname,
   ...
 }: {
@@ -22,7 +23,7 @@
 
     initrd = {
       availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod"];
-      kernelModules = ["amdgpu"];
+      kernelModules = lib.optionals (gpu == "amd") "amdgpu";
     };
 
     # Needed For Some Steam Games

@@ -1,11 +1,11 @@
 {
   pkgs,
   lib,
-  hostname,
+  DE,
   ...
 }: {
   config = lib.mkMerge [
-    (lib.mkIf (hostname == "waylander") {
+    (lib.mkIf (builtins.elem "hyprland" DE) {
       programs.hyprland = {
         enable = true;
         portalPackage = pkgs.xdg-desktop-portal-hyprland;
@@ -13,9 +13,8 @@
       };
     })
 
-    (lib.mkIf (hostname == "druss") {
+    (lib.mkIf (builtins.elem "plasma" DE) {
       services.xserver.enable = true;
-      services.displayManager.sddm.enable = true;
       services.desktopManager.plasma6.enable = true;
     })
 

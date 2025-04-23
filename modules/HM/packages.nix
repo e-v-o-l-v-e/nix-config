@@ -1,9 +1,9 @@
 {
-  hostname,
   lib,
   pkgs,
   self,
   system,
+  personal,
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should manage.
@@ -42,11 +42,12 @@
       ]
       ++ [self.packages."${system}".my-neovim]
       # packages for personal machine
-      ++ lib.optionals (hostname == "waylander" || hostname == "druss") (with pkgs; [
+      ++ lib.optionals personal (with pkgs; [
         element-desktop
         imagemagick
         jellyfin-media-player
         jq
+        kitty
         libnotify
         libreoffice-qt6-fresh
         libsForQt5.kdeconnect-kde
@@ -57,9 +58,6 @@
         vesktop
         xdg-user-dirs
         xdg-utils
-      ])
-      # enable kitty for non-server hosts
-      ++ (lib.optional (hostname != "delnoch" && hostname != "wsl")
-        pkgs.kitty);
+      ]);
   };
 }

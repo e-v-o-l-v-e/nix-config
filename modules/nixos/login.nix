@@ -1,12 +1,12 @@
 {
   pkgs,
-  hostname,
   username,
+  login,
   ...
 }: {
   services = {
     greetd = {
-      enable = hostname == "waylander";
+      enable = login == "greetd";
       vt = 3;
       settings = {
         default_session = {
@@ -14,6 +14,10 @@
           command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland"; # start Hyprland with a TUI login manager
         };
       };
+    };
+
+    displayManager.sddm = {
+      enable = login == "sddm";
     };
   };
 }
