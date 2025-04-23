@@ -10,11 +10,20 @@
     services.xserver.videoDrivers = ["amdgpu"];
 
     # OpenGL
-    hardware.graphics = {
-      extraPackages = with pkgs; [
-        libva
-        libva-utils
-      ];
+    hardware = {
+      graphics = {
+        enable = true;
+        extraPackages = with pkgs; [
+          libva
+          libva-utils
+        ];
+      };
+      amdgpu.amdvlk.enable = true;
     };
+
+    environment.systemPackages = with pkgs; [
+      vulkan-tools
+      volk
+    ];
   };
 }

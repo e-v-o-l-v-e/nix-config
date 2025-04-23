@@ -1,13 +1,18 @@
 {
   pkgs,
   gaming,
+  username,
   ...
 }: let
   gamingPkgs = {
     full = with pkgs; [
-      heroic-unwrapped
+      heroic
       steam
       steam-run
+      wine
+      umu-launcher
+      protonup
+      amdvlk
     ];
     simple = with pkgs; [
       steam
@@ -15,4 +20,7 @@
   };
 in {
   home.packages = gamingPkgs.${gaming} or [];
+  home.sessionVariables = {
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/evolve/steam/root/compatibilitytools.d/";
+  };
 }
