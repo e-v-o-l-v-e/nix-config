@@ -23,7 +23,7 @@
 
     initrd = {
       availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod"];
-      kernelModules = lib.optionals (gpu == "amd") "amdgpu";
+      kernelModules = lib.optional (gpu == "amd") "amdgpu";
     };
 
     # Needed For Some Steam Games
