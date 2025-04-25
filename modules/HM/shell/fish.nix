@@ -35,6 +35,9 @@
       nl0 = "hyprshade off";
       nl = "hyprshade toggle bluefilter";
       nl2 = "hyprshade toggle blue-light-filter";
+
+      # docker
+      dc = "docker compose";
     };
 
     shellInit = ''
