@@ -13,6 +13,10 @@
       umu-launcher
       protonup
       amdvlk
+      vkd3d
+      vkd3d-proton
+      dxvk_2
+      directx-headers
     ];
     simple = with pkgs; [
       steam
