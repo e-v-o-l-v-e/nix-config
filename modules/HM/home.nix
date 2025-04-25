@@ -12,7 +12,7 @@ in {
   home = {
     inherit username;
     homeDirectory = "/home/${username}";
-    stateVersion = sysv."${hostname}" or "";
+    stateVersion = sysv."${hostname}" or "24.11";
   };
   programs.home-manager.enable = true;
 }
