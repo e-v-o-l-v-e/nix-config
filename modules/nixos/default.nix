@@ -10,6 +10,7 @@
     ./login.nix
     ./network.nix
     ./nix.nix
+    ./openrgb.nix
     ./systemVersion.nix
     ./time.nix
     ./user.nix
