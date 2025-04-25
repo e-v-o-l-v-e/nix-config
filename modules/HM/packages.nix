@@ -43,6 +43,7 @@
       ++ [self.packages."${system}".my-neovim]
       # packages for personal machine
       ++ lib.optionals personal (with pkgs; [
+        blueman
         element-desktop
         imagemagick
         jellyfin-media-player

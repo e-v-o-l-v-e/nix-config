@@ -13,4 +13,8 @@
   services.tailscale.enable = true;
 
   programs.localsend.enable = personal;
+
+  hardware.bluetooth = {
+    enable = personal;
+  };
 }
