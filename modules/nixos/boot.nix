@@ -15,6 +15,11 @@
       "systemd.mask=dev-tpmrm0.device" #this is to mask that stupid 1.5 mins systemd bug
       "nowatchdog"
       "modprobe.blacklist=sp5100_tco" #watchdog for AMD
+      "splash"
+      "quiet"
+      "boot.shell_on_fail"
+      "rd.systemd.show_status=auto"
+      "udev.log_priority=3"
     ];
 
     # This is for OBS Virtual Cam Support
@@ -24,12 +29,11 @@
     initrd = {
       availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod"];
       kernelModules = lib.optional (gpu == "amd") "amdgpu";
+      verbose = false;
     };
+    consoleLogLevel = 3;
 
     # Needed For Some Steam Games
-    #kernel.sysctl = {
-    #  "vm.max_map_count" = 2147483642;
-    #};
     kernel.sysctl = lib.mkIf config.programs.steam.enable {
       "vm.max_map_count" = 2147483642;
     };
@@ -43,7 +47,7 @@
       canTouchEfiVariables = true;
     };
 
-    loader.timeout = 5;
+    loader.timeout = 3;
 
     # Bootloader GRUB
     #loader.grub = {
@@ -74,6 +78,15 @@
       magicOrExtension = ''\x7fELF....AI\x02'';
     };
 
-    plymouth.enable = true;
+    plymouth = {
+      enable = true;
+      theme = "flame";
+      # theme = "rings";
+      themePackages = with pkgs; [
+        (adi1090x-plymouth-themes.override {selected_themes = ["rings" "liquid" "blockchain" "flame"];})
+        # (adi1090x-plymouth-themes.override {selected_themes = ["rings" "liquid" "blockchain" "colorfull-loop" "cyanide" "flame" "green-blocks" "hud-space"];})
+        nixos-bgrt-plymouth
+      ];
+    };
   };
 }

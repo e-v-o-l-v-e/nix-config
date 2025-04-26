@@ -43,5 +43,9 @@
     shellInit = ''
       set -g fish_greeting ""
     '';
+
+    interactiveShellInit = ''
+      fish_vi_key_bindings
+    '';
   };
 }
