@@ -98,14 +98,28 @@
     };
 
     # package Neovim config (nvf)
-    packages.x86_64-linux.my-neovim =
-      (nvf.lib.neovimConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [./nvf.nix];
-      })
+    packages.x86_64-linux = {
+      nvf-max = let
+        maxConfig = import ./nvf.nix true;
+      in
+        (nvf.lib.neovimConfiguration
+          {
+            pkgs = nixpkgs.legacyPackages.x86_64-linux;
+            modules = [maxConfig];
+          })
       .neovim;
-    # set neovim config as default package
-    packages.x86_64-linux.default = self.packages.x86_64-linux.my-neovim;
+
+      nvf-min = let
+        minConfig = import ./nvf.nix false;
+      in
+        (nvf.lib.neovimConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          modules = [minConfig];
+        })
+      .neovim;
+      # set nvf minimal config as default package
+      default = self.packages.x86_64-linux.nvf-min;
+    };
 
     # import shells
     devShells.${system} = import ./shells.nix {inherit pkgs;};

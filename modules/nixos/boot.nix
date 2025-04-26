@@ -4,23 +4,28 @@
   lib,
   gpu,
   hostname,
+  personal,
+  useAppImage,
   ...
 }: {
   boot = lib.mkIf (hostname != "wsl") {
     kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
     #kernelPackages = pkgs.linuxPackages_latest; #linux Kernel
 
-    kernelParams = [
-      "systemd.mask=systemd-vconsole-setup.service"
-      "systemd.mask=dev-tpmrm0.device" #this is to mask that stupid 1.5 mins systemd bug
-      "nowatchdog"
-      "modprobe.blacklist=sp5100_tco" #watchdog for AMD
-      "splash"
-      "quiet"
-      "boot.shell_on_fail"
-      "rd.systemd.show_status=auto"
-      "udev.log_priority=3"
-    ];
+    kernelParams =
+      [
+        "systemd.mask=systemd-vconsole-setup.service"
+        "systemd.mask=dev-tpmrm0.device" #this is to mask that stupid 1.5 mins systemd bug
+        "nowatchdog"
+        "modprobe.blacklist=sp5100_tco" #watchdog for AMD
+      ]
+      ++ lib.optionals personal [
+        "splash"
+        "quiet"
+        "boot.shell_on_fail"
+        "rd.systemd.show_status=auto"
+        "udev.log_priority=3"
+      ];
 
     # This is for OBS Virtual Cam Support
     #kernelModules = [ "v4l2loopback" ];
@@ -29,9 +34,9 @@
     initrd = {
       availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod"];
       kernelModules = lib.optional (gpu == "amd") "amdgpu";
-      verbose = false;
+      verbose = !personal;
     };
-    consoleLogLevel = 3;
+    consoleLogLevel = lib.mkIf personal 3;
 
     # Needed For Some Steam Games
     kernel.sysctl = lib.mkIf config.programs.steam.enable {
@@ -69,7 +74,7 @@
     };
 
     # Appimage Support
-    binfmt.registrations.appimage = {
+    binfmt.registrations.appimage = lib.mkIf useAppImage {
       wrapInterpreterInShell = false;
       interpreter = "${pkgs.appimage-run}/bin/appimage-run";
       recognitionType = "magic";
@@ -79,7 +84,7 @@
     };
 
     plymouth = {
-      enable = true;
+      enable = personal;
       theme = "flame";
       # theme = "rings";
       themePackages = with pkgs; [

@@ -7,6 +7,8 @@
     useZen = lib.mkDefault false;
     personal = lib.mkDefault true;
     gpu = lib.mkDefault "";
+    useAppImage = lib.mkDefault false;
+    nvfConfig = lib.mkDefault "nvf-min";
   };
 
   waylander = {
@@ -17,6 +19,8 @@
     server = false;
     login = "greetd";
     gpu = "amd";
+    useAppImage = true;
+    nvfConfig = "nvf-max";
   };
 
   druss = {
@@ -27,6 +31,8 @@
     login = "sddm";
     server = false;
     gpu = "amd";
+    useAppImage = true;
+    nvfConfig = "nvf-max";
   };
 
   wsl = {
@@ -36,6 +42,7 @@
     DE = [];
     server = false;
     wsl = true;
+    nvfConfig = "nvf-max";
   };
 
   delnoch = {
@@ -44,5 +51,17 @@
     gaming = "none";
     DE = [];
     server = true;
+    nvfConfig = "nvf-max";
+  };
+
+  min = {
+    personal = false;
+    useZen = true;
+    gaming = "none";
+    DE = ["hyprland"];
+    login = "greetd";
+    server = false;
+    useAppImage = false;
+    nvfConfig = "nvf-min";
   };
 }

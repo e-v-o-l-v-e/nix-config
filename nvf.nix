@@ -3,7 +3,7 @@
 # an overview of nvf's module options. To find a complete and curated list of nvf module
 # options, examples, instruction tutorials and more; please visit the online manual.
 # https://notashelf.github.io/nvf/options.html
-{lib, ...}: {
+max: {
   config.vim = {
     viAlias = true;
     vimAlias = true;
@@ -14,7 +14,7 @@
     };
 
     spellcheck = {
-      enable = true;
+      enable = max;
     };
 
     undoFile.enable = true;
@@ -26,12 +26,12 @@
     };
 
     lsp = {
-      formatOnSave = true;
+      formatOnSave = max;
       lspkind.enable = false;
-      lightbulb.enable = true;
+      lightbulb.enable = max;
       lspsaga.enable = false;
-      trouble.enable = true;
-      lspSignature.enable = true;
+      trouble.enable = max;
+      lspSignature.enable = max;
       otter-nvim.enable = true;
       nvim-docs-view.enable = false;
     };
@@ -43,7 +43,7 @@
 
     debugger = {
       nvim-dap = {
-        enable = true;
+        enable = max;
         ui.enable = true;
       };
     };
@@ -57,20 +57,25 @@
       enableExtraDiagnostics = true;
 
       # Languages.
-      nix.enable = true;
-      nix.lsp.server = "nixd";
-      java.enable = true;
-      csharp.enable = true;
-      python.enable = true;
+      nix = {
+        enable = true;
+        extraDiagnostics.enable = true;
+        treesitter.enable = true;
+        format.type = "nixfmt";
+        lsp.server = "nixd";
+      };
+      java.enable = max;
+      csharp.enable = max;
+      python.enable = max;
       markdown.enable = true;
       yaml.enable = true;
-      dart.enable = true;
+      dart.enable = max;
 
-      lua.enable = false;
+      lua.enable = max;
       bash.enable = true;
       clang.enable = true;
-      css.enable = true;
-      html.enable = true;
+      css.enable = max;
+      html.enable = max;
       sql.enable = true;
       kotlin.enable = false;
       ts.enable = false;
@@ -106,7 +111,7 @@
       nvim-web-devicons.enable = true;
       nvim-cursorline.enable = true;
       cinnamon-nvim.enable = true;
-      fidget-nvim.enable = true;
+      fidget-nvim.enable = max;
 
       highlight-undo.enable = true;
       indent-blankline.enable = true;
@@ -135,16 +140,6 @@
 
     autocomplete.nvim-cmp = {
       enable = true;
-      # setupOpts = {
-      #   sources = lib.mkDefault [
-      #     # {name = lib.mkForce "path";} # Path source for file and directory completion
-      #     "lsp"
-      #     "path"
-      #     "snippets"
-      #     "buffer"
-      #     {name = "luasnip";}
-      #     {name = "path";}
-      #   ];
     };
 
     snippets.luasnip.enable = true;
@@ -159,7 +154,7 @@
       nvimBufferline.enable = true;
     };
 
-    treesitter.context.enable = true;
+    treesitter.context.enable = max;
 
     binds = {
       whichKey.enable = true;
@@ -176,16 +171,16 @@
 
     minimap = {
       minimap-vim.enable = false;
-      codewindow.enable = true; # lighter, faster, and uses lua for configuration
+      codewindow.enable = max; # lighter, faster, and uses lua for configuration
     };
 
     dashboard = {
       dashboard-nvim.enable = false;
-      alpha.enable = true;
+      alpha.enable = max;
     };
 
     notify = {
-      nvim-notify.enable = true;
+      nvim-notify.enable = max;
     };
 
     projects = {
@@ -193,18 +188,19 @@
     };
 
     utility = {
+      nix-develop.enable = max;
       ccc.enable = false;
-      vim-wakatime.enable = false;
+      vim-wakatime.enable = max;
       diffview-nvim.enable = true;
       yanky-nvim.enable = true;
-      icon-picker.enable = true;
+      icon-picker.enable = max;
       surround.enable = true;
       leetcode-nvim.enable = false;
       multicursors.enable = true;
 
       motion = {
-        hop.enable = true;
-        precognition.enable = true;
+        hop.enable = max;
+        precognition.enable = max;
       };
       images = {
         image-nvim.enable = false;
@@ -226,13 +222,13 @@
 
     ui = {
       borders.enable = false;
-      noice.enable = true;
+      noice.enable = max;
       colorizer.enable = true;
-      modes-nvim.enable = true; # the theme looks terrible with catppuccin # TEST: à tester
+      modes-nvim.enable = false; # the theme looks terrible with catppuccin # TEST: à tester
       illuminate.enable = true;
       breadcrumbs = {
-        enable = true;
-        navbuddy.enable = true;
+        enable = max;
+        navbuddy.enable = max;
       };
       smartcolumn = {
         enable = false;
@@ -257,7 +253,7 @@
     };
 
     session = {
-      nvim-session-manager.enable = true;
+      nvim-session-manager.enable = max;
     };
 
     gestures = {
@@ -269,7 +265,7 @@
     };
 
     presence = {
-      neocord.enable = true;
+      neocord.enable = max;
     };
   };
 }
