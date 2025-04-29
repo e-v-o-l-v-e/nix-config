@@ -187,6 +187,8 @@ max: {
       project-nvim.enable = false;
     };
 
+    mini.surround.enable = true;
+
     utility = {
       nix-develop.enable = max;
       ccc.enable = false;
@@ -237,7 +239,10 @@ max: {
           nix = "110";
           ruby = "120";
           java = "130";
-          go = ["90" "130"];
+          go = [
+            "90"
+            "130"
+          ];
         };
       };
       fastaction.enable = true;
