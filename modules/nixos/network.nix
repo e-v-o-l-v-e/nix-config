@@ -2,13 +2,12 @@
   hostname,
   personal,
   lib,
-  wsl,
   ...
 }:
 {
   networking = {
     networkmanager.enable = true;
-    nameservers = lib.optionals wsl [
+    nameservers = lib.optionals (hostname != "wsl") [
       "1.1.1.1"
       "1.0.0.1"
     ];
