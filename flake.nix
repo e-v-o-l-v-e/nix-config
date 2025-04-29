@@ -26,102 +26,110 @@
     };
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    home-manager,
-    nvf,
-    ...
-  }: let
-    system = "x86_64-linux";
-    username = "evolve";
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      nvf,
+      ...
+    }:
+    let
+      system = "x86_64-linux";
+      username = "evolve";
 
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {allowUnfree = true;};
-    };
-
-    variables = import ./variables.nix {lib = pkgs.lib;};
-
-    sharedArgs = {
-      inherit inputs;
-      inherit self;
-      inherit system;
-      inherit username;
-    };
-
-    mkHomeConfig = hostname:
-      home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [./modules/HM];
-        extraSpecialArgs = sharedArgs // variables.defaults // variables.${hostname} // {inherit hostname;};
-      };
-
-    mkSystemConfig = hostname:
-      nixpkgs.lib.nixosSystem {
-        inherit pkgs;
+      pkgs = import nixpkgs {
         inherit system;
-        specialArgs = sharedArgs // variables.defaults // variables.${hostname} // {inherit hostname;};
-
-        modules = [
-          ./hosts/${hostname}
-          ./modules/nixos
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              users.${username} = import ./modules/HM;
-              extraSpecialArgs = sharedArgs // variables.defaults // variables.${hostname} // {inherit hostname;};
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "backup";
-            };
-          }
-        ];
+        config = {
+          allowUnfree = true;
+        };
       };
-  in {
-    # NIXOS CONFIGURATIONS
-    nixosConfigurations = {
-      waylander = mkSystemConfig "waylander";
-      druss = mkSystemConfig "druss";
-      wsl = mkSystemConfig "wsl";
-      delnoch = mkSystemConfig "delnoch";
-      min = mkSystemConfig "min";
-    };
 
-    # HOME-MANAGER CONFIGURATIONS.
-    homeConfigurations = {
-      waylander = mkHomeConfig "waylander";
-      druss = mkHomeConfig "druss";
-      delnoch = mkHomeConfig "delnoch";
-      wsl = mkHomeConfig "wsl";
-      min = mkHomeConfig "min";
-    };
+      variables = import ./variables.nix { lib = pkgs.lib; };
 
-    # package Neovim config (nvf)
-    packages.x86_64-linux = {
-      nvf-max = let
-        maxConfig = import ./nvf.nix true;
-      in
-        (nvf.lib.neovimConfiguration
-          {
+      sharedArgs = {
+        inherit inputs;
+        inherit self;
+        inherit system;
+        inherit username;
+      };
+
+      mkHomeConfig =
+        hostname:
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./home ];
+          extraSpecialArgs =
+            sharedArgs // variables.defaults // variables.${hostname} // { inherit hostname; };
+        };
+
+      mkSystemConfig =
+        hostname:
+        nixpkgs.lib.nixosSystem {
+          inherit pkgs;
+          inherit system;
+          specialArgs = sharedArgs // variables.defaults // variables.${hostname} // { inherit hostname; };
+
+          modules = [
+            ./hosts/${hostname}
+            ./system
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                users.${username} = import ./home;
+                extraSpecialArgs =
+                  sharedArgs // variables.defaults // variables.${hostname} // { inherit hostname; };
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "backup";
+              };
+            }
+          ];
+        };
+    in
+    {
+      # NIXOS CONFIGURATIONS
+      nixosConfigurations = {
+        waylander = mkSystemConfig "waylander";
+        druss = mkSystemConfig "druss";
+        wsl = mkSystemConfig "wsl";
+        delnoch = mkSystemConfig "delnoch";
+        min = mkSystemConfig "min";
+      };
+
+      # HOME-MANAGER CONFIGURATIONS.
+      homeConfigurations = {
+        waylander = mkHomeConfig "waylander";
+        druss = mkHomeConfig "druss";
+        delnoch = mkHomeConfig "delnoch";
+        wsl = mkHomeConfig "wsl";
+        min = mkHomeConfig "min";
+      };
+
+      # package Neovim config (nvf)
+      packages.x86_64-linux = {
+        nvf-max =
+          let
+            maxConfig = import ./nvf.nix true;
+          in
+          (nvf.lib.neovimConfiguration {
             pkgs = nixpkgs.legacyPackages.x86_64-linux;
-            modules = [maxConfig];
-          })
-      .neovim;
+            modules = [ maxConfig ];
+          }).neovim;
 
-      nvf-min = let
-        minConfig = import ./nvf.nix false;
-      in
-        (nvf.lib.neovimConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          modules = [minConfig];
-        })
-      .neovim;
-      # set nvf minimal config as default package
-      default = self.packages.x86_64-linux.nvf-min;
+        nvf-min =
+          let
+            minConfig = import ./nvf.nix false;
+          in
+          (nvf.lib.neovimConfiguration {
+            pkgs = nixpkgs.legacyPackages.x86_64-linux;
+            modules = [ minConfig ];
+          }).neovim;
+        # set nvf minimal config as default package
+        default = self.packages.x86_64-linux.nvf-min;
+      };
+
+      # import shells
+      devShells.${system} = import ./shells.nix { inherit pkgs; };
     };
-
-    # import shells
-    devShells.${system} = import ./shells.nix {inherit pkgs;};
-  };
 }
