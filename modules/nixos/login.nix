@@ -2,8 +2,10 @@
   pkgs,
   username,
   login,
+  lib,
   ...
-}: {
+}:
+{
   services = {
     greetd = {
       enable = login == "greetd";
@@ -16,8 +18,11 @@
       };
     };
 
-    displayManager.sddm = {
-      enable = login == "sddm";
+    displayManager = {
+      enable = login != "";
+      sddm = {
+        enable = login == "sddm";
+      };
     };
   };
 }

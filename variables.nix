@@ -1,16 +1,16 @@
 { lib, ... }:
 {
   defaults = {
-    server = lib.mkDefault false;
-    wsl = lib.mkDefault false;
-    gaming = lib.mkDefault "none";
     DE = lib.mkDefault [ ];
-    useZen = lib.mkDefault false;
-    personal = lib.mkDefault true;
+    gaming = lib.mkDefault "none";
     gpu = lib.mkDefault "";
-    useAppImage = lib.mkDefault false;
-    nvfConfig = lib.mkDefault "nvf-min";
     login = lib.mkDefault "";
+    nvfConfig = lib.mkDefault "nvf-min";
+    personal = lib.mkDefault true;
+    server = lib.mkDefault false;
+    useAppImage = lib.mkDefault false;
+    useZen = lib.mkDefault false;
+    wsl = lib.mkDefault false;
   };
 
   waylander = {
