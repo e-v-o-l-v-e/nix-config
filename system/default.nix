@@ -7,7 +7,6 @@
     ./fonts.nix
     ./gaming.nix
     ./keyboard.nix
-    ./local-hardware-clock.nix
     ./locale.nix
     ./login.nix
     ./network.nix
