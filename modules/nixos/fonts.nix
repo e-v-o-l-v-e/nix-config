@@ -1,7 +1,7 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-cjk
     noto-fonts-cjk-sans
     fira-code
     terminus_font
