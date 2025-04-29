@@ -62,6 +62,9 @@
           vesktop
           xdg-user-dirs
           xdg-utils
+
+          # theming
+          flat-remix-icon-theme
         ]
       );
   };

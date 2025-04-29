@@ -1,12 +1,14 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./amd-drivers.nix
     ./boot.nix
     ./flatpak.nix
+    ./fonts.nix
     ./gaming.nix
     ./keyboard.nix
-    ./locale.nix
     ./local-hardware-clock.nix
+    ./locale.nix
     ./login.nix
     ./network.nix
     ./nix.nix
