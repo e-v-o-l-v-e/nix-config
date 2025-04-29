@@ -192,7 +192,7 @@ max: {
     utility = {
       nix-develop.enable = max;
       ccc.enable = false;
-      vim-wakatime.enable = max;
+      vim-wakatime.enable = false;
       diffview-nvim.enable = true;
       yanky-nvim.enable = true;
       icon-picker.enable = max;
