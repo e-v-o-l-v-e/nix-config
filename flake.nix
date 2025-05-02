@@ -20,6 +20,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    stylix.url = "github:danth/stylix";
+
     ags = {
       url = "github:aylur/ags/v1"; # aylurs-gtk-shell-v1
       inputs.nixpkgs.follows = "nixpkgs";
@@ -58,7 +60,10 @@
         hostname:
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./home ];
+          modules = [
+            ./home
+            inputs.stylix.homeManagerModules.stylix
+          ];
           extraSpecialArgs =
             sharedArgs // variables.defaults // variables.${hostname} // { inherit hostname; };
         };
@@ -73,6 +78,7 @@
           modules = [
             ./hosts/${hostname}
             ./system
+            inputs.stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
             {
               home-manager = {

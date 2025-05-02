@@ -11,6 +11,7 @@
     useAppImage = lib.mkDefault false;
     useZen = lib.mkDefault false;
     wsl = lib.mkDefault false;
+    useStylix = lib.mkDefault false;
   };
 
   waylander = {
@@ -23,6 +24,7 @@
     gpu = "amd";
     useAppImage = true;
     nvfConfig = "nvf-max";
+    useStylix = true;
   };
 
   druss = {
