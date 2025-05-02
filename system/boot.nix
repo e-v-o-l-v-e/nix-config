@@ -60,7 +60,7 @@
       canTouchEfiVariables = true;
     };
 
-    loader.timeout = 3;
+    loader.timeout = 0;
 
     # Bootloader GRUB
     #loader.grub = {
@@ -92,21 +92,20 @@
     };
 
     plymouth = {
-      enable = hostname == "druss";
-      theme = "flame";
-      # theme = "rings";
-      themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override {
-          selected_themes = [
-            "rings"
-            "liquid"
-            "blockchain"
-            "flame"
-          ];
-        })
-        # (adi1090x-plymouth-themes.override {selected_themes = ["rings" "liquid" "blockchain" "colorfull-loop" "cyanide" "flame" "green-blocks" "hud-space"];})
-        nixos-bgrt-plymouth
-      ];
+      enable = personal;
+      # theme = "nixos-bgrt";
+      # themePackages = with pkgs; [
+      #   (adi1090x-plymouth-themes.override {
+      #     selected_themes = [
+      #       "rings"
+      #       "liquid"
+      #       "blockchain"
+      #       "flame"
+      #     ];
+      #   })
+      #   # (adi1090x-plymouth-themes.override {selected_themes = ["rings" "liquid" "blockchain" "colorfull-loop" "cyanide" "flame" "green-blocks" "hud-space"];})
+      #   nixos-bgrt-plymouth
+      # ];
     };
   };
 }
