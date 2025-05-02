@@ -126,7 +126,7 @@
             modules = [ minConfig ];
           }).neovim;
         # set nvf minimal config as default package
-        default = self.packages.x86_64-linux.nvf-min;
+        default = self.packages.x86_64-linux.nvf-max;
       };
 
       # import shells
