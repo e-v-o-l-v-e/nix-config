@@ -1,33 +1,40 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   defaults = {
-    server = lib.mkDefault false;
-    wsl = lib.mkDefault false;
+    DE = lib.mkDefault [ ];
     gaming = lib.mkDefault "none";
-    DE = lib.mkDefault [];
-    useZen = lib.mkDefault false;
-    personal = lib.mkDefault true;
     gpu = lib.mkDefault "";
-    useAppImage = lib.mkDefault false;
+    login = lib.mkDefault "";
     nvfConfig = lib.mkDefault "nvf-min";
+    personal = lib.mkDefault true;
+    server = lib.mkDefault false;
+    useAppImage = lib.mkDefault false;
+    useZen = lib.mkDefault false;
+    wsl = lib.mkDefault false;
+    useStylix = lib.mkDefault false;
   };
 
   waylander = {
     personal = true;
     useZen = true;
     gaming = "simple";
-    DE = ["hyprland"];
+    DE = [ "hyprland" ];
     server = false;
     login = "greetd";
     gpu = "amd";
     useAppImage = true;
     nvfConfig = "nvf-max";
+    useStylix = true;
   };
 
   druss = {
     personal = true;
     useZen = true;
     gaming = "full";
-    DE = ["plasma" "hyprland"];
+    DE = [
+      "plasma"
+      "hyprland"
+    ];
     login = "sddm";
     server = false;
     gpu = "amd";
@@ -39,7 +46,7 @@
     personal = false;
     useZen = false;
     gaming = "none";
-    DE = [];
+    DE = [ ];
     server = false;
     wsl = true;
     nvfConfig = "nvf-max";
@@ -49,7 +56,7 @@
     personal = false;
     useZen = false;
     gaming = "none";
-    DE = [];
+    DE = [ ];
     server = true;
     nvfConfig = "nvf-max";
   };
@@ -58,7 +65,7 @@
     personal = false;
     useZen = true;
     gaming = "none";
-    DE = ["hyprland"];
+    DE = [ "hyprland" ];
     login = "greetd";
     server = false;
     useAppImage = false;

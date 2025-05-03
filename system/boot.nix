@@ -7,7 +7,8 @@
   personal,
   useAppImage,
   ...
-}: {
+}:
+{
   boot = lib.mkIf (hostname != "wsl") {
     kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
     #kernelPackages = pkgs.linuxPackages_latest; #linux Kernel
@@ -15,9 +16,9 @@
     kernelParams =
       [
         "systemd.mask=systemd-vconsole-setup.service"
-        "systemd.mask=dev-tpmrm0.device" #this is to mask that stupid 1.5 mins systemd bug
+        "systemd.mask=dev-tpmrm0.device" # this is to mask that stupid 1.5 mins systemd bug
         "nowatchdog"
-        "modprobe.blacklist=sp5100_tco" #watchdog for AMD
+        "modprobe.blacklist=sp5100_tco" # watchdog for AMD
       ]
       ++ lib.optionals personal [
         "splash"
@@ -32,7 +33,14 @@
     #  extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
 
     initrd = {
-      availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod"];
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "nvme"
+        "usb_storage"
+        "usbhid"
+        "sd_mod"
+      ];
       kernelModules = lib.optional (gpu == "amd") "amdgpu";
       verbose = !personal;
     };
@@ -52,7 +60,7 @@
       canTouchEfiVariables = true;
     };
 
-    loader.timeout = 3;
+    loader.timeout = 0;
 
     # Bootloader GRUB
     #loader.grub = {
@@ -85,13 +93,19 @@
 
     plymouth = {
       enable = personal;
-      theme = "flame";
-      # theme = "rings";
-      themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override {selected_themes = ["rings" "liquid" "blockchain" "flame"];})
-        # (adi1090x-plymouth-themes.override {selected_themes = ["rings" "liquid" "blockchain" "colorfull-loop" "cyanide" "flame" "green-blocks" "hud-space"];})
-        nixos-bgrt-plymouth
-      ];
+      # theme = "nixos-bgrt";
+      # themePackages = with pkgs; [
+      #   (adi1090x-plymouth-themes.override {
+      #     selected_themes = [
+      #       "rings"
+      #       "liquid"
+      #       "blockchain"
+      #       "flame"
+      #     ];
+      #   })
+      #   # (adi1090x-plymouth-themes.override {selected_themes = ["rings" "liquid" "blockchain" "colorfull-loop" "cyanide" "flame" "green-blocks" "hud-space"];})
+      #   nixos-bgrt-plymouth
+      # ];
     };
   };
 }

@@ -1,10 +1,12 @@
-{pkgs}: let
+{ pkgs }:
+let
   useFish = ''
     export SHELL=${pkgs.fish}/bin/fish
     fish
     exit
   '';
-in {
+in
+{
   c = pkgs.mkShell {
     name = "c programming shell";
     nativeBuildInputs = with pkgs; [
@@ -33,6 +35,7 @@ in {
     nativeBuildInputs = with pkgs; [
       flutter
     ];
+    shellHook = useFish;
   };
 
   java = pkgs.mkShell {
@@ -51,6 +54,7 @@ in {
       lua-language-server
       lua
     ];
+    shellHook = useFish;
   };
 
   python = pkgs.mkShell {
@@ -62,7 +66,6 @@ in {
       python312Packages.pandas
       python3Packages.pip
     ];
-
     shellHook = useFish;
   };
 }

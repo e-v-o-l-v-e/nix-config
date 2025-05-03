@@ -3,7 +3,8 @@
   lib,
   DE,
   ...
-}: {
+}:
+{
   config = lib.mkMerge [
     (lib.mkIf (builtins.elem "hyprland" DE) {
       programs.hyprland = {
@@ -11,6 +12,7 @@
         portalPackage = pkgs.xdg-desktop-portal-hyprland;
         xwayland.enable = true;
       };
+      programs.dconf.enable = true;
     })
 
     (lib.mkIf (builtins.elem "plasma" DE) {

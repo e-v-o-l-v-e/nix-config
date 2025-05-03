@@ -187,14 +187,19 @@ max: {
       project-nvim.enable = false;
     };
 
+    mini.surround.enable = false;
+
     utility = {
       nix-develop.enable = max;
       ccc.enable = false;
-      vim-wakatime.enable = max;
+      vim-wakatime.enable = false;
       diffview-nvim.enable = true;
       yanky-nvim.enable = true;
       icon-picker.enable = max;
-      surround.enable = true;
+      surround = {
+        enable = true;
+        useVendoredKeybindings = false;
+      };
       leetcode-nvim.enable = false;
       multicursors.enable = true;
 
@@ -237,7 +242,10 @@ max: {
           nix = "110";
           ruby = "120";
           java = "130";
-          go = ["90" "130"];
+          go = [
+            "90"
+            "130"
+          ];
         };
       };
       fastaction.enable = true;
