@@ -129,9 +129,9 @@ max: {
 
     theme = {
       enable = true;
-      name = "tokyonight";
-      transparent = true;
-      style = "night";
+      # name = "gruvbox";
+      # transparent = true;
+      # style = "dark";
       # name = "catppuccin";
       # style = "mocha";
     };

@@ -72,5 +72,8 @@
   programs = {
     vesktop.enable = personal;
     element-desktop.enable = personal;
+    btop.enable = personal;
+    cava.enable = personal;
+
   };
 }

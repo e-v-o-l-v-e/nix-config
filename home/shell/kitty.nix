@@ -5,8 +5,5 @@ _: {
     settings = {
       cursor_trail = 10;
     };
-    environment = {
-      "TERM" = "xterm-256color";
-    };
   };
 }

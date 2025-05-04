@@ -12,10 +12,11 @@
     gaming = "simple";
     DE = [ "hyprland" ];
     loginManager = "greetd";
+    colorScheme = "emil";
   };
 
   druss = {
-    colorScheme = "emil";
+    colorScheme = "gruvbox-dark-hard";
     gaming = "full";
     DE = [
       "plasma"
