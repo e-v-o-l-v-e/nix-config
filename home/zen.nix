@@ -1,14 +1,11 @@
 {
   inputs,
-  useZen,
-  lib,
+  personal,
+  zen-browser,
   ...
-}: {
-  imports = [inputs.zen-browser.homeModules.twilight];
+}:
+{
+  # imports = [ zen-browser.homeModules.twilight ];
 
-  programs = lib.mkIf useZen {
-    zen-browser = {
-      enable = useZen;
-    };
-  };
+  programs.zen-browser.enable = personal;
 }

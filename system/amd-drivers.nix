@@ -2,12 +2,13 @@
 {
   lib,
   pkgs,
-  gpu,
+  hostname,
   ...
-}: {
-  config = lib.mkIf (gpu == "amd") {
-    systemd.tmpfiles.rules = ["L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"];
-    services.xserver.videoDrivers = ["amdgpu"];
+}:
+{
+  config = lib.mkIf (hostname == "waylander" || hostname == "druss") {
+    systemd.tmpfiles.rules = [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}" ];
+    services.xserver.videoDrivers = [ "amdgpu" ];
 
     # OpenGL
     hardware = {

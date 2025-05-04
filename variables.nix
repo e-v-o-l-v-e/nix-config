@@ -1,74 +1,38 @@
 { lib, ... }:
 {
   defaults = {
-    DE = lib.mkDefault [ ];
-    gaming = lib.mkDefault "none";
-    gpu = lib.mkDefault "";
-    login = lib.mkDefault "";
-    nvfConfig = lib.mkDefault "nvf-min";
-    personal = lib.mkDefault true;
-    server = lib.mkDefault false;
-    useAppImage = lib.mkDefault false;
-    useZen = lib.mkDefault false;
-    wsl = lib.mkDefault false;
-    useStylix = lib.mkDefault false;
+    DE = [ ]; # "hyprland" and/or "plasma"
+    gaming = "none"; # one of [ "none" "simple" "full" ]
+    personal = true; # set personal config and packages. like zen-browser, stylix config etc
+    server = false; # docker etc
+    colorScheme = ""; # set colorScheme, https://tinted-theming.github.io/tinted-gallery/
+    loginManager = ""; # which loginmanager to use, "greetd" or "sddm"
   };
 
   waylander = {
-    personal = true;
-    useZen = true;
     gaming = "simple";
     DE = [ "hyprland" ];
-    server = false;
-    login = "greetd";
-    gpu = "amd";
-    useAppImage = true;
-    nvfConfig = "nvf-max";
-    useStylix = true;
+    loginManager = "greetd";
   };
 
   druss = {
-    personal = true;
-    useZen = true;
+    colorScheme = "emil";
     gaming = "full";
     DE = [
       "plasma"
       "hyprland"
     ];
-    login = "sddm";
-    server = false;
-    gpu = "amd";
-    useAppImage = true;
-    nvfConfig = "nvf-max";
-  };
-
-  wsl = {
-    personal = false;
-    useZen = false;
-    gaming = "none";
-    DE = [ ];
-    server = false;
-    wsl = true;
-    nvfConfig = "nvf-max";
+    loginManager = "sddm";
   };
 
   delnoch = {
     personal = false;
-    useZen = false;
     gaming = "none";
     DE = [ ];
     server = true;
-    nvfConfig = "nvf-max";
   };
 
-  min = {
+  wsl = {
     personal = false;
-    useZen = true;
-    gaming = "none";
-    DE = [ "hyprland" ];
-    login = "greetd";
-    server = false;
-    useAppImage = false;
-    nvfConfig = "nvf-min";
   };
 }

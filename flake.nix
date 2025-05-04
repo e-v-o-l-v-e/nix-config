@@ -34,6 +34,8 @@
       nixpkgs,
       home-manager,
       nvf,
+      zen-browser,
+      stylix,
       ...
     }:
     let
@@ -62,10 +64,16 @@
           inherit pkgs;
           modules = [
             ./home
-            inputs.stylix.homeManagerModules.stylix
+            stylix.homeManagerModules.stylix
+            zen-browser.homeModules.twilight
           ];
           extraSpecialArgs =
-            sharedArgs // variables.defaults // variables.${hostname} // { inherit hostname; };
+            sharedArgs
+            // pkgs.lib.mkBefore variables.defaults
+            // variables.${hostname}
+            // {
+              inherit hostname;
+            };
         };
 
       mkSystemConfig =
@@ -73,7 +81,13 @@
         nixpkgs.lib.nixosSystem {
           inherit pkgs;
           inherit system;
-          specialArgs = sharedArgs // variables.defaults // variables.${hostname} // { inherit hostname; };
+          specialArgs =
+            pkgs.lib.mkBefore sharedArgs
+            // variables.defaults
+            // variables.${hostname}
+            // {
+              inherit hostname;
+            };
 
           modules = [
             ./hosts/${hostname}
@@ -84,7 +98,12 @@
               home-manager = {
                 users.${username} = import ./home;
                 extraSpecialArgs =
-                  sharedArgs // variables.defaults // variables.${hostname} // { inherit hostname; };
+                  sharedArgs
+                  // pkgs.lib.mkBefore variables.defaults
+                  // variables.${hostname}
+                  // {
+                    inherit hostname;
+                  };
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 backupFileExtension = "backup";
@@ -100,7 +119,6 @@
         druss = mkSystemConfig "druss";
         wsl = mkSystemConfig "wsl";
         delnoch = mkSystemConfig "delnoch";
-        min = mkSystemConfig "min";
       };
 
       # HOME-MANAGER CONFIGURATIONS.
@@ -109,7 +127,6 @@
         druss = mkHomeConfig "druss";
         delnoch = mkHomeConfig "delnoch";
         wsl = mkHomeConfig "wsl";
-        min = mkHomeConfig "min";
       };
 
       # package Neovim config (nvf)

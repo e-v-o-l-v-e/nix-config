@@ -1,14 +1,14 @@
 {
   pkgs,
   username,
-  login,
+  loginManager,
   lib,
   ...
 }:
 {
   services = {
     greetd = {
-      enable = login == "greetd";
+      enable = loginManager == "greetd";
       vt = 3;
       settings = {
         default_session = {
@@ -19,16 +19,16 @@
     };
 
     displayManager = {
-      enable = login != "";
+      enable = loginManager != "";
       sddm = {
-        enable = login == "sddm";
+        enable = loginManager == "sddm";
       };
     };
 
   };
   security.pam.services.swaylock = {
     text = ''
-      auth include login
+      guth include login
     '';
   };
 }

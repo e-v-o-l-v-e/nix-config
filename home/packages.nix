@@ -41,7 +41,7 @@
         zip
         zoxide
       ]
-      ++ [ self.packages."${system}"."${nvfConfig}" ]
+      ++ [ self.packages."${system}".nvf-max ]
       # packages for personal machine
       ++ lib.optionals personal (
         with pkgs;
@@ -67,5 +67,10 @@
           flat-remix-icon-theme
         ]
       );
+  };
+
+  programs = {
+    vesktop.enable = personal;
+    element-desktop.enable = personal;
   };
 }

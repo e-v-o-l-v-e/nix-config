@@ -2,10 +2,8 @@
   config,
   pkgs,
   lib,
-  gpu,
   hostname,
   personal,
-  useAppImage,
   ...
 }:
 {
@@ -41,7 +39,7 @@
         "usbhid"
         "sd_mod"
       ];
-      kernelModules = lib.optional (gpu == "amd") "amdgpu";
+      kernelModules = lib.optional (hostname == "waylander" || hostname == "druss") "amdgpu";
       verbose = !personal;
     };
     consoleLogLevel = lib.mkIf personal 3;
@@ -60,7 +58,7 @@
       canTouchEfiVariables = true;
     };
 
-    loader.timeout = 0;
+    loader.timeout = lib.mkIf personal 0;
 
     # Bootloader GRUB
     #loader.grub = {
@@ -82,30 +80,13 @@
     };
 
     # Appimage Support
-    binfmt.registrations.appimage = lib.mkIf useAppImage {
+    binfmt.registrations.appimage = {
       wrapInterpreterInShell = false;
       interpreter = "${pkgs.appimage-run}/bin/appimage-run";
       recognitionType = "magic";
       offset = 0;
       mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
       magicOrExtension = ''\x7fELF....AI\x02'';
-    };
-
-    plymouth = {
-      enable = personal;
-      # theme = "nixos-bgrt";
-      # themePackages = with pkgs; [
-      #   (adi1090x-plymouth-themes.override {
-      #     selected_themes = [
-      #       "rings"
-      #       "liquid"
-      #       "blockchain"
-      #       "flame"
-      #     ];
-      #   })
-      #   # (adi1090x-plymouth-themes.override {selected_themes = ["rings" "liquid" "blockchain" "colorfull-loop" "cyanide" "flame" "green-blocks" "hud-space"];})
-      #   nixos-bgrt-plymouth
-      # ];
     };
   };
 }
