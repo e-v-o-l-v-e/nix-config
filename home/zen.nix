@@ -2,10 +2,12 @@
   inputs,
   personal,
   zen-browser,
+  hostname,
+  lib,
   ...
 }:
 {
-  # imports = [ zen-browser.homeModules.twilight ];
+  imports = lib.optional personal inputs.zen-browser.homeModules.twilight;
 
   programs.zen-browser.enable = personal;
 }

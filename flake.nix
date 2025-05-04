@@ -49,7 +49,10 @@
         };
       };
 
-      variables = import ./variables.nix { lib = pkgs.lib; };
+      variables = import ./variables.nix;
+      getVar =
+        hostname:
+        nixpkgs.lib.recursiveUpdate variables.defaults (nixpkgs.lib.attrByPath [ hostname ] { } variables);
 
       sharedArgs = {
         inherit inputs;
@@ -69,11 +72,10 @@
           ];
           extraSpecialArgs =
             sharedArgs
-            // pkgs.lib.mkBefore variables.defaults
-            // variables.${hostname}
             // {
               inherit hostname;
-            };
+            }
+            // getVar hostname;
         };
 
       mkSystemConfig =
@@ -82,12 +84,11 @@
           inherit pkgs;
           inherit system;
           specialArgs =
-            pkgs.lib.mkBefore sharedArgs
-            // variables.defaults
-            // variables.${hostname}
+            sharedArgs
             // {
               inherit hostname;
-            };
+            }
+            // getVar hostname;
 
           modules = [
             ./hosts/${hostname}
@@ -99,11 +100,10 @@
                 users.${username} = import ./home;
                 extraSpecialArgs =
                   sharedArgs
-                  // pkgs.lib.mkBefore variables.defaults
-                  // variables.${hostname}
                   // {
                     inherit hostname;
-                  };
+                  }
+                  // getVar hostname;
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 backupFileExtension = "backup";

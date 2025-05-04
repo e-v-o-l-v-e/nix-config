@@ -1,4 +1,3 @@
-{ lib, ... }:
 {
   defaults = {
     DE = [ ]; # "hyprland" and/or "plasma"
