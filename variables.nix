@@ -16,7 +16,7 @@
   };
 
   druss = {
-    colorScheme = "gruvbox-dark-hard";
+    colorScheme = "gruvbox-dark-medium";
     gaming = "full";
     DE = [
       "plasma"
