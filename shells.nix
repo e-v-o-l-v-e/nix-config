@@ -41,6 +41,7 @@ in
   java = pkgs.mkShell {
     name = "java programming shell";
     nativeBuildInputs = with pkgs; [
+      gradle
       jdk
       jdt-language-server
       jre

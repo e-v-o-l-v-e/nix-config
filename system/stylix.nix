@@ -31,6 +31,8 @@
       package = pkgs.nerd-fonts.daddy-time-mono;
       name = "DaddyTimeMono Nerd Font";
     };
+
+    sizes.terminal = 13;
   };
 
   # enable boot loading styling
