@@ -106,7 +106,7 @@
                   // getVar hostname;
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                backupFileExtension = "backup";
+                backupFileExtension = "";
               };
             }
           ];

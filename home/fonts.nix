@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, lib, ... }:
+{
   home.packages = with pkgs; [
     noto-fonts
     fira-code
@@ -12,9 +13,9 @@
   ];
 
   fonts.fontconfig = {
-    enable = true;
+    enable = lib.mkForce false;
     defaultFonts = {
-      monospace = ["daddy-time-mono"];
+      monospace = [ "daddy-time-mono" ];
     };
   };
 }

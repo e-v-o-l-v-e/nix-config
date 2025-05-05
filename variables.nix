@@ -1,3 +1,7 @@
+let
+  dark = "gruvbox-dark-medium";
+  light = "atelier-dune-light";
+in
 {
   defaults = {
     DE = [ ]; # "hyprland" and/or "plasma"
@@ -12,7 +16,7 @@
     gaming = "simple";
     DE = [ "hyprland" ];
     loginManager = "greetd";
-    colorScheme = "emil";
+    colorScheme = dark;
   };
 
   druss = {

@@ -21,10 +21,16 @@
   stylix.fonts = {
     monospace = {
       package = pkgs.nerd-fonts.daddy-time-mono;
-      name = "Daddy Time Mono";
+      name = "DaddyTimeMono Nerd Font";
     };
-    serif = config.stylix.fonts.monospace;
-    sansSerif = config.stylix.fonts.monospace;
+    sansSerif = {
+      package = pkgs.nerd-fonts.daddy-time-mono;
+      name = "DaddyTimeMono Nerd Font";
+    };
+    serif = {
+      package = pkgs.nerd-fonts.daddy-time-mono;
+      name = "DaddyTimeMono Nerd Font";
+    };
   };
 
   # enable boot loading styling
