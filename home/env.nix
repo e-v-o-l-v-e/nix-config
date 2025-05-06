@@ -1,6 +1,7 @@
-{...}: {
+{ ... }:
+{
   home.sessionVariables = {
     EDITOR = "nvim";
-    TERM = "xterm-256color";
+    # TERM = "xterm-256color";
   };
 }

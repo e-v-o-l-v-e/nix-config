@@ -4,7 +4,7 @@ _: {
     enableGitIntegration = true;
     settings = {
       cursor_trail = 10;
-      window_padding_width = 4;
+      window_padding_width = "2 5";
     };
   };
 }

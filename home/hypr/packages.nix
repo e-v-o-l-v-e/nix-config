@@ -5,36 +5,41 @@
   system,
   inputs,
   ...
-}: {
-  home.packages = lib.mkIf (hostname
-    == "waylander") (with pkgs; [
-    inputs.ags.packages.${system}.default
-    bc
-    brightnessctl
-    cava
-    cpufrequtils
-    glib
-    gnome-system-monitor
-    grim
-    gsettings-qt
-    gtk-engine-murrine
-    hypridle
-    hyprland
-    hyprlock
-    hyprpicker
-    hyprshade
-    inxi
-    libappindicator
-    nwg-displays
-    nwg-look
-    polkit_gnome
-    rofi-wayland
-    slurp
-    swappy
-    swaynotificationcenter
-    swww
-    wallust
-    waybar
-    wlogout
-  ]);
+}:
+{
+  home.packages = lib.mkIf (hostname == "waylander") (
+    with pkgs;
+    [
+      inputs.ags.packages.${system}.default
+      bc
+      brightnessctl
+      cava
+      cpufrequtils
+      glib
+      gnome-system-monitor
+      grim
+      gsettings-qt
+      gtk-engine-murrine
+      hypridle
+      hyprland
+      hyprlock
+      hyprpicker
+      hyprshade
+      inxi
+      libappindicator
+      nwg-displays
+      nwg-look
+      polkit_gnome
+      rofi-wayland
+      slurp
+      swappy
+      swaynotificationcenter
+      swww
+      wallust
+      waybar
+      wlogout
+    ]
+  );
+
+  programs.waybar.enable = true;
 }
