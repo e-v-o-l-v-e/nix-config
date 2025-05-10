@@ -89,4 +89,8 @@
       magicOrExtension = ''\x7fELF....AI\x02'';
     };
   };
+
+  networking.interfaces = lib.mkIf (hostname == "druss" || hostname == "delnoch") {
+    eth0.wakeOnLan.enable = true;
+  };
 }
