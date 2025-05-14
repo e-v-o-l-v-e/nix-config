@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.fish = {
     enable = true;
 
@@ -17,6 +18,7 @@
       sv = "sudo -e";
 
       # git
+      g = "git";
       gs = "git status -s";
       gss = "git status";
       sw = "git switch";

@@ -25,6 +25,8 @@ in
       pkg-config
       valgrind
       zlib
+
+      fish
     ];
 
     shellHook = useFish;
@@ -34,6 +36,7 @@ in
     name = "dart programming shell";
     nativeBuildInputs = with pkgs; [
       flutter
+      fish
     ];
     shellHook = useFish;
   };
@@ -45,6 +48,8 @@ in
       jdk
       jdt-language-server
       jre
+
+      fish
     ];
     shellHook = useFish;
   };
@@ -54,6 +59,8 @@ in
     nativeBuildInputs = with pkgs; [
       lua-language-server
       lua
+
+      fish
     ];
     shellHook = useFish;
   };
@@ -66,6 +73,8 @@ in
       python312Packages.numpy
       python312Packages.pandas
       python3Packages.pip
+
+      fish
     ];
     shellHook = useFish;
   };
