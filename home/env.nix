@@ -1,7 +1,7 @@
-{ ... }:
+{ lib, config, ... }:
 {
   home.sessionVariables = {
     EDITOR = "nvim";
-    # TERM = "xterm-256color";
+    TERM = lib.mkIf config.kitty.enable == false "xterm-256color";
   };
 }
