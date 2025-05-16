@@ -20,7 +20,7 @@ in
   };
 
   druss = {
-    colorScheme = light;
+    colorScheme = dark;
     gaming = "full";
     DE = [
       "plasma"
