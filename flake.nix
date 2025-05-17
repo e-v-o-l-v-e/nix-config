@@ -67,7 +67,7 @@
           inherit pkgs;
           modules = [
             ./home
-            stylix.homeManagerModules.stylix
+            stylix.homeModules.stylix
             zen-browser.homeModules.twilight
           ];
           extraSpecialArgs =

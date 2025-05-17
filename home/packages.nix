@@ -33,6 +33,7 @@
         playerctl
         ripgrep
         starship
+        tmux
         tree
         unzip
         wget

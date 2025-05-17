@@ -26,7 +26,7 @@ max: {
     };
 
     lsp = {
-      formatOnSave = max;
+      formatOnSave = false;
       lspkind.enable = false;
       lightbulb.enable = max;
       lspsaga.enable = false;
