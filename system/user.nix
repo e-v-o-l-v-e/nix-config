@@ -29,6 +29,5 @@
     defaultUserShell = pkgs.fish;
   };
 
-  environment.shells = with pkgs; [fish bash];
   programs.fish.enable = true;
 }

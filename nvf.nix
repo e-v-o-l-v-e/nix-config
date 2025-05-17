@@ -14,7 +14,7 @@ max: {
     };
 
     spellcheck = {
-      enable = max;
+      enable = false;
     };
 
     undoFile.enable = true;

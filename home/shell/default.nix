@@ -5,6 +5,7 @@
     ./kitty.nix
     ./pay-respects.nix
     ./starship.nix
+    ./tmux.nix
     ./zoxide.nix
   ];
 }

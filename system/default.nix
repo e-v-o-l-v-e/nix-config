@@ -12,6 +12,7 @@
     ./network.nix
     ./nix.nix
     ./openrgb.nix
+    ./shell.nix
     ./stylix.nix
     ./systemVersion.nix
     ./time.nix
