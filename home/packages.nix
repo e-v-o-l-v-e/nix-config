@@ -15,7 +15,6 @@
       [
         bat
         btop
-        cliphist
         curl
         dust
         fd
@@ -23,12 +22,9 @@
         fzf
         git
         gnutar
-        loupe
         lsd
         networkmanager
         nixd
-        pamixer
-        pavucontrol
         pciutils
         playerctl
         ripgrep
@@ -38,7 +34,6 @@
         unzip
         wget
         vim
-        wl-clipboard
         zip
         zoxide
       ]
@@ -57,10 +52,14 @@
           libreoffice-qt6-fresh
           libsForQt5.kdeconnect-kde
           localsend
+          loupe
           nextcloud-client
+          pamixer
+          pavucontrol
           supersonic
           xfce.thunar
           vesktop
+          vlc
           xdg-user-dirs
           xdg-utils
 
