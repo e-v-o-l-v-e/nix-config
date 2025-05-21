@@ -14,7 +14,8 @@ max: {
     };
 
     spellcheck = {
-      enable = false;
+      enable = true;
+      languages = [ "en" "fr" ];
     };
 
     undoFile.enable = true;
@@ -45,6 +46,9 @@ max: {
       nvim-dap = {
         enable = max;
         ui.enable = true;
+        # sources = {
+        #   java = "vscode-extensions.vscjava.vscode-java-pack";
+        # };
       };
     };
 
@@ -129,9 +133,9 @@ max: {
 
     theme = {
       enable = true;
-      # name = "gruvbox";
+      name = "gruvbox";
+      style = "light";
       # transparent = true;
-      # style = "dark";
       # name = "catppuccin";
       # style = "mocha";
     };
