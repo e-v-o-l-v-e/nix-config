@@ -4,7 +4,6 @@
   self,
   system,
   personal,
-  nvfConfig,
   ...
 }:
 {
@@ -59,6 +58,7 @@
           pamixer
           pavucontrol
           presenterm
+          ripgrep-all
           supersonic
           wl-clipboard
           xfce.thunar
@@ -77,7 +77,7 @@
   programs = {
     vesktop.enable = personal;
     element-desktop.enable = personal;
-    btop.enable = personal;
+    btop.enable = true;
     cava.enable = personal;
     fd.enable = true;
   };
