@@ -1,6 +1,7 @@
-_: {
+{ personal, ... }:
+{
   programs.kitty = {
-    enable = true;
+    enable = personal;
     enableGitIntegration = true;
     settings = {
       cursor_trail = 10;
