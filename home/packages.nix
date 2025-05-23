@@ -57,6 +57,7 @@
           pamixer
           pavucontrol
           supersonic
+          wl-clipboard
           xfce.thunar
           vesktop
           vlc
