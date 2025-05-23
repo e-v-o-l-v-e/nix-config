@@ -20,7 +20,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix.url = "github:danth/stylix";
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     ags = {
       url = "github:aylur/ags/v1"; # aylurs-gtk-shell-v1

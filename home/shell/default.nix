@@ -6,6 +6,7 @@
     ./pay-respects.nix
     ./starship.nix
     ./tmux.nix
+    ./zellij.nix
     ./zoxide.nix
   ];
 }

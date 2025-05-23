@@ -17,10 +17,12 @@
         btop
         curl
         dust
+        duf
         fd
         fish
         fzf
         git
+        gitui
         gnutar
         lsd
         networkmanager
@@ -56,12 +58,14 @@
           nextcloud-client
           pamixer
           pavucontrol
+          presenterm
           supersonic
           xfce.thunar
           vesktop
           vlc
           xdg-user-dirs
           xdg-utils
+          zellij
 
           # theming
           flat-remix-icon-theme
