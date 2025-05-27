@@ -15,7 +15,10 @@ max: {
 
     spellcheck = {
       enable = true;
-      languages = [ "en" "fr" ];
+      languages = [
+        "en"
+        "fr"
+      ];
     };
 
     undoFile.enable = true;
@@ -66,7 +69,15 @@ max: {
         extraDiagnostics.enable = true;
         treesitter.enable = true;
         format.type = "nixfmt";
-        lsp.server = "nixd";
+        lsp = {
+          server = "nixd";
+          options = {
+            nixos.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.waylander.options";
+            # home-manager = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.waylander.options";
+
+            home-manager.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.waylander.options.home-manager.users.type.getSubOptions []";
+          };
+        };
       };
       java.enable = max;
       csharp.enable = max;

@@ -1,4 +1,4 @@
 { ... }:
 {
-  # stylix.targets.waybar.addCss = true;
+  stylix.targets.waybar.addCss = true;
 }
