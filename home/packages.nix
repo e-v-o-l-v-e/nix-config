@@ -44,6 +44,7 @@
         with pkgs;
         [
           blueman
+          cliphist
           element-desktop
           imagemagick
           jellyfin-media-player
