@@ -1,6 +1,7 @@
 { pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
+    carlito
     noto-fonts
     fira-code
     terminus_font

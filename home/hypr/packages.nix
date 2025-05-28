@@ -41,5 +41,5 @@
     ]
   );
 
-  programs.waybar.enable = true;
+  programs.waybar.enable = hostname == "waylander";
 }

@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   fonts.packages = with pkgs; [
+    carlito
     noto-fonts
     noto-fonts-cjk-sans
     fira-code
