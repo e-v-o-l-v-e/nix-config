@@ -276,7 +276,17 @@ max: {
     };
 
     session = {
-      nvim-session-manager.enable = max;
+      nvim-session-manager = {
+        enable = max;
+        setupOpts = {
+          autoload_mode = "CurrentDir";
+          autosave_ignore_dirs = [
+            "/home/evolve"
+            "/home/evolve/Downloads"
+            "/home/evolve/tmp"
+          ];
+        };
+      };
     };
 
     gestures = {

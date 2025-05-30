@@ -46,6 +46,7 @@
           blueman
           cliphist
           element-desktop
+          finamp
           imagemagick
           jellyfin-media-player
           jq
@@ -54,13 +55,13 @@
           libreoffice-qt6-fresh
           libsForQt5.kdeconnect-kde
           localsend
+          lowfi
           loupe
           nextcloud-client
           pamixer
           pavucontrol
           presenterm
           ripgrep-all
-          supersonic
           wl-clipboard
           xfce.thunar
           vesktop

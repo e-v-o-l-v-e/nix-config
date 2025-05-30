@@ -1,13 +1,22 @@
 {hostname, ...}: {
   programs.waybar = {
     enable = hostname == "waylander";
+
+    style = ''
+      .modules-right {
+        padding: 0 5;
+      }
+
+      #clock {
+        color: @base0C;
+      }
+
+      #battery {
+        color: @base0C;
+        padding: 0 10;
+      }
+    '';
   };
 
-  # stylix.targets.waybar.extraCss = ''
-  #     window#waybar, tooltip {
-  #         padding: 0;
-  #         margin: 0;
-  #         border-radius: 0px;
-  #     }
-  #   '';
+  stylix.targets.waybar.addCss = false;
 }
