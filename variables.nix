@@ -17,7 +17,7 @@ in
     gaming = "simple";
     DE = [ "hyprland" ];
     loginManager = "greetd";
-    colorScheme = light2;
+    colorScheme = dark;
   };
 
   druss = {

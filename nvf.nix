@@ -145,7 +145,7 @@ max: {
     theme = {
       enable = true;
       name = "gruvbox";
-      style = "light";
+      style = "dark";
       # transparent = true;
       # name = "catppuccin";
       # style = "mocha";
