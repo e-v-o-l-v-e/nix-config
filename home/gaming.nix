@@ -7,7 +7,6 @@
   gamingPkgs = {
     full = with pkgs; [
       heroic
-      steam
       steam-run
       wine
       umu-launcher
@@ -18,13 +17,10 @@
       dxvk_2
       directx-headers
     ];
-    simple = with pkgs; [
-      steam
-    ];
   };
 in {
   home.packages = gamingPkgs.${gaming} or [];
-  home.sessionVariables = {
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/evolve/steam/root/compatibilitytools.d/";
-  };
+  # home.sessionVariables = {
+  #   STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/evolve/steam/root/compatibilitytools.d/";
+  # };
 }

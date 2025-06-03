@@ -3,13 +3,18 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   opti = gaming == "simple";
   battlestation = gaming == "full";
-in {
+in
+{
   programs = {
-    steam.enable = opti;
-    steam.gamescopeSession.enable = battlestation;
+    steam = {
+      enable = opti || battlestation;
+      gamescopeSession.enable = battlestation;
+      extraCompatPackages = pkgs.proton-ge-bin;
+    };
     gamemode.enable = battlestation;
 
     nix-ld = {
@@ -30,10 +35,8 @@ in {
       ];
     };
   };
-  environment.systemPackages =
-    lib.optionals battlestation
-    [
-      pkgs.mangohud
-      pkgs.mangohud
-    ];
+  environment.systemPackages = lib.optionals battlestation [
+    pkgs.mangohud
+    pkgs.mangohud
+  ];
 }
