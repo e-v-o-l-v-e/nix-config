@@ -13,7 +13,7 @@ in
     steam = {
       enable = opti || battlestation;
       gamescopeSession.enable = battlestation;
-      extraCompatPackages = pkgs.proton-ge-bin;
+      extraCompatPackages = [ pkgs.proton-ge-bin ];
     };
     gamemode.enable = battlestation;
 
