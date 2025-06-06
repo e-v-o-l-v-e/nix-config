@@ -144,11 +144,11 @@ max: {
 
     theme = {
       enable = true;
-      name = "gruvbox";
-      style = "dark";
+      # name = "gruvbox";
+      # style = "dark";
       # transparent = true;
-      # name = "catppuccin";
-      # style = "mocha";
+      name = "catppuccin";
+      style = "latte";
     };
 
     autopairs.nvim-autopairs.enable = true;
