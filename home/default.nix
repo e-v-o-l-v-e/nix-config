@@ -8,6 +8,7 @@
     ./hypr
     ./keyboard.nix
     ./packages.nix
+    ./quickshell
     ./shell
     ./zen.nix
   ];

@@ -2,6 +2,7 @@
 {
   imports = [
     ./amd-drivers.nix
+    ./battery.nix
     ./boot.nix
     ./flatpak.nix
     ./fonts.nix

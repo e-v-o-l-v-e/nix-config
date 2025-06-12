@@ -22,6 +22,9 @@
       gtk-engine-murrine
       hypridle
       hyprland
+      hyprland-qtutils
+      hyprland-qt-support
+      hyprland-protocols
       hyprlock
       hyprpicker
       hyprshade
