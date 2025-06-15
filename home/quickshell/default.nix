@@ -18,6 +18,7 @@
     foot
     fuzzel
     grim
+    gtk3
     hyprpaper
     imagemagick
     jq
