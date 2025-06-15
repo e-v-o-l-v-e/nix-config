@@ -71,6 +71,7 @@
         inherit self;
         inherit system;
         inherit username;
+        flakePath = "/home/${username}/nix-config";
       };
 
       mkHomeConfig =
