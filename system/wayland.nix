@@ -2,6 +2,7 @@
   pkgs,
   lib,
   DE,
+  hostname,
   ...
 }:
 {
@@ -18,6 +19,16 @@
     (lib.mkIf (builtins.elem "plasma" DE) {
       services.xserver.enable = true;
       services.desktopManager.plasma6.enable = true;
+    })
+
+    (lib.mkIf (hostname == "waylander") {
+      programs.light = {
+        enable = true;
+        brightnessKeys = {
+          step = 5;
+          enable = true;
+        };
+      };
     })
 
     {
