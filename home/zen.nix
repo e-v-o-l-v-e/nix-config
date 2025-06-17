@@ -1,13 +1,16 @@
 {
   inputs,
-  personal,
-  zen-browser,
-  hostname,
+  hostConfig,
   lib,
   ...
 }:
+let
+  cfg = hostConfig.soft.zen;
+in 
 {
-  imports = lib.optional personal inputs.zen-browser.homeModules.twilight;
+  imports = lib.optional cfg.enable inputs.zen-browser.homeModules.twilight;
 
-  programs.zen-browser.enable = personal;
+  programs.zen-browser = {
+    inherit (cfg) enable;
+  };
 }

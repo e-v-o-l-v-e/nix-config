@@ -1,45 +1,6 @@
 {
   description = "My confiiiiig";
 
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nvf = {
-      url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    stylix = {
-      url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    ags = {
-      # url = "github:aylur/ags/v1";
-      url = "github:aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    astal = {
-      url = "github:aylur/astal";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
   outputs =
     inputs@{
       self,
@@ -51,8 +12,17 @@
       ...
     }:
     let
-      system = "x86_64-linux";
       username = "evolve";
+      system = "x86_64-linux";
+      flakePath = "/home/${username}/nix-config";
+
+      colorscheme = {
+        dark = "gruvbox-dark-medium";
+        light = "one-light";
+        light1 = "atelier-dune-light";
+        light2 = "gruvbox-light-hard";
+      };
+
 
       pkgs = import nixpkgs {
         inherit system;
@@ -61,18 +31,77 @@
         };
       };
 
-      variables = import ./variables.nix;
-      getVar =
-        hostname:
-        nixpkgs.lib.recursiveUpdate variables.defaults (nixpkgs.lib.attrByPath [ hostname ] { } variables);
+      hostConfigurations = {
+        # my battlestation
+        druss = {
+          gaming = {
+            enable = true;
+            full = true;
+          };
+          gui = {
+            enable = true;
+            plasma.enable = true;
+            stylix = {
+              enable = true;
+              theme = colorscheme.dark;
+            };
+          };
+        };
 
-      sharedArgs = {
-        inherit inputs;
-        inherit self;
-        inherit system;
-        inherit username;
-        flakePath = "/home/${username}/nix-config";
+        # my laptop
+        waylander = {
+          laptop = true;
+          gaming.enable = true;
+          gui = {
+            enable = true;
+            hyprland = true;
+            stylix = {
+              enable = true;
+              theme = colorscheme.light;
+            };
+            quickshell.enable = true;
+
+          };
+        };
+
+        # my server
+        delnoch = {
+          server = true;
+        };
       };
+
+      mkSystemConfig = hostname:
+        nixpkgs.lib.nixosSystem {
+          inherit system pkgs;
+          specialArgs = {
+            inherit inputs self hostname username;
+            hostConfig = hostConfigurations.${hostname} or { };
+          };
+
+          modules = [
+            ./hosts/${hostname}
+            ./system
+            stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "";
+                users.${username} = {
+                  imports = [
+                    ./home
+                    stylix.homeModules.stylix
+                  ];
+                  _module.args = {
+                    inherit inputs self hostname;
+                    hostConfig = hostConfigurations.${hostname} or { };
+                  };
+                };
+              };
+            }
+          ];
+        };
 
       mkHomeConfig =
         hostname:
@@ -81,48 +110,16 @@
           modules = [
             ./home
             stylix.homeModules.stylix
-            zen-browser.homeModules.twilight
           ];
-          extraSpecialArgs =
-            sharedArgs
-            // {
-              inherit hostname;
-            }
-            // getVar hostname;
-        };
-
-      mkSystemConfig =
-        hostname:
-        nixpkgs.lib.nixosSystem {
-          inherit pkgs;
-          inherit system;
-          specialArgs =
-            sharedArgs
-            // {
-              inherit hostname;
-            }
-            // getVar hostname;
-
-          modules = [
-            ./hosts/${hostname}
-            ./system
-            inputs.stylix.nixosModules.stylix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                users.${username} = import ./home;
-                extraSpecialArgs =
-                  sharedArgs
-                  // {
-                    inherit hostname;
-                  }
-                  // getVar hostname;
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "";
-              };
-            }
-          ];
+          extraSpecialArgs = {
+            inherit
+              inputs
+              self
+              hostname
+              username
+              ;
+            hostConfig = hostConfigurations.${hostname} or { };
+          };
         };
     in
     {
@@ -168,4 +165,43 @@
       # import shells
       devShells.${system} = import ./shells.nix { inherit pkgs; };
     };
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ags = {
+      # url = "github:aylur/ags/v1";
+      url = "github:aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    astal = {
+      url = "github:aylur/astal";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 }

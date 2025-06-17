@@ -1,24 +1,23 @@
 {
-  gaming,
+  hostConfig,
   pkgs,
   lib,
   ...
 }:
 let
-  opti = gaming == "simple";
-  battlestation = gaming == "full";
+  cfg = hostConfig.gaming;
 in
 {
   programs = {
     steam = {
-      enable = opti || battlestation;
-      gamescopeSession.enable = battlestation;
+      inherit (cfg) enable;
+      gamescopeSession.enable = cfg.full;
       extraCompatPackages = [ pkgs.proton-ge-bin ];
     };
-    gamemode.enable = battlestation;
+    gamemode.enable = cfg.full;
 
     nix-ld = {
-      enable = battlestation;
+      enable = cfg.full;
       libraries = with pkgs; [
         freetype
         wine
@@ -35,7 +34,8 @@ in
       ];
     };
   };
-  environment.systemPackages = lib.optionals battlestation [
+
+  environment.systemPackages = lib.optionals cfg.full [
     pkgs.mangohud
     pkgs.mangohud
   ];

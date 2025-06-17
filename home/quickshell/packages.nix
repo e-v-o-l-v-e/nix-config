@@ -10,7 +10,7 @@ let
       owner = "caelestia-dots";
       repo = "scripts";
       rev = "main";
-      sha256 = "agQPRI7mnbIHyW5M+Wr0NJMOLeRe0i5qFrAYsGTDEzI=";
+      sha256 = "4TBfJDWNbT2+EZ85J+SoPc9bZfoJE+x5sL4ATJ/bJIw=";
     };
 
     nativeBuildInputs = with pkgs; [

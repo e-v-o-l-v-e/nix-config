@@ -1,55 +1,49 @@
 {
-  pkgs,
+  hostConfig,
   lib,
-  DE,
-  hostname,
+  pkgs,
   ...
 }:
+let
+  cfg = hostConfig.gui;
+in
 {
-  config = lib.mkMerge [
-    (lib.mkIf (builtins.elem "hyprland" DE) {
-      programs.hyprland = {
-        enable = true;
-        portalPackage = pkgs.xdg-desktop-portal-hyprland;
-        xwayland.enable = true;
-      };
-      programs.dconf.enable = true;
-    })
+  programs = lib.mkIf cfg.hyprland.enable {
+    hyprland = {
+      enable = true;
+      portalPackage = pkgs.xdg-desktop-portal-hyprland;
+      xwayland.enable = true;
+    };
+    programs.dconf = {
+      enable = true;
+    };
+  };
 
-    (lib.mkIf (builtins.elem "plasma" DE) {
-      services.xserver.enable = true;
-      services.desktopManager.plasma6.enable = true;
-    })
+  services = lib.mkIf cfg.plasma.enable {
+    xserver.enable = true;
+    desktopManager.plasma6.enable = true;
+  };
 
-    (lib.mkIf (hostname == "waylander") {
-      programs.light = {
-        enable = true;
-        brightnessKeys = {
-          step = 5;
-          enable = true;
-        };
-      };
-    })
 
-    {
-      xdg.portal = {
-        enable = true;
-        wlr.enable = false;
-        extraPortals = [
-          pkgs.xdg-desktop-portal-gtk
-        ];
-        configPackages = [
-          pkgs.xdg-desktop-portal-gtk
-          pkgs.xdg-desktop-portal
-        ];
-      };
+  # wayland config
+  xdg.portal = lib.mkIf cfg.enable {
+    enable = true;
+    wlr.enable = false;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    configPackages = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal
+    ];
+  };
 
-      environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = lib.mkIf cfg.enable {
+    NIXOS_OZONE_WL = "1";
+  };
 
-      hardware.graphics = {
-        enable = true;
-        enable32Bit = true;
-      };
-    }
-  ];
+  hardware.graphics = lib.mkIf cfg.enable {
+    enable = true;
+    enable32Bit = true;
+  };
 }
