@@ -4,9 +4,6 @@
   outputs = inputs@{ self, nixpkgs, home-manager, nvf, ...
     }:
     let
-      configuration = import ./configuration.nix;
-      inherit (configuration) hostConfigurations;
-
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
@@ -19,28 +16,24 @@
           inherit system pkgs;
           specialArgs = {
             inherit inputs self hostname;
-            hostConfig = hostConfigurations.${hostname};
-            inherit (hostConfigurations.${hostname}) username;
           };
-
           modules = [
             ./options.nix
-            ./hosts/${hostname}
             ./system
+            ./hosts/${hostname}
             home-manager.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 backupFileExtension = "";
-                users.${hostConfigurations.${hostname}.username} = {
+                users.${username} = {
                   imports = [
                     ./options.nix
                     ./home
                   ];
                   _module.args = {
                     inherit inputs self hostname;
-                    hostConfig = hostConfigurations.${hostname};
                   };
                 };
               };
