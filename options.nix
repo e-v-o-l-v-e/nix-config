@@ -1,30 +1,90 @@
-{ lib, ...}:
+{ lib, ... }:
 {
-  gui = { 
-    # global
-    enable = lib.mkEnableOption "enable graphics, de etc";
-
-    # de / compositor
-    hyprland.enable = lib.mkEnableOption "Use hyprland compositor";
-    plasma.enable = lib.mkEnableOption "Use plasma6 de";
-
-    # color
-    stylix = {
-      enable = lib.mkEnableOption "Use stylix for theming";
-      # default to real cool color
-      theme = lib.mkOverride 1501 "gruvbox-dark-medium";
+  options = {
+    username = lib.mkOption {
+      type = lib.types.str;
+      default = "evolve";
+      description = "Username used across the system";
     };
 
-    quickshell.enable = lib.mkEnableOption "Enable QuickShell with Caelestia config";
-  };
+    system-version = lib.mkOption {
+      type = lib.types.str;
+      default = "25.05";
+      description = "NixOS first installation's system version";
+    };
 
-  gaming = {
-    enable = lib.mkEnableOption "Enable gaming capabilities (steam)";
-    full = lib.mkEnableOption "Full gaming capabilities (heroic, etc)";
-  };
+    # from /home/{username}
+    # TODO : integrate it into nvf config, right now it is hard-coded with my username
+    flakePath = "nix-config";
 
-  soft = {
-    zen.enable = lib.mkEnableOption "Enable Zen Browser";
-    nvf.enable = lib.mkEnableOption "Use notashelf's nvf, an amazing neovim wrapper";
+    personal.enable = lib.mkEnableOption "Whether this is a personal device";
+    laptop.enable = lib.mkEnableOption "Enable laptop related modules, battery management, brightness keys etc";
+    server.enable = lib.mkEnableOption "Enable server modules";
+
+    soft = {
+      zen.enable = lib.mkEnableOption "Enable Zen browser";
+      nvf.enable = lib.mkEnableOption "Enable notashelf’s Neovim config (nvf)";
+    };
+
+    gui = {
+      enable = lib.mkEnableOption "Enable GUI (DE, compositor, etc)";
+
+      hyprland.enable = lib.mkEnableOption "Use Hyprland";
+      plasma.enable = lib.mkEnableOption "Use Plasma";
+
+      theme = lib.mkOption {
+        type = lib.types.enum [ "dark" "light"];
+        default = "dark";
+      };
+
+      stylix = {
+        colorScheme = lib.mkEnableOption "Enable Stylix theming";
+        theme = lib.mkOption {
+          type = lib.types.str;
+          default = "gruvbox-dark-medium";
+          description = "Stylix theme";
+        };
+      };
+
+      quickshell = {
+        enable = lib.mkEnableOption "Enable QuickShell";
+        caelestia.enable = lib.mkEnableOption "Use Caelestia config for QuickShell";
+      };
+    };
+
+    gaming = {
+      enable = lib.mkEnableOption "Enable basic gaming support";
+      full = lib.mkEnableOption "Enable full gaming stack (e.g. Heroic)";
+    };
+
+    login-manager = lib.mkOption {
+      type = lib.types.enum [ "greetd" "sddm" ];
+      default = "greetd";
+      description = "Which login manager to use";
+    };
+
+    hardware = {
+      keyboard = {
+        layout = lib.mkOption {
+          type = lib.types.str;
+          default = "gb";
+          description = "Keyboard layout";
+        };
+        variant = lib.mkOption {
+          type = lib.types.str;
+          default = "extd";
+          description = "Keyboard layout variant";
+        };
+
+        kanata = {
+          enable = lib.mkEnableOption "Enable kanata for remapping, evolve's home-row config";
+        };
+      };
+
+      timeZone = lib.mkOption {
+        type = lib.types.str;
+        default = "Europe/Paris";
+      };
+    };
   };
 }

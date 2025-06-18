@@ -8,7 +8,7 @@
 }:
 
 let
-  cfg = hostConfig.gui.quickshell;
+  cfg = hostConfig.gui.quickshell.caelestia;
 in
 {
   config = lib.mkIf cfg.enable {

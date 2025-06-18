@@ -1,4 +1,4 @@
-{ ... }:
+_:
 {
   programs.fish = {
     enable = true;
@@ -6,6 +6,8 @@
     shellAbbrs = {
       # shell
       ls = "lsd";
+      rm = "trashy";
+
       "bh" = {
         position = "anywhere";
         expansion = "| bat -phelp";
@@ -49,5 +51,13 @@
     interactiveShellInit = ''
       fish_vi_key_bindings
     '';
+
+    functions."ssh" = {
+      argumentNames = [ "argv" ];
+      body = ''
+        set -lx TERM xterm-256color
+        command ssh $argv
+      '';
+    };
   };
 }

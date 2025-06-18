@@ -1,21 +1,31 @@
 {
-  hostname,
-  username,
+  hostConfig,
+  config,
   ...
 }:
 let
-  sysv = {
-    waylander = "24.11";
-    druss = "25.05";
-    delnoch = "25.05";
-    wsl = "24.11";
-  };
+  inherit (hostConfig) username;
 in
 {
+  programs.home-manager.enable = true;
+
   home = {
     inherit username;
     homeDirectory = "/home/${username}";
-    stateVersion = sysv."${hostname}" or "25.5";
   };
-  programs.home-manager.enable = true;
+
+  home.keyboard = {
+    layout = "gb";
+    variant = "extd";
+  };
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    # nh flake path to use `nh os switch/test` without having to specify path
+    NH_FLAKE = "home/${hostConfig.username}/${hostConfig.flakePath}";
+    # there is a fish function that automatically export TERM as xterm-256color when using ssh
+    TERM = if config.programs.kitty.enable then "xterm-kitty" else "xterm-256color";
+  };
+
+  home.stateVersion = hostConfig.system-version or "25.5";
 }

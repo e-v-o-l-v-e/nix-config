@@ -1,31 +1,29 @@
 {
   pkgs,
-  username,
-  loginManager,
-  lib,
+  hostConfig,
   ...
 }:
 {
   services = {
     greetd = {
-      enable = loginManager == "greetd";
+      enable = hostConfig.login-manager == "greetd";
       vt = 3;
       settings = {
         default_session = {
-          user = username;
+          user = hostConfig.username;
           command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland"; # start Hyprland with a TUI login manager
         };
       };
     };
 
     displayManager = {
-      enable = loginManager != "";
+      enable = hostConfig.login-manager == "sddm";
       sddm = {
-        enable = loginManager == "sddm";
+        enable = hostConfig.login-manager == "sddm";
       };
     };
-
   };
+
   security.pam.services.swaylock = {
     text = ''
       guth include login

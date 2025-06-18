@@ -14,7 +14,7 @@ in
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
       xwayland.enable = true;
     };
-    programs.dconf = {
+    dconf = {
       enable = true;
     };
   };

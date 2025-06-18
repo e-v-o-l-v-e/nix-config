@@ -1,29 +1,13 @@
 {
   description = "My confiiiiig";
 
-  outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      home-manager,
-      nvf,
-      zen-browser,
-      stylix,
-      ...
+  outputs = inputs@{ self, nixpkgs, home-manager, nvf, ...
     }:
     let
-      username = "evolve";
+      configuration = import ./configuration.nix;
+      inherit (configuration) hostConfigurations;
+
       system = "x86_64-linux";
-      flakePath = "/home/${username}/nix-config";
-
-      colorscheme = {
-        dark = "gruvbox-dark-medium";
-        light = "one-light";
-        light1 = "atelier-dune-light";
-        light2 = "gruvbox-light-hard";
-      };
-
-
       pkgs = import nixpkgs {
         inherit system;
         config = {
@@ -31,71 +15,32 @@
         };
       };
 
-      hostConfigurations = {
-        # my battlestation
-        druss = {
-          gaming = {
-            enable = true;
-            full = true;
-          };
-          gui = {
-            enable = true;
-            plasma.enable = true;
-            stylix = {
-              enable = true;
-              theme = colorscheme.dark;
-            };
-          };
-        };
-
-        # my laptop
-        waylander = {
-          laptop = true;
-          gaming.enable = true;
-          gui = {
-            enable = true;
-            hyprland = true;
-            stylix = {
-              enable = true;
-              theme = colorscheme.light;
-            };
-            quickshell.enable = true;
-
-          };
-        };
-
-        # my server
-        delnoch = {
-          server = true;
-        };
-      };
-
-      mkSystemConfig = hostname:
-        nixpkgs.lib.nixosSystem {
+      mkSystemConfig = hostname: nixpkgs.lib.nixosSystem {
           inherit system pkgs;
           specialArgs = {
-            inherit inputs self hostname username;
-            hostConfig = hostConfigurations.${hostname} or { };
+            inherit inputs self hostname;
+            hostConfig = hostConfigurations.${hostname};
+            inherit (hostConfigurations.${hostname}) username;
           };
 
           modules = [
+            ./options.nix
             ./hosts/${hostname}
             ./system
-            stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 backupFileExtension = "";
-                users.${username} = {
+                users.${hostConfigurations.${hostname}.username} = {
                   imports = [
+                    ./options.nix
                     ./home
-                    stylix.homeModules.stylix
                   ];
                   _module.args = {
                     inherit inputs self hostname;
-                    hostConfig = hostConfigurations.${hostname} or { };
+                    hostConfig = hostConfigurations.${hostname};
                   };
                 };
               };
@@ -103,22 +48,16 @@
           ];
         };
 
-      mkHomeConfig =
-        hostname:
-        home-manager.lib.homeManagerConfiguration {
+      mkHomeConfig = hostname: home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
+            ./options.nix
             ./home
-            stylix.homeModules.stylix
           ];
           extraSpecialArgs = {
-            inherit
-              inputs
-              self
-              hostname
-              username
-              ;
-            hostConfig = hostConfigurations.${hostname} or { };
+            inherit inputs self hostname;
+            inherit (hostConfigurations.${hostname}) username;
+            hostConfig = hostConfigurations.${hostname};
           };
         };
     in
@@ -127,8 +66,8 @@
       nixosConfigurations = {
         waylander = mkSystemConfig "waylander";
         druss = mkSystemConfig "druss";
-        wsl = mkSystemConfig "wsl";
         delnoch = mkSystemConfig "delnoch";
+        # wsl = mkSystemConfig "wsl";
       };
 
       # HOME-MANAGER CONFIGURATIONS.
@@ -136,7 +75,7 @@
         waylander = mkHomeConfig "waylander";
         druss = mkHomeConfig "druss";
         delnoch = mkHomeConfig "delnoch";
-        wsl = mkHomeConfig "wsl";
+        # wsl = mkHomeConfig "wsl";
       };
 
       # package Neovim config (nvf)

@@ -1,15 +1,9 @@
 {...}: {
   imports = [
-    ./env.nix
+    ./de
     ./fonts.nix
-    ./gaming.nix
-    ./git.nix
+    ./gui
     ./home.nix
-    ./hypr
-    ./keyboard.nix
-    ./packages.nix
-    ./quickshell
     ./shell
-    ./zen.nix
   ];
 }

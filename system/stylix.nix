@@ -9,13 +9,13 @@ let
   cfg = hostConfig.gui.stylix;
 in
 {
-  # this enable stylix customization
+  # allow and enable stylix customization
   imports = lib.optional cfg.enable inputs.stylix.nixosModules.stylix;
 
   stylix = {
     inherit (cfg) enable;
     # set the chosen colorScheme
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/${cfg.theme}.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/${cfg.colorScheme}.yaml";
 
     fonts = {
       monospace = {

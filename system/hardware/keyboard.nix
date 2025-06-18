@@ -1,8 +1,18 @@
-{pkgs, ...}: {
-  environment.systemPackages = [pkgs.kanata];
+{hostConfig, ...}: 
+let
+  cfg = hostConfig.hardware.keyboard;
+in {
+  console.keyMap = "uk";
+
+  services.xserver = {
+    enable = true;
+    xkb = {
+      inherit (cfg) layout variant;
+    };
+  };
 
   services.kanata = {
-    enable = true;
+    inherit (cfg.kanata) enable;
     keyboards = {
       internalKeyboard = {
         devices = [

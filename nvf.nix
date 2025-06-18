@@ -41,8 +41,8 @@ max: {
     };
 
     diagnostics.config = {
-      underline.enable = false;
-      virtual_lines.enable = true;
+      underline.enable = true;
+      virtual_lines.enable = false;
     };
 
     debugger = {
@@ -171,7 +171,7 @@ max: {
     treesitter.context.enable = max;
 
     binds = {
-      whichKey.enable = true;
+      whichKey.enable = false;
       cheatsheet.enable = true;
     };
 
