@@ -1,6 +1,6 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
-  cfg = config.laptop.enable;
+  cfg = config.laptop;
 in
 {
   programs.light = {
@@ -11,7 +11,7 @@ in
     };
   };
 
-  services = {
+  services = lib.mkForce {
     upower = {
       inherit (cfg) enable;
     };

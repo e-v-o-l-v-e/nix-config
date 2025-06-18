@@ -5,10 +5,9 @@
 }: {
   users = {
     mutableUsers = true;
-    users."${username}" = {
+    users.${username} = {
       homeMode = "755";
       isNormalUser = true;
-      description = "evolve";
       extraGroups = [
         "audio"
         "docker"

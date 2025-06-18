@@ -1,8 +1,8 @@
-{ config, ... }:
+{ username, ... }:
 {
   programs.git = {
     enable = true;
-    userName = config.username;
+    userName = username;
     userEmail = "elivanoa5@gmail.com";
     extraConfig = {
       push.autoSetupRemote = true;

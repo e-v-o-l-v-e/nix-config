@@ -2,23 +2,24 @@
   config,
   pkgs,
   lib,
-  hostname,
-  personal,
   ...
 }:
+let
+  inherit (config.hardware) gpu;
+  perso = config.personal.enable;
+in 
 {
-  boot = lib.mkIf (hostname != "wsl") {
+  # boot = lib.mkIf (hostname != "wsl") {
+  boot = {
     kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
     #kernelPackages = pkgs.linuxPackages_latest; #linux Kernel
 
-    kernelParams =
-      [
+    kernelParams = [
         "systemd.mask=systemd-vconsole-setup.service"
         "systemd.mask=dev-tpmrm0.device" # this is to mask that stupid 1.5 mins systemd bug
         "nowatchdog"
         "modprobe.blacklist=sp5100_tco" # watchdog for AMD
-      ]
-      ++ lib.optionals personal [
+      ] ++ lib.optionals perso [
         "splash"
         "quiet"
         "boot.shell_on_fail"
@@ -39,10 +40,10 @@
         "usbhid"
         "sd_mod"
       ];
-      kernelModules = lib.optional (hostname == "waylander" || hostname == "druss") "amdgpu";
-      verbose = !personal;
+      kernelModules = lib.optional (gpu == "amd") "amdgpu";
+      verbose = !perso;
     };
-    consoleLogLevel = lib.mkIf personal 3;
+    consoleLogLevel = lib.mkIf perso 3;
 
     # Needed For Some Steam Games
     kernel.sysctl = lib.mkIf config.programs.steam.enable {
@@ -58,7 +59,7 @@
       canTouchEfiVariables = true;
     };
 
-    loader.timeout = lib.mkIf personal 0;
+    loader.timeout = lib.mkIf perso 0;
 
     # Bootloader GRUB
     #loader.grub = {
@@ -90,7 +91,5 @@
     };
   };
 
-  networking.interfaces = lib.mkIf (hostname == "druss" || hostname == "delnoch") {
-    eth0.wakeOnLan.enable = true;
-  };
+  networking.interfaces.eth0.wakeOnLan.enable = perso;
 }

@@ -39,7 +39,7 @@
       zoxide
     ]
     ++ [ self.packages."${system}".nvf-max ]
-    ++ lib.optionals (config.personal) (with pkgs; [
+    ++ lib.optionals (config.personal.enable) (with pkgs; [
       libnotify
       lowfi
       pamixer

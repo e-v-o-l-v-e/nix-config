@@ -1,10 +1,12 @@
 {
   description = "My confiiiiig";
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nvf, ...
+  outputs = inputs@{ self, nixpkgs, zen-browser, stylix, home-manager, nvf, ...
     }:
     let
+      username = "evolve";
       system = "x86_64-linux";
+
       pkgs = import nixpkgs {
         inherit system;
         config = {
@@ -12,30 +14,35 @@
         };
       };
 
-      mkSystemConfig = hostname: nixpkgs.lib.nixosSystem {
+      mkSystemConfig = hostname: username: nixpkgs.lib.nixosSystem {
           inherit system pkgs;
           specialArgs = {
-            inherit inputs self hostname;
+            inherit hostname username self inputs;
           };
           modules = [
             ./options.nix
-            ./system
             ./hosts/${hostname}
+            ./system
+
+            inputs.stylix.nixosModules.stylix
+
             home-manager.nixosModules.home-manager
             {
               home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "";
                 users.${username} = {
-                  imports = [
-                    ./options.nix
-                    ./home
-                  ];
-                  _module.args = {
-                    inherit inputs self hostname;
-                  };
-                };
+		  imports = [
+		    ./options.nix
+		    ./home
+		    zen-browser.homeModules.twilight
+		  ];
+                  # _module.args = {
+                  #   inherit inputs self hostname username;
+                  # };
+		};
+              extraSpecialArgs = { inherit inputs self hostname username system; };
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "";
               };
             }
           ];
@@ -45,21 +52,20 @@
           inherit pkgs;
           modules = [
             ./options.nix
+            ./hosts/${hostname}
             ./home
           ];
           extraSpecialArgs = {
             inherit inputs self hostname;
-            inherit (hostConfigurations.${hostname}) username;
-            hostConfig = hostConfigurations.${hostname};
           };
         };
     in
     {
       # NIXOS CONFIGURATIONS
       nixosConfigurations = {
-        waylander = mkSystemConfig "waylander";
-        druss = mkSystemConfig "druss";
-        delnoch = mkSystemConfig "delnoch";
+        waylander = mkSystemConfig "waylander" username;
+        druss = mkSystemConfig "druss" username;
+        delnoch = mkSystemConfig "delnoch" username;
         # wsl = mkSystemConfig "wsl";
       };
 

@@ -14,20 +14,18 @@ let
   };
 in {
   config = {
-    system-version = "24.11";
-    laptop.enable = true;
-    gaming.enable = true;
+    personal.enable = true;
+    gaming = {
+      enable = true;
+      full = true;
+    };
     gui = {
       enable = true;
       theme = "light";
-      hyprland.enable = true;
+      plasma.enable = true;
       stylix = {
         enable = true;
         colorScheme = colorScheme.light;
-      };
-      quickshell = {
-        enable = true;
-        caelestia.enable = true;
       };
     };
   };

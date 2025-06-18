@@ -35,8 +35,9 @@ in
     };
   };
 
-  environment.systemPackages = lib.optionals cfg.full [
-    pkgs.mangohud
-    pkgs.mangohud
-  ];
+  environment.systemPackages = [
+      # pkgs.proton-ge-bin
+    ] ++ lib.optionals cfg.full [
+      pkgs.mangohud
+    ];
 }

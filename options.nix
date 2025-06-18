@@ -1,11 +1,12 @@
 { lib, ... }:
 {
+  config = { };
   options = {
-    username = lib.mkOption {
-      type = lib.types.str;
-      default = "evolve";
-      description = "Username used across the system";
-    };
+    # username = lib.mkOption {
+    #   type = lib.types.str;
+    #   default = "evolve";
+    #   description = "Username used across the system";
+    # };
 
     system-version = lib.mkOption {
       type = lib.types.str;
@@ -15,7 +16,11 @@
 
     # from /home/{username}
     # TODO : integrate it into nvf config, right now it is hard-coded with my username
-    flakePath = "nix-config";
+    flakePath = lib.mkOption {
+      type = lib.types.str;
+      default = "nix-config";
+      description = "path to the flake directory from /home/{username}";
+    };
 
     personal.enable = lib.mkEnableOption "Whether this is a personal device";
     laptop.enable = lib.mkEnableOption "Enable laptop related modules, battery management, brightness keys etc";
@@ -33,13 +38,16 @@
       plasma.enable = lib.mkEnableOption "Use Plasma";
 
       theme = lib.mkOption {
-        type = lib.types.enum [ "dark" "light"];
+        type = lib.types.enum [
+          "dark"
+          "light"
+        ];
         default = "dark";
       };
 
       stylix = {
-        colorScheme = lib.mkEnableOption "Enable Stylix theming";
-        theme = lib.mkOption {
+        enable = lib.mkEnableOption "Enable Stylix theming";
+        colorScheme = lib.mkOption {
           type = lib.types.str;
           default = "gruvbox-dark-medium";
           description = "Stylix theme";
@@ -58,7 +66,10 @@
     };
 
     login-manager = lib.mkOption {
-      type = lib.types.enum [ "greetd" "sddm" ];
+      type = lib.types.enum [
+        "greetd"
+        "sddm"
+      ];
       default = "greetd";
       description = "Which login manager to use";
     };
@@ -84,6 +95,16 @@
       timeZone = lib.mkOption {
         type = lib.types.str;
         default = "Europe/Paris";
+      };
+
+      gpu = lib.mkOption {
+        type = lib.types.enum [
+          "amd"
+          "nvidia"
+          "intel"
+        ];
+        default = "amd";
+        description = "gpu type, to enable relevant drivers, currently only amd works";
       };
     };
   };

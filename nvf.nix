@@ -172,7 +172,7 @@ max: {
 
     binds = {
       whichKey.enable = false;
-      cheatsheet.enable = true;
+      cheatsheet.enable = false;
     };
 
     telescope.enable = true;

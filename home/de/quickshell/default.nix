@@ -1,22 +1,20 @@
 {
   config,
-  config,
   pkgs,
   inputs,
   lib,
   ...
 }:
-
 let
   cfg = config.gui.quickshell.caelestia;
 in
 {
-  config = lib.mkIf cfg.enable {
+  imports = [
+    ./packages.nix # Caelestia scripts and quickshell wrapper derivations
+    ./config.nix # Configuration files and environment setup
+  ];
 
-    imports = [
-      ./packages.nix # Caelestia scripts and quickshell wrapper derivations
-      ./config.nix # Configuration files and environment setup
-    ];
+  config = lib.mkIf cfg.enable {
 
     # Main packages
     home.packages = with pkgs; [

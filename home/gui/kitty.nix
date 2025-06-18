@@ -1,7 +1,7 @@
 { config, ... }:
 {
   programs.kitty = {
-    inherit (config.gui.enable) enable;
+    inherit (config.gui) enable;
     enableGitIntegration = true;
     settings = {
       cursor_trail = 10;

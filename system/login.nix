@@ -1,27 +1,30 @@
 {
+  lib,
   pkgs,
   config,
+  username,
   ...
-}:
-{
+}: let
+  lm = config.login-manager; 
+in {
   services = {
     greetd = {
-      enable = config.login-manager == "greetd";
+      enable = lm == "greetd";
       vt = 3;
       settings = {
         default_session = {
-          user = config.username;
+          user = username;
           command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland"; # start Hyprland with a TUI login manager
         };
       };
     };
 
-    displayManager = {
-      enable = config.login-manager == "sddm";
-      sddm = {
-        enable = config.login-manager == "sddm";
+    displayManager = lib.mkIf (lm == "sddm") {
+        enable = true;
+        sddm = {
+          enable = true;
+        };
       };
-    };
   };
 
   security.pam.services.swaylock = {

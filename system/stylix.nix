@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  inputs,
   ...
 }:
 let
@@ -10,8 +9,6 @@ let
 in
 {
   # allow and enable stylix customization
-  imports = lib.optional cfg.enable inputs.stylix.nixosModules.stylix;
-
   stylix = {
     inherit (cfg) enable;
     # set the chosen colorScheme
