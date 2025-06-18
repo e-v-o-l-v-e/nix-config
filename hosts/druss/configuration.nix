@@ -21,11 +21,11 @@ in {
     };
     gui = {
       enable = true;
-      theme = "light";
+      theme = "dark";
       plasma.enable = true;
       stylix = {
         enable = true;
-        colorScheme = colorScheme.light;
+        colorScheme = colorScheme.dark;
       };
     };
   };
