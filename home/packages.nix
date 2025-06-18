@@ -31,6 +31,7 @@
         ripgrep
         starship
         tmux
+        trashy
         tree
         unzip
         wget
