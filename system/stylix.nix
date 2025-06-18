@@ -1,12 +1,12 @@
 {
-  hostConfig,
+  config,
   pkgs,
   lib,
   inputs,
   ...
 }:
 let
-  cfg = hostConfig.gui.stylix;
+  cfg = config.gui.stylix;
 in
 {
   # allow and enable stylix customization

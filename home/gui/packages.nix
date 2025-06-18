@@ -1,11 +1,11 @@
 {
   lib,
   pkgs,
-  hostConfig,
+  config,
   ...
 }:
 {
-  home.packages = lib.optionals (hostConfig.personal.enable) (with pkgs; [
+  home.packages = lib.optionals (config.personal.enable) (with pkgs; [
       # packages for personal machine
       blueman
       cliphist
@@ -32,7 +32,7 @@
   );
 
   programs = {
-    vesktop.enable = hostConfig.personal.enable;
-    element-desktop.enable = hostConfig.personal.enable;
+    vesktop.enable = config.personal.enable;
+    element-desktop.enable = config.personal.enable;
   };
 }

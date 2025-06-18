@@ -1,13 +1,13 @@
-{ inputs, hostConfig, ... }:
+{ inputs, config, ... }:
 {
   # nix settings, nh, garbage cleaning
-  system.stateVersion = hostConfig.system-version;
+  system.stateVersion = config.system-version;
 
   programs.nh = {
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 14d";
-    flake = "home/${hostConfig.username}/${hostConfig.flakePath}";
+    flake = "home/${config.username}/${hostConfig.flakePath}";
   };
 
   nix = {

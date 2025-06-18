@@ -1,5 +1,5 @@
-{ hostConfig, ... }: let
-  cfg = hostConfig.hardware.time;
+{ config, ... }: let
+  cfg = config.hardware.time;
 in {
   time = {
     inherit (cfg) timeZone;

@@ -1,6 +1,6 @@
-{hostConfig, ...}: 
+{config, ...}: 
 let
-  cfg = hostConfig.hardware.keyboard;
+  cfg = config.hardware.keyboard;
 in {
   console.keyMap = "uk";
 

@@ -1,11 +1,11 @@
 {
-  hostConfig,
+  config,
   lib,
   pkgs,
   ...
 }:
 let
-  cfg = hostConfig.gui;
+  cfg = config.gui;
 in
 {
   programs = lib.mkIf cfg.hyprland.enable {

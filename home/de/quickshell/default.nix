@@ -1,5 +1,5 @@
 {
-  hostConfig,
+  config,
   config,
   pkgs,
   inputs,
@@ -8,7 +8,7 @@
 }:
 
 let
-  cfg = hostConfig.gui.quickshell.caelestia;
+  cfg = config.gui.quickshell.caelestia;
 in
 {
   config = lib.mkIf cfg.enable {

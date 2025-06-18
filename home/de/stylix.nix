@@ -1,6 +1,6 @@
-{hostConfig, inputs, lib, ...}: 
+{config, inputs, lib, ...}: 
 let
-  cfg = hostConfig.gui.stylix;
+  cfg = config.gui.stylix;
 in 
 {
   imports = lib.optionals cfg.enable inputs.stylix.homeModules.stylix;

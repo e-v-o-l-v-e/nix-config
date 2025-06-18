@@ -1,4 +1,4 @@
-{ hostConfig, ... }:
+{ config, ... }:
 let
   # my locale setup is weird
   # i have almost everything in french but my default and numeric are english

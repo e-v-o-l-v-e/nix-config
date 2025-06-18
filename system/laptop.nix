@@ -1,6 +1,6 @@
-{ hostConfig, ... }:
+{ config, ... }:
 let
-  cfg = hostConfig.laptop.enable;
+  cfg = config.laptop.enable;
 in
 {
   programs.light = {

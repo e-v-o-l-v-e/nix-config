@@ -1,7 +1,7 @@
 {
   pkgs,
   self,
-  hostConfig,
+  config,
   system,
   ...
 }:
@@ -39,7 +39,7 @@
       zoxide
     ]
     ++ [ self.packages."${system}".nvf-max ]
-    ++ lib.optionals (hostConfig.personal) (with pkgs; [
+    ++ lib.optionals (config.personal) (with pkgs; [
       libnotify
       lowfi
       pamixer
@@ -51,6 +51,6 @@
   programs = {
     btop.enable = true;
     fd.enable = true;
-    cava.enable = hostConfig.personal.enable;
+    cava.enable = config.personal.enable;
   };
 }

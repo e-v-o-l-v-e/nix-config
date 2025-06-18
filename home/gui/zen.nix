@@ -1,11 +1,11 @@
 {
   inputs,
-  hostConfig,
+  config,
   lib,
   ...
 }:
 let
-  cfg = hostConfig.soft.zen;
+  cfg = config.soft.zen;
 in 
 {
   imports = lib.optional cfg.enable inputs.zen-browser.homeModules.twilight;

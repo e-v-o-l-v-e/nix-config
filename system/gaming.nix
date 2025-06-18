@@ -1,11 +1,11 @@
 {
-  hostConfig,
+  config,
   pkgs,
   lib,
   ...
 }:
 let
-  cfg = hostConfig.gaming;
+  cfg = config.gaming;
 in
 {
   programs = {
