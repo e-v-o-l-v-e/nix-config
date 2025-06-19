@@ -82,9 +82,9 @@ max: {
       java.enable = max;
       csharp.enable = max;
       python.enable = max;
-      markdown.enable = true;
+      markdown.enable = false; # tmp true;
       yaml.enable = true;
-      dart.enable = max;
+      dart.enable = false;
 
       lua.enable = max;
       bash.enable = true;
@@ -171,8 +171,8 @@ max: {
     treesitter.context.enable = max;
 
     binds = {
-      whichKey.enable = false;
-      cheatsheet.enable = false;
+      whichKey.enable = true;
+      cheatsheet.enable = true;
     };
 
     telescope.enable = true;
@@ -219,7 +219,7 @@ max: {
 
       motion = {
         hop.enable = max;
-        precognition.enable = max;
+        precognition.enable = false;
       };
       images = {
         image-nvim.enable = false;
@@ -229,7 +229,7 @@ max: {
     notes = {
       neorg.enable = false;
       orgmode.enable = false;
-      todo-comments.enable = true;
+      todo-comments.enable = true; # tmp true;
     };
 
     terminal = {

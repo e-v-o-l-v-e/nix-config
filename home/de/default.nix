@@ -1,6 +1,6 @@
 {...}: {
   imports = [
     ./hypr
-    ./quickshell
+    # ./quickshell
   ];
 }

@@ -1,25 +1,25 @@
 {
   pkgs,
-  gaming,
-  username,
+  config,
+  lib,
   ...
-}: let
-  gamingPkgs = {
-    full = with pkgs; [
-      heroic
-      steam-run
-      wine
-      umu-launcher
-      protonup
-      amdvlk
-      vkd3d
-      vkd3d-proton
-      dxvk_2
-      directx-headers
-    ];
-  };
+}:let
+  cfg = config.gaming;
 in {
-  home.packages = gamingPkgs.${gaming} or [];
+  home.packages = lib.mkIf cfg.full [
+      pkgs.heroic
+      pkgs.steam-run
+      pkgs.wine
+      pkgs.umu-launcher
+      pkgs.protonup
+      pkgs.amdvlk
+      pkgs.vkd3d
+      pkgs.vkd3d-proton
+      pkgs.dxvk_2
+      pkgs.directx-headers
+    ];
+
+
   # home.sessionVariables = {
   #   STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/evolve/steam/root/compatibilitytools.d/";
   # };

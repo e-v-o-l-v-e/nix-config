@@ -1,8 +1,7 @@
 {
   description = "My confiiiiig";
 
-  outputs = inputs@{ self, nixpkgs, zen-browser, stylix, home-manager, nvf, ...
-    }:
+  outputs = inputs@{ self, nixpkgs, zen-browser, stylix, home-manager, nvf, ... }:
     let
       username = "evolve";
       system = "x86_64-linux";
@@ -14,10 +13,17 @@
         };
       };
 
-      mkSystemConfig = hostname: username: nixpkgs.lib.nixosSystem {
+      mkSystemConfig =
+        hostname: username:
+        nixpkgs.lib.nixosSystem {
           inherit system pkgs;
           specialArgs = {
-            inherit hostname username self inputs;
+            inherit
+              hostname
+              username
+              self
+              inputs
+              ;
           };
           modules = [
             ./options.nix
@@ -30,33 +36,39 @@
             {
               home-manager = {
                 users.${username} = {
-		  imports = [
-		    ./options.nix
-		    ./home
-		    zen-browser.homeModules.twilight
-		  ];
-                  # _module.args = {
-                  #   inherit inputs self hostname username;
-                  # };
-		};
-              extraSpecialArgs = { inherit inputs self hostname username system; };
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "";
+                  imports = [
+                    ./options.nix
+                    ./hosts/${hostname}/configuration.nix
+                    ./home
+                    zen-browser.homeModules.twilight
+                  ];
+                };
+                extraSpecialArgs = {
+                  inherit
+                    inputs
+                    self
+                    hostname
+                    username
+                    system
+                    ;
+                };
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "";
               };
             }
           ];
         };
 
-      mkHomeConfig = hostname: home-manager.lib.homeManagerConfiguration {
+      mkHomeConfig = hostname: username: home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
             ./options.nix
-            ./hosts/${hostname}
+            ./hosts/${hostname}/configuration.nix
             ./home
           ];
           extraSpecialArgs = {
-            inherit inputs self hostname;
+            inherit inputs self hostname username;
           };
         };
     in
@@ -71,9 +83,9 @@
 
       # HOME-MANAGER CONFIGURATIONS.
       homeConfigurations = {
-        waylander = mkHomeConfig "waylander";
-        druss = mkHomeConfig "druss";
-        delnoch = mkHomeConfig "delnoch";
+        waylander = mkHomeConfig "waylander" username;
+        druss = mkHomeConfig "druss" username;
+        delnoch = mkHomeConfig "delnoch" username;
         # wsl = mkHomeConfig "wsl";
       };
 

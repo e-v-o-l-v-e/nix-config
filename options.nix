@@ -1,13 +1,6 @@
 { lib, ... }:
 {
-  config = { };
   options = {
-    # username = lib.mkOption {
-    #   type = lib.types.str;
-    #   default = "evolve";
-    #   description = "Username used across the system";
-    # };
-
     system-version = lib.mkOption {
       type = lib.types.str;
       default = "25.05";
