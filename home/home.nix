@@ -19,5 +19,5 @@
     TERM = if config.programs.kitty.enable then "xterm-kitty" else "xterm-256color";
   };
 
-  home.stateVersion = config.system-version or "25.5";
+  home.stateVersion = config.system-version;
 }

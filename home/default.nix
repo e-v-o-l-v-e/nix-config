@@ -1,8 +1,7 @@
 {...}: {
   imports = [
-    ./de
-    ./fonts.nix
-    ./gui
+    ./apps
+    ./desktop
     ./home.nix
     ./shell
   ];
