@@ -1,5 +1,7 @@
 # My Flake
 
+# WIP, README NOT UP TO DATE
+
 This flake holds the configurations for all my machines and my user across those machines, my shells for developing and my nvf config.
 
 ## HOSTS
