@@ -79,10 +79,10 @@ in
           lsp = {
             server = "nixd";
             options = {
-              nixos.expr = "(builtins.getFlake (builtins.toString ./..)).nixosConfigurations.waylander.options";
+              nixos.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.waylander.options";
               # home-manager = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.waylander.options";
 
-              home-manager.expr = "(builtins.getFlake (builtins.toString ./..)).nixosConfigurations.waylander.options.home-manager.users.type.getSubOptions []";
+              home-manager.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.waylander.options.home-manager.users.type.getSubOptions []";
             };
           };
         };

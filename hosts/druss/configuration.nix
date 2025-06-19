@@ -14,6 +14,11 @@ let
   };
 in {
   config = {
+    server = {
+      enable = true;
+      services.opencloud.enable = true;
+    };
+
     personal.enable = true;
 
     soft.zen.enable = true;

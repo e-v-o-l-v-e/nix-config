@@ -43,7 +43,6 @@ in
 
     personal.enable = lib.mkEnableOption "Whether this is a personal device";
     laptop.enable = lib.mkEnableOption "Enable laptop related modules, battery management, brightness keys etc";
-    server.enable = lib.mkEnableOption "Enable server modules";
 
     soft = {
       zen.enable = lib.mkEnableOption "Enable Zen browser";
@@ -164,8 +163,15 @@ in
         description = "gpu type, to enable relevant drivers, currently only amd works";
       };
 
-      # not usefull right now
-      homeManagerOnly = lib.mkEnableOption "For standalone home-manager";
+    };
+    # not usefull right now
+    homeManagerOnly = lib.mkEnableOption "For standalone home-manager";
+
+    server = {
+      enable = lib.mkEnableOption "Enable server modules";
+      services = {
+        opencloud.enable = lib.mkEnableOption "Enable opencloud";
+      };
     };
   };
 }

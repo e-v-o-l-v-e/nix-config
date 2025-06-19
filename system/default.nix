@@ -8,6 +8,7 @@
     ./locale.nix
     ./network.nix
     ./nix.nix
+    ./server
     ./user.nix
   ];
 
