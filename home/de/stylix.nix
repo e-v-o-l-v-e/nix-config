@@ -27,9 +27,6 @@ in {
 
       sizes.terminal = 13;
     };
-
-    targets.starship.enable = false;
   };
-
   home.packages = lib.optional cfg.enable pkgs.base16-schemes;
 }
