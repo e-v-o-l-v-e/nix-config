@@ -66,9 +66,13 @@
             ./options.nix
             ./hosts/${hostname}/configuration.nix
             ./home
+
+            stylix.homeModules.stylix
+            zen-browser.homeModules.twilight
           ];
           extraSpecialArgs = {
             inherit inputs self hostname username;
+            config.homeManagerOnly = true;
           };
         };
     in

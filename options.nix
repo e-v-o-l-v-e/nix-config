@@ -99,6 +99,8 @@
         default = "amd";
         description = "gpu type, to enable relevant drivers, currently only amd works";
       };
+
+      homeManagerOnly = lib.mkEnableOption "For standalone home-manager";
     };
   };
 }
