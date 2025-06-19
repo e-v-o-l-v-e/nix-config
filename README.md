@@ -17,30 +17,30 @@ Options are declared in ./options.nix, and set by host in ./hosts/{hostname}/con
 ## Structure
 
 ```shell
-nix-config
+nix-config/
 ├── flake.lock
 ├── flake.nix
-├── home
-│   ├── apps
+├── home/
+│   ├── apps/
 │   │   ├── default.nix
 │   │   ├── gaming.nix
 │   │   ├── kitty.nix
 │   │   ├── packages.nix
 │   │   └── zen.nix
 │   ├── default.nix
-│   ├── desktop
+│   ├── desktop/
 │   │   ├── default.nix
 │   │   ├── fonts.nix
-│   │   ├── hypr
+│   │   ├── hypr/
 │   │   │   ├── default.nix
 │   │   │   ├── hyprland.nix
 │   │   │   ├── packages.nix
 │   │   │   └── waybar.nix
-│   │   ├── quickshell
+│   │   ├── quickshell/
 │   │   └── stylix.nix
 │   ├── home.nix
 │   ├── nvf.nix
-│   └── shell
+│   └── shell/
 │       ├── default.nix
 │       ├── fish.nix
 │       ├── git.nix
@@ -50,31 +50,28 @@ nix-config
 │       ├── tmux.nix
 │       ├── zellij.nix
 │       └── zoxide.nix
-├── hosts
-│   ├── druss
+├── hosts/
+│   ├── druss/
 │   │   ├── configuration.nix
 │   │   ├── default.nix
 │   │   ├── hardware.nix
-│   ├── waylander
-│   │   ├── configuration.nix
-│   │   ├── default.nix
-│   │   └── hardware.nix
-│   └── wsl
-│       ├── configuration.nix
-│       └── default.nix
+│   └── waylander/
+│       ├── configuration.nix
+│       ├── default.nix
+│       └── hardware.nix
 ├── options.nix
 ├── README.md
 ├── shells.nix
-└── system
+└── system/
     ├── default.nix
-    ├── desktop
+    ├── desktop/
     │   ├── default.nix
     │   ├── fonts.nix
     │   ├── gaming.nix
     │   ├── login.nix
     │   ├── stylix.nix
     │   └── wayland.nix
-    ├── hardware
+    ├── hardware/
     │   ├── amd-drivers.nix
     │   ├── boot.nix
     │   ├── default.nix
@@ -86,7 +83,6 @@ nix-config
     ├── network.nix
     ├── nix.nix
     └── user.nix
-
 ```
 
 
