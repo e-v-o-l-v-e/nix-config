@@ -1,7 +1,6 @@
 {
   hostname,
   config,
-  lib,
   ...
 }:let
   cfg = config.personal;
@@ -9,7 +8,7 @@ in {
   networking = {
     hostName = hostname;
     networkmanager.enable = true;
-    nameservers = lib.optionals (hostname != "wsl") [
+    nameservers = [
       "1.1.1.1"
       "1.0.0.1"
     ];

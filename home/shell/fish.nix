@@ -6,7 +6,7 @@ _:
     shellAbbrs = {
       # shell
       ls = "lsd";
-      rm = "trash";
+      rm = "trash put";
 
       "bh" = {
         position = "anywhere";

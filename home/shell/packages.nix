@@ -38,7 +38,7 @@
       zip
       zoxide
     ]
-    ++ [ self.packages."${system}".nvf-max ]
+    # ++ [ self.packages."${system}".nvf-max ]
     ++ lib.optionals (config.personal.enable) (with pkgs; [
       libnotify
       lowfi

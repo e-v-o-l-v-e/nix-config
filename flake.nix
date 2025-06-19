@@ -37,10 +37,12 @@
               home-manager = {
                 users.${username} = {
                   imports = [
+                    zen-browser.homeModules.twilight
+                    nvf.homeManagerModules.default
+
                     ./options.nix
                     ./hosts/${hostname}/configuration.nix
                     ./home
-                    zen-browser.homeModules.twilight
                   ];
                 };
                 extraSpecialArgs = {
@@ -63,12 +65,13 @@
       mkHomeConfig = hostname: username: home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
+            stylix.homeModules.stylix
+            zen-browser.homeModules.twilight
+            nvf.homeManagerModules.default
+
             ./options.nix
             ./hosts/${hostname}/configuration.nix
             ./home
-
-            stylix.homeModules.stylix
-            zen-browser.homeModules.twilight
           ];
           extraSpecialArgs = {
             inherit inputs self hostname username;
@@ -94,27 +97,27 @@
       };
 
       # package Neovim config (nvf)
-      packages.x86_64-linux = {
-        nvf-max =
-          let
-            maxConfig = import ./nvf.nix true;
-          in
-          (nvf.lib.neovimConfiguration {
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
-            modules = [ maxConfig ];
-          }).neovim;
-
-        nvf-min =
-          let
-            minConfig = import ./nvf.nix false;
-          in
-          (nvf.lib.neovimConfiguration {
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
-            modules = [ minConfig ];
-          }).neovim;
-        # set nvf minimal config as default package
-        default = self.packages.x86_64-linux.nvf-max;
-      };
+      # packages.x86_64-linux = {
+      #   nvf-max =
+      #     let
+      #       maxConfig = import ./nvf.nix true;
+      #     in
+      #     (nvf.lib.neovimConfiguration {
+      #       pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      #       modules = [ maxConfig ];
+      #     }).neovim;
+      #
+      #   nvf-min =
+      #     let
+      #       minConfig = import ./nvf.nix false;
+      #     in
+      #     (nvf.lib.neovimConfiguration {
+      #       pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      #       modules = [ minConfig ];
+      #     }).neovim;
+      #   # set nvf minimal config as default package
+      #   default = self.packages.x86_64-linux.nvf-max;
+      # };
 
       # import shells
       devShells.${system} = import ./shells.nix { inherit pkgs; };

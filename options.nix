@@ -1,4 +1,31 @@
 { lib, ... }:
+let
+  listTheme = lib.types.enum [
+    "base16"
+    "catppuccin"
+    "dracula"
+    "github"
+    "gruvbox"
+    "mini-base16"
+    "nord"
+    "onedark"
+    "oxocarbon"
+    "rose-pine"
+    "solarized"
+    "solarized-osaka"
+    "tokyonight"
+  ];
+
+  listStyle = lib.types.enum [
+    "dark"
+    "darker"
+    "cool"
+    "deep"
+    "warm"
+    "warmer"
+    "latte"
+  ]; # i may have forgotten something, know that latte is only for catppuccin
+in
 {
   options = {
     system-version = lib.mkOption {
@@ -8,7 +35,6 @@
     };
 
     # from /home/{username}
-    # TODO : integrate it into nvf config, right now it is hard-coded with my username
     flakePath = lib.mkOption {
       type = lib.types.str;
       default = "nix-config";
@@ -21,7 +47,45 @@
 
     soft = {
       zen.enable = lib.mkEnableOption "Enable Zen browser";
-      nvf.enable = lib.mkEnableOption "Enable notashelf’s Neovim config (nvf)";
+
+      nvf = {
+        enable = lib.mkOption {
+          type = lib.types.bool;
+          default = false;
+          description = "Enable notashelf’s Neovim config (nvf)";
+        };
+        max = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Heavier config";
+        };
+        theme = {
+          light = {
+            name = lib.mkOption {
+              default = "catppuccin";
+              description = "nvf's light theme";
+              type = listTheme;
+            };
+            style = lib.mkOption {
+              default = "latte";
+              description = "nvf's light theme style";
+              type = listStyle;
+            };
+          };
+          dark = {
+            name = lib.mkOption {
+              default = "gruvbox";
+              description = "nvf's dark theme";
+              type = listTheme;
+            };
+            style = lib.mkOption {
+              default = "dark";
+              description = "nvf's light theme style\nNote that not all theme support all style";
+              type = listStyle;
+            };
+          };
+        };
+      };
     };
 
     gui = {
@@ -100,6 +164,7 @@
         description = "gpu type, to enable relevant drivers, currently only amd works";
       };
 
+      # not usefull right now
       homeManagerOnly = lib.mkEnableOption "For standalone home-manager";
     };
   };

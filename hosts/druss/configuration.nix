@@ -17,6 +17,7 @@ in {
     personal.enable = true;
 
     soft.zen.enable = true;
+    soft.nvf.enable = true;
 
     gaming = {
       enable = true;
@@ -25,11 +26,11 @@ in {
 
     gui = {
       enable = true;
-      theme = "light";
+      theme = "dark";
       plasma.enable = true;
       stylix = {
         enable = true;
-        colorScheme = colorScheme.light;
+        colorScheme = colorScheme.dark;
       };
     };
 

@@ -1,12 +1,13 @@
 # 💫 https://github.com/JaKooLit 💫 #
 {
+  config,
   lib,
   pkgs,
-  hostname,
   ...
-}:
-{
-  config = lib.mkIf (hostname == "waylander" || hostname == "druss") {
+}:let
+  inherit (config.hardware) gpu;
+in {
+  config = lib.mkIf (gpu == "amd") {
     systemd.tmpfiles.rules = [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}" ];
     services.xserver.videoDrivers = [ "amdgpu" ];
 
