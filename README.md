@@ -10,20 +10,9 @@ This flake holds the config (nixos and/or home-manager) for all my machines.
 - druss : battle station
 - delnoch : server, only host still not on Nixos, HM on Debian
 
-All configs can be used for home-manager standalone or nixos (with home-manager as a module).
+All configs are intended for nixos with home-manager as a module, it will be available for just home-manager soon.
 
-## TODO
-
-- [ ] rewrite an modularize the whole config
-  - [x] waylander
-  - [x] druss
-  - [ ] delnoch
-  - [x] wsl
-- [ ] nvf
-    - [x] ajouter une config nvf minimaliste
-    - [ ] better theme management
-
-
+Options are declared in ./options.nix, and set by host in ./hosts/{hostname}/configuration.nix, the code is either clear or commented, take a look at the options, it's of course opinionated.
 
 ## Structure
 
