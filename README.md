@@ -2,14 +2,13 @@
 
 # WIP, README NOT UP TO DATE
 
-This flake holds the configurations for all my machines and my user across those machines, my shells for developing and my nvf config.
+This flake holds the config (nixos and/or home-manager) for all my machines.
 
 ## HOSTS
 
 - waylander : laptop config
-- druss : battle station, maximal config
-- delnoch : server, cli and shell, docker (WIP), only host still not on Nixos, HM on Debian
-- wsl : windows subsystem for Linux
+- druss : battle station
+- delnoch : server, only host still not on Nixos, HM on Debian
 
 All configs can be used for home-manager standalone or nixos (with home-manager as a module).
 
@@ -24,79 +23,90 @@ All configs can be used for home-manager standalone or nixos (with home-manager 
     - [x] ajouter une config nvf minimaliste
     - [ ] better theme management
 
-## NVF
-
-Currently I output my nvf config as an output package ([relevant manual part](https://notashelf.github.io/nvf/index.xhtml#ch-standalone-installation)).
-
-It allows me to import it as part of my config in my package with `self.packages."${system}".nvf-max`.
-
-The nvf config itself is located at ./nvf.nix, and imported by the flake, the `max` argument allows to have a big config, and a smaller one (which is not that small actually).
 
 
 ## Structure
 
 ```shell
-.
+nix-config
 ├── flake.lock
 ├── flake.nix
 ├── home
-│   ├── default.nix
-│   ├── env.nix
-│   ├── fonts.nix
-│   ├── gaming.nix
-│   ├── git.nix
-│   ├── home.nix
-│   ├── hypr
+│   ├── apps
 │   │   ├── default.nix
-│   │   ├── hyprland.nix
-│   │   ├── packages.nix
-│   │   └── stylix.nix
-│   ├── keyboard.nix
-│   ├── packages.nix
-│   ├── shell
-│   │   ├── default.nix
-│   │   ├── fish.nix
+│   │   ├── gaming.nix
 │   │   ├── kitty.nix
-│   │   ├── pay-respects.nix
-│   │   ├── starship.nix
-│   │   ├── tmux.nix
-│   │   ├── zellij.nix
-│   │   └── zoxide.nix
-│   └── zen.nix
+│   │   ├── packages.nix
+│   │   └── zen.nix
+│   ├── default.nix
+│   ├── desktop
+│   │   ├── default.nix
+│   │   ├── fonts.nix
+│   │   ├── hypr
+│   │   │   ├── default.nix
+│   │   │   ├── hyprland.nix
+│   │   │   ├── packages.nix
+│   │   │   └── waybar.nix
+│   │   ├── quickshell
+│   │   └── stylix.nix
+│   ├── home.nix
+│   ├── nvf.nix
+│   └── shell
+│       ├── default.nix
+│       ├── fish.nix
+│       ├── git.nix
+│       ├── packages.nix
+│       ├── pay-respects.nix
+│       ├── starship.nix
+│       ├── tmux.nix
+│       ├── zellij.nix
+│       └── zoxide.nix
 ├── hosts
 │   ├── druss
-│   │   ├── default.nix
-│   │   └── hardware.nix
-│   ├── waylander
+│   │   ├── configuration.nix
 │   │   ├── default.nix
 │   │   ├── hardware.nix
-│   │   ├── kanata.nix
+│   ├── waylander
+│   │   ├── configuration.nix
+│   │   ├── default.nix
+│   │   └── hardware.nix
 │   └── wsl
 │       ├── configuration.nix
 │       └── default.nix
-├── nvf.nix
+├── options.nix
 ├── README.md
 ├── shells.nix
-├── system
-│   ├── amd-drivers.nix
-│   ├── boot.nix
-│   ├── default.nix
-│   ├── flatpak.nix
-│   ├── fonts.nix
-│   ├── gaming.nix
-│   ├── keyboard.nix
-│   ├── locale.nix
-│   ├── login.nix
-│   ├── network.nix
-│   ├── nix.nix
-│   ├── openrgb.nix
-│   ├── shell.nix
-│   ├── stylix.nix
-│   ├── systemVersion.nix
-│   ├── time.nix
-│   ├── user.nix
-│   └── wayland.nix
-└── variables.nix
+└── system
+    ├── default.nix
+    ├── desktop
+    │   ├── default.nix
+    │   ├── fonts.nix
+    │   ├── gaming.nix
+    │   ├── login.nix
+    │   ├── stylix.nix
+    │   └── wayland.nix
+    ├── hardware
+    │   ├── amd-drivers.nix
+    │   ├── boot.nix
+    │   ├── default.nix
+    │   ├── keyboard.nix
+    │   ├── openrgb.nix
+    │   └── time.nix
+    ├── laptop.nix
+    ├── locale.nix
+    ├── network.nix
+    ├── nix.nix
+    └── user.nix
 
-9 directories, 53 files
 ```
+
+
+## Reference
+
+- NVF : neovim config nix wrapper or something, it's really cool [github](https://github.com/NotAShelf/nvf), [manual](https://notashelf.github.io/nvf/index.xhtml).
+- [zen-browser](https://zen-browser.app) : really cool browser based on firefox by [github](https://github.com/zen-browser/desktop), [site](https://zen-browser.app). 
+- initial hyprland config : [JaKooLit's hyprland dotfiles](https://github.com/JaKooLit/Hyprland-Dots), i still lose some of this, i will soon write my hyprland config in nix
+- hyprland, https://hypr.land
+- initial nixos config : [JaKooLit's nixos config](https://github.com/JaKooLit/NixOS-Hyprland/tree/main), there's barely anything left from it, but it's a nice starting point, no home manager though
+
+
