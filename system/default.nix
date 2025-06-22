@@ -9,6 +9,7 @@
     ./network.nix
     ./nix.nix
     ./server
+    ./sops.nix
     ./user.nix
   ];
 

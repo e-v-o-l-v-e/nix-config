@@ -5,5 +5,6 @@
     ./home.nix
     ./nvf.nix
     ./shell
+    ./sops.nix
   ];
 }

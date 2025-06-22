@@ -27,6 +27,7 @@
       pciutils
       ripgrep
       ripgrep-all
+      sops
       starship
       tmux
       trashy
