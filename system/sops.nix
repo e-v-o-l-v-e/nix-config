@@ -1,4 +1,7 @@
 { inputs, username, ... }:
+let
+  server.sopsFile = ../secrets/server.yaml;
+in 
 {
   imports = [
     inputs.sops-nix.nixosModules.sops
@@ -15,6 +18,7 @@
     };
 
     secrets = {
+      domain-name = server;
     };
   };
 

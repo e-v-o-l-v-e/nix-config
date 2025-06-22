@@ -16,7 +16,8 @@ in {
   config = {
     server = {
       enable = true;
-      services.opencloud.enable = true;
+      services.opencloud.enable = false;
+      services.jellyfin.enable = true;
     };
 
     personal.enable = true;

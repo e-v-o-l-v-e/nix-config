@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, username, ... }:
 let
   listNvfTheme = lib.types.enum [ 
     "base16" "catppuccin" "dracula" "github" "gruvbox" 
@@ -110,9 +110,14 @@ in
 
     server = {
       enable = lib.mkEnableOption "Enable server modules";
+      configPath = lib.mkOption {
+        type = lib.types.str;
+        default = "/home/${username}/services-config";
+        description = "path to the server's services config dir, from /home/{username}";
+      };
       services = {
-        opencloud.enable = lib.mkEnableOption "Enable opencloud";
-        jellyfin.enable = true;
+        opencloud.enable = lib.mkEnableOption "Enable Opencloud";
+        jellyfin.enable = lib.mkEnableOption "Enable Jellyfin";
       };
     };
 

@@ -7,7 +7,7 @@
   ...
 }:
 let
-  extraGroups = [ "audio" "docker" "input" "inputs" "kvm" "libvirtd" "lp" "networkmanager" "scanner" "uinputs" "users" "video" "wheel" ];
+  extraGroups = [ "audio" "docker" "input" "inputs" "kvm" "libvirtd" "lp" "networkmanager" "scanner" "server" "uinputs" "users" "video" "wheel" ];
   cfg = config.soft.sops-nix;
 in
 {
