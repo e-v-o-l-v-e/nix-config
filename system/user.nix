@@ -29,6 +29,6 @@ in
 
   programs.fish.enable = true;
 
-  sops.secrets.evolve-password.neededForUsers = true;
+  sops.secrets."password-${hostname}".neededForUsers = true;
   users.mutableUsers = lib.mkIf cfg.enable (lib.mkForce false);
 }
