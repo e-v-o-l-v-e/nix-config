@@ -3,12 +3,11 @@ keys:
   - &evolve age18gl43fja78cy38dld5jvh7y7d3ylpzxlw5lgayhw563jy0z944ts0u20sv
   hosts:
   - &druss age1e2kjkwzrhwgayswkvaw86cgantjyvpa2k9kylmcu3fgkswnkagjqgpxl0z    
-  services:
-    - &github ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEZo8nPEvC4d/LZJXhRQVGPlJfKbZxBnppoMoQ0pYGeT elivanoa5@gmail.com
+  - &waylander age1udcvdr0cfgyxza5h0ew03tqf8hcpjps8v6l89nqmkavndh9j5v3sjus53m
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
     - age:
       - *evolve
       - *druss
-      - *github
+      - *waylander
