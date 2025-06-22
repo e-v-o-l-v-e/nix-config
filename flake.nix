@@ -1,7 +1,7 @@
 {
   description = "My confiiiiig";
 
-  outputs = inputs@{ self, nixpkgs, zen-browser, stylix, home-manager, nvf, ... }:
+  outputs = inputs@{ self, nixpkgs, zen-browser, stylix, home-manager, nvf, sops-nix, ... }:
     let
       username = "evolve";
       system = "x86_64-linux";
@@ -137,6 +137,11 @@
 
     nvf = {
       url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    sops-nix = {
+      url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

@@ -8,6 +8,7 @@
     ./locale.nix
     ./network.nix
     ./nix.nix
+    ./sops.nix
     ./user.nix
   ];
 

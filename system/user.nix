@@ -1,33 +1,34 @@
 {
   pkgs,
+  lib,
   username,
+  hostname,
+  config,
   ...
-}: {
+}:
+let
+  extraGroups = [ "audio" "docker" "input" "inputs" "kvm" "libvirtd" "lp" "networkmanager" "scanner" "uinputs" "users" "video" "wheel" ];
+  cfg = config.soft.sops-nix;
+in
+{
   users = {
-    mutableUsers = true;
     users.${username} = {
-      homeMode = "755";
       isNormalUser = true;
-      extraGroups = [
-        "audio"
-        "docker"
-        "input"
-        "inputs"
-        "kvm"
-        "libvirtd"
-        "lp"
-        "networkmanager"
-        "scanner"
-        "uinputs"
-        "users"
-        "video"
-        "wheel"
-      ];
+      homeMode = "755";
+      inherit extraGroups;
+      hashedPasswordFile = lib.mkIf cfg.enable (
+        builtins.getAttr "password-${hostname}" config.sops.secrets config.sops.secrets.defaultPassword
+      );
     };
-
     defaultUserShell = pkgs.fish;
   };
-  environment.shells = with pkgs; [fish bash];
+  environment.shells = with pkgs; [
+    fish
+    bash
+  ];
 
   programs.fish.enable = true;
+
+  sops.secrets.evolve-password.neededForUsers = true;
+  users.mutableUsers = lib.mkIf cfg.enable (lib.mkForce false);
 }

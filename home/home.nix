@@ -11,6 +11,8 @@
     inherit (config.keyboard) layout variant;
   };
 
+  services.ssh-agent.enable = true;
+
   home.sessionVariables = {
     EDITOR = "nvim";
     # nh flake path to use `nh os switch/test` without having to specify path
