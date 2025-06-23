@@ -3,7 +3,6 @@
 in {
   services.jellyfin = {
     inherit (cfg.services.jellyfin) enable;
-    group = "server";
     dataDir = "${cfg.configPath}/jellyfin";
   };
 

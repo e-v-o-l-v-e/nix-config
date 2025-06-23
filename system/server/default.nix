@@ -10,12 +10,13 @@ in
     ./radarr.nix
   ];
 
-  users.groups.server = lib.mkIf cfg.enable {
-    name = cfg.groupName;
-    gid = cfg.groupId;
+  users.groups."${cfg.mediaGroupName}" = lib.mkIf cfg.enable {
+    name = cfg.mediaGroupName;
+    gid = cfg.mediaGroupId;
     members = [
       username
       "jellyfin"
+      "radarr"
     ];
   };
 

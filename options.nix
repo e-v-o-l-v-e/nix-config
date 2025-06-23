@@ -125,15 +125,15 @@ in
         jellyfin.enable = lib.mkEnableOption "Enable Jellyfin";
         radarr.enable = lib.mkEnableOption "enable radarr";
       };
-      groupName = lib.mkOption {
+      mediaGroupName = lib.mkOption {
         type = lib.types.str;
-        default = "server";
-        description = "Nom du groupe auquel appartiendront tous les services";
+        default = "media";
+        description = "Nom du groupe auquel appartiendront les services media (arr stack, jellyfin etc)";
       };
-      groupId = lib.mkOption {
+      mediaGroupId = lib.mkOption {
         type = lib.types.int;
         default = 2000;
-        description = "Id du groupe auquel appartiendront tous les services";
+        description = "Id du groupe auquel appartiendront les services media (arr stack, jellyfin etc)";
       };
     };
 

@@ -5,7 +5,7 @@ in
 {
   services.radarr = {
     inherit (cfg.services.radarr) enable;
-    group = cfg.groupName;
+    group = cfg.mediaGroupName;
     dataDir = "${cfg.configPath}/radarr";
     settings = {
       update.mechanism = "external";
