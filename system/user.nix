@@ -18,9 +18,7 @@ in
       homeMode = "700";
       inherit extraGroups;
       home = "/home/${username}";
-      hashedPasswordFile = lib.mkIf cfg.enable (
-        builtins.getAttr "password-${hostname}" config.sops.secrets config.sops.secrets.defaultPassword
-      );
+      hashedPasswordFile = config.sops.secrets."password-${hostname}".path;
     };
     defaultUserShell = pkgs.fish;
   };
