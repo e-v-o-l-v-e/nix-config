@@ -111,6 +111,8 @@ in
 
     server = {
       enable = lib.mkEnableOption "Enable server modules";
+      
+      airvpn.enable = lib.mkEnableOption "Enable connection with airvpn through wireguard";
 
       services = {
         opencloud.enable = lib.mkEnableOption "Enable Opencloud";
