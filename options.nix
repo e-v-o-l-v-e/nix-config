@@ -1,17 +1,17 @@
 { lib, username, ... }:
 let
   listNvfTheme = lib.types.enum [ 
-    "base16" "catppuccin" "dracula" "github" "gruvbox" 
+    "base16" "catppuccin" "dracula" "github" "gruvbox"
     "mini-base16" "nord" "onedark" "oxocarbon" "rose-pine"
     "solarized" "solarized-osaka" "tokyonight"
   ];
 
   listNvfStyle = lib.types.enum [
     "dark" "darker" "cool" "deep"
-    "warm" "warmer" "latte"
-    # i may have forgotten something, 
+    "warm" "warmer" "latte" 
+    # i may have forgotten something,
     # know that latte is only for catppuccin
-  ]; 
+  ];
 in
 {
   options = {
@@ -110,26 +110,32 @@ in
 
     server = {
       enable = lib.mkEnableOption "Enable server modules";
+
+      services = {
+        opencloud.enable = lib.mkEnableOption "Enable Opencloud";
+        jellyfin.enable = lib.mkEnableOption "Enable Jellyfin";
+        radarr.enable = lib.mkEnableOption "enable radarr";
+        sonarr.enable = lib.mkEnableOption "enable sonarr";
+      };
+
       configPath = lib.mkOption {
         type = lib.types.str;
         default = "/services-config";
         description = "path to the server's services config dir, from /home/{username}";
       };
+
       dataPath = lib.mkOption {
         type = lib.types.str;
         default = "/data";
         description = "path to the data dir";
       };
-      services = {
-        opencloud.enable = lib.mkEnableOption "Enable Opencloud";
-        jellyfin.enable = lib.mkEnableOption "Enable Jellyfin";
-        radarr.enable = lib.mkEnableOption "enable radarr";
-      };
+
       mediaGroupName = lib.mkOption {
         type = lib.types.str;
         default = "media";
         description = "Nom du groupe auquel appartiendront les services media (arr stack, jellyfin etc)";
       };
+
       mediaGroupId = lib.mkOption {
         type = lib.types.int;
         default = 2000;

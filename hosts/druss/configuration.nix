@@ -15,10 +15,10 @@ let
 in {
   config = {
     server = {
-      enable = true;
-      services.opencloud.enable = false;
-      services.jellyfin.enable = true;
-      services.radarr.enable = true;
+      enable = false;
+      # services.jellyfin.enable = true;
+      # services.radarr.enable = true;
+      # services.sonarr.enable = true;
     };
 
     personal.enable = true;
