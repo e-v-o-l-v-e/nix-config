@@ -27,7 +27,7 @@ in {
       };
   };
 
-  security.pam.services.swaylock = {
+  security.pam.services.swaylock = lib.mkIf (!config.server.enable) {
     text = ''
       guth include login
     '';

@@ -69,6 +69,7 @@ in
       type = lib.types.enum [
         "greetd"
         "sddm"
+        null
       ];
       default = "greetd";
       description = "Which login manager to use";
