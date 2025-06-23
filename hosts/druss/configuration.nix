@@ -18,6 +18,7 @@ in {
       enable = true;
       services.opencloud.enable = false;
       services.jellyfin.enable = true;
+      services.radarr.enable = true;
     };
 
     personal.enable = true;

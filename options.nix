@@ -112,12 +112,28 @@ in
       enable = lib.mkEnableOption "Enable server modules";
       configPath = lib.mkOption {
         type = lib.types.str;
-        default = "/home/${username}/services-config";
+        default = "/services-config";
         description = "path to the server's services config dir, from /home/{username}";
+      };
+      dataPath = lib.mkOption {
+        type = lib.types.str;
+        default = "/data";
+        description = "path to the data dir";
       };
       services = {
         opencloud.enable = lib.mkEnableOption "Enable Opencloud";
         jellyfin.enable = lib.mkEnableOption "Enable Jellyfin";
+        radarr.enable = lib.mkEnableOption "enable radarr";
+      };
+      groupName = lib.mkOption {
+        type = lib.types.str;
+        default = "server";
+        description = "Nom du groupe auquel appartiendront tous les services";
+      };
+      groupId = lib.mkOption {
+        type = lib.types.int;
+        default = 2000;
+        description = "Id du groupe auquel appartiendront tous les services";
       };
     };
 

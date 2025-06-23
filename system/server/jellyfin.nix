@@ -1,9 +1,16 @@
 { config, ...}:let
-  confDir = config.server.configPath;
+  cfg = config.server;
 in {
   services.jellyfin = {
-    inherit (config.server.services.jellyfin) enable;
+    inherit (cfg.services.jellyfin) enable;
     group = "server";
-    configDir = "${confDir}/jellyfin";
+    dataDir = "${cfg.configPath}/jellyfin";
   };
+
+  # systemd.tmpfiles.rules = lib.mkIf cfg.enable [ 
+  #   "d ${cfg.configPath}/jellyfin 770 jellyfin - -" 
+  #   "Z ${cfg.configPath}/jellyfin 770 jellyfin - -" 
+  #   "d ${cfg.dataPath}/config/jellyfin 770 jellyfin - -" 
+  #   "Z ${cfg.dataPath}/jellyfin 770 jellyfin - -" 
+  # ];
 }
