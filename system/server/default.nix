@@ -8,6 +8,7 @@ in
     ./jellyfin.nix
     ./network.nix
     ./opencloud.nix
+    ./prowlarr.nix
     ./radarr.nix
     ./sonarr.nix
   ];

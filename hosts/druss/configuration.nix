@@ -15,7 +15,8 @@ let
 in {
   config = {
     server = {
-      enable = false;
+      enable = true;
+      services.prowlarr.enable = true;
     };
 
     personal.enable = true;

@@ -117,8 +117,9 @@ in
       services = {
         opencloud.enable = lib.mkEnableOption "Enable Opencloud";
         jellyfin.enable = lib.mkEnableOption "Enable Jellyfin";
-        radarr.enable = lib.mkEnableOption "enable radarr";
-        sonarr.enable = lib.mkEnableOption "enable sonarr";
+        prowlarr.enable = lib.mkEnableOption "Enable Prowlarr";
+        radarr.enable = lib.mkEnableOption "Enable Radarr";
+        sonarr.enable = lib.mkEnableOption "Enable Sonarr";
       };
 
       configPath = lib.mkOption {
