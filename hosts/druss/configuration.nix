@@ -16,10 +16,6 @@ in {
   config = {
     server = {
       enable = false;
-      airvpn = true;
-      # services.jellyfin.enable = true;
-      # services.radarr.enable = true;
-      # services.sonarr.enable = true;
     };
 
     personal.enable = true;

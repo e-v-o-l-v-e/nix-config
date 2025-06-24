@@ -1,6 +1,7 @@
 { inputs, username, ... }:
 let
   server.sopsFile = ../secrets/server.yaml;
+  common.sopsFile = ../secrets/common.yaml;
 in 
 {
   imports = [
@@ -19,6 +20,8 @@ in
 
     secrets = {
       domain-name = server;
+      "airvpn/private_key" = common;
+      "airvpn/preSharedKey" = common;
     };
   };
 

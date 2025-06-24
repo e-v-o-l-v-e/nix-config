@@ -6,6 +6,7 @@ in
   imports = [
     ./caddy.nix
     ./jellyfin.nix
+    ./network.nix
     ./opencloud.nix
     ./radarr.nix
     ./sonarr.nix

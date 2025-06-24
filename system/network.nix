@@ -12,6 +12,7 @@ in {
       "1.1.1.1"
       "1.0.0.1"
     ];
+    interfaces.eth0.wakeOnLan.enable = true;
   };
 
   services.openssh.enable = true;

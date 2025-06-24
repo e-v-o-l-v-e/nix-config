@@ -90,6 +90,4 @@ in
       magicOrExtension = ''\x7fELF....AI\x02'';
     };
   };
-
-  networking.interfaces.eth0.wakeOnLan.enable = perso;
 }
