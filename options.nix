@@ -115,13 +115,16 @@ in
       airvpn.enable = lib.mkEnableOption "Enable connection with airvpn through wireguard";
 
       services = {
-        opencloud.enable = lib.mkEnableOption "Enable Opencloud";
         jellyfin.enable = lib.mkEnableOption "Enable Jellyfin";
+        jellyseerr.enable = lib.mkEnableOption "Enable Jellyseerr";
+
         prowlarr.enable = lib.mkEnableOption "Enable Prowlarr";
         radarr.enable = lib.mkEnableOption "Enable Radarr";
         sonarr.enable = lib.mkEnableOption "Enable Sonarr";
         readarr.enable = lib.mkEnableOption "Enable Readarr";
         lidarr.enable = lib.mkEnableOption "Enable Lidarr";
+
+        opencloud.enable = lib.mkEnableOption "Enable Opencloud";
       };
 
       configPath = lib.mkOption {

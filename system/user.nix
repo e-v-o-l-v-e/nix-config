@@ -1,14 +1,17 @@
 {
   pkgs,
-  lib,
   username,
   hostname,
   config,
   ...
 }:
 let
-  extraGroups = [ "audio" "docker" "input" "inputs" "kvm" "libvirtd" "lp" "networkmanager" "scanner" "server" "uinputs" "users" "video" "wheel" ];
-  cfg = config.soft.sops-nix;
+  extraGroups = [ 
+    "audio" "docker" "input" "inputs"
+    "kvm" "libvirtd" "lp" "networkmanager"
+    "scanner" "uinputs" "users" "video" "wheel"
+    config.server.mediaGroupName
+  ];
 in
 {
   users = {
