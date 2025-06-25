@@ -120,6 +120,8 @@ in
         prowlarr.enable = lib.mkEnableOption "Enable Prowlarr";
         radarr.enable = lib.mkEnableOption "Enable Radarr";
         sonarr.enable = lib.mkEnableOption "Enable Sonarr";
+        readarr.enable = lib.mkEnableOption "Enable Readarr";
+        lidarr.enable = lib.mkEnableOption "Enable Lidarr";
       };
 
       configPath = lib.mkOption {

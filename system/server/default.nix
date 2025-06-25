@@ -6,10 +6,12 @@ in
   imports = [
     ./caddy.nix
     ./jellyfin.nix
+    ./lidarr.nix
     ./network.nix
     ./opencloud.nix
     ./prowlarr.nix
     ./radarr.nix
+    ./readarr.nix
     ./sonarr.nix
   ];
 

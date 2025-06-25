@@ -17,6 +17,10 @@ in {
     server = {
       enable = true;
       services.prowlarr.enable = true;
+      # services.readarr.enable = true;
+      # services.radarr.enable = true;
+      # services.sonarr.enable = true;
+      services.lidarr.enable = true;
     };
 
     personal.enable = true;
