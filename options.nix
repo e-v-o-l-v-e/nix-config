@@ -31,6 +31,11 @@ in
     personal.enable = lib.mkEnableOption "Whether this is a personal device";
     laptop.enable = lib.mkEnableOption "Enable laptop related modules, battery management, brightness keys etc";
 
+    networking = {
+      wol.enable = lib.mkEnableOption "Enable wake on lan on eth0";
+      tailscale.enable = lib.mkEnableOption "Enable tailscale";
+    };
+
     gui = {
       enable = lib.mkEnableOption "Enable GUI (DE, compositor, etc)";
 

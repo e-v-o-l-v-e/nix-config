@@ -44,5 +44,10 @@ in {
     };
 
     login-manager = "sddm";
+
+    networking = {
+      tailscale.enable = true;
+      wol.enable = true;
+    };
   };
 }

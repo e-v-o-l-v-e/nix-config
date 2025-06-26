@@ -1,10 +1,14 @@
 {
   hostname,
   config,
+  lib,
   ...
-}:let
-  cfg = config.personal;
-in {
+}:
+let
+  perso = config.personal.enable;
+  cfg = config.networking;
+in
+{
   networking = {
     hostName = hostname;
     networkmanager.enable = true;
@@ -12,12 +16,14 @@ in {
       "1.1.1.1"
       "1.0.0.1"
     ];
-    interfaces.eth0.wakeOnLan.enable = true;
+    interfaces = lib.mkIf cfg.wol.enable {
+      eth0.wakeOnLan.enable = true;
+    };
   };
 
   services.openssh.enable = true;
-  services.tailscale.enable = true;
+  services.tailscale.enable = cfg.tailscale.enable;
 
-  programs.localsend.enable = cfg.enable;
-  hardware.bluetooth.enable = cfg.enable;
+  programs.localsend.enable = perso;
+  hardware.bluetooth.enable = perso;
 }

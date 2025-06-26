@@ -13,6 +13,11 @@
       services.sonarr.enable = true;
     };
 
+    networking = {
+      wol.enable = true;
+      tailscale.enable = true;
+    };
+
     soft.nvf.enable = true;
 
     login-manager = null;

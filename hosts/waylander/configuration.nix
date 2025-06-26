@@ -24,6 +24,10 @@ in {
       nvf.enable = true;
     };
 
+    networking = {
+      tailscale.enable = true;
+    };
+
     gui = {
       enable = true;
       theme = "light";
