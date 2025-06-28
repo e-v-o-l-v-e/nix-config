@@ -1,4 +1,9 @@
-{ username, config, lib, ... }:
+{
+  username,
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.server;
 in
@@ -25,6 +30,19 @@ in
       "radarr"
       "sonarr"
       "lidarr"
+    ];
+  };
+
+  users.groups.server = {
+    name = "server";
+    gid = 1001;
+    members = [
+      username
+      "jellyfin"
+      "radarr"
+      "sonarr"
+      "lidarr"
+      "opencloud"
     ];
   };
 
