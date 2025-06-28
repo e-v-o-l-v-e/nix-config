@@ -15,7 +15,9 @@ let
 in {
   config = {
     server = {
-      # enable = true;
+      enable = true;
+      services.caddy.enable = true;
+      services.opencloud.enable = true;
       # services.jellyfin.enable = true;
       # services.prowlarr.enable = true;
       # services.radarr.enable = true;

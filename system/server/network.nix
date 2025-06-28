@@ -15,8 +15,7 @@ let
   addressv6 = "fd7d:76ee:e68f:a993:8a1a:ff5d:d8f0:ecea/128";
 in
 {
-
-  networking.firewall.allowedUDPPorts = lib.optionals cfg.enable [
+  networking.firewall.allowedTCPPorts = lib.optionals config.server.enable [
     80
     443
   ];

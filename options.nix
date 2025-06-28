@@ -115,6 +115,9 @@ in
       airvpn.enable = lib.mkEnableOption "Enable connection with airvpn through wireguard";
 
       services = {
+      
+        caddy.enable = lib.mkEnableOption "Enable Caddy reverse proxy";
+
         jellyfin.enable = lib.mkEnableOption "Enable Jellyfin";
         jellyseerr.enable = lib.mkEnableOption "Enable Jellyseerr";
 

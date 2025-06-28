@@ -1,5 +1,5 @@
 {config, ...}: let
-  cfg = config.server;
+  cfg = config.server.services.caddy;
 in {
   services.caddy = {
     inherit (cfg) enable;
@@ -7,7 +7,7 @@ in {
       "test.cloud.imp-network.com" = {
         # serverAliases = [ "www.hydra.example.com" ];
         extraConfig = ''
-          reverse_proxy https://localhost:8100
+          reverse_proxy http://localhost:8100
         '';
       };
       "test.imp-network.com" = {
