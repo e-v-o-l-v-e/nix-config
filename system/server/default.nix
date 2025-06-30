@@ -13,6 +13,7 @@ in
     ./jellyfin.nix
     ./jellyseerr.nix
     ./lidarr.nix
+    ./local-content-share.nix
     ./network.nix
     ./opencloud.nix
     ./prowlarr.nix

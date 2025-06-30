@@ -36,10 +36,6 @@
               ;
           };
           modules = [
-            {
-              environment.systemPackages = [ inputs.local-content-share.packages.x86_64-linux.local-content-share ];
-            }
-
             ./options.nix
             ./hosts/${hostname}
             ./system
@@ -190,6 +186,5 @@
       url = "github:e-v-o-l-v-e/local-content-share";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 }
