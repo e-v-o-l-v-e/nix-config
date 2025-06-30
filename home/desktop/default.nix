@@ -2,7 +2,7 @@
   imports = [
     ./hypr
     ./fonts.nix
-    # ./quickshell
+    ./quickshell
     ./stylix.nix
   ];
 }

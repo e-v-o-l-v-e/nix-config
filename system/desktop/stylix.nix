@@ -15,7 +15,4 @@ in
   };
 
   # environment.systemPackages = lib.optional cfg.enable pkgs.base16-schemes;
-
-  # enable boot loading styling
-  boot.plymouth.enable = cfg.enable;
 }

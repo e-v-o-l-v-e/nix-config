@@ -7,25 +7,31 @@
 let
   inherit (config.hardware) gpu;
   perso = config.personal.enable;
-in 
+in
 {
   # boot = lib.mkIf (hostname != "wsl") {
   boot = {
     kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
     #kernelPackages = pkgs.linuxPackages_latest; #linux Kernel
 
-    kernelParams = [
+    kernelParams =
+      [
         "systemd.mask=systemd-vconsole-setup.service"
         "systemd.mask=dev-tpmrm0.device" # this is to mask that stupid 1.5 mins systemd bug
         "nowatchdog"
         "modprobe.blacklist=sp5100_tco" # watchdog for AMD
-      ] ++ lib.optionals perso [
-        "splash"
-        "quiet"
-        "boot.shell_on_fail"
-        "rd.systemd.show_status=auto"
-        "udev.log_priority=3"
-      ];
+      ]
+      ++ lib.optionals perso
+        [
+          "splash"
+          "quiet"
+          "boot.shell_on_fail"
+          "rd.systemd.show_status=auto"
+          "udev.log_priority=3"
+        ];
+
+    # enable boot loading styling
+    plymouth.enable = config.gui.stylix.enable;
 
     # This is for OBS Virtual Cam Support
     #kernelModules = [ "v4l2loopback" ];
@@ -43,7 +49,7 @@ in
       kernelModules = lib.optional (gpu == "amd") "amdgpu";
       verbose = !perso;
     };
-    consoleLogLevel = lib.mkIf perso 3;
+    consoleLogLevel = 4; # lib.mkIf perso 3;
 
     # Needed For Some Steam Games
     kernel.sysctl = lib.mkIf config.programs.steam.enable {

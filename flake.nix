@@ -1,7 +1,17 @@
 {
   description = "My confiiiiig";
 
-  outputs = inputs@{ self, nixpkgs, zen-browser, stylix, home-manager, nvf, sops-nix, ... }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      zen-browser,
+      stylix,
+      home-manager,
+      nvf,
+      sops-nix,
+      ...
+    }:
     let
       username = "evolve";
       system = "x86_64-linux";
@@ -26,6 +36,10 @@
               ;
           };
           modules = [
+            {
+              environment.systemPackages = [ inputs.local-content-share.packages.x86_64-linux.local-content-share ];
+            }
+
             ./options.nix
             ./hosts/${hostname}
             ./system
@@ -62,7 +76,9 @@
           ];
         };
 
-      mkHomeConfig = hostname: username: home-manager.lib.homeManagerConfiguration {
+      mkHomeConfig =
+        hostname: username:
+        home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
             stylix.homeModules.stylix
@@ -74,7 +90,12 @@
             ./home
           ];
           extraSpecialArgs = {
-            inherit inputs self hostname username;
+            inherit
+              inputs
+              self
+              hostname
+              username
+              ;
             config.homeManagerOnly = true;
           };
         };
@@ -165,5 +186,10 @@
       url = "github:aylur/astal";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    local-content-share = {
+      url = "github:e-v-o-l-v-e/local-content-share";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 }
