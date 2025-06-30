@@ -1,6 +1,6 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 {
-  home.packages = with pkgs; [
+  home.packages = lib.optional config.homeManagerOnly (with pkgs; [
     carlito
     noto-fonts
     fira-code
@@ -11,7 +11,7 @@
     jetbrains-mono
     font-awesome
     fira
-  ];
+  ]);
 
   fonts.fontconfig = {
     enable = lib.mkForce false;
