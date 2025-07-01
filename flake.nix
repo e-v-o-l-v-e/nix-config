@@ -5,11 +5,7 @@
     inputs@{
       self,
       nixpkgs,
-      zen-browser,
-      stylix,
       home-manager,
-      nvf,
-      sops-nix,
       ...
     }:
     let
@@ -28,12 +24,7 @@
         nixpkgs.lib.nixosSystem {
           inherit system pkgs;
           specialArgs = {
-            inherit
-              hostname
-              username
-              self
-              inputs
-              ;
+            inherit hostname username self inputs;
           };
           modules = [
             ./options.nix
@@ -47,8 +38,8 @@
               home-manager = {
                 users.${username} = {
                   imports = [
-                    zen-browser.homeModules.twilight
-                    nvf.homeManagerModules.default
+                    inputs.zen-browser.homeModules.twilight
+                    inputs.nvf.homeManagerModules.default
 
                     ./options.nix
                     ./hosts/${hostname}/configuration.nix
@@ -56,13 +47,7 @@
                   ];
                 };
                 extraSpecialArgs = {
-                  inherit
-                    inputs
-                    self
-                    hostname
-                    username
-                    system
-                    ;
+                  inherit inputs self hostname username system;
                 };
                 useGlobalPkgs = true;
                 useUserPackages = true;
@@ -77,21 +62,16 @@
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
-            stylix.homeModules.stylix
-            zen-browser.homeModules.twilight
-            nvf.homeManagerModules.default
+            inputs.stylix.homeModules.stylix
+            inputs.zen-browser.homeModules.twilight
+            inputs.nvf.homeManagerModules.default
 
             ./options.nix
             ./hosts/${hostname}/configuration.nix
             ./home
           ];
           extraSpecialArgs = {
-            inherit
-              inputs
-              self
-              hostname
-              username
-              ;
+            inherit inputs self hostname username;
             config.homeManagerOnly = true;
           };
         };
@@ -112,29 +92,6 @@
         delnoch = mkHomeConfig "delnoch" username;
         # wsl = mkHomeConfig "wsl";
       };
-
-      # package Neovim config (nvf)
-      # packages.x86_64-linux = {
-      #   nvf-max =
-      #     let
-      #       maxConfig = import ./nvf.nix true;
-      #     in
-      #     (nvf.lib.neovimConfiguration {
-      #       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      #       modules = [ maxConfig ];
-      #     }).neovim;
-      #
-      #   nvf-min =
-      #     let
-      #       minConfig = import ./nvf.nix false;
-      #     in
-      #     (nvf.lib.neovimConfiguration {
-      #       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      #       modules = [ minConfig ];
-      #     }).neovim;
-      #   # set nvf minimal config as default package
-      #   default = self.packages.x86_64-linux.nvf-max;
-      # };
 
       # import shells
       devShells.${system} = import ./shells.nix { inherit pkgs; };
@@ -182,6 +139,7 @@
       url = "github:aylur/astal";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     local-content-share = {
       url = "github:e-v-o-l-v-e/local-content-share";
       inputs.nixpkgs.follows = "nixpkgs";
