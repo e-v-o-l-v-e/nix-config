@@ -5,6 +5,7 @@
     inputs@{
       self,
       nixpkgs,
+      nixpkgs-local,
       home-manager,
       ...
     }:
@@ -13,6 +14,13 @@
       system = "x86_64-linux";
 
       pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+
+      upkgs = import nixpkgs-local {
         inherit system;
         config = {
           allowUnfree = true;
@@ -57,6 +65,44 @@
           ];
         };
 
+      mkSystemConfigTest =
+        hostname: username:
+        nixpkgs-local.lib.nixosSystem {
+          inherit system;
+          pkgs = upkgs;
+          specialArgs = {
+            inherit hostname username self inputs;
+          };
+          modules = [
+            ./options.nix
+            ./hosts/${hostname}
+            ./system
+
+            inputs.stylix.nixosModules.stylix
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                users.${username} = {
+                  imports = [
+                    inputs.zen-browser.homeModules.twilight
+                    inputs.nvf.homeManagerModules.default
+
+                    ./options.nix
+                    ./hosts/${hostname}/configuration.nix
+                    ./home
+                  ];
+                };
+                extraSpecialArgs = {
+                  inherit inputs self hostname username system;
+                };
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "";
+              };
+            }
+          ];
+        };
       mkHomeConfig =
         hostname: username:
         home-manager.lib.homeManagerConfiguration {
@@ -83,6 +129,8 @@
         druss = mkSystemConfig "druss" username;
         delnoch = mkSystemConfig "delnoch" username;
         # wsl = mkSystemConfig "wsl";
+
+        test = mkSystemConfigTest "test" username;
       };
 
       # HOME-MANAGER CONFIGURATIONS.
@@ -99,6 +147,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-local.url = "git+file:///home/evolve/Code/nixpkgs";
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";

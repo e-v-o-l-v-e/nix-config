@@ -43,7 +43,8 @@ in {
       }
       // getPwd "password-druss" druss
       // getPwd "password-waylander" waylander
-      // getPwd "password-delnoch" delnoch;
+      // getPwd "password-delnoch" delnoch
+      // getPwd "password-test" common;
   };
 
   users.users.${username}.openssh.authorizedKeys.keys = [

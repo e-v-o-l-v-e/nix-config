@@ -3,7 +3,10 @@
 #   cfg = config.services.local-content-share;
 # in
 {
-  imports = [ ../../custom/modules/local-content-share.nix ];
+  # imports = [ ../../custom/modules/local-content-share.nix ];
 
-  services.local-content-share.enable = true;
+  # services.local-content-share = {
+  #   enable = true;
+  #   port = 8081;
+  # };
 }
