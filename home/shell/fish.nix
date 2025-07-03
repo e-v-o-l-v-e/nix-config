@@ -23,13 +23,13 @@ _:
       g = "git";
       gs = "git status -s";
       gss = "git status";
-      sw = "git switch";
-      br = "git branch";
-      cm = "git commit -m \"";
-      rb = "git rebase";
-      ph = "git push";
       pl = "git pull";
-      me = "git merge";
+      ph = "git push";
+      sw = "git switch";
+      gm = "git merge";
+      br = "git branch";
+      gcm = "git commit -m \"";
+      grb = "git rebase";
 
       # nix
       nr = "nix run nixpkgs#";
