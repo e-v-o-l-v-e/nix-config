@@ -1,8 +1,6 @@
-{config, ...}: let
-  cfg = config.server.services.caddy;
-in {
+{config, ...}:
+{
   services.caddy = {
-    inherit (cfg) enable;
     virtualHosts = {
       "test.cloud.imp-network.com" = {
         # serverAliases = [ "www.hydra.example.com" ];

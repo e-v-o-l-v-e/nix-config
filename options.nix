@@ -21,14 +21,8 @@ in
       description = "NixOS first installation's system version";
     };
 
-    # from /home/{username}
-    flakePath = lib.mkOption {
-      type = lib.types.str;
-      default = "nix-config";
-      description = "path to the flake directory from /home/{username}";
-    };
 
-    personal.enable = lib.mkEnableOption "Whether this is a personal device";
+    personal.enable = lib.mkEnableOption "Whether this is a personal device, enable vesktop, jellyfin media player etc";
     laptop.enable = lib.mkEnableOption "Enable laptop related modules, battery management, brightness keys etc";
 
     networking = {
@@ -70,33 +64,6 @@ in
       full = lib.mkEnableOption "Enable full gaming stack (e.g. Heroic)";
     };
 
-    login-manager = lib.mkOption {
-      type = lib.types.enum [
-        "greetd"
-        "sddm"
-        null
-      ];
-      default = "greetd";
-      description = "Which login manager to use";
-    };
-
-    hardware = {
-      keyboard = {
-        layout = lib.mkOption {
-          type = lib.types.str;
-          default = "gb";
-          description = "Keyboard layout";
-        };
-        variant = lib.mkOption {
-          type = lib.types.str;
-          default = "extd";
-          description = "Keyboard layout variant";
-        };
-
-        kanata = {
-          enable = lib.mkEnableOption "Enable kanata for remapping, evolve's home-row config";
-        };
-      };
 
       timeZone = lib.mkOption {
         type = lib.types.str;
@@ -114,56 +81,7 @@ in
       };
     };
 
-    server = {
-      enable = lib.mkEnableOption "Enable server modules";
-      
-      airvpn.enable = lib.mkEnableOption "Enable connection with airvpn through wireguard";
-
-      services = {
-      
-        caddy.enable = lib.mkEnableOption "Enable Caddy reverse proxy";
-
-        jellyfin.enable = lib.mkEnableOption "Enable Jellyfin";
-        jellyseerr.enable = lib.mkEnableOption "Enable Jellyseerr";
-
-        prowlarr.enable = lib.mkEnableOption "Enable Prowlarr";
-        radarr.enable = lib.mkEnableOption "Enable Radarr";
-        sonarr.enable = lib.mkEnableOption "Enable Sonarr";
-        readarr.enable = lib.mkEnableOption "Enable Readarr";
-        lidarr.enable = lib.mkEnableOption "Enable Lidarr";
-
-        opencloud.enable = lib.mkEnableOption "Enable Opencloud";
-      };
-
-      configPath = lib.mkOption {
-        type = lib.types.str;
-        default = "/services-config";
-        description = "path to the server's services config dir, from /home/{username}";
-      };
-
-      dataPath = lib.mkOption {
-        type = lib.types.str;
-        default = "/data";
-        description = "path to the data dir";
-      };
-
-      mediaGroupName = lib.mkOption {
-        type = lib.types.str;
-        default = "media";
-        description = "Nom du groupe auquel appartiendront les services media (arr stack, jellyfin etc)";
-      };
-
-      mediaGroupId = lib.mkOption {
-        type = lib.types.int;
-        default = 2000;
-        description = "Id du groupe auquel appartiendront les services media (arr stack, jellyfin etc)";
-      };
-    };
-
     soft = {
-      zen.enable = lib.mkEnableOption "Enable Zen browser";
-      sops-nix.enable = lib.mkEnableOption "Enable secrets management with sops-nix";
-
       nvf = {
         enable = lib.mkOption {
           type = lib.types.bool;
@@ -203,7 +121,5 @@ in
         };
       };
     };
-    # not usefull right now
-    homeManagerOnly = lib.mkEnableOption "For standalone home-manager";
   };
 }

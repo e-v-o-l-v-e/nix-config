@@ -1,5 +1,6 @@
-{ inputs, username, ... }:
+{ inputs, username, lib, config, ... }:
 let
+  cfg = config.sops-nix;
   sshkeydir = "/home/${username}/.ssh/keys";
 in 
 {
@@ -7,7 +8,7 @@ in
     inputs.sops-nix.homeManagerModules.sops
   ];
 
-  sops = {
+  config.sops = cfg.enable {
     age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
     defaultSopsFile = ../secrets/common.yaml;
     validateSopsFiles = false;
@@ -21,4 +22,6 @@ in
       };
     };
   };
+  
+  options.sops-nix.enable = lib.mkEnableOption "Enable secrets management with sops-nix";
 }

@@ -22,30 +22,58 @@ in
     ./sonarr.nix
   ];
 
-  users.groups."${cfg.mediaGroupName}" = lib.mkIf cfg.enable {
-    name = cfg.mediaGroupName;
-    gid = cfg.mediaGroupId;
-    members = [
-      username
-      "jellyfin"
-      "radarr"
-      "sonarr"
-      "lidarr"
-    ];
+  config = {
+    users.groups."${cfg.mediaGroupName}" = lib.mkIf cfg.enable {
+      name = cfg.mediaGroupName;
+      gid = cfg.mediaGroupId;
+      members = [
+        username
+        "jellyfin"
+        "radarr"
+        "sonarr"
+        "lidarr"
+      ];
+    };
+
+    users.groups.server = {
+      name = "server";
+      gid = 1001;
+      members = [
+        username
+        "jellyfin"
+        "radarr"
+        "sonarr"
+        "lidarr"
+        "opencloud"
+      ];
+    };
+
+    users.users.${username}.linger = cfg.enable;
   };
 
-  users.groups.server = {
-    name = "server";
-    gid = 1001;
-    members = [
-      username
-      "jellyfin"
-      "radarr"
-      "sonarr"
-      "lidarr"
-      "opencloud"
-    ];
-  };
+  options = {
+    configPath = lib.mkOption {
+      type = lib.types.str;
+      default = "/services-config";
+      description = "path to the server's services config dir";
+    };
 
-  users.users.${username}.linger = cfg.enable;
+    dataPath = lib.mkOption {
+      type = lib.types.str;
+      default = "/data";
+      description = "path to the data dir";
+    };
+
+    mediaGroupName = lib.mkOption {
+      type = lib.types.str;
+      default = "media";
+      description = "Nom du groupe auquel appartiendront les services media (arr stack, jellyfin etc)";
+    };
+
+    mediaGroupId = lib.mkOption {
+      type = lib.types.int;
+      default = 2000;
+      description = "Id du groupe auquel appartiendront les services media (arr stack, jellyfin etc)";
+    };
+  };
 }

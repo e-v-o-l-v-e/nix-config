@@ -1,8 +1,6 @@
 { inputs, config, username, ... }:
 {
   # nix settings, nh, garbage cleaning
-  system.stateVersion = config.system-version;
-
   programs.nh = {
     enable = true;
     clean.enable = true;

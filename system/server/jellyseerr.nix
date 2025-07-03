@@ -5,7 +5,6 @@ let
 in
 {
   services.jellyseerr = {
-    inherit (cfg.services.jellyseerr) enable;
     port = 5055;
     inherit configDir;
   };

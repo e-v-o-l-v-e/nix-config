@@ -1,9 +1,8 @@
-{config, ...}: 
+{ config, ... }:
 let
-  cfg = config.hardware.keyboard;
-in {
-  console.keyMap = "uk";
-
+  cfg = config.home.keyboard;
+in
+{
   services.xserver = {
     enable = true;
     xkb = {
@@ -11,8 +10,9 @@ in {
     };
   };
 
+  console.keyMap = if (cfg.layout == "gb") then "uk" else cfg.layout;
+
   services.kanata = {
-    inherit (cfg.kanata) enable;
     keyboards = {
       internalKeyboard = {
         devices = [

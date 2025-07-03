@@ -1,12 +1,12 @@
 {
   hostname,
   config,
-  lib,
+  username,
   ...
 }:
 let
   perso = config.personal.enable;
-  cfg = config.networking;
+  secretsDir = ../secrets;
 in
 {
   networking = {
@@ -16,14 +16,18 @@ in
       "1.1.1.1"
       "1.0.0.1"
     ];
-    interfaces = lib.mkIf cfg.wol.enable {
-      eth0.wakeOnLan.enable = true;
-    };
   };
 
   services.openssh.enable = true;
-  services.tailscale.enable = cfg.tailscale.enable;
+
+  users.users.${username}.openssh.authorizedKeys.keys = [
+    (builtins.readFile "${secretsDir}/public_keys/github.pub")
+    (builtins.readFile "${secretsDir}/public_keys/git_unistra.pub")
+  ];
 
   programs.localsend.enable = perso;
-  hardware.bluetooth.enable = perso;
+
+  # defined in host/${hostname}/configuration.nix
+  services.tailscale = {};
+  hardware.bluetooth.enable = {};
 }

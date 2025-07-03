@@ -2,15 +2,13 @@
 # https://notashelf.github.io/nvf/options.html
 { config, username, lib, ... }:
 let
-  cfg = config.soft.nvf;
-  inherit (cfg) max;
+  inherit (config.nvf) max;
   light = config.gui.theme == "light";
   name = if light then cfg.theme.light.name else cfg.theme.dark.name;
   style = if light then cfg.theme.light.style else cfg.theme.dark.style;
 in
 {
   programs.nvf = {
-    inherit (cfg) enable;
     settings.vim = {
       viAlias = true;
       vimAlias = false;

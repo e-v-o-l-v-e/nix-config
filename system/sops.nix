@@ -1,13 +1,14 @@
-{ inputs, username, ... }:
-
+{ inputs, username, config, lib, ... }:
 let
+  cfg = config.sops-nix;
+
   # Define each sops file path
   secretsDir = ../secrets;
 
   common.sopsFile = "${secretsDir}/common.yaml";
-
   server.sopsFile = "${secretsDir}/server.yaml";
 
+  # specific host
   druss.sopsFile = "${secretsDir}/druss.yaml";
   waylander.sopsFile = "${secretsDir}/waylander.yaml";
   delnoch.sopsFile = "${secretsDir}/delnoch.yaml";
@@ -20,13 +21,14 @@ let
     };
   };
 
-in {
+in 
+{
   imports = [
     inputs.sops-nix.nixosModules.sops
   ];
 
-  sops = {
-    defaultSopsFile = "${secretsDir}/common.yaml";
+  sops = lib.mkIf cfg.enable {
+    defaultSopsFile = common.sopsFile;
     validateSopsFiles = false;
 
     age = {
@@ -46,10 +48,5 @@ in {
       // getPwd "password-delnoch" delnoch
       // getPwd "password-test" common;
   };
-
-  users.users.${username}.openssh.authorizedKeys.keys = [
-    (builtins.readFile "${secretsDir}/public_keys/github.pub")
-    (builtins.readFile "${secretsDir}/public_keys/git_unistra.pub")
-  ];
 }
 
