@@ -6,7 +6,7 @@
   ...
 }:
 let
-  cfg = config.gui.quickshell.caelestia;
+  cfg = config.gui.quickshell;
 in
 {
   imports = [
