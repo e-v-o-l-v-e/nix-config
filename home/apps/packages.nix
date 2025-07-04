@@ -39,10 +39,4 @@
       element-desktop.enable = config.personal.enable && config.gui.packages.enable;
     };
   };
-
-  options = {
-    personal.enable = lib.mkEnableOption "Whether this is a personal device, enable vesktop, libreOffice etc";
-
-    gui.packages.enable = lib.mkEnableOption "Enable packages that needs a gui";
-  };
 }

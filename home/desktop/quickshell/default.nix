@@ -99,7 +99,7 @@ in
     ];
 
     # Systemd service
-    systemd.user.services.caelestia-shell = {
+    systemd.user.services.caelestia-shell = lib.mkIf cfg.caelestia {
       Unit = {
         Description = "Caelestia desktop shell";
         After = [ "graphical-session.target" ];
@@ -120,13 +120,6 @@ in
       caelestia-shell = "qs -c caelestia";
       caelestia-edit = "cd ${config.xdg.configHome}/quickshell/caelestia && $EDITOR";
       caelestia = "caelestia-quickshell";
-    };
-  };
-
-  options = {
-    gui.quickshell = {
-      enable = lib.mkEnableOption "Enable QuickShell";
-      caelestia.enable = lib.mkEnableOption "Use Caelestia config for QuickShell";
     };
   };
 }

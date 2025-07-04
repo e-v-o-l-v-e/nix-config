@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 {
   imports = [
     ./hypr
@@ -6,16 +6,4 @@
     ./quickshell
     ./stylix.nix
   ];
-
-  options = {
-    gui = {
-      theme = lib.mkOption {
-        type = lib.types.enum [
-          "dark"
-          "light"
-        ];
-        default = "light";
-      };
-    };
-  };
 }

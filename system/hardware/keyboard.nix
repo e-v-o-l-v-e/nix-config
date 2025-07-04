@@ -1,16 +1,13 @@
 { config, ... }:
-let
-  cfg = config.home.keyboard;
-in
 {
-  services.xserver = {
-    enable = true;
-    xkb = {
-      inherit (cfg) layout variant;
-    };
-  };
+  # services.xserver = {
+  #   enable = true;
+  #   xkb = {
+  #     inherit (config) keyboard;
+  #   };
+  # };
 
-  console.keyMap = if (cfg.layout == "gb") then "uk" else cfg.layout;
+  console.keyMap = if (config.keyboard.layout == "gb") then "uk" else config.keyboard.layout;
 
   services.kanata = {
     keyboards = {

@@ -35,6 +35,7 @@
             inherit hostname username self inputs;
           };
           modules = [
+            ./options.nix
             ./hosts/${hostname}
             ./system
 
@@ -48,6 +49,7 @@
                     inputs.zen-browser.homeModules.twilight
                     inputs.nvf.homeManagerModules.default
 
+                    ./options.nix
                     ./hosts/${hostname}/configuration.nix
                     ./home
                   ];
@@ -72,6 +74,7 @@
             inherit hostname username self inputs;
           };
           modules = [
+            ./options.nix
             ./hosts/${hostname}
             ./system
 
@@ -85,6 +88,7 @@
                     inputs.zen-browser.homeModules.twilight
                     inputs.nvf.homeManagerModules.default
 
+                    ./options.nix
                     ./hosts/${hostname}/configuration.nix
                     ./home
                   ];
