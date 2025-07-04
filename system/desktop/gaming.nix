@@ -1,14 +1,9 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ config, pkgs, lib, ... }:
 let
   cfg = config.gaming;
 in
 {
-  programs = {
+  config.programs = {
     steam = {
       inherit (cfg) enable;
       gamescopeSession.enable = cfg.full;
@@ -35,5 +30,10 @@ in
     };
   };
 
-  environment.systemPackages = lib.optionals cfg.full [ pkgs.mangohud ];
+  options = {
+    gaming = {
+      enable = lib.mkEnableOption "Enable basic gaming support";
+      full = lib.mkEnableOption "Enable full gaming stack (e.g. Heroic, gamescope etc)";
+    };
+  };
 }

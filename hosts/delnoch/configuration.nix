@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 # this is where the per host configuration happens
 # all options and their default values are set in ./options.nix
 
@@ -7,26 +7,49 @@
 {
   config = {
     
-    #=== HOME ===#
-    programs.nvf.enable = true;
-    programs.zen.enable = false;
+    #=#=#=# HOME #=#=#=#
+
+    personal.enable = lib.mkEnableOption "Whether this is a personal device, enable vesktop, jellyfin media player etc";
 
     home.keyboard = {
       layout = "gb";
       variant = "extd";
     };
 
+    # Apps #
+    programs.nvf.enable = true;
+    programs.nvf.maxConfig = true;
+
+    programs.zen.enable = false;
+
+    gui.packages.enable = false;
+
+    # Theming #
+    gui.theme = "light";
+
+    gui.quickshell.enable = false;
+    gui.quickshell.caelestia = false;
+
+    programs.stylix.enable = false;
+    programs.stylix.colorScheme = "one-light";
+
     # home-manager version at the time of first install, do not change
     home.stateVersion = "25.05";
 
-    #=== SYSTEM ===#
 
+    #=#=#=# SYSTEM #=#=#=#
+
+    laptop.enable = false;
+    
     # nixos version at the time of first install, do not change
     system.stateVersion = "25.05";
 
     # Apps #
     login-manager = null;
-    services.kanata.enable = false;
+    programs.hyprland.enable = false;
+    services.dispayManager.plasma6.enable = false;
+
+    services.kanata.enable = false; # remapping tool, this enable my personal config following a home-row scheme
 
     # Network #
     services.tailscale.enable = true;
@@ -34,7 +57,9 @@
     interfaces.eth0.wakeOnLan.enable = true;
 
 
-    #=== SERVER ===#
+
+    #=#=#=# SERVER SPECIFIC #=#=#=#
+
     server = {
       enable = true;
       dataPath = "/data";

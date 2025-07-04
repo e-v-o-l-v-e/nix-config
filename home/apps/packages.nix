@@ -5,34 +5,44 @@
   ...
 }:
 {
-  home.packages = lib.optionals (config.personal.enable) (with pkgs; [
-      # packages for personal machine
-      blueman
-      cliphist
-      element-desktop
-      finamp
-      jellyfin-media-player
-      kitty
-      libreoffice-qt6-fresh
-      libsForQt5.kdeconnect-kde
-      localsend
-      loupe
-      nextcloud-client
-      pavucontrol
-      wl-clipboard
-      xfce.thunar
-      vesktop
-      vlc
-      xdg-user-dirs
-      zellij
+  config = {
+    home.packages = lib.mkMerge [
+      (lib.optionals (config.gui.packages.enable) (with pkgs; [
+        # packages for personal machine
+        blueman
+        cliphist
+        kitty
+        localsend
+        loupe
+        pavucontrol
+        vlc
+        wl-clipboard
+        xfce.thunar
 
-      # theming
-      flat-remix-icon-theme
-    ]
-  );
+        # theming
+        flat-remix-icon-theme
+      ]))
+      (lib.optionals (config.personal.enable && config.gui.packages.enable) (with pkgs; [
+        # packages for personal machine
+        element-desktop
+        finamp
+        jellyfin-media-player
+        kdePackages.kdeconnect-kde
+        libreoffice-qt6-fresh
+        nextcloud-client
+        vesktop
+      ]))
+    ];
 
-  programs = {
-    vesktop.enable = config.personal.enable;
-    element-desktop.enable = config.personal.enable;
+    programs = {
+      vesktop.enable = config.personal.enable && config.gui.packages.enable; # need to be enabled for stylix theming to apply
+      element-desktop.enable = config.personal.enable && config.gui.packages.enable;
+    };
+  };
+
+  options = {
+    personal.enable = lib.mkEnableOption "Whether this is a personal device, enable vesktop, libreOffice etc";
+
+    gui.packages.enable = lib.mkEnableOption "Enable packages that needs a gui";
   };
 }

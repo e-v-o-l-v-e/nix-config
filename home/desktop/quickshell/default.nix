@@ -122,4 +122,11 @@ in
       caelestia = "caelestia-quickshell";
     };
   };
+
+  options = {
+    gui.quickshell = {
+      enable = lib.mkEnableOption "Enable QuickShell";
+      caelestia.enable = lib.mkEnableOption "Use Caelestia config for QuickShell";
+    };
+  };
 }

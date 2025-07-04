@@ -2,13 +2,11 @@
 # https://notashelf.github.io/nvf/options.html
 { config, username, lib, ... }:
 let
-  inherit (config.nvf) max;
-  light = config.gui.theme == "light";
-  name = if light then cfg.theme.light.name else cfg.theme.dark.name;
-  style = if light then cfg.theme.light.style else cfg.theme.dark.style;
+  inherit (config.nvf) maxConfig;
+  light = (config.gui.theme == "light");
 in
 {
-  programs.nvf = {
+  config.programs.nvf = {
     settings.vim = {
       viAlias = true;
       vimAlias = false;
@@ -37,10 +35,10 @@ in
       lsp = {
         formatOnSave = false;
         lspkind.enable = false;
-        lightbulb.enable = max;
+        lightbulb.enable = maxConfig;
         lspsaga.enable = false;
-        trouble.enable = max;
-        lspSignature.enable = max;
+        trouble.enable = maxConfig;
+        lspSignature.enable = maxConfig;
         otter-nvim.enable = true;
         nvim-docs-view.enable = false;
       };
@@ -52,7 +50,7 @@ in
 
       debugger = {
         nvim-dap = {
-          enable = max;
+          enable = maxConfig;
           ui.enable = true;
           # sources = {
           #   java = "vscode-extensions.vscjava.vscode-java-pack";
@@ -84,18 +82,18 @@ in
             };
           };
         };
-        java.enable = max;
-        csharp.enable = max;
-        python.enable = max;
+        java.enable = maxConfig;
+        csharp.enable = maxConfig;
+        python.enable = maxConfig;
         markdown.enable = false; # tmp true;
         yaml.enable = true;
         dart.enable = false;
 
-        lua.enable = max;
+        lua.enable = maxConfig;
         bash.enable = true;
         clang.enable = true;
-        css.enable = max;
-        html.enable = max;
+        css.enable = maxConfig;
+        html.enable = maxConfig;
         sql.enable = true;
         kotlin.enable = false;
         ts.enable = false;
@@ -131,7 +129,7 @@ in
         nvim-web-devicons.enable = true;
         nvim-cursorline.enable = true;
         cinnamon-nvim.enable = true;
-        fidget-nvim.enable = max;
+        fidget-nvim.enable = maxConfig;
 
         highlight-undo.enable = true;
         indent-blankline.enable = true;
@@ -147,15 +145,14 @@ in
         };
       };
 
-      theme = lib.mkForce {
-        enable = true;
-          inherit name;
-          inherit style;
-        # name = "gruvbox";
-        # style = "dark";
-        # name = "catppuccin";
-        # style = "latte";
-      };
+      theme = lib.mkForce ( { enable = true; } // (
+          if light then {
+            name = "catppuccin";
+            style = "latte";
+          } else {
+            name = "gruvbox";
+            style = "dark";
+          }));
 
       autopairs.nvim-autopairs.enable = true;
 
@@ -175,7 +172,7 @@ in
         nvimBufferline.enable = true;
       };
 
-      treesitter.context.enable = max;
+      treesitter.context.enable = maxConfig;
 
       binds = {
         whichKey.enable = true;
@@ -192,16 +189,16 @@ in
 
       minimap = {
         minimap-vim.enable = false;
-        codewindow.enable = max; # lighter, faster, and uses lua for configuration
+        codewindow.enable = maxConfig; # lighter, faster, and uses lua for configuration
       };
 
       dashboard = {
         dashboard-nvim.enable = false;
-        alpha.enable = max;
+        alpha.enable = maxConfig;
       };
 
       notify = {
-        nvim-notify.enable = max;
+        nvim-notify.enable = maxConfig;
       };
 
       projects = {
@@ -211,12 +208,12 @@ in
       mini.surround.enable = false;
 
       utility = {
-        nix-develop.enable = max;
+        nix-develop.enable = maxConfig;
         ccc.enable = false;
         vim-wakatime.enable = false;
         diffview-nvim.enable = true;
         yanky-nvim.enable = false;
-        icon-picker.enable = max;
+        icon-picker.enable = maxConfig;
         surround = {
           enable = true;
           useVendoredKeybindings = false;
@@ -225,7 +222,7 @@ in
         multicursors.enable = true;
 
         motion = {
-          hop.enable = max;
+          hop.enable = maxConfig;
           precognition.enable = false;
         };
         images = {
@@ -248,13 +245,13 @@ in
 
       ui = {
         borders.enable = false;
-        noice.enable = max;
+        noice.enable = maxConfig;
         colorizer.enable = true;
         modes-nvim.enable = false; # the theme looks terrible with catppuccin # TEST: à tester
         illuminate.enable = true;
         breadcrumbs = {
-          enable = max;
-          navbuddy.enable = max;
+          enable = maxConfig;
+          navbuddy.enable = maxConfig;
         };
         smartcolumn = {
           enable = false;
@@ -283,7 +280,7 @@ in
 
       session = {
         nvim-session-manager = {
-          enable = max;
+          enable = maxConfig;
           setupOpts = {
             autoload_mode = "CurrentDir";
             autosave_ignore_dirs = [
@@ -304,8 +301,12 @@ in
       };
 
       presence = {
-        neocord.enable = max;
+        neocord.enable = maxConfig;
       };
     };
+  };
+
+  options = {
+    programs.nvf.maxConfig = lib.mkEnableOption "Enable heavier nvf config"; # // { default = true; };
   };
 }
