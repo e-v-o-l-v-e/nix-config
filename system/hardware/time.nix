@@ -5,7 +5,7 @@
     hardwareClockInLocalTime = true;
   };
 
-  option.timeZone = lib.mkOption {
+  options.timeZone = lib.mkOption {
     type = lib.types.str;
     default = "Europe/Paris";
   };

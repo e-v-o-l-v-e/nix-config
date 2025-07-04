@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, ... }:
 # this is where the per host configuration happens
 # all options and their default values are set in ./options.nix
 
@@ -9,7 +9,7 @@
     
     #=#=#=# HOME #=#=#=#
 
-    personal.enable = lib.mkEnableOption "Whether this is a personal device, enable vesktop, jellyfin media player etc";
+    personal.enable = false;
 
     home.keyboard = {
       layout = "gb";

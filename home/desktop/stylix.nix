@@ -33,7 +33,8 @@ in
   };
 
   options = {
-    stylix = {
+    gui.stylix = {
+      enable = lib.mkEnableOption "Enable theming with stylix";
       colorScheme = lib.mkOption {
         type = lib.types.str;
         default = "one-light";

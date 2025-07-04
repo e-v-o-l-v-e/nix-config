@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }:
 let
@@ -15,4 +16,14 @@ in
   };
 
   # environment.systemPackages = lib.optional cfg.enable pkgs.base16-schemes;
+  options = {
+    gui.stylix = {
+      enable = lib.mkEnableOption "Enable theming with stylix";
+      colorScheme = lib.mkOption {
+        type = lib.types.str;
+        default = "one-light";
+        description = "Stylix baseScheme name";
+      };
+    };
+  };
 }

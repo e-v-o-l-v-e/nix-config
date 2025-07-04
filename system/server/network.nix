@@ -15,15 +15,6 @@ let
   addressv6 = "fd7d:76ee:e68f:a993:8a1a:ff5d:d8f0:ecea/128";
 in
 {
-  option = {
-    server.openPorts = lib.mkOption {
-      type = lib.types.listOf lib.types.int;
-      default = [ 80 443 ];
-      description = "List of ports to open";
-    };
-    server.vpn.enable = lib.mkEnableOption "Enable connection with airvpn through wireguard for a server config";
-  };
-
   config = {
     networking.firewall.allowedTCPPorts = lib.optionals cfg.enable cfg.openPorts;
 
@@ -82,5 +73,17 @@ in
         ];
       };
     };
+  };
+
+  options = {
+    server.openPorts = lib.mkOption {
+      type = lib.types.listOf lib.types.int;
+      default = [
+        80
+        443
+      ];
+      description = "List of ports to open";
+    };
+    server.vpn.enable = lib.mkEnableOption "Enable connection with airvpn through wireguard for a server config";
   };
 }
