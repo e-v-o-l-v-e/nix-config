@@ -1,11 +1,11 @@
 { config, ... }:
 {
-  # services.xserver = {
-  #   enable = true;
-  #   xkb = {
-  #     inherit (config) keyboard;
-  #   };
-  # };
+  services.xserver = {
+    enable = true;
+    xkb = {
+      inherit (config.keyboard) layout variant;
+    };
+  };
 
   console.keyMap = if (config.keyboard.layout == "gb") then "uk" else config.keyboard.layout;
 

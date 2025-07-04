@@ -23,35 +23,39 @@ in
   ];
 
   config = {
-    users.groups."${cfg.mediaGroupName}" = lib.mkIf cfg.enable {
-      name = cfg.mediaGroupName;
-      gid = cfg.mediaGroupId;
-      members = [
-        username
-        "jellyfin"
-        "radarr"
-        "sonarr"
-        "lidarr"
-      ];
-    };
+    users.groups = lib.mkIf cfg.enable {
+      "${cfg.mediaGroupName}" = {
+        name = cfg.mediaGroupName;
+        gid = cfg.mediaGroupId;
+        members = [
+          username
+          "jellyfin"
+          "radarr"
+          "sonarr"
+          "lidarr"
+        ];
+      };
 
-    users.groups.server = {
-      name = "server";
-      gid = 1001;
-      members = [
-        username
-        "jellyfin"
-        "radarr"
-        "sonarr"
-        "lidarr"
-        "opencloud"
-      ];
+      server = {
+        name = "server";
+        gid = 1001;
+        members = [
+          username
+          "jellyfin"
+          "radarr"
+          "sonarr"
+          "lidarr"
+          "opencloud"
+        ];
+      };
     };
 
     users.users.${username}.linger = cfg.enable;
   };
 
-  options = {
+  options.server = {
+    enable = lib.mkEnableOption "Enable server fonctionnalities";
+
     configPath = lib.mkOption {
       type = lib.types.str;
       default = "/services-config";

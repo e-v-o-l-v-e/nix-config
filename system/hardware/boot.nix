@@ -5,7 +5,6 @@
   ...
 }:
 let
-  inherit (config.hardware) gpu;
   perso = config.personal.enable;
 in
 {
@@ -46,7 +45,6 @@ in
           "usbhid"
           "sd_mod"
         ];
-        kernelModules = lib.optional (gpu == "amd") "amdgpu";
         verbose = !perso;
       };
       consoleLogLevel = 4; # lib.mkIf perso 3;
@@ -95,18 +93,6 @@ in
         mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
         magicOrExtension = ''\x7fELF....AI\x02'';
       };
-    };
-  };
-
-  options = {
-    gpu = lib.mkOption {
-      type = lib.types.enum [
-        "amd"
-        "nvidia"
-        "intel"
-      ];
-      default = "amd";
-      description = "gpu type, to enable relevant drivers, currently only amd does something";
     };
   };
 }

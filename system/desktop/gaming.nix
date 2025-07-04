@@ -29,11 +29,4 @@ in
       ];
     };
   };
-
-  options = {
-    gaming = {
-      enable = lib.mkEnableOption "Enable basic gaming support";
-      full = lib.mkEnableOption "Enable full gaming stack (e.g. Heroic, gamescope etc)";
-    };
-  };
 }

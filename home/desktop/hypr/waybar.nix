@@ -1,6 +1,5 @@
-{hostname, ...}: {
+{...}: {
   programs.waybar = {
-    enable = hostname == "waylander";
 
     style = ''
       .modules-right {

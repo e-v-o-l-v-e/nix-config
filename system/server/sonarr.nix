@@ -4,7 +4,6 @@ let
 in
 {
   services.sonarr = {
-    inherit (cfg.services.sonarr) enable;
     group = cfg.mediaGroupName;
     dataDir = "${cfg.configPath}/sonarr";
     settings = {

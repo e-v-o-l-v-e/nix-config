@@ -4,7 +4,6 @@ let
 in
 {
   services.radarr = {
-    inherit (cfg.services.radarr) enable;
     group = cfg.mediaGroupName;
     dataDir = "${cfg.configPath}/radarr";
     settings = {

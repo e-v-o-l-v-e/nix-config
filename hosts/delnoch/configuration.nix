@@ -81,6 +81,7 @@
       sonarr.enable = true;
       lidarr.enable = true;
       readarr.enable = true;
+      opencloud.enable = true;
     };
   };
 }

@@ -3,9 +3,9 @@
   options = {
     personal.enable = lib.mkEnableOption "Whether this is a personal device, enable vesktop, libreOffice etc";
 
-    laptop.enable = lib.mkEnableOption "Enable laptop related modules, battery management, brightness keys etc";
-
     homeManagerOnly = lib.mkEnableOption "For standalone home-manager";
+
+    sops-nix.enable = lib.mkEnableOption "Enable secrets management with sops-nix";
 
     flakePath = lib.mkOption {
       type = lib.types.str;
@@ -14,11 +14,21 @@
     };
 
     keyboard = {
-      
+      layout = lib.mkOption {
+        type = lib.types.str;
+        default = "gb";
+        description = "Keyboard layout";
+      };
+      variant = lib.mkOption {
+        type = lib.types.str;
+        default = null;
+        example = "extd";
+        description = "Keyboard layout variant";
+      };
     };
 
     gui = {
-      packages.enable = lib.mkEnableOption "Enable packages that needs a gui";
+      enable = lib.mkEnableOption "Enable gui and allow specifics packages";
 
       theme = lib.mkOption {
         type = lib.types.enum [
@@ -42,6 +52,11 @@
         enable = lib.mkEnableOption "Enable QuickShell";
         caelestia = lib.mkEnableOption "Use Caelestia config for QuickShell";
       };
+    };
+
+    gaming = {
+      enable = lib.mkEnableOption "Enable basic gaming support";
+      full = lib.mkEnableOption "Enable full gaming stack (e.g. Heroic, gamescope etc)";
     };
   };
 }

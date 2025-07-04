@@ -1,13 +1,14 @@
 {
   pkgs,
-  hostname,
+  self,
   lib,
   system,
   inputs,
+  hyprlandEnabled ? false,
   ...
 }:
 {
-  home.packages = lib.mkIf (hostname == "waylander") (
+  home.packages = lib.mkIf hyprlandEnabled (
     with pkgs;
     [
       inputs.ags.packages.${system}.default
@@ -43,6 +44,4 @@
       wlogout
     ]
   );
-
-  programs.waybar.enable = hostname == "waylander";
 }

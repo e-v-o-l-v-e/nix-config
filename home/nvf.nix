@@ -2,7 +2,7 @@
 # https://notashelf.github.io/nvf/options.html
 { config, username, lib, ... }:
 let
-  inherit (config.nvf) maxConfig;
+  inherit (config.programs.nvf) maxConfig;
   light = (config.gui.theme == "light");
 in
 {

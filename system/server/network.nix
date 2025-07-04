@@ -24,7 +24,7 @@ in
 
     networking.wireguard.interfaces = lib.mkIf cfg.vpn.enable {
       "wg-${vpn}" = {
-        privateKeyFile = config.sops.secrets."${vpn}/private_key".path;
+        # privateKeyFile = config.sops.secrets."${vpn}/private_key".path;
         ips = [
           addressv4
           addressv6

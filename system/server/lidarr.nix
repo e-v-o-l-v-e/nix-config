@@ -4,7 +4,6 @@ let
 in
 {
   services.lidarr = {
-    inherit (cfg.services.lidarr) enable;
     group = cfg.mediaGroupName;
     dataDir = "${cfg.configPath}/lidarr";
     settings = {

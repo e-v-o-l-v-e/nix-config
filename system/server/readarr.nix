@@ -4,7 +4,6 @@ let
 in
 {
   services.readarr = {
-    inherit (cfg.services.readarr) enable;
     group = cfg.mediaGroupName;
     dataDir = "${cfg.configPath}/readarr";
     settings = {

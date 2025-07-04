@@ -35,16 +35,17 @@ in
         guth include login
       '';
     };
+  };
 
-    options = {
-      login-manager = lib.mkOption {
-        type = lib.types.enum [
-          "greetd"
-          "sddm"
-        ];
-        default = "greetd";
-        description = "Which login manager to use, null for none";
-      };
+  options = {
+    login-manager = lib.mkOption {
+      type = lib.types.enum [
+        "greetd"
+        "sddm"
+        null
+      ];
+      default = "greetd";
+      description = "Which login manager to use, null for none";
     };
   };
 }

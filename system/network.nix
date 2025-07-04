@@ -29,5 +29,5 @@ in
 
   # defined in host/${hostname}/configuration.nix
   services.tailscale = {};
-  hardware.bluetooth.enable = {};
+  hardware.bluetooth = {};
 }

@@ -8,7 +8,7 @@ in
     inputs.sops-nix.homeManagerModules.sops
   ];
 
-  config.sops = cfg.enable {
+  config.sops = lib.mkIf cfg.enable {
     age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
     defaultSopsFile = ../secrets/common.yaml;
     validateSopsFiles = false;
@@ -22,6 +22,4 @@ in
       };
     };
   };
-  
-  options.sops-nix.enable = lib.mkEnableOption "Enable secrets management with sops-nix";
 }

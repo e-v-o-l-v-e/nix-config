@@ -33,6 +33,7 @@
           inherit system pkgs;
           specialArgs = {
             inherit hostname username self inputs;
+            HM = false;
           };
           modules = [
             ./options.nix
@@ -56,6 +57,7 @@
                 };
                 extraSpecialArgs = {
                   inherit inputs self hostname username system;
+                  HM = true;
                 };
                 useGlobalPkgs = true;
                 useUserPackages = true;
@@ -75,7 +77,7 @@
           };
           modules = [
             ./options.nix
-            ./hosts/${hostname}
+            ./hosts/${hostname} { HM = false; }
             ./system
 
             inputs.stylix.nixosModules.stylix
@@ -89,7 +91,7 @@
                     inputs.nvf.homeManagerModules.default
 
                     ./options.nix
-                    ./hosts/${hostname}/configuration.nix
+                    ./hosts/${hostname}/configuration.nix { HM = true; }
                     ./home
                   ];
                 };
@@ -103,23 +105,23 @@
             }
           ];
         };
-      mkHomeConfig =
-        hostname: username:
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            inputs.stylix.homeModules.stylix
-            inputs.zen-browser.homeModules.twilight
-            inputs.nvf.homeManagerModules.default
-
-            ./hosts/${hostname}/configuration.nix
-            ./home
-          ];
-          extraSpecialArgs = {
-            inherit inputs self hostname username;
-            config.homeManagerOnly = true;
-          };
-        };
+      # mkHomeConfig =
+      #   hostname: username:
+      #   home-manager.lib.homeManagerConfiguration {
+      #     inherit pkgs;
+      #     modules = [
+      #       inputs.stylix.homeModules.stylix
+      #       inputs.zen-browser.homeModules.twilight
+      #       inputs.nvf.homeManagerModules.default
+      #
+      #       ./hosts/${hostname}/configuration.nix
+      #       ./home
+      #     ];
+      #     extraSpecialArgs = {
+      #       inherit inputs self hostname username;
+      #       config.homeManagerOnly = true;
+      #     };
+      #   };
     in
     {
       # NIXOS CONFIGURATIONS
@@ -133,12 +135,12 @@
       };
 
       # HOME-MANAGER CONFIGURATIONS.
-      homeConfigurations = {
-        waylander = mkHomeConfig "waylander" username;
-        druss = mkHomeConfig "druss" username;
-        delnoch = mkHomeConfig "delnoch" username;
-        # wsl = mkHomeConfig "wsl";
-      };
+      # homeConfigurations = {
+      #   waylander = mkHomeConfig "waylander" username;
+      #   druss = mkHomeConfig "druss" username;
+      #   delnoch = mkHomeConfig "delnoch" username;
+      #   # wsl = mkHomeConfig "wsl";
+      # };
 
       # import shells
       devShells.${system} = import ./shells.nix { inherit pkgs; };

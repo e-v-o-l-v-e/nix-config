@@ -11,8 +11,7 @@
       inherit username;
       homeDirectory = "/home/${username}";
 
-      inherit (config) keyboard ;
-      inherit (config.system) stateVersion;
+      inherit (config) keyboard;
     };
 
     home.sessionVariables = {

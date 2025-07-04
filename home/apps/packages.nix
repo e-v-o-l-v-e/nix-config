@@ -7,7 +7,7 @@
 {
   config = {
     home.packages = lib.mkMerge [
-      (lib.optionals (config.gui.packages.enable) (with pkgs; [
+      (lib.optionals (config.gui.enable) (with pkgs; [
         # packages for personal machine
         blueman
         cliphist
@@ -22,7 +22,7 @@
         # theming
         flat-remix-icon-theme
       ]))
-      (lib.optionals (config.personal.enable && config.gui.packages.enable) (with pkgs; [
+      (lib.optionals (config.personal.enable && config.gui.enable) (with pkgs; [
         # packages for personal machine
         element-desktop
         finamp
@@ -35,8 +35,8 @@
     ];
 
     programs = {
-      vesktop.enable = config.personal.enable && config.gui.packages.enable; # need to be enabled for stylix theming to apply
-      element-desktop.enable = config.personal.enable && config.gui.packages.enable;
+      vesktop.enable = config.personal.enable && config.gui.enable; # need to be enabled for stylix theming to apply
+      element-desktop.enable = config.personal.enable && config.gui.enable;
     };
   };
 }

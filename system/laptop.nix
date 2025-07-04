@@ -21,4 +21,8 @@ in
       };
     };
   };
+
+  options = {
+    laptop.enable = lib.mkEnableOption "Enable laptop related modules, battery management, brightness keys etc";
+  };
 }

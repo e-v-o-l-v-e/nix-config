@@ -6,10 +6,10 @@
   ...
 }:
 let
-  cfg = config.gui.quickshell.caelestia;
+  cfg = config.gui.quickshell;
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.caelestia {
     # Configuration files
     xdg.configFile = {
       # Main caelestia shell configuration

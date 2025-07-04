@@ -5,9 +5,11 @@
   pkgs,
   ...
 }:let
-  inherit (config.hardware) gpu;
+  inherit (config) gpu;
 in {
   config = lib.mkIf (gpu == "amd") {
+    boot.initrd.kernelModules = lib.optional (gpu == "amd") "amdgpu";
+
     systemd.tmpfiles.rules = [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}" ];
     services.xserver.videoDrivers = [ "amdgpu" ];
 
@@ -27,5 +29,17 @@ in {
       vulkan-tools
       volk
     ];
+  };
+
+  options = {
+    gpu = lib.mkOption {
+      type = lib.types.enum [
+        "amd"
+        "nvidia"
+        "intel"
+      ];
+      default = "amd";
+      description = "gpu type, to enable relevant drivers, currently only amd does something";
+    };
   };
 }
