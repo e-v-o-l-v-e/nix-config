@@ -46,6 +46,18 @@
           example = "gruvbox-dark-medium";
           description = "Stylix baseScheme name";
         };
+
+        colorSchemeLight = lib.mkOption {
+          type = lib.types.str;
+          default = "one-light";
+          description = "Stylix light baseScheme";
+        };
+
+        colorSchemeDark = lib.mkOption {
+          type = lib.types.str;
+          default = "gruvbox-dark-medium";
+          description = "Stylix dark baseScheme";
+        };
       };
 
       quickshell = {

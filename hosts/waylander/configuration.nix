@@ -1,57 +1,79 @@
-{ config, lib, ... }:
+{
+  lib,
+  HM,
+  config,
+  ...
+}:
 # this is where the per host configuration happens
 # all options and their default values are set in ./options.nix
 
 # the username is set globally as the username option's default
 # you can override it per host or change it in ./options.nix to use the same on every machine, current is "evolve"
 {
-  config = {
+  config = lib.mkMerge [
+    {
+      #=#=#=# HOME #=#=#=#
+      personal.enable = true;
 
-    #=#=#=# HOME #=#=#=#
-    personal.enable = true;
+      sops-nix.enable = true;
 
-    home.keyboard = {
-      layout = "gb";
-      variant = "extd";
-    };
+      keyboard = {
+        layout = "gb";
+        variant = "extd";
+      };
 
-    # Apps #
-    programs.nvf.enable = true;
-    programs.nvf.maxConfig = true;
+      # Theming #
+      gui.theme = "light";
 
-    programs.zen.enable = true;
+      gui.quickshell.enable = false;
+      gui.quickshell.caelestia = false;
+      programs.waybar.enable = false;
 
-    gui.packages.enable = true;
+      gui.stylix.enable = true;
+      gui.stylix.colorSchemeDark = "gruvbox-dark-medium";
+      gui.stylix.colorSchemeLight = "one-light";
+      gui.stylix.colorScheme = lib.mkForce "tokyo-night-dark";
 
-    # Theming #
-    gui.theme = "light";
+      gaming.enable = true;
+      gaming.full = true;
+    }
+    ( if HM then {
+      #=#=#=# HOME #=#=#=#
+      # Apps #
+      gui.enable = true;
 
-    gui.quickshell.enable = true;
-    gui.quickshell.caelestia = true;
+      programs.nvf.enable = true;
+      programs.nvf.maxConfig = true;
 
-    gui.stylix.enable = true;
-    gui.stylix.colorScheme = "one-light";
+      programs.zen-browser.enable = true;
 
-    # home-manager version at the time of first install, do not change
-    home.stateVersion = "24.11";
+      wayland.windowManager.hyprland.enable = false; # manage hyprland settings with home-manager
 
-    #=#=#=# SYSTEM #=#=#=#
+      # home-manager version at the time of first install, do not change
+      home.stateVersion = "25.05";
+    }
+    else
+    {
+      #=#=#=# SYSTEM #=#=#=#
+      laptop.enable = false;
 
-    laptop.enable = true;
+      # nixos version at the time of first install, do not change
+      system.stateVersion = "25.05";
 
-    # nixos version at the time of first install, do not change
-    system.stateVersion = "24.11";
+      # Desktop #
+      login-manager = "sddm";
 
-    # Apps #
-    login-manager = "greetd";
-    programs.hyprland.enable = true;
-    services.dispayManager.plasma6.enable = false;
+      programs.hyprland.enable = false;
 
-    services.kanata.enable = true; # remapping tool, this enable my personal config following a home-row scheme
+      services.desktopManager.plasma6.enable = true;
 
-    # Network #
-    services.tailscale.enable = true;
-    server.airvpn.enable = false;
-    interfaces.eth0.wakeOnLan.enable = false;
-  };
+      # Apps #
+      services.kanata.enable = false; # remapping tool, this enable my personal config following a home-row scheme
+
+      # Network #
+      services.tailscale.enable = true;
+      server.vpn.enable = false;
+      networking.interfaces.eth0.wakeOnLan.enable = true;
+    })
+  ];
 }

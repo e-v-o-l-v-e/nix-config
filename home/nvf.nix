@@ -145,14 +145,14 @@ in
         };
       };
 
-      theme = lib.mkForce ( { enable = true; } // (
-          if light then {
-            name = "catppuccin";
-            style = "latte";
-          } else {
-            name = "gruvbox";
-            style = "dark";
-          }));
+      theme = lib.mkDefault ({ enable = true; } // (
+        if light then {
+          name = "catppuccin";
+          style = "latte";
+        } else {
+          name = "gruvbox";
+          style = "dark";
+        }));
 
       autopairs.nvim-autopairs.enable = true;
 

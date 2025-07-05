@@ -5,9 +5,15 @@
 }:
 let
   cfg = config.gui.stylix;
+
+  gui.stylix.colorScheme = ( 
+    if config.gui.theme == "light" 
+    then "gruvbox-dark-medium" 
+    else "one-light"
+  );
 in
 {
-  # allow and enable stylix customization
+  # enable system's stylix customization
   config.stylix = {
     inherit (cfg) enable;
     # set the chosen colorScheme

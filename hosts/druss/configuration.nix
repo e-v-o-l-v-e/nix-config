@@ -1,6 +1,7 @@
 {
   lib,
   HM,
+  config,
   ...
 }:
 # this is where the per host configuration happens
@@ -22,16 +23,17 @@
       };
 
       # Theming #
-      gui.theme = "light";
+      gui.theme = "dark";
 
       gui.quickshell.enable = false;
       gui.quickshell.caelestia = false;
       programs.waybar.enable = false;
 
       gui.stylix.enable = true;
-      gui.stylix.colorScheme = "one-light";
+      gui.stylix.colorSchemeDark = "gruvbox-dark-medium";
+      gui.stylix.colorSchemeLight = "one-light";
+      gui.stylix.colorScheme = lib.mkForce "tokyo-night-dark";
 
-      # else
       gaming.enable = true;
       gaming.full = true;
     }
@@ -44,6 +46,11 @@
       programs.nvf.maxConfig = true;
 
       programs.zen-browser.enable = true;
+
+      programs.nvf.settings.vim.theme = lib.mkForce {
+        name = "tokyonight";
+        style = "night";
+      };
 
       wayland.windowManager.hyprland.enable = false; # manage hyprland settings with home-manager
 

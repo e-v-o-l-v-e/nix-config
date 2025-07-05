@@ -6,6 +6,12 @@
 }:
 let
   cfg = config.gui.stylix;
+
+  gui.stylix.colorScheme = ( 
+    if config.gui.theme == "light" 
+    then "gruvbox-dark-medium" 
+    else "one-light"
+  );
 in
 {
   config = {
