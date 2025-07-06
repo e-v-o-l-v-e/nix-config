@@ -1,26 +1,27 @@
 { lib, ... }:
+with lib;
 {
   options = {
-    personal.enable = lib.mkEnableOption "Whether this is a personal device, enable vesktop, libreOffice etc";
+    personal.enable = mkEnableOption "Whether this is a personal device, enable vesktop, libreOffice etc";
 
-    homeManagerOnly = lib.mkEnableOption "For standalone home-manager";
+    homeManagerOnly = mkEnableOption "For standalone home-manager";
 
-    sops-nix.enable = lib.mkEnableOption "Enable secrets management with sops-nix";
+    sops-nix.enable = mkEnableOption "Enable secrets management with sops-nix";
 
-    flakePath = lib.mkOption {
-      type = lib.types.str;
+    flakePath = mkOption {
+      type = types.str;
       default = "nix-config";
       description = "path to the flake directory from /home/{username}";
     };
 
     keyboard = {
-      layout = lib.mkOption {
-        type = lib.types.str;
+      layout = mkOption {
+        type = types.str;
         default = "gb";
         description = "Keyboard layout";
       };
-      variant = lib.mkOption {
-        type = lib.types.str;
+      variant = mkOption {
+        type = types.str;
         default = null;
         example = "extd";
         description = "Keyboard layout variant";
@@ -28,10 +29,10 @@
     };
 
     gui = {
-      enable = lib.mkEnableOption "Enable gui and allow specifics packages";
+      enable = mkEnableOption "Enable gui and allow specifics packages";
 
-      theme = lib.mkOption {
-        type = lib.types.enum [
+      theme = mkOption {
+        type = types.enum [
           "dark"
           "light"
         ];
@@ -39,36 +40,42 @@
       };
 
       stylix = {
-        enable = lib.mkEnableOption "Enable theming with stylix";
-        colorScheme = lib.mkOption {
-          type = lib.types.str;
-          default = "one-light";
+        enable = mkEnableOption "Enable theming with stylix";
+
+        themeOverride = mkOption {
+          type = types.nullOr types.str;
+          default = null;
           example = "gruvbox-dark-medium";
-          description = "Stylix baseScheme name";
+          description = "Stylix baseScheme name to override dark and light";
         };
 
-        colorSchemeLight = lib.mkOption {
-          type = lib.types.str;
+        colorSchemeLight = mkOption {
+          type = types.str;
           default = "one-light";
           description = "Stylix light baseScheme";
         };
 
-        colorSchemeDark = lib.mkOption {
-          type = lib.types.str;
+        colorSchemeDark = mkOption {
+          type = types.str;
           default = "gruvbox-dark-medium";
           description = "Stylix dark baseScheme";
         };
       };
 
       quickshell = {
-        enable = lib.mkEnableOption "Enable QuickShell";
-        caelestia = lib.mkEnableOption "Use Caelestia config for QuickShell";
+        enable = mkEnableOption "Enable QuickShell";
+        caelestia = mkEnableOption "Use Caelestia config for QuickShell";
       };
     };
 
     gaming = {
-      enable = lib.mkEnableOption "Enable basic gaming support";
-      full = lib.mkEnableOption "Enable full gaming stack (e.g. Heroic, gamescope etc)";
+      enable = mkEnableOption "Enable basic gaming support";
+      full = mkEnableOption "Enable full gaming stack (e.g. Heroic, gamescope etc)";
     };
+  };
+
+  config = {
+    specialisation.dark.configuration = { config.gui.theme = "dark"; };
+    specialisation.light.configuration = { config.gui.theme = "light"; };
   };
 }

@@ -23,16 +23,18 @@
       };
 
       # Theming #
-      gui.theme = "dark";
-
       gui.quickshell.enable = false;
       gui.quickshell.caelestia = false;
       programs.waybar.enable = false;
 
       gui.stylix.enable = true;
-      gui.stylix.colorSchemeDark = "gruvbox-dark-medium";
+      gui.stylix.colorSchemeDark = "tokyo-night-dark";
       gui.stylix.colorSchemeLight = "one-light";
-      gui.stylix.colorScheme = lib.mkForce "tokyo-night-dark";
+      # gui.stylix.themeOverride = "gruvbox-dark-medium";
+      # gui.stylix.colorScheme = (
+      #   if config.gui.theme == "light"
+      #   then config.gui.stylix.colorSchemeLight 
+      #   else config.gui.stylix.colorSchemeDark);
 
       gaming.enable = true;
       gaming.full = true;
