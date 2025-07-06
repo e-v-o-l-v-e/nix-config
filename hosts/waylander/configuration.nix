@@ -24,17 +24,17 @@
 
       # Theming #
       gui.enable = true;
-      gui.theme = "dark";
+      gui.theme = "light";
 
       gui.stylix.enable = true;
       gui.stylix.colorSchemeDark = "tokyo-night-dark";
       gui.stylix.colorSchemeLight = "one-light";
-      # gui.stylix.colorScheme = lib.mkForce "tokyo-night-dark";
+      # gui.stylix.colorScheme = lib.mkForce "gruvbox-dark-medium";
 
-      gui.stylix.colorScheme = 
-        (if config.gui.theme == "light" 
-        then config.gui.stylix.colorSchemeLight
-        else config.gui.stylix.colorSchemeDark);
+      # gui.stylix.colorScheme = 
+      #   (if config.gui.theme == "light" 
+      #   then config.gui.stylix.colorSchemeLight
+      #   else config.gui.stylix.colorSchemeDark);
 
       programs.waybar.enable = true;
 
@@ -49,10 +49,11 @@
 
       programs.nvf.enable = true;
       programs.nvf.maxConfig = true;
-      programs.nvf.settings.vim.theme = lib.mkForce {
-        name = "tokyonight";
-        style = "night";
-      };
+      # programs.nvf.settings.vim.theme = lib.mkForce {
+      #   enable = true;
+      #   # name = "tokyonight";
+      #   # style = "night";
+      # };
 
       programs.zen-browser.enable = true;
 
