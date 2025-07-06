@@ -23,57 +23,66 @@
       };
 
       # Theming #
-      gui.theme = "light";
-
-      gui.quickshell.enable = false;
-      gui.quickshell.caelestia = false;
-      programs.waybar.enable = false;
+      gui.enable = true;
+      gui.theme = "dark";
 
       gui.stylix.enable = true;
-      gui.stylix.colorSchemeDark = "gruvbox-dark-medium";
+      gui.stylix.colorSchemeDark = "tokyo-night-dark";
       gui.stylix.colorSchemeLight = "one-light";
-      gui.stylix.colorScheme = lib.mkForce "tokyo-night-dark";
+      # gui.stylix.colorScheme = lib.mkForce "tokyo-night-dark";
+
+      gui.stylix.colorScheme = 
+        (if config.gui.theme == "light" 
+        then config.gui.stylix.colorSchemeLight
+        else config.gui.stylix.colorSchemeDark);
+
+      programs.waybar.enable = true;
 
       gaming.enable = true;
-      gaming.full = true;
+      gaming.full = false;
     }
     ( if HM then {
       #=#=#=# HOME #=#=#=#
       # Apps #
-      gui.enable = true;
+      gui.quickshell.enable = true;
+      gui.quickshell.caelestia = true;
 
       programs.nvf.enable = true;
       programs.nvf.maxConfig = true;
+      programs.nvf.settings.vim.theme = lib.mkForce {
+        name = "tokyonight";
+        style = "night";
+      };
 
       programs.zen-browser.enable = true;
 
       wayland.windowManager.hyprland.enable = false; # manage hyprland settings with home-manager
 
       # home-manager version at the time of first install, do not change
-      home.stateVersion = "25.05";
+      home.stateVersion = "24.11";
     }
     else
     {
       #=#=#=# SYSTEM #=#=#=#
-      laptop.enable = false;
+      laptop.enable = true;
 
       # nixos version at the time of first install, do not change
-      system.stateVersion = "25.05";
+      system.stateVersion = "24.11";
 
       # Desktop #
-      login-manager = "sddm";
+      login-manager = "greetd";
 
-      programs.hyprland.enable = false;
+      programs.hyprland.enable = true;
 
-      services.desktopManager.plasma6.enable = true;
+      services.desktopManager.plasma6.enable = false;
 
       # Apps #
-      services.kanata.enable = false; # remapping tool, this enable my personal config following a home-row scheme
+      services.kanata.enable = true;
 
       # Network #
       services.tailscale.enable = true;
       server.vpn.enable = false;
-      networking.interfaces.eth0.wakeOnLan.enable = true;
+      networking.interfaces.eth0.wakeOnLan.enable = false;
     })
   ];
 }
