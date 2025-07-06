@@ -228,6 +228,7 @@ in
       mini.surround.enable = false;
 
       utility = {
+        snacks-nvim.enable = maxConfig;
         nix-develop.enable = maxConfig;
         ccc.enable = false;
         vim-wakatime.enable = false;
