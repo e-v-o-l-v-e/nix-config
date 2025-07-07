@@ -3,7 +3,7 @@ _:{
     ./fonts.nix
     ./gaming.nix
     ./login.nix
-    ./stylix.nix
+    ../../home/desktop/stylix.nix
     ./wayland.nix
   ];
 }

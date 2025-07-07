@@ -42,7 +42,7 @@ with lib;
       stylix = {
         enable = mkEnableOption "Enable theming with stylix";
 
-        themeOverride = mkOption {
+        colorScheme = mkOption {
           type = types.nullOr types.str;
           default = null;
           example = "gruvbox-dark-medium";
@@ -73,9 +73,9 @@ with lib;
       full = mkEnableOption "Enable full gaming stack (e.g. Heroic, gamescope etc)";
     };
   };
-
-  config = {
-    specialisation.dark.configuration = { config.gui.theme = "dark"; };
-    specialisation.light.configuration = { config.gui.theme = "light"; };
-  };
+  #
+  # config = {
+  #   specialisation.dark.configuration = { config.gui.theme = "dark"; };
+  #   specialisation.light.configuration = { config.gui.theme = "light"; };
+  # };
 }

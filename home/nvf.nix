@@ -145,34 +145,36 @@ in
         };
       };
 
-      theme = {
+      theme = lib.mkForce {
+      	enable = true;
         # lib.mkDefault ({ enable = true; } // (
-        # if light then {
-        #   name = "catppuccin";
-        #   style = "latte";
-        # } else {
-        #   name = "gruvbox";
-        #   style = "dark";
-        # })
-        base16-colors = {
-          inherit (config.lib.stylix.colors) base00;
-          inherit (config.lib.stylix.colors) base01;
-          inherit (config.lib.stylix.colors) base02;
-          inherit (config.lib.stylix.colors) base03;
-          inherit (config.lib.stylix.colors) base04;
-          inherit (config.lib.stylix.colors) base05;
-          inherit (config.lib.stylix.colors) base06;
-          inherit (config.lib.stylix.colors) base07;
-          inherit (config.lib.stylix.colors) base08;
-          inherit (config.lib.stylix.colors) base09;
-          inherit (config.lib.stylix.colors) base0A;
-          inherit (config.lib.stylix.colors) base0B;
-          inherit (config.lib.stylix.colors) base0C;
-          inherit (config.lib.stylix.colors) base0D;
-          inherit (config.lib.stylix.colors) base0E;
-          inherit (config.lib.stylix.colors) base0F;
-        };
-      };
+	} //
+        (if light then {
+          name = "catppuccin";
+          style = "latte";
+        } else {
+          name = "tokyonight";
+          style = "night";
+        });
+        # base16-colors = {
+        #   inherit (config.lib.stylix.colors) base00;
+        #   inherit (config.lib.stylix.colors) base01;
+        #   inherit (config.lib.stylix.colors) base02;
+        #   inherit (config.lib.stylix.colors) base03;
+        #   inherit (config.lib.stylix.colors) base04;
+        #   inherit (config.lib.stylix.colors) base05;
+        #   inherit (config.lib.stylix.colors) base06;
+        #   inherit (config.lib.stylix.colors) base07;
+        #   inherit (config.lib.stylix.colors) base08;
+        #   inherit (config.lib.stylix.colors) base09;
+        #   inherit (config.lib.stylix.colors) base0A;
+        #   inherit (config.lib.stylix.colors) base0B;
+        #   inherit (config.lib.stylix.colors) base0C;
+        #   inherit (config.lib.stylix.colors) base0D;
+        #   inherit (config.lib.stylix.colors) base0E;
+        #   inherit (config.lib.stylix.colors) base0F;
+        # };
+      # };
 
       autopairs.nvim-autopairs.enable = true;
 

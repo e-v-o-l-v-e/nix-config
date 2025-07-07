@@ -35,6 +35,8 @@ in
 
   programs.fish.enable = true;
 
+  # documentation.man.generateCaches = config.users.defaultUserShell != pkgs.fish;
+
   sops.secrets = lib.mkIf cfg.enable { 
     "password-${hostname}".neededForUsers = true; 
   };

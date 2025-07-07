@@ -8,7 +8,7 @@ let
   cfg = config.gui.stylix;
 
   colorScheme = 
-    if cfg.themeOverride != null
+    if cfg.colorScheme != null
       then cfg.themeOverride
     else if config.gui.theme == "light"
       then cfg.colorSchemeLight
@@ -39,6 +39,17 @@ in
         sizes.terminal = 13;
       };
     };
-    home.packages = lib.optional config.stylix.enable pkgs.base16-schemes;
+
+    # specialisation = {
+    #   dark.configuration = {
+    #     gui.theme = "dark";
+    #     base16Scheme = "${pkgs.base16-schemes}/share/themes/${colorScheme}.yaml";
+    #   };
+    #   
+    #   light.configuration = {
+    #     gui.theme = "light";
+    #     base16Scheme = "${pkgs.base16-schemes}/share/themes/${colorScheme}.yaml";
+    #   };
+    # };
   };
 }
