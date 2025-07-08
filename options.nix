@@ -36,7 +36,7 @@ with lib;
           "dark"
           "light"
         ];
-        default = "light";
+        default = "dark";
       };
 
       stylix = {
@@ -44,7 +44,8 @@ with lib;
 
         colorScheme = mkOption {
           type = types.nullOr types.str;
-          default = null;
+          # default = null;
+          default = "tokyo-night-dark";
           example = "gruvbox-dark-medium";
           description = "Stylix baseScheme name to override dark and light";
         };
@@ -60,6 +61,8 @@ with lib;
           default = "gruvbox-dark-medium";
           description = "Stylix dark baseScheme";
         };
+
+        enableSpecialisation = mkEnableOption "Build config for dark and white theme, SLOW";
       };
 
       quickshell = {

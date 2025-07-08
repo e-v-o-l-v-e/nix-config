@@ -9,14 +9,14 @@ let
 
   colorScheme = 
     if cfg.colorScheme != null
-      then cfg.themeOverride
+      then cfg.colorScheme
     else if config.gui.theme == "light"
       then cfg.colorSchemeLight
     else 
       cfg.colorSchemeDark;
 in
 {
-  config = lib.mkIf config.homeManagerOnly {
+  config = {
     stylix = {
       inherit (cfg) enable;
 
@@ -40,16 +40,16 @@ in
       };
     };
 
-    # specialisation = {
-    #   dark.configuration = {
-    #     gui.theme = "dark";
-    #     base16Scheme = "${pkgs.base16-schemes}/share/themes/${colorScheme}.yaml";
-    #   };
-    #   
-    #   light.configuration = {
-    #     gui.theme = "light";
-    #     base16Scheme = "${pkgs.base16-schemes}/share/themes/${colorScheme}.yaml";
-    #   };
-    # };
+    specialisation = lib.mkIf cfg.enableSpecialisation {
+      dark.configuration = {
+        gui.theme = "dark";
+        stylix.base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/${cfg.colorSchemeDark}.yaml";
+      };
+      
+      light.configuration = {
+        gui.theme = "light";
+        stylix.base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/${cfg.colorSchemeLight}.yaml";
+      };
+    };
   };
 }

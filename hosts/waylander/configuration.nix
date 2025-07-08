@@ -24,7 +24,7 @@
 
       # Theming #
       gui.enable = true;
-      gui.theme = "light";
+      gui.theme = "dark";
 
       gui.stylix.enable = true;
       gui.stylix.colorSchemeDark = "tokyo-night-dark";
@@ -83,7 +83,6 @@
       # Network #
       services.tailscale.enable = true;
       server.vpn.enable = false;
-      networking.interfaces.eth0.wakeOnLan.enable = false;
     })
   ];
 }
