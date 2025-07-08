@@ -30,6 +30,7 @@
         kdePackages.kdeconnect-kde
         libreoffice-qt6-fresh
         nextcloud-client
+        thunderbird
         vesktop
       ]))
     ];

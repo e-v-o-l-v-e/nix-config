@@ -7,8 +7,7 @@
 let
   cfg = config.gui.stylix;
 
-  colorScheme = 
-    if cfg.colorScheme != null
+  colorScheme = if cfg.colorScheme != null
       then cfg.colorScheme
     else if config.gui.theme == "light"
       then cfg.colorSchemeLight

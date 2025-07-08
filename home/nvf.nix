@@ -1,6 +1,11 @@
 # list of nvf module options, examples, instruction etc :
 # https://notashelf.github.io/nvf/options.html
-{ config, username, lib, ... }:
+{
+  config,
+  username,
+  lib,
+  ...
+}:
 let
   inherit (config.programs.nvf) maxConfig;
   light = (config.gui.theme == "light");
@@ -146,34 +151,41 @@ in
       };
 
       theme = lib.mkForce {
-      	enable = true;
-        # lib.mkDefault ({ enable = true; } // (
-	} //
-        (if light then {
-          name = "catppuccin";
-          style = "latte";
-        } else {
-          name = "tokyonight";
-          style = "night";
-        });
-        # base16-colors = {
-        #   inherit (config.lib.stylix.colors) base00;
-        #   inherit (config.lib.stylix.colors) base01;
-        #   inherit (config.lib.stylix.colors) base02;
-        #   inherit (config.lib.stylix.colors) base03;
-        #   inherit (config.lib.stylix.colors) base04;
-        #   inherit (config.lib.stylix.colors) base05;
-        #   inherit (config.lib.stylix.colors) base06;
-        #   inherit (config.lib.stylix.colors) base07;
-        #   inherit (config.lib.stylix.colors) base08;
-        #   inherit (config.lib.stylix.colors) base09;
-        #   inherit (config.lib.stylix.colors) base0A;
-        #   inherit (config.lib.stylix.colors) base0B;
-        #   inherit (config.lib.stylix.colors) base0C;
-        #   inherit (config.lib.stylix.colors) base0D;
-        #   inherit (config.lib.stylix.colors) base0E;
-        #   inherit (config.lib.stylix.colors) base0F;
-        # };
+        enable = true;
+        base16-colors = {
+          inherit (config.lib.stylix.colors)
+            base00 base01 base02 base03
+            base04 base05 base06 base07
+            base08 base09 base0A base0B
+            base0C base0D base0E base0F;
+        };
+      };
+      # //
+      # (if light then {
+      #   name = "catppuccin";
+      #   style = "latte";
+      # } else {
+      #   name = "tokyonight";
+      #   style = "night";
+      # });
+      # base16-colors = {
+      #   inherit (config.lib.stylix.colors) base00;
+      #   inherit (config.lib.stylix.colors) base01;
+      #   inherit (config.lib.stylix.colors) base02;
+      #   inherit (config.lib.stylix.colors) base03;
+      #   inherit (config.lib.stylix.colors) base04;
+      #   inherit (config.lib.stylix.colors) base05;
+      #   inherit (config.lib.stylix.colors) base06;
+      #   inherit (config.lib.stylix.colors) base07;
+      #   inherit (config.lib.stylix.colors) base08;
+      #   inherit (config.lib.stylix.colors) base09;
+      #   inherit (config.lib.stylix.colors) base0A;
+      #   inherit (config.lib.stylix.colors) base0B;
+      #   inherit (config.lib.stylix.colors) base0C;
+      #   inherit (config.lib.stylix.colors) base0D;
+      #   inherit (config.lib.stylix.colors) base0E;
+      #   inherit (config.lib.stylix.colors) base0F;
+      # };
       # };
 
       autopairs.nvim-autopairs.enable = true;

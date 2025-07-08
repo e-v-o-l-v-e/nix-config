@@ -23,6 +23,9 @@
       };
 
       # Theming #
+      gui.enable = true;
+      gui.theme = "light";
+
       gui.quickshell.enable = false;
       gui.quickshell.caelestia = false;
       programs.waybar.enable = false;
@@ -42,17 +45,10 @@
     ( if HM then {
       #=#=#=# HOME #=#=#=#
       # Apps #
-      gui.enable = true;
-
       programs.nvf.enable = true;
       programs.nvf.maxConfig = true;
 
       programs.zen-browser.enable = true;
-
-      programs.nvf.settings.vim.theme = lib.mkForce {
-        name = "tokyonight";
-        style = "night";
-      };
 
       wayland.windowManager.hyprland.enable = false; # manage hyprland settings with home-manager
 

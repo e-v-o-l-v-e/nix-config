@@ -44,8 +44,8 @@ with lib;
 
         colorScheme = mkOption {
           type = types.nullOr types.str;
-          # default = null;
-          default = "tokyo-night-dark";
+          default = null;
+          # default = "tokyo-night-dark";
           example = "gruvbox-dark-medium";
           description = "Stylix baseScheme name to override dark and light";
         };
