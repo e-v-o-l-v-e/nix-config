@@ -3,10 +3,10 @@
   programs.kitty = {
     inherit (config.gui) enable;
 
-    font = {
-      inherit (config.gui.font) size;
-      name = "DaddyTimeMono";
-    };
+    # font = {
+    #   inherit (config.gui.font) size;
+    #   name = "DaddyTimeMono";
+    # };
 
     settings = {
       cursor_trail = 10;

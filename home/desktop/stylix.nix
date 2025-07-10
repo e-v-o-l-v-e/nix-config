@@ -22,11 +22,11 @@ in
 
       base16Scheme = "${pkgs.base16-schemes}/share/themes/${colorScheme}.yaml";
 
-      fonts = {
-        monospace = {
-          package = pkgs.nerd-fonts.daddy-time-mono;
-          name = "DaddyTimeMono Nerd Font";
-        };
+      # fonts = {
+      #   monospace = {
+      #     package = pkgs.nerd-fonts.daddy-time-mono;
+      #     name = "DaddyTimeMono Nerd Font";
+      #   };
         # sansSerif = {
         #   package = pkgs.nerd-fonts.daddy-time-mono;
         #   name = "DaddyTimeMono Nerd Font";
@@ -36,8 +36,8 @@ in
         #   name = "DaddyTimeMono Nerd Font";
         # };
 
-        sizes.terminal = config.gui.font.size;
-      };
+      #   sizes.terminal = config.gui.font.size;
+      # };
 
       targets.zellij.enable = false;
     };
