@@ -22,19 +22,16 @@
         variant = "extd";
       };
 
-      # Theming #
+      # gui / theming #
       gui.enable = true;
       gui.theme = "dark";
+
+      gui.hyprland.enable = true;
 
       gui.stylix.enable = true;
       gui.stylix.colorSchemeDark = "tokyo-night-dark";
       gui.stylix.colorSchemeLight = "one-light";
       # gui.stylix.colorScheme = lib.mkForce "gruvbox-dark-medium";
-
-      # gui.stylix.colorScheme = 
-      #   (if config.gui.theme == "light" 
-      #   then config.gui.stylix.colorSchemeLight
-      #   else config.gui.stylix.colorSchemeDark);
 
       programs.waybar.enable = true;
 
@@ -73,7 +70,7 @@
       # Desktop #
       login-manager = "greetd";
 
-      programs.hyprland.enable = true;
+      programs.hyprland.enable = config.gui.hyprland.enable;
 
       services.desktopManager.plasma6.enable = false;
 

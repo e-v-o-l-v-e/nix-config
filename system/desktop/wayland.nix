@@ -19,7 +19,6 @@ in
         enable = true;
       };
     };
-    home-manager.extraSpecialArgs.hyprlandEnabled = config.programs.hyprland.enable;
 
     services = lib.mkIf config.services.desktopManager.plasma6.enable {
       xserver.enable = true;

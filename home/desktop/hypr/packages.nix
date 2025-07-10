@@ -4,11 +4,11 @@
   lib,
   system,
   inputs,
-  hyprlandEnabled ? false,
+  config,
   ...
 }:
 {
-  home.packages = lib.mkIf hyprlandEnabled (
+  home.packages = lib.mkIf config.gui.hyprland.enable (
     with pkgs;
     [
       inputs.ags.packages.${system}.default

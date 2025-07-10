@@ -465,21 +465,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-local": {
-      "locked": {
-        "lastModified": 1751458198,
-        "narHash": "sha256-VkJDSdJUoR6vrHItJSHKtcY8m9FizDV2xw8adVP3YIg=",
-        "ref": "refs/heads/nixos-local-content-share-init",
-        "rev": "d8c847420b4f69d29809769bb2f6d26dff49c1e8",
-        "revCount": 823687,
-        "type": "git",
-        "url": "file:///home/evolve/Code/nixpkgs"
-      },
-      "original": {
-        "type": "git",
-        "url": "file:///home/evolve/Code/nixpkgs"
-      }
-    },
     "nur": {
       "inputs": {
         "flake-parts": [
@@ -558,7 +543,6 @@
         "home-manager": "home-manager",
         "local-content-share": "local-content-share",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-local": "nixpkgs-local",
         "nvf": "nvf",
         "quickshell": "quickshell",
         "sops-nix": "sops-nix",

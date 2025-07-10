@@ -38,6 +38,17 @@ with lib;
         ];
         default = "dark";
       };
+      
+      font = {
+        size = mkOption {
+          type = types.int;
+          default = 13;
+          example = 15;
+          description = "Terminal font size";
+        };
+      };
+
+      hyprland.enable = mkEnableOption "Enable hyprland and related packages for my config";
 
       stylix = {
         enable = mkEnableOption "Enable theming with stylix";

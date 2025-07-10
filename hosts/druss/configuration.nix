@@ -26,6 +26,8 @@
       gui.enable = true;
       gui.theme = "light";
 
+      gui.font.size = 13;
+
       gui.quickshell.enable = false;
       gui.quickshell.caelestia = false;
       programs.waybar.enable = false;
@@ -33,11 +35,9 @@
       gui.stylix.enable = true;
       gui.stylix.colorSchemeDark = "tokyo-night-dark";
       gui.stylix.colorSchemeLight = "one-light";
-      # gui.stylix.themeOverride = "gruvbox-dark-medium";
-      # gui.stylix.colorScheme = (
-      #   if config.gui.theme == "light"
-      #   then config.gui.stylix.colorSchemeLight 
-      #   else config.gui.stylix.colorSchemeDark);
+
+      # if you want only one theme you can just uncomment this line
+      # gui.stylix.colorScheme = "gruvbox-dark-medium";
 
       gaming.enable = true;
       gaming.full = true;

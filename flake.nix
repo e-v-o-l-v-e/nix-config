@@ -5,7 +5,6 @@
     inputs@{
       self,
       nixpkgs,
-      nixpkgs-local,
       home-manager,
       ...
     }:
@@ -20,135 +19,71 @@
         };
       };
 
-      upkgs = import nixpkgs-local {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-      };
-
       mkSystemConfig =
-        hostname: username:
+        hostname:
         nixpkgs.lib.nixosSystem {
           inherit system pkgs;
+
           specialArgs = {
             inherit hostname username self inputs;
             HM = false;
           };
-          modules = [
-            ./options.nix
-            ./hosts/${hostname}
-            ./system
 
-            inputs.stylix.nixosModules.stylix
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                users.${username} = {
-                  imports = [
-                    inputs.zen-browser.homeModules.twilight
-                    inputs.nvf.homeManagerModules.default
-
-                    ./options.nix
-                    ./hosts/${hostname}/configuration.nix
-                    ./home
-                  ];
-                };
-                extraSpecialArgs = {
-                  inherit inputs self hostname username system;
-                  HM = true;
-                };
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "";
-              };
-            }
-          ];
+          modules = importModulesNixos hostname;
         };
 
-      mkSystemConfigTest =
-        hostname: username:
-        nixpkgs-local.lib.nixosSystem {
-          inherit system;
-          pkgs = upkgs;
-          specialArgs = {
-            inherit hostname username self inputs;
-          };
-          modules = [
-            ./options.nix
-            ./hosts/${hostname} { HM = false; }
-            ./system
+      mkHomeConfig = hostname: home-manager.lib.homeManagerConfiguration { 
+        inherit pkgs;
 
-            inputs.stylix.nixosModules.stylix
+        modules = importModulesHM hostname;
 
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                users.${username} = {
-                  imports = [
-                    inputs.zen-browser.homeModules.twilight
-                    inputs.nvf.homeManagerModules.default
-
-                    ./options.nix
-                    ./hosts/${hostname}/configuration.nix { HM = true; }
-                    ./home
-                  ];
-                };
-                extraSpecialArgs = {
-                  inherit inputs self hostname username system;
-                };
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "";
-              };
-            }
-          ];
+        extraSpecialArgs = {
+          inherit hostname username self inputs system;
+          homeManagerOnly = true;
+          HM = true;
         };
-      # mkHomeConfig =
-      #   hostname: username:
-      #   home-manager.lib.homeManagerConfiguration {
-      #     inherit pkgs;
-      #     modules = [
-      #       inputs.stylix.homeModules.stylix
-      #       inputs.zen-browser.homeModules.twilight
-      #       inputs.nvf.homeManagerModules.default
-      #
-      #       ./hosts/${hostname}/configuration.nix
-      #       ./home
-      #     ];
-      #     extraSpecialArgs = {
-      #       inherit inputs self hostname username;
-      #       config.homeManagerOnly = true;
-      #     };
-      #   };
+      };
+
+      importModulesNixos = hostname: [
+        ./options.nix
+        ./hosts/${hostname}
+        ./system
+
+        inputs.stylix.nixosModules.stylix
+      ];
+
+      importModulesHM = hostname: [
+	./options.nix
+        ./hosts/${hostname}/configuration.nix
+        ./home
+
+        inputs.zen-browser.homeModules.twilight
+        inputs.nvf.homeManagerModules.default
+        inputs.stylix.homeModules.stylix
+      ];
+
+      myHosts = builtins.attrNames (builtins.readDir ./hosts);
     in
     {
       # NIXOS CONFIGURATIONS
-      nixosConfigurations = {
-        waylander = mkSystemConfig "waylander" username;
-        druss = mkSystemConfig "druss" username;
-        delnoch = mkSystemConfig "delnoch" username;
-        # wsl = mkSystemConfig "wsl";
-
-        test = mkSystemConfigTest "test" username;
-      };
+      nixosConfigurations = nixpkgs.lib.genAttrs myHosts mkSystemConfig;
 
       # HOME-MANAGER CONFIGURATIONS.
-      # homeConfigurations = {
-      #   waylander = mkHomeConfig "waylander" username;
-      #   druss = mkHomeConfig "druss" username;
-      #   delnoch = mkHomeConfig "delnoch" username;
-      #   # wsl = mkHomeConfig "wsl";
-      # };
+      # homeConfigurations = nixpkgs.lib.genAttrs myHosts mkHomeConfig;
+      homeConfigurations = builtins.listToAttrs (
+        builtins.map (host: {
+          name = "${username}@${host}";
+          value = mkHomeConfig host;
+        }) myHosts
+      );
 
       # import shells
       devShells.${system} = import ./shells.nix { inherit pkgs; };
     };
 
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-local.url = "git+file:///home/evolve/Code/nixpkgs";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";

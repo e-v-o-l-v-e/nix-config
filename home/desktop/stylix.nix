@@ -27,17 +27,19 @@ in
           package = pkgs.nerd-fonts.daddy-time-mono;
           name = "DaddyTimeMono Nerd Font";
         };
-        sansSerif = {
-          package = pkgs.nerd-fonts.daddy-time-mono;
-          name = "DaddyTimeMono Nerd Font";
-        };
-        serif = {
-          package = pkgs.nerd-fonts.daddy-time-mono;
-          name = "DaddyTimeMono Nerd Font";
-        };
+        # sansSerif = {
+        #   package = pkgs.nerd-fonts.daddy-time-mono;
+        #   name = "DaddyTimeMono Nerd Font";
+        # };
+        # serif = {
+        #   package = pkgs.nerd-fonts.daddy-time-mono;
+        #   name = "DaddyTimeMono Nerd Font";
+        # };
 
-        sizes.terminal = 13;
+        sizes.terminal = config.gui.font.size;
       };
+
+      targets.zellij.enable = false;
     };
 
     # specialisation = {
