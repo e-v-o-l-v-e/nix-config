@@ -53,14 +53,6 @@ with lib;
       stylix = {
         enable = mkEnableOption "Enable theming with stylix";
 
-        colorScheme = mkOption {
-          type = types.nullOr types.str;
-          default = null;
-          # default = "tokyo-night-dark";
-          example = "gruvbox-dark-medium";
-          description = "Stylix baseScheme name to override dark and light";
-        };
-
         colorSchemeLight = mkOption {
           type = types.str;
           default = "one-light";
@@ -69,8 +61,18 @@ with lib;
 
         colorSchemeDark = mkOption {
           type = types.str;
-          default = "gruvbox-dark-medium";
+          default = "tokyo-night-dark";
           description = "Stylix dark baseScheme";
+        };
+
+        override = mkEnableOption "Override dark and light schemes";
+
+        overrideColorScheme = mkOption {
+          type = types.nullOr types.str;
+          default = null;
+          # default = "tokyo-night-dark";
+          example = "gruvbox-dark-medium";
+          description = "Stylix baseScheme name to override dark and light";
         };
 
         enableSpecialisation = mkEnableOption "Build config for dark and white theme, SLOW";

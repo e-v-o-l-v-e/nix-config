@@ -1,22 +1,17 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ config, pkgs, ... }:
 let
   cfg = config.gui.stylix;
 
   colorScheme = 
-    if cfg.colorScheme != null
-      then cfg.themeOverride
-    else if config.gui.theme == "light"
-      then cfg.colorSchemeLight
+    if cfg.override
+      then cfg.overrideColorScheme
+    else if config.gui.theme == "dark"
+      then cfg.colorSchemeDark
     else 
-      cfg.colorSchemeDark;
+      cfg.colorSchemeLight;
 in
 {
-  config = lib.mkIf config.homeManagerOnly {
+  config = {
     stylix = {
       inherit (cfg) enable;
 

@@ -48,6 +48,8 @@
       programs.nvf.enable = true;
       programs.nvf.maxConfig = true;
 
+      programs.zellij.enable = true;
+
       programs.zen-browser.enable = true;
 
       wayland.windowManager.hyprland.enable = false; # manage hyprland settings with home-manager

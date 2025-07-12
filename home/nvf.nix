@@ -8,7 +8,6 @@
 }:
 let
   inherit (config.programs.nvf) maxConfig;
-  light = (config.gui.theme == "light");
 in
 {
   config.programs.nvf = {
@@ -160,7 +159,7 @@ in
         #     base0C base0D base0E base0F;
         # };
       } //
-      (if light then {
+      (if config.gui.theme != "dark" then {
         name = "catppuccin";
         style = "latte";
       } else {

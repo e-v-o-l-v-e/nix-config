@@ -24,14 +24,19 @@
 
       # gui / theming #
       gui.enable = true;
-      gui.theme = "dark";
+      gui.theme = "light";
 
       gui.hyprland.enable = true;
 
       gui.stylix.enable = true;
       gui.stylix.colorSchemeDark = "tokyo-night-dark";
       gui.stylix.colorSchemeLight = "one-light";
-      # gui.stylix.colorScheme = lib.mkForce "gruvbox-dark-medium";
+
+      gui.stylix.override = true;
+      gui.stylix.overrideColorScheme = 
+        if config.gui.theme == "light"
+        then config.gui.stylix.colorSchemeLight
+        else config.gui.stylix.colorSchemeDark;
 
       programs.waybar.enable = true;
 
@@ -51,6 +56,8 @@
       #   # name = "tokyonight";
       #   # style = "night";
       # };
+
+      programs.zellij.enable = true;
 
       programs.zen-browser.enable = true;
 
@@ -78,6 +85,7 @@
       services.kanata.enable = true;
 
       # Network #
+      hardware.bluetooth.enable = true;
       services.tailscale.enable = true;
       server.vpn.enable = false;
     })
