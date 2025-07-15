@@ -51,11 +51,4 @@ config,
     presenterm
     xdg-utils
   ]);
-
-  # some programs need to be enabled like this to allow stylix auto theming
-  programs = {
-    btop.enable = true;
-    fd.enable = true;
-    cava.enable = config.personal.enable;
-  };
 }

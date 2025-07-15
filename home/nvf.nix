@@ -2,14 +2,15 @@
 # https://notashelf.github.io/nvf/options.html
 {
   config,
-  username,
+  hostname,
   lib,
+  pkgs,
+  self,
+  username,
   ...
-}:
-let
+}: let
   inherit (config.programs.nvf) maxConfig;
-in
-{
+in {
   config.programs.nvf = {
     settings.vim = {
       viAlias = true;
@@ -75,17 +76,22 @@ in
           enable = true;
           extraDiagnostics.enable = true;
           treesitter.enable = true;
-          format.type = "nixfmt";
+          format.type = "alejandra";
           lsp = {
             server = "nixd";
+            package = pkgs.nixd;
             options = {
-              nixos.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.waylander.options";
-              # home-manager = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.waylander.options";
-
-              home-manager.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.waylander.options.home-manager.users.type.getSubOptions []";
+              # nixos.expr = (builtins.getFlake (builtins.toString ./.)).nixosConfigurations.${hostname}.options;
+              # home-manager.expr = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.${username}@${hostname}.options";
+              # nixos.expr = self.nixosConfigurations.${hostname}.options;
+              # home-manager.expr = self.homeConfigurations."${username}@${hostname}".options;
+              # nixos.expr = "/home/evolve/nix-config";
+              nixos.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.${hostname}.options";
+              home_manager.expr = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.\"${username}@${hostname}\".options";
             };
           };
         };
+
         java.enable = maxConfig;
         csharp.enable = maxConfig;
         python.enable = maxConfig;
@@ -149,42 +155,24 @@ in
         };
       };
 
-      theme = lib.mkForce {
-        enable = true;
-        # base16-colors = {
-        #   inherit (config.lib.stylix.colors)
-        #     base00 base01 base02 base03
-        #     base04 base05 base06 base07
-        #     base08 base09 base0A base0B
-        #     base0C base0D base0E base0F;
-        # };
-      } //
-      (if config.gui.theme != "dark" then {
-        name = "catppuccin";
-        style = "latte";
-      } else {
-        name = "tokyonight";
-        style = "night";
-      });
-      # base16-colors = {
-      #   inherit (config.lib.stylix.colors) base00;
-      #   inherit (config.lib.stylix.colors) base01;
-      #   inherit (config.lib.stylix.colors) base02;
-      #   inherit (config.lib.stylix.colors) base03;
-      #   inherit (config.lib.stylix.colors) base04;
-      #   inherit (config.lib.stylix.colors) base05;
-      #   inherit (config.lib.stylix.colors) base06;
-      #   inherit (config.lib.stylix.colors) base07;
-      #   inherit (config.lib.stylix.colors) base08;
-      #   inherit (config.lib.stylix.colors) base09;
-      #   inherit (config.lib.stylix.colors) base0A;
-      #   inherit (config.lib.stylix.colors) base0B;
-      #   inherit (config.lib.stylix.colors) base0C;
-      #   inherit (config.lib.stylix.colors) base0D;
-      #   inherit (config.lib.stylix.colors) base0E;
-      #   inherit (config.lib.stylix.colors) base0F;
-      # };
-      # };
+      theme = lib.mkForce (
+        let
+          # light = config.gui.theme == "light";
+          light = false;
+        in {
+          enable = true;
+          name =
+            if light
+            then "catppuccin"
+            else "gruvbox";
+          style =
+            if light
+            then "latte"
+            else "dark";
+          # name = "gruvbox";
+          # style = "dark";
+        }
+      );
 
       autopairs.nvim-autopairs.enable = true;
 
@@ -245,7 +233,10 @@ in
         ccc.enable = false;
         vim-wakatime.enable = false;
         diffview-nvim.enable = true;
-        yanky-nvim.enable = false;
+        yanky-nvim = {
+          enable = maxConfig;
+          setupOpts.ring.storage = "sqlite";
+        };
         icon-picker.enable = maxConfig;
         surround = {
           enable = true;
