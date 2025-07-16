@@ -1,22 +1,21 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, ... }:
 {
-  home.packages = lib.optional config.homeManagerOnly (with pkgs; [
+  home.packages = with pkgs; [
     carlito
-    noto-fonts
-    fira-code
-    terminus_font
-    victor-mono
-    nerd-fonts.daddy-time-mono
-    fantasque-sans-mono
-    jetbrains-mono
-    font-awesome
     fira
-  ]);
+    fira-code
+    font-awesome
+    jetbrains-mono
+    monoid
+    nerd-fonts.daddy-time-mono
+    noto-fonts
+    victor-mono
+  ];
 
   fonts.fontconfig = {
-    enable = lib.mkForce false;
-    defaultFonts = {
-      monospace = [ "daddy-time-mono" ];
-    };
+    enable = true;
+    # defaultFonts = {
+    #   monospace = [ "FiraCode Nerd Font Mono" "DaddyTime Nerd Font Mono" ];
+    # };
   };
 }

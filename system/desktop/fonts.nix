@@ -5,6 +5,8 @@
     noto-fonts
     noto-fonts-cjk-sans
     fira-code
+    fira-code-symbols
+    nerd-fonts.fira-code
     nerd-fonts.terminess-ttf
     victor-mono
     nerd-fonts.daddy-time-mono

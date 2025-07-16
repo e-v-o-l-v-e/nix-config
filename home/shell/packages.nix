@@ -27,6 +27,9 @@ config,
     gitui
     gnutar
     imagemagick
+    linux-manual 
+    man-pages
+    man-pages-posix
     ripgrep-all
     tmux
     tree
@@ -57,5 +60,7 @@ config,
     btop.enable = true;
     fd.enable = true;
     cava.enable = config.personal.enable;
+    man.enable = true;
+    # man.generateCaches = true;
   };
 }

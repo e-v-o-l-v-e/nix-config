@@ -1,12 +1,12 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   programs.kitty = {
     inherit (config.gui) enable;
 
-    # font = {
-    #   inherit (config.gui.font) size;
-    #   name = "DaddyTimeMono";
-    # };
+    font = lib.mkForce {
+      size = 12;
+      name = "FiraCode";
+    };
 
     settings = {
       cursor_trail = 10;

@@ -26,6 +26,11 @@
       gui.enable = true;
       gui.theme = "light";
 
+      # specialisation."light".configuration = {
+      #   gui.theme = "light";
+      #   environment.etc."specialisation".text = "light";
+      # };
+
       gui.hyprland.enable = true;
 
       gui.stylix.enable = true;
