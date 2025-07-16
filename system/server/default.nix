@@ -19,6 +19,7 @@ in
     ./prowlarr.nix
     ./radarr.nix
     ./readarr.nix
+    ./silverbullet.nix
     ./sonarr.nix
   ];
 
@@ -66,6 +67,12 @@ in
       type = lib.types.str;
       default = "/data";
       description = "path to the data dir";
+    };
+
+    ssdPath = lib.mkOption {
+      type = lib.types.str;
+      default = "/ssd";
+      description = "path to the ssd data dir, for small frequently accessed files";
     };
 
     mediaGroupName = lib.mkOption {

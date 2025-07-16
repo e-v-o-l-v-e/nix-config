@@ -2,14 +2,14 @@
 # https://notashelf.github.io/nvf/options.html
 {
   config,
-  username,
+  hostname,
   lib,
+  pkgs,
+  username,
   ...
-}:
-let
+}: let
   inherit (config.programs.nvf) maxConfig;
-in
-{
+in {
   config.programs.nvf = {
     settings.vim = {
       viAlias = true;
@@ -75,17 +75,22 @@ in
           enable = true;
           extraDiagnostics.enable = true;
           treesitter.enable = true;
-          format.type = "nixfmt";
+          format.type = "alejandra";
           lsp = {
             server = "nixd";
+            package = pkgs.nixd;
             options = {
-              nixos.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.waylander.options";
-              # home-manager = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.waylander.options";
-
-              home-manager.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.waylander.options.home-manager.users.type.getSubOptions []";
+              # nixos.expr = (builtins.getFlake (builtins.toString ./.)).nixosConfigurations.${hostname}.options;
+              # home-manager.expr = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.${username}@${hostname}.options";
+              # nixos.expr = self.nixosConfigurations.${hostname}.options;
+              # home-manager.expr = self.homeConfigurations."${username}@${hostname}".options;
+              # nixos.expr = "/home/evolve/nix-config";
+              nixos.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.${hostname}.options";
+              home_manager.expr = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.\"${username}@${hostname}\".options";
             };
           };
         };
+
         java.enable = maxConfig;
         csharp.enable = maxConfig;
         python.enable = maxConfig;
@@ -149,42 +154,24 @@ in
         };
       };
 
-      theme = lib.mkForce {
-        enable = true;
-        # base16-colors = {
-        #   inherit (config.lib.stylix.colors)
-        #     base00 base01 base02 base03
-        #     base04 base05 base06 base07
-        #     base08 base09 base0A base0B
-        #     base0C base0D base0E base0F;
-        # };
-      } //
-      (if config.gui.theme != "dark" then {
-        name = "catppuccin";
-        style = "latte";
-      } else {
-        name = "tokyonight";
-        style = "night";
-      });
-      # base16-colors = {
-      #   inherit (config.lib.stylix.colors) base00;
-      #   inherit (config.lib.stylix.colors) base01;
-      #   inherit (config.lib.stylix.colors) base02;
-      #   inherit (config.lib.stylix.colors) base03;
-      #   inherit (config.lib.stylix.colors) base04;
-      #   inherit (config.lib.stylix.colors) base05;
-      #   inherit (config.lib.stylix.colors) base06;
-      #   inherit (config.lib.stylix.colors) base07;
-      #   inherit (config.lib.stylix.colors) base08;
-      #   inherit (config.lib.stylix.colors) base09;
-      #   inherit (config.lib.stylix.colors) base0A;
-      #   inherit (config.lib.stylix.colors) base0B;
-      #   inherit (config.lib.stylix.colors) base0C;
-      #   inherit (config.lib.stylix.colors) base0D;
-      #   inherit (config.lib.stylix.colors) base0E;
-      #   inherit (config.lib.stylix.colors) base0F;
-      # };
-      # };
+      theme = lib.mkForce (
+        let
+          # light = config.gui.theme == "light";
+          light = false;
+        in {
+          enable = true;
+          name =
+            if light
+            then "catppuccin"
+            else "gruvbox";
+          style =
+            if light
+            then "latte"
+            else "dark";
+          # name = "gruvbox";
+          # style = "dark";
+        }
+      );
 
       autopairs.nvim-autopairs.enable = true;
 
@@ -245,7 +232,10 @@ in
         ccc.enable = false;
         vim-wakatime.enable = false;
         diffview-nvim.enable = true;
-        yanky-nvim.enable = false;
+        yanky-nvim = {
+          enable = maxConfig;
+          setupOpts.ring.storage = "sqlite";
+        };
         icon-picker.enable = maxConfig;
         surround = {
           enable = true;
@@ -336,6 +326,25 @@ in
       presence = {
         neocord.enable = maxConfig;
       };
+
+      keymaps = [
+        { key = "p";     action = "<Plug>(YankyPutAfter)";                    mode = ["n" "x"]; silent = true; }
+        { key = "P";     action = "<Plug>(YankyPutBefore)";                   mode = ["n" "x"]; silent = true; }
+        { key = "gp";    action = "<Plug>(YankyGPutAfter)";                   mode = ["n" "x"]; silent = true; }
+        { key = "gP";    action = "<Plug>(YankyGPutBefore)";                  mode = ["n" "x"]; silent = true; }
+        { key = "<c-p>"; action = "<Plug>(YankyPreviousEntry)";               mode = "n";       silent = true; }
+        { key = "<c-n>"; action = "<Plug>(YankyNextEntry)";                   mode = "n";       silent = true; }
+        { key = "]p";    action = "<Plug>(YankyPutIndentAfterLinewise)";      mode = "n";       silent = true; }
+        { key = "[p";    action = "<Plug>(YankyPutIndentBeforeLinewise)";     mode = "n";       silent = true; }
+        { key = "]P";    action = "<Plug>(YankyPutIndentAfterLinewise)";      mode = "n";       silent = true; }
+        { key = "[P";    action = "<Plug>(YankyPutIndentBeforeLinewise)";     mode = "n";       silent = true; }
+        { key = ">p";    action = "<Plug>(YankyPutIndentAfterShiftRight)";    mode = "n";       silent = true; }
+        { key = "<p";    action = "<Plug>(YankyPutIndentAfterShiftLeft)";     mode = "n";       silent = true; }
+        { key = ">P";    action = "<Plug>(YankyPutIndentBeforeShiftRight)";   mode = "n";       silent = true; }
+        { key = "<P";    action = "<Plug>(YankyPutIndentBeforeShiftLeft)";    mode = "n";       silent = true; }
+        { key = "=p";    action = "<Plug>(YankyPutAfterFilter)";              mode = "n";       silent = true; }
+        { key = "=P";    action = "<Plug>(YankyPutBeforeFilter)";             mode = "n";       silent = true; }
+      ];
     };
   };
 

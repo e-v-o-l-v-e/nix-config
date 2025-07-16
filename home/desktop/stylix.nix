@@ -13,7 +13,8 @@ in
 {
   config = {
     stylix = {
-      inherit (cfg) enable;
+      # inherit (cfg) enable;
+      enable = false;
 
       base16Scheme = "${pkgs.base16-schemes}/share/themes/${colorScheme}.yaml";
 

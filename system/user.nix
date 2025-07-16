@@ -10,7 +10,7 @@ let
   cfg = config.sops-nix;
 
   extraGroups = [ 
-    "audio" "docker" "input" "inputs"
+    "audio" "docker" "input" "inputs" "key"
     "kvm" "libvirtd" "lp" "networkmanager"
     "scanner" "uinputs" "users" "video" "wheel"
     config.server.mediaGroupName
@@ -28,6 +28,7 @@ in
     };
     defaultUserShell = pkgs.fish;
   };
+
   environment.shells = with pkgs; [
     fish
     bash
