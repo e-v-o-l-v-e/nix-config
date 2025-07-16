@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   programs.tmux = {
-    enable = true;
+    enable = false;
     shortcut = "a";
     keyMode = "emacs";
     shell = "${pkgs.fish}/bin/fish";

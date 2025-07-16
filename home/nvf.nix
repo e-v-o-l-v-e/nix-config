@@ -156,17 +156,18 @@ in {
 
       theme = lib.mkForce (
         let
-          # light = config.gui.theme == "light";
-          light = false;
+          light = config.gui.theme == "light";
+          # light = false;
         in {
           enable = true;
-          name =
-            if light
-            then "catppuccin"
-            else "gruvbox";
+          name = "gruvbox";
+            # if light
+            # then "catppuccin"
+            # else "gruvbox";
           style =
             if light
-            then "latte"
+            # then "latte"
+            then "light"
             else "dark";
           # name = "gruvbox";
           # style = "dark";

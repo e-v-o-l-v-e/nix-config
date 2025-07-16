@@ -51,8 +51,8 @@
     ( if HM then {
       #=#=#=# HOME #=#=#=#
       # Apps #
-      gui.quickshell.enable = true;
-      gui.quickshell.caelestia = true;
+      gui.quickshell.enable = false;
+      gui.quickshell.caelestia = false;
 
       programs.nvf.enable = true;
       programs.nvf.maxConfig = true;
