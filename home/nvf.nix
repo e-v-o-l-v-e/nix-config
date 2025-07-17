@@ -94,9 +94,14 @@ in {
         java.enable = maxConfig;
         csharp.enable = maxConfig;
         python.enable = maxConfig;
-        markdown.enable = false; # tmp true;
         yaml.enable = true;
         dart.enable = false;
+
+
+        markdown = {
+          enable = true;
+          extensions.render-markdown-nvim.enable = true;
+        };
 
         lua.enable = maxConfig;
         bash.enable = true;
