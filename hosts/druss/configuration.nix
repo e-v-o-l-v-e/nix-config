@@ -24,7 +24,7 @@
 
       # Theming #
       gui.enable = true;
-      gui.theme = "light";
+      gui.theme = "dark";
 
       gui.font.size = 13;
 

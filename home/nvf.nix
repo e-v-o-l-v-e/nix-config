@@ -260,9 +260,14 @@ in {
       };
 
       notes = {
-        neorg.enable = false;
+        neorg = {
+          enable = false;
+          treesitter = {
+            norgPackage = pkgs.vimPlugins.nvim-treesitter.grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg;
+          };
+        };
         orgmode.enable = false;
-        todo-comments.enable = true; # tmp true;
+        todo-comments.enable = true;
       };
 
       terminal = {
