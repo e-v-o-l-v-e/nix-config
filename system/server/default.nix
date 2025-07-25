@@ -54,35 +54,47 @@ in
     users.users.${username}.linger = cfg.enable;
   };
 
-  options.server = {
-    enable = lib.mkEnableOption "Enable server fonctionnalities";
+  options.server = with lib; {
+    enable = mkEnableOption "Enable server fonctionnalities";
 
-    configPath = lib.mkOption {
-      type = lib.types.str;
+    configPath = mkOption {
+      type = types.str;
       default = "/services-config";
       description = "path to the server's services config dir";
     };
 
-    dataPath = lib.mkOption {
-      type = lib.types.str;
+    dataPath = mkOption {
+      type = types.str;
       default = "/data";
       description = "path to the data dir";
     };
 
-    ssdPath = lib.mkOption {
-      type = lib.types.str;
+    ssdPath = mkOption {
+      type = types.str;
       default = "/ssd";
       description = "path to the ssd data dir, for small frequently accessed files";
     };
 
-    mediaGroupName = lib.mkOption {
-      type = lib.types.str;
+    domain = mkOption {
+      type = types.str;
+      default = "example.com";
+      description = "main FQDN";
+    };
+
+    domainSecondary = mkOption {
+      type = types.str;
+      default = "example.com";
+      description = "secondary FQDN";
+    };
+
+    mediaGroupName = mkOption {
+      type = types.str;
       default = "media";
       description = "Nom du groupe auquel appartiendront les services media (arr stack, jellyfin etc)";
     };
 
-    mediaGroupId = lib.mkOption {
-      type = lib.types.int;
+    mediaGroupId = mkOption {
+      type = types.int;
       default = 2000;
       description = "Id du groupe auquel appartiendront les services media (arr stack, jellyfin etc)";
     };

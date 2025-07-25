@@ -1,14 +1,15 @@
-{config, ...}:
-{
+{config, ...}: let
+  fqdn = config.server.domain;
+in {
   services.caddy = {
     virtualHosts = {
-      "test.cloud.imp-network.com" = {
+      "test.cloud.${fqdn}" = {
         # serverAliases = [ "www.hydra.example.com" ];
         extraConfig = ''
           reverse_proxy http://localhost:9200
         '';
       };
-      "test.imp-network.com" = {
+      "test.${fqdn}" = {
         extraConfig = ''
           respond "DRUUUUUS"
         '';

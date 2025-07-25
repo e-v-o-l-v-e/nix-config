@@ -52,8 +52,12 @@
 
       server = {
         enable = true;
+
         dataPath = "/data";
         configPath = "/services-config";
+
+        domain = "imp-network.com";
+        domainSecondary = "jeudefou.com";
       };
 
       server.vpn.enable = true;

@@ -1,6 +1,8 @@
 { config, ... }:
 let
   cfg = config.server;
+  port = 8686;
+  fqdn = config.server.domain;
 in
 {
   services.lidarr = {
@@ -9,10 +11,16 @@ in
     settings = {
       update.mechanism = "external";
       server = {
+        inherit port;
         urlbase = "localhost";
-        port = 8686;
         bindaddress = "*";
       };
     };
+  };
+
+  services.caddy.virtualHosts."lidarr.${fqdn}" = {
+    extraConfig = ''
+      reverse_proxy http://localhost:${toString port}
+    '';
   };
 }

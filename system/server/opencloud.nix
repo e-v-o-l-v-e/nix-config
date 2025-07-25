@@ -1,8 +1,9 @@
-{ config, ... }:
-{
+{config, ...}: let
+  fqdn = config.server.domain;
+in {
   services.opencloud = {
     # port = 9200;
-    url = "https://test.cloud.imp-network.com";
+    url = "https://test.cloud.${fqdn}";
     # stateDir = "${config.server.dataPath}/opencloud";
     stateDir = "/data/opencloud";
     user = "opencloud";

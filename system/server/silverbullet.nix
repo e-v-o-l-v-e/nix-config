@@ -2,6 +2,7 @@
 let
   listenPort = 3333;
   spaceDir = config.server.ssdPath + "/silverbullet/space";
+  fqdn = config.server.domain;
 in
   {
   services.silverbullet = {
@@ -14,7 +15,7 @@ in
     envFile = "/etc/silverbullet.env";
   };
 
-  services.caddy.virtualHosts."silverbullet.imp-network.com" = {
+  services.caddy.virtualHosts."silverbullet.${fqdn}" = {
     extraConfig = ''
       reverse_proxy http://localhost:${toString listenPort}
     '';

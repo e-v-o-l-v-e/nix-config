@@ -2,6 +2,9 @@
 let
   cfg = config.services.prowlarr;
   dataDir = "${cfg.configPath}/prowlarr";
+
+  port = 9696;
+  fqdn = config.server.domain;
 in
 {
   services.prowlarr = {
@@ -10,12 +13,19 @@ in
     settings = {
       update.mechanism = "external";
       server = {
+        inherit port;
         urlbase = "localhost";
-        port = 9696;
         bindaddress = "*";
       };
     };
   };
+
+  services.caddy.virtualHosts."prowlarr.${fqdn}" = {
+    extraConfig = ''
+      reverse_proxy http://localhost:${toString port}
+    '';
+  };
+
   users.users.prowlarr = lib.mkIf cfg.enable {
     isSystemUser = true;
     group = cfg.mediaGroupName;
