@@ -165,15 +165,18 @@ in {
           # light = false;
         in {
           enable = true;
-          name = "gruvbox";
+          # name = "gruvbox";
+          name = "tokyonight";
             # if light
             # then "catppuccin"
             # else "gruvbox";
           style =
             if light
-            # then "latte"
-            then "light"
-            else "dark";
+            then "day"
+            else "night";
+            # # then "latte"
+            # then "light"
+            # else "dark";
           # name = "gruvbox";
           # style = "dark";
         }

@@ -5,6 +5,7 @@
     settings.color_theme = 
       if config.gui.theme == "light"
         then "gruvbox_light"
-      else "gruvbox_dark";
+      # else "gruvbox_dark";
+      else "tokyo-night";
   };
 }
