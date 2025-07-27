@@ -3,8 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-let
+}: let
   cfg = config.server;
 
   vpn = "airvpn";
@@ -13,14 +12,22 @@ let
   vns = "veth-${vpn}";
   addressv4 = "10.142.178.59/32";
   addressv6 = "fd7d:76ee:e68f:a993:8a1a:ff5d:d8f0:ecea/128";
-in
-{
+in {
   config = {
     networking.firewall.allowedTCPPorts = lib.optionals cfg.enable cfg.openPorts;
 
+    # networking.interfaces = lib.mkIf cfg.staticAdress.enable {
+    #   enp2s0 = {
+    #     ipv4.addresses = [ {
+    #         adress = "192.168.0.212";
+    #         prefixLength = 24;
+    #       } ];
+    #   };
+    # };
+
     # VPN CONFIG
     networking.wireguard.enable = cfg.vpn.enable;
-    environment.systemPackages = lib.optionals cfg.vpn.enable [ pkgs.wireguard-tools ];
+    environment.systemPackages = lib.optionals cfg.vpn.enable [pkgs.wireguard-tools];
 
     networking.wireguard.interfaces = lib.mkIf cfg.vpn.enable {
       "wg-${vpn}" = {
@@ -64,10 +71,10 @@ in
         peers = [
           {
             publicKey = "PyLCXAQT8KkM4T+dUsOQfn+Ub3pGxfGlxkIApuig+hk=";
-            allowedIPs = [
-              "0.0.0.0/0"
-              "::/0"
-            ];
+            # allowedIPs = [
+            #   "0.0.0.0/0"
+            #   "::/0"
+            # ];
             endpoint = "ch3.vpn.airdns.org:1637";
           }
         ];
@@ -84,6 +91,9 @@ in
       ];
       description = "List of ports to open";
     };
+
+    server.staticAdress = lib.mkEnableOption "Enable static IPv4 address";
+
     server.vpn.enable = lib.mkEnableOption "Enable connection with airvpn through wireguard for a server config";
   };
 }

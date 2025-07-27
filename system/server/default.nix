@@ -17,6 +17,7 @@ in
     ./network.nix
     ./opencloud.nix
     ./prowlarr.nix
+    ./qbittorrent.nix
     ./radarr.nix
     ./readarr.nix
     ./silverbullet.nix

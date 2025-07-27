@@ -3,7 +3,7 @@ let
   cfg = config.server;
 
   port = 7878;
-  fqdn = config.server.domain;
+  fqdn = cfg.domain;
 in
 {
   services.radarr = {
