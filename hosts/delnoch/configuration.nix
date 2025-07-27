@@ -68,7 +68,10 @@
         caddy.enable = true;
 
         # notes
-        services.silverbullet.enable = true;
+        silverbullet.enable = true;
+
+        # utilities
+        # local-content-share.enable = true;
 
         # media viewing/request
         jellyfin.enable = true;

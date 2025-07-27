@@ -82,7 +82,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    nixpkgs-local.url = "git+"
+    # nixpkgs.url = "git+file:///home/evolve/Code/nixpkgs?ref=nixos-local-content-share-init";
+
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
