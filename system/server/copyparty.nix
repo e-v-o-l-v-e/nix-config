@@ -6,7 +6,7 @@
 }: let
   port = 3923;
 in {
-  imports = [inputs.copyparty.nixosModule.default];
+  imports = [inputs.copyparty.nixosModules.default];
 
   services.copyparty = {
     accounts = {
@@ -15,7 +15,7 @@ in {
     };
   };
 
-  services.caddy.virtualHosts."copyparty.${config.server.domainName}" = {
+  services.caddy.virtualHosts."copyparty.${config.server.domain}" = {
     extraConfig = ''
       reverse_proxy http://localhost:${toString port}
     '';

@@ -39,7 +39,7 @@ in
 
     secrets = 
       {
-        domain-name = server;
+        domain = server;
         "airvpn/private_key" = common;
         "airvpn/preSharedKey" = common;
       }

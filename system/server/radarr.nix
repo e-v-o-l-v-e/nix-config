@@ -17,7 +17,7 @@ in
     };
   };
 
-  services.caddy.virtualHosts."radarr.${cfg.domainName}" = {
+  services.caddy.virtualHosts."radarr.${cfg.domain}" = {
     extraConfig = ''
       reverse_proxy http://localhost:${toString port}
     '';
