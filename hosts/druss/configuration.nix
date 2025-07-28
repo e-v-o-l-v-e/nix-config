@@ -78,7 +78,8 @@
       # Network #
       services.tailscale.enable = true;
       server.vpn.enable = false;
-      networking.interfaces.eth0.wakeOnLan.enable = true;
+      # networking = {};
+      # networking.interfaces.eth0.wakeOnLan.enable = true;
       hardware.bluetooth.enable = true;
     })
   ];

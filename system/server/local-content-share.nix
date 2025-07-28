@@ -1,7 +1,7 @@
 {config, ...}: let
   port = 8081;
 in {
-  imports = [../../custom/modules/local-content-share.nix];
+  # imports = [../../custom/modules/local-content-share.nix];
 
   services.local-content-share = {
     inherit port;
