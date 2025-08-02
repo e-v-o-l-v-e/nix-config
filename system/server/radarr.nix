@@ -1,9 +1,7 @@
 { config, ... }:
 let
   cfg = config.server;
-
   port = 7878;
-  fqdn = config.server.domain;
 in
 {
   services.radarr = {
@@ -19,7 +17,7 @@ in
     };
   };
 
-  services.caddy.virtualHosts."radarr.${fqdn}" = {
+  services.caddy.virtualHosts."radarr.${cfg.domain}" = {
     extraConfig = ''
       reverse_proxy http://localhost:${toString port}
     '';

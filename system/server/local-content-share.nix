@@ -1,12 +1,15 @@
-{ config, ... }:
-# let
-#   cfg = config.services.local-content-share;
-# in
-{
-  # imports = [ ../../custom/modules/local-content-share.nix ];
+{config, ...}: let
+  port = 8081;
+in {
+  # imports = [../../custom/modules/local-content-share.nix];
 
-  # services.local-content-share = {
-  #   enable = true;
-  #   port = 8081;
-  # };
+  services.local-content-share = {
+    inherit port;
+  };
+
+  services.caddy.virtualHosts."quickshare.${config.server.domainName}" = {
+    extraConfig = ''
+      reverse_proxy http://localhost:${toString port}
+    '';
+  };
 }

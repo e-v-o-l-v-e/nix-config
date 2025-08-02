@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{config, ...}: let
   cfg = config.server;
   dataDir = "${cfg.configPath}/jellyfin";
   fqdn = config.server.domain;
