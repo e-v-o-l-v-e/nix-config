@@ -24,7 +24,7 @@
 
       # gui / theming #
       gui.enable = true;
-      gui.theme = "dark";
+      gui.theme = "light";
 
       # specialisation."light".configuration = {
       #   gui.theme = "light";

@@ -166,13 +166,14 @@ in {
         in {
           enable = true;
           # name = "gruvbox";
-          name = "tokyonight";
-            # if light
-            # then "catppuccin"
-            # else "gruvbox";
+          # name = "tokyonight";
+          name =
+            if light
+            then "catppuccin"
+            else "tokyonight";
           style =
             if light
-            then "day"
+            then "latte"
             else "night";
             # # then "latte"
             # then "light"
