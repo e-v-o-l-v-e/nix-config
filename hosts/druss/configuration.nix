@@ -28,8 +28,6 @@
 
       gui.font.size = 13;
 
-      gui.quickshell.enable = false;
-      gui.quickshell.caelestia = false;
       programs.waybar.enable = false;
 
       gui.stylix.enable = true;

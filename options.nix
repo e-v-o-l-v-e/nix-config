@@ -77,11 +77,6 @@ with lib;
 
         enableSpecialisation = mkEnableOption "Build config for dark and white theme, SLOW";
       };
-
-      quickshell = {
-        enable = mkEnableOption "Enable QuickShell";
-        caelestia = mkEnableOption "Use Caelestia config for QuickShell";
-      };
     };
 
     gaming = {

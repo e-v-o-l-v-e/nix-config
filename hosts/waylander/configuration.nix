@@ -51,9 +51,6 @@
     ( if HM then {
       #=#=#=# HOME #=#=#=#
       # Apps #
-      gui.quickshell.enable = false;
-      gui.quickshell.caelestia = false;
-
       programs.nvf.enable = true;
       programs.nvf.maxConfig = true;
       # programs.nvf.settings.vim.theme = lib.mkForce {

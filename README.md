@@ -36,7 +36,6 @@ nix-config/
 │   │   │   ├── hyprland.nix
 │   │   │   ├── packages.nix
 │   │   │   └── waybar.nix
-│   │   ├── quickshell/
 │   │   └── stylix.nix
 │   ├── home.nix
 │   ├── nvf.nix
