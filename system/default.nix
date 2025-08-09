@@ -7,7 +7,8 @@
     ./locale.nix
     ./network.nix
     ./nix.nix
-    ./server
+    ./server.nix
+    ./services
     ./sops.nix
     ./user.nix
   ];

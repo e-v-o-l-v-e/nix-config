@@ -118,7 +118,7 @@
 
 
     # import shells
-    devShells.${system} = import ./shells.nix {inherit pkgs;};
+    devShells.${system} = import ./custom/shells.nix {inherit pkgs;};
   };
 
   inputs = {
