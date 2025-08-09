@@ -166,11 +166,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    local-content-share = {
-      url = "github:e-v-o-l-v-e/local-content-share";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     copyparty = {
       url = "github:9001/copyparty";
       inputs.nixpkgs.follows = "nixpkgs";

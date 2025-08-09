@@ -15,7 +15,7 @@ in
     ./jellyseerr.nix
     ./lidarr.nix
     ./local-content-share.nix
-    ./network.nix
+    # ./network.nix
     ./opencloud.nix
     ./prowlarr.nix
     ./qbittorrent.nix
