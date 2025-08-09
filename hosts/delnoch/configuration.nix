@@ -45,7 +45,7 @@
 
       # Network #
       services.tailscale.enable = true;
-      interfaces.eth0.wakeOnLan.enable = true;
+      networking.interfaces.eth0.wakeOnLan.enable = true;
 
 
       #=#=#=# SERVER SPECIFIC #=#=#=#

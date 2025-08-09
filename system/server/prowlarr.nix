@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  cfg = config.services.prowlarr;
+  cfg = config.server;
   dataDir = "${cfg.configPath}/prowlarr";
 
   port = 9696;

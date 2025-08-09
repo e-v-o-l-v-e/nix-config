@@ -3,11 +3,11 @@
 in {
   # imports = [../../custom/modules/local-content-share.nix];
 
-  services.local-content-share = {
-    inherit port;
-  };
+  # services.local-content-share = {
+  #   inherit port;
+  # };
 
-  services.caddy.virtualHosts."quickshare.${config.server.domainName}" = {
+  services.caddy.virtualHosts."quickshare.${config.server.domain}" = {
     extraConfig = ''
       reverse_proxy http://localhost:${toString port}
     '';

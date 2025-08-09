@@ -23,7 +23,7 @@
 
         specialArgs = {
           inherit hostname username self inputs;
-          config.gui.theme = "light";
+          # config.gui.theme = "light";
           HM = false;
         };
 
@@ -39,7 +39,7 @@
         extraSpecialArgs = {
           inherit hostname username self inputs system;
           homeManagerOnly = true;
-          config.gui.theme = "light";
+          # config.gui.theme = "light";
           HM = true;
         };
       };
