@@ -14,5 +14,7 @@
     };
 
     enableGitIntegration = true;
+
+    # extraConfig = "shell zellij --layout welcome";
   };
 }

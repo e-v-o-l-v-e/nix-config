@@ -1,7 +1,7 @@
 { config, ... }: {
   programs.zellij = {
-    enableFishIntegration = true;
-    attachExistingSession = true;
+    enableFishIntegration = false;
+    attachExistingSession = false;
     exitShellOnExit = false;
 
     settings = {

@@ -50,6 +50,10 @@
 
     interactiveShellInit = ''
       fish_vi_key_bindings
+      # zellij -l welcome
+      if test "$TERM" = "xterm-kitty" -a -z "$ZELLIJ"
+        exec zellij --layout welcome
+      end
     '';
 
     functions."ssh" = {
