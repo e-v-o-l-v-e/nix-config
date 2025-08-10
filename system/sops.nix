@@ -40,6 +40,12 @@ in
     secrets = 
       {
         domain = server;
+
+        caddy-env = lib.mkIf config.services.caddy.enable {
+          inherit (server) sopsFile;
+          owner = "caddy";
+        };
+
         "airvpn/private_key" = common;
         "airvpn/preSharedKey" = common;
       }
