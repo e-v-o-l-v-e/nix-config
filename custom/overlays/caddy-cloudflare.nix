@@ -5,10 +5,8 @@ inputs: _final: prev:
 let
 
   plugins = [ "github.com/caddy-dns/cloudflare" ];
-  goImports =
-    prev.lib.flip prev.lib.concatMapStrings plugins (pkg: "   _ \"${pkg}\"\n");
-  goGets = prev.lib.flip prev.lib.concatMapStrings plugins
-    (pkg: "go get ${pkg}\n      ");
+  goImports = prev.lib.flip prev.lib.concatMapStrings plugins (pkg: "   _ \"${pkg}\"\n");
+  goGets = prev.lib.flip prev.lib.concatMapStrings plugins (pkg: "go get ${pkg}\n      ");
   main = ''
     package main
     import (

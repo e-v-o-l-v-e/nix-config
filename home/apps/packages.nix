@@ -15,6 +15,7 @@
         localsend
         loupe
         pavucontrol
+        ueberzugpp
         vlc
         wl-clipboard
         xfce.thunar
