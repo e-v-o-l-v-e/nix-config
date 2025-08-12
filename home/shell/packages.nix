@@ -31,7 +31,6 @@ config,
     man-pages
     man-pages-posix
     ripgrep-all
-    tmux
     tree
     wget
 
@@ -48,6 +47,7 @@ config,
     zip
   ]
   ++ lib.optionals config.personal.enable (with pkgs; [
+    jellyfin-tui
     libnotify
     lowfi
     pamixer
