@@ -92,9 +92,8 @@
 
       ## SERVER TESTING ##
       # server.enable = true;
-      # server.vpn.enable = true;
       # server.domain = "imp-network.com";
-      # services.qbittorrent.enable = true;
+      # services.jellyfin.enable = true;
       # services.caddy.enable = true;
     })
   ];

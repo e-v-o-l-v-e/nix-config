@@ -85,6 +85,8 @@
         readarr.enable = true;
         opencloud.enable = false;
       };
+
+      virtualisation.docker.enable = true;
     })
   ];
 }

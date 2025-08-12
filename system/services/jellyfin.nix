@@ -9,35 +9,27 @@ in {
     group = "media";
   };
 
-  services.caddy.virtualHosts = lib.mkIf config.services.jellyfin.enable {
-    "jellyfin.${fqdn}" = {
-      extraConfig = ''
-      reverse_proxy http://localhost:8096
-      '';
+  virtualisation.oci-containers.containers = lib.mkIf config.services.jellyfin.enable {
+    jellyfin_vue = {
+      autoStart = true;
+      serviceName = "vue";
+      pull = "always";
+      image = "ghcr.io/jellyfin/jellyfin-vue:unstable";
+      ports = [ "8888:80" ];
     };
   };
 
-  # systemd.services.jellyfin = {
-  #   serviceConfig = {
-  #     DynamicUser = lib.mkForce false;
-  #     User = "jellyfin";
-  #     Group = "media";
-  #     ReadWritePaths = [ dataDir ];
-  #   };
-  #   wantedBy = [ "multi-user.target" ];
-  #   after = [ "systemd-tmpfiles-setup.service" ];
-  #   requires = [ "systemd-tmpfiles-setup.service" ];
-  # };
 
-  # systemd.tmpfiles.rules = [
-  #   "d ${dataDir} 0755 jellyseerr media -"
-  #   "Z ${dataDir} 0755 jellyseerr media"
-  # ];
-
-  # systemd.tmpfiles.rules = lib.mkIf cfg.enable [
-  #   "d ${cfg.configPath}/jellyfin 770 jellyfin - -"
-  #   "Z ${cfg.configPath}/jellyfin 770 jellyfin - -"
-  #   "d ${cfg.dataPath}/config/jellyfin 770 jellyfin - -"
-  #   "Z ${cfg.dataPath}/jellyfin 770 jellyfin - -"
-  # ];
+  services.caddy.virtualHosts = lib.mkIf config.services.jellyfin.enable {
+    "jellyfin.${fqdn}" = {
+      extraConfig = ''
+        reverse_proxy http://localhost:8096
+      '';
+    };
+    "vue.${fqdn}" = {
+      extraConfig = ''
+        reverse_proxy http://localhost:8888
+      '';
+    };
+  };
 }
