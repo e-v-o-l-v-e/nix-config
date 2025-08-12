@@ -159,7 +159,13 @@ in {
         };
       };
 
-      theme.enable = false;
+      options.termguicolors = true;
+
+      theme = {
+        enable = true;
+        name = "gruvbox";
+        style = "dark";
+      };
 
       # theme = {
       #   name = "tokyonight";;
