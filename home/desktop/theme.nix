@@ -37,6 +37,9 @@
 
       # kitty switch, defined in ../apps/kitty.nix
       theme-kitty-switch $THEME
+
+      # btop switch, defined in ../shell/btop.nix
+      theme-btop-switch $THEME
     '')
   ];
 }

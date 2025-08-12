@@ -17,6 +17,12 @@ in {
     settings = {
       cursor_trail = 10;
       window_padding_width = "2 5";
+      allow_remote_control = "yes";
+      listen_on = "unix:/tmp/mykitty";
+    };
+
+    environment = {
+      "KITTY_LISTEN_ON" = "unix:@mykitty";
     };
 
     font = lib.mkForce {
@@ -52,8 +58,8 @@ in {
       cd $HOME/.config/kitty
 
       if test $argv[1] = "restore"
-        echo restore previous theme :
         mv -v theme.conf.previous theme.conf
+        kitten @ load-config
         exit
       end
 
@@ -64,10 +70,8 @@ in {
         exit
       end
 
-      echo backup current theme :
       mv -v theme.conf theme.conf.previous
 
-      echo enable $argv theme
       if test $argv[1] = "light"
         ln -sv themes/${theme.light}.conf theme.conf
       else if test $argv[1] = "dark"
@@ -80,17 +84,11 @@ in {
           mv -v theme.conf.previous theme.conf
         end
       end
+        
+      # reload
+      kill -SIGUSR1 $(pgrep kitty)
+
+      echo ""
     '')
   ];
-
-  home.activation = {
-    kittyTheme = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      target="$HOME/.config/kitty/theme.conf"
-      link="./themes/Alabaster_Dark.conf"
-      if [ ! -e "$target" ]; then
-        mkdir -p "$(dirname "$target")"
-        ln -s "$link" "$target"
-      fi
-    '';
-  };
 }
