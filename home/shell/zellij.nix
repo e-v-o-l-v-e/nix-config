@@ -5,9 +5,9 @@
     exitShellOnExit = false;
 
     settings = {
-      theme = if config.gui.theme == "light"
-        then "gruvbox-light"
-        else "gruvbox-dark";
+      # theme = if config.gui.theme == "light"
+      #   then "gruvbox-light"
+      #   else "gruvbox-dark";
 
       themes = {
         # RGB version (light theme)

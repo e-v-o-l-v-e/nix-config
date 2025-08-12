@@ -14,8 +14,8 @@
 
   fonts.fontconfig = {
     enable = true;
-    # defaultFonts = {
-    #   monospace = [ "FiraCode Nerd Font Mono" "DaddyTime Nerd Font Mono" ];
-    # };
+    defaultFonts = {
+      monospace = [ "FiraCode Nerd Font Mono" "DaddyTime Nerd Font Mono" ];
+    };
   };
 }

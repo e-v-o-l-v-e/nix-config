@@ -10,7 +10,7 @@
     timeout = 3000
     [package_manager]
     package_manager = "nix"
-    install_method = "Shell"
+    install_method = "System"
   '';
 
   programs.nix-index = {

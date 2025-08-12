@@ -159,29 +159,34 @@ in {
         };
       };
 
-      theme = lib.mkForce (
-        let
-          light = config.gui.theme == "light";
-          # light = false;
-        in {
-          enable = true;
-          # name = "gruvbox";
-          # name = "tokyonight";
-          name =
-            if light
-            then "catppuccin"
-            else "tokyonight";
-          style =
-            if light
-            then "latte"
-            else "night";
-            # # then "latte"
-            # then "light"
-            # else "dark";
-          # name = "gruvbox";
-          # style = "dark";
-        }
-      );
+      theme.enable = false;
+
+      # theme = {
+      #   name = "tokyonight";;
+      # };
+      #   lib.mkForce (
+      #   let
+      #     light = config.gui.theme == "light";
+      #     # light = false;
+      #   in {
+      #     enable = true;
+      #     # name = "gruvbox";
+      #     # name = "tokyonight";
+      #     name =
+      #       if light
+      #       then "catppuccin"
+      #       else "tokyonight";
+      #     style =
+      #       if light
+      #       then "latte"
+      #       else "night";
+      #       # # then "latte"
+      #       # then "light"
+      #       # else "dark";
+      #     # name = "gruvbox";
+      #     # style = "dark";
+      #   }
+      # );
 
       autopairs.nvim-autopairs.enable = true;
 

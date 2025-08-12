@@ -1,8 +1,8 @@
 { ... }:
 {
   imports = [
-    ./hypr
     ./fonts.nix
-    ./stylix.nix
+    ./hypr.nix
+    ./theme.nix
   ];
 }

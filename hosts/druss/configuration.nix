@@ -29,7 +29,7 @@
 
       programs.waybar.enable = false;
 
-      gui.stylix.enable = true;
+      gui.stylix.enable = false;
       gui.stylix.colorSchemeDark = "tokyo-night-dark";
       gui.stylix.colorSchemeLight = "one-light";
 
