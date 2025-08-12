@@ -41,5 +41,19 @@
       # btop switch, defined in ../shell/btop.nix
       theme-btop-switch $THEME
     '')
+
+    (pkgs.writeScriptBin "theme-initial-install" ''
+      #!/usr/bin/env fish
+
+      set -U THEME "dark"
+
+      # btop
+      set btopdir $HOME/.config/btop
+      mkdir -p $btopdir
+      echo 'color_theme = "gruvbox_light"' > $btopdir/theme-light.conf
+      echo 'color_theme = "gruvbox_dark"' > $btopdir/theme-dark.conf
+
+      theme-global-switch
+    '')
   ];
 }
