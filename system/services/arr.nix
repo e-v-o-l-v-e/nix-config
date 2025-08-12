@@ -29,14 +29,16 @@ let
         group = cfg.mediaGroupName;
       };
 
-      services.caddy.virtualHosts."${name}.${fqdn}" = {
-        extraConfig = ''
+      services.caddy.virtualHosts = lib.mkIf config.services."${name}".enable {
+        "${name}.${fqdn}" = {
+          extraConfig = ''
           reverse_proxy http://localhost:${toString port}
           tls {
             dns cloudflare {env.CLOUDFLARE_API_TOKEN}
             resolvers 1.1.1.1
           }
-        '';
+          '';
+        };
       };
     };
 in

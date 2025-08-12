@@ -46,6 +46,16 @@ in
           owner = "caddy";
         };
 
+        silverbullet-env = {
+          inherit (server) sopsFile;
+          # owner = "silverbullet";
+          owner = config.services.silverbullet.user;
+        };
+
+        "wg-airvpn.conf" = {
+          inherit (server) sopsFile;
+        };
+
         "airvpn/private_key" = common;
         "airvpn/preSharedKey" = common;
       }

@@ -89,7 +89,13 @@
       # Network #
       hardware.bluetooth.enable = true;
       services.tailscale.enable = true;
-      server.vpn.enable = false;
+
+      ## SERVER TESTING ##
+      # server.enable = true;
+      # server.vpn.enable = true;
+      # server.domain = "imp-network.com";
+      # services.qbittorrent.enable = true;
+      # services.caddy.enable = true;
     })
   ];
 }

@@ -50,6 +50,7 @@
       ./system
 
       inputs.stylix.nixosModules.stylix
+      inputs.vpn-confinement.nixosModules.default
     ];
 
     importModulesHM = hostname: [
@@ -170,5 +171,7 @@
       url = "github:9001/copyparty";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
   };
 }

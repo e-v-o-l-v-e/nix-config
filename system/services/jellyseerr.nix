@@ -11,10 +11,12 @@ in
     inherit port configDir;
   };
 
-  services.caddy.virtualHosts."jellyseerr.${fqdn}" = {
-    extraConfig = ''
+  services.caddy.virtualHosts = lib.mkIf config.services.jellyseerr.enable {
+    "jellyseerr.${fqdn}" = {
+      extraConfig = ''
       reverse_proxy http://localhost:${toString port}
-    '';
+      '';
+    };
   };
 
   # users.users.jellyseerr = lib.mkIf cfg.services.jellyseerr.enable {

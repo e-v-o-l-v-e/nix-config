@@ -1,4 +1,4 @@
-{config, ...}: let
+{ lib, config, ...}: let
   cfg = config.server;
   dataDir = "${cfg.configPath}/jellyfin";
   fqdn = config.server.domain;
@@ -9,10 +9,12 @@ in {
     group = "media";
   };
 
-  services.caddy.virtualHosts."jellyfin.${fqdn}" = {
-    extraConfig = ''
+  services.caddy.virtualHosts = lib.mkIf config.services.jellyfin.enable {
+    "jellyfin.${fqdn}" = {
+      extraConfig = ''
       reverse_proxy http://localhost:8096
-    '';
+      '';
+    };
   };
 
   # systemd.services.jellyfin = {
