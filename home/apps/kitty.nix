@@ -5,9 +5,9 @@
   ...
 }: let
   theme = {
-    dark = "Alabaster_Dark";
+    initialDark = "Alabaster_Dark";
     # light = "Catppuccin-Latte";
-    light = "Doom_One_Light"; # least unreadable light theme
+    initialLight = "Doom_One_Light"; # least unreadable light theme
   };
 in {
   programs.kitty = {
@@ -86,6 +86,13 @@ in {
       kill -SIGUSR1 $(pgrep kitty)
 
       echo ""
+    '')
+
+    (pkgs.writeScriptBin "theme-kitty-init" ''
+      #!/usr/bin/env fish
+
+      set -U THEME_KITTY_LIGHT ${theme.initialLight}
+      set -U THEME_KITTY_DARK ${theme.initialDark}
     '')
   ];
 }

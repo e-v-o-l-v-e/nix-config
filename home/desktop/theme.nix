@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, pkgs, ... }: {
   home.packages = with pkgs; [
     # GTK
     dconf
@@ -45,14 +45,15 @@
     (pkgs.writeScriptBin "theme-initial-install" ''
       #!/usr/bin/env fish
 
-      set -U THEME "dark"
+      # initial global theme, dark is the default
+      # override in ../../hosts/${hostname}/configuration.nix
+      set -U THEME ${config.gui.theme}
 
-      # btop
-      set btopdir $HOME/.config/btop
-      mkdir -p $btopdir
-      echo 'color_theme = "gruvbox_light"' > $btopdir/theme-light.conf
-      echo 'color_theme = "gruvbox_dark"' > $btopdir/theme-dark.conf
+      # apps
+      theme-kitty-init
+      theme-btop-init
 
+      # enable theme
       theme-global-switch
     '')
   ];

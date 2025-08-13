@@ -43,5 +43,16 @@
 
       echo ""
     '')
+
+    (pkgs.writeScriptBin "theme-btop-init" ''
+      #!/usr/bin/env fish
+
+      set btopdir $HOME/.config/btop
+
+      mkdir -p $btopdir
+
+      echo 'color_theme = "gruvbox_light"' > $btopdir/theme-light.conf
+      echo 'color_theme = "gruvbox_dark"' > $btopdir/theme-dark.conf
+    '')
   ];
 }

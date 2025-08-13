@@ -9,8 +9,10 @@ username,
 ...
 }: let
   inherit (config.programs.nvf) maxConfig;
-  light-theme = "base16-ia-light";
-  dark-theme = "tokyonight-moon";
+  theme = {
+    initialLight = "base16-ia-light";
+    initialDark = "tokyonight-moon";
+  };
 in {
   config = {
     programs.nvf = {
@@ -412,14 +414,39 @@ in {
       "nvim" = {
         argumentNames = [ "argv" ];
         body = ''
-        if test $THEME = "light"
-          command nvim -c "colorscheme ${light-theme}" $argv
-        else 
-          command nvim -c "colorscheme ${dark-theme}" $argv
-        end
+          command nvim -c "colorscheme $THEME_NVIM" $argv
         '';
       };
     };
+
+    home.packages = [
+      (pkgs.writeShellScript "theme-nvim-switch" ''
+        #!/usr/bin/env fish
+
+        if test $THEME = "light"
+          set -U THEME_NVIM $THEME_NVIM_LIGHT
+        else
+          set -U THEME_NVIM $THEME_NVIM_DARK
+        end
+
+        for f in (fd nvf /run/user/1000/)
+          nvim --server $f --remote-send ":colorscheme $THEME_NVIM<cr>"
+        end
+      '')
+
+      (pkgs.writeShellScript "theme-nvim-init" ''
+        #!/usr/bin/env fish
+
+        set -U THEME_NVIM_DARK ${theme.initialDark}
+        set -U THEME_NVIM_LIGHT ${theme.initialLight}
+
+        if test $THEME = "light"
+          set -U THEME_NVIM $THEME_NVIM_LIGHT
+        else
+          set -U THEME_NVIM $THEME_NVIM_DARK
+        end
+      '')
+    ];
   };
 
   options = {

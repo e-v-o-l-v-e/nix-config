@@ -37,6 +37,7 @@ with lib;
           "light"
         ];
         default = "dark";
+        description = "initial theme";
       };
       
       font = {
