@@ -56,12 +56,14 @@
       end
     '';
 
-    functions."ssh" = {
-      argumentNames = [ "argv" ];
-      body = ''
-        set -lx TERM xterm-256color
-        command ssh $argv
-      '';
+    functions = {
+      "ssh" = {
+        argumentNames = [ "argv" ];
+        body = ''
+          set -lx TERM xterm-256color
+          command ssh $argv
+        '';
+      };
     };
   };
 }

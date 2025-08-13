@@ -47,9 +47,12 @@ config,
     zip
   ]
   ++ lib.optionals config.personal.enable (with pkgs; [
+    cava
+    fastfetch
     jellyfin-tui
     libnotify
     lowfi
+    neo-cowsay
     pamixer
     presenterm
     xdg-utils
