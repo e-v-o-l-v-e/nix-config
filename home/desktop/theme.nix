@@ -1,13 +1,5 @@
 { config, pkgs, ... }: {
   home.packages = with pkgs; [
-    # GTK
-    dconf
-    dconf-editor
-    glib
-
-    # QT
-    gsettings-qt
-
     # CUSTOMS SCRIPTS
     (pkgs.writeScriptBin "theme-global-switch" ''
       #!/usr/bin/env fish
@@ -38,8 +30,14 @@
       # kitty switch, defined in ../apps/kitty.nix
       theme-kitty-switch $THEME
 
+      # gtk switch, defined in ./gtk.nix
+      theme-gtk-switch
+
       # nvim switch, defined in ../nvf.nix
       theme-nvim-switch
+
+      # plasma switch, defined in ./plasma.nix
+      theme-plasma-switch
 
       # btop switch, defined in ../shell/btop.nix
       theme-btop-switch $THEME

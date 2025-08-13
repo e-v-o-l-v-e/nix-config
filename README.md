@@ -55,13 +55,14 @@ Main
 - [x] kitty
 - [x] nvim
 - [ ] btop
-- [ ] gtk
-- [ ] qt
+- [x] gtk
+- [x] plasma
 - [ ] hyprland
 
 Optional specific theming
 
 - [ ] vesktop
+- [ ] qt ?
 
 ## Structure
 
