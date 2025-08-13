@@ -420,7 +420,7 @@ in {
     };
 
     home.packages = [
-      (pkgs.writeShellScript "theme-nvim-switch" ''
+      (pkgs.writeScriptBin "theme-nvim-switch" ''
         #!/usr/bin/env fish
 
         if test $THEME = "light"
@@ -434,7 +434,7 @@ in {
         end
       '')
 
-      (pkgs.writeShellScript "theme-nvim-init" ''
+      (pkgs.writeScriptBin "theme-nvim-init" ''
         #!/usr/bin/env fish
 
         set -U THEME_NVIM_DARK ${theme.initialDark}

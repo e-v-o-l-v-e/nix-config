@@ -38,11 +38,14 @@
       # kitty switch, defined in ../apps/kitty.nix
       theme-kitty-switch $THEME
 
+      # nvim switch, defined in ../nvf.nix
+      theme-nvim-switch
+
       # btop switch, defined in ../shell/btop.nix
       theme-btop-switch $THEME
     '')
 
-    (pkgs.writeScriptBin "theme-initial-install" ''
+    (pkgs.writeScriptBin "theme-global-init" ''
       #!/usr/bin/env fish
 
       # initial global theme, dark is the default
@@ -51,6 +54,7 @@
 
       # apps
       theme-kitty-init
+      theme-nvim-init
       theme-btop-init
 
       # enable theme

@@ -46,13 +46,22 @@ in {
       #!/usr/bin/env fish
 
       set narg (count $argv)
-      if test $narg -ne 1
-        echo "need one argument [ dark light list restore <theme name> ]"
+      if test $narg -ge 2
+        echo "need zero or one argument [ dark light list restore <theme name> ]"
         exit
       end
 
       echo "# KITTY THEME SWITCHING"
       cd $HOME/.config/kitty
+
+      if test narg -eq 0
+        if test $THEME = "light"
+          ln -sv themes/$THEME_KITTY_LIGHT.conf theme.conf
+        else
+          ln -sv themes/$THEME_KITTY_DARK.conf theme.conf
+        end
+      end
+        
 
       if test $argv[1] = "restore"
         mv -v theme.conf.previous theme.conf
@@ -70,9 +79,9 @@ in {
       mv -v theme.conf theme.conf.previous
 
       if test $argv[1] = "light"
-        ln -sv themes/${theme.light}.conf theme.conf
+        ln -sv themes/$THEME_KITTY_LIGHT.conf theme.conf
       else if test $argv[1] = "dark"
-        ln -sv themes/${theme.dark}.conf theme.conf
+        ln -sv themes/$THEME_KITTY_DARK.conf theme.conf
       else
         if test -e themes/$argv[1].conf
           ln -vs themes/$argv[1].conf theme.conf
