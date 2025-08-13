@@ -31,7 +31,6 @@
               self
               inputs
               ;
-            # config.gui.theme = "light";
             HM = false;
           };
 
@@ -54,7 +53,6 @@
               system
               ;
             homeManagerOnly = true;
-            # config.gui.theme = "light";
             HM = true;
           };
         };
@@ -79,49 +77,10 @@
       ];
 
       myHosts = builtins.attrNames (builtins.readDir ./hosts);
-
-      # parseHostTheme = fullHost: let
-      #   parts = builtins.match "^(.*?)(?:-(dark|light))?$" fullHost;
-      # in {
-      #   hostname = parts[0];
-      #   theme = if parts[1] != null then parts[1] else "light";
-      # };
-
-      parseHostTheme =
-        fullHost:
-        let
-          parts = builtins.match "^(.*)-dark$" fullHost;
-        in
-        if parts != null then
-          {
-            hostname = parts [ 0 ];
-            theme = "dark";
-          }
-        else
-          (
-            let
-              parts2 = builtins.match "^(.*)-light$" fullHost;
-            in
-            if parts2 != null then
-              {
-                hostname = parts2 [ 0 ];
-                theme = "light";
-              }
-            else
-              {
-                hostname = fullHost;
-                theme = "light";
-              }
-          );
-
     in
     {
       # NIXOS CONFIGURATIONS
       nixosConfigurations = nixpkgs.lib.genAttrs myHosts mkSystemConfig;
-      # nixosConfigurations = nixpkgs.lib.genAttrs myHosts (hostStr:
-      #   let parsed = parseHostTheme hostStr;
-      #   in mkSystemConfig parsed.hostname parsed.theme
-      # );
 
       # HOME-MANAGER CONFIGURATIONS.
       homeConfigurations = builtins.listToAttrs (
@@ -130,16 +89,6 @@
           value = mkHomeConfig host;
         }) myHosts
       );
-
-      #   homeConfigurations = builtins.listToAttrs (
-      #   builtins.map (hostStr:
-      #     let parsed = parseHostTheme hostStr;
-      #     in {
-      #       name = "${username}@${parsed.hostname}";
-      #       value = mkHomeConfig parsed.hostname parsed.theme;
-      #     }
-      #   ) myHosts
-      # );
 
       # import shells
       devShells.${system} = import ./custom/shells.nix { inherit pkgs; };
