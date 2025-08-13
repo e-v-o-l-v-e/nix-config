@@ -9,6 +9,8 @@ username,
 ...
 }: let
   inherit (config.programs.nvf) maxConfig;
+  light-theme = "base16-ia-light";
+  dark-theme = "tokyonight-moon";
 in {
   config = {
     programs.nvf = {
@@ -169,6 +171,21 @@ in {
           transparent = false;
         };
 
+        startPlugins = [
+          "base16"
+          "catppuccin"
+          "dracula"
+          "everforest"
+          "gruvbox"
+          "nord"
+          "onedark"
+          "oxocarbon"
+          "rose-pine"
+          "solarized"
+          "solarized-osaka"
+          "tokyonight"
+        ];
+
         # theme = {
         #   name = "tokyonight";;
         # };
@@ -229,6 +246,7 @@ in {
         };
 
         telescope.enable = true;
+        telescope.setupOpts.pickers.colorscheme.enable_preview = true;
 
         git = {
           enable = true;
@@ -366,6 +384,10 @@ in {
         };
 
         keymaps = [
+          # telescope colorscheme
+          { key = "<leader>fc"; action = ":Telescope colorscheme<cr>"; mode = ["n" "x"]; silent = true; desc = "Colorscheme [Telescope]"; }
+
+          # yanky-nvim config
           { key = "p";     action = "<Plug>(YankyPutAfter)";                    mode = ["n" "x"]; silent = true; }
           { key = "P";     action = "<Plug>(YankyPutBefore)";                   mode = ["n" "x"]; silent = true; }
           { key = "gp";    action = "<Plug>(YankyGPutAfter)";                   mode = ["n" "x"]; silent = true; }
@@ -391,9 +413,9 @@ in {
         argumentNames = [ "argv" ];
         body = ''
         if test $THEME = "light"
-          command nvim -c "colorscheme tokyonight-day" $argv
+          command nvim -c "colorscheme ${light-theme}" $argv
         else 
-          command nvim $argv
+          command nvim -c "colorscheme ${dark-theme}" $argv
         end
         '';
       };

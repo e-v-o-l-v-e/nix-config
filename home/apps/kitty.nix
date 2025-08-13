@@ -6,7 +6,8 @@
 }: let
   theme = {
     dark = "Alabaster_Dark";
-    light = "AtomOneLight";
+    # light = "Catppuccin-Latte";
+    light = "Doom_One_Light"; # least unreadable light theme
   };
 in {
   programs.kitty = {
@@ -19,10 +20,6 @@ in {
       window_padding_width = "2 5";
       allow_remote_control = "yes";
       listen_on = "unix:/tmp/mykitty";
-    };
-
-    environment = {
-      "KITTY_LISTEN_ON" = "unix:@mykitty";
     };
 
     font = lib.mkForce {
@@ -38,7 +35,7 @@ in {
       include theme.conf
     '';
 
-    # themeFile = "SpaceGray_Eighties";;
+    # themeFile = "SpaceGray_Eighties";
   };
 
   xdg.configFile."kitty/themes".source = pkgs.kitty-themes + "/share/kitty-themes/themes";
