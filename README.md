@@ -10,7 +10,24 @@ This flake holds the config (nixos and/or home-manager) for all my machines.
 > switch between dark and light theme, as stylix is bloated as fuck, ultra slow,
 > aaaaand i'm tired of rebuilding 10 times a day just the switch to dark or
 > light, so I removed it and am replacing it with fish scripts
-> (pkgs.writeScriptBin in HM) and environment variable
+> (pkgs.writeScriptBin in home.packages) and environment variable
+
+## CONFIG
+
+This config is VERY opinionated, for example i use fish and don't support other
+shells, because fish is awesome, so all scripts are in fish.
+
+Basic configuration (enable this and that) happens in ./hosts/{hostname}/configuration.nix,
+there is no (i think, or it's relative) enabling in home or system dir, to make
+it simple to use such or such thing, i don't know where I'm going I'll come back
+and make this readme better sometime, don't hesitate to open issue or discussion
+if you need help for something, I'll gladly make myself useful.
+
+Options are declared in ./options.nix for global ones, or in the relevant files,
+and set by host in  the code is either
+clear or commented, take a look at the options, it's of course opinionated.
+
+To create your own config just copy one of /hosts/${hostname} and edit from there.
 
 ## HOSTS
 
@@ -24,14 +41,27 @@ everything for nixos, replacing docker with services before installing
 All configs are intended for nixos with home-manager standalone, or just
 home-manager on any linux distribution.
 
-Options are declared in ./options.nix for global ones, or in the relevant files,
-and set by host in ./hosts/{hostname}/configuration.nix, the code is either
-clear or commented, take a look at the options, it's of course opinionated.
+## Theming
 
-To create your own config just copy one of /hosts/${hostname} and edit from there.
+Each themed app has a fish script in its nix file to switch its theme, it also
+have a fish script to init its parameters.
+All switch/init scripts are called by a global switch/init script declared in 
+home/desktop/theme.nix
 
-This config is VERY opinionated, for example i use fish and don't support other
-shells, because fish is awesome, so all scripts are in fish.
+### todo
+
+Main
+
+- [x] kitty
+- [x] nvim
+- [ ] btop
+- [ ] gtk
+- [ ] qt
+- [ ] hyprland
+
+Optional specific theming
+
+- [ ] vesktop
 
 ## Structure
 
@@ -132,11 +162,9 @@ shells, because fish is awesome, so all scripts are in fish.
 20 directories, 77 files
 ```
 
-
 ## Reference
 
 - NVF : neovim config nix wrapper or something, it's really cool [github](https://github.com/NotAShelf/nvf), [manual](https://notashelf.github.io/nvf/index.xhtml).
-- [zen-browser](https://zen-browser.app) : really cool browser based on firefox by [github](https://github.com/zen-browser/desktop), [site](https://zen-browser.app). 
+- [zen-browser](https://zen-browser.app) : really cool browser based on firefox by [github](https://github.com/zen-browser/desktop)
 - initial nixos config : [JaKooLit's nixos config](https://github.com/JaKooLit/NixOS-Hyprland/tree/main), nothing left from it
-
 
