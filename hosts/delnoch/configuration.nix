@@ -60,33 +60,33 @@
         domainSecondary = "jeudefou.com";
       };
 
-      server.vpn.enable = true;
-
-      # Services #
-      services = {
-        # reverse proxy
-        caddy.enable = true;
-
-        # notes
-        silverbullet.enable = true;
-
-        # utilities
-        # local-content-share.enable = true;
-
-        # media viewing/request
-        jellyfin.enable = true;
-        jellyseerr.enable = true;
-
-        # *arr / torrents
-        prowlarr.enable = true;
-        radarr.enable = true;
-        sonarr.enable = true;
-        lidarr.enable = true;
-        readarr.enable = true;
-        opencloud.enable = false;
-      };
-
-      virtualisation.docker.enable = true;
+      # server.vpn.enable = true;
+      #
+      # # Services #
+      # services = {
+      #   # reverse proxy
+      #   caddy.enable = true;
+      #
+      #   # notes
+      #   silverbullet.enable = true;
+      #
+      #   # utilities
+      #   # local-content-share.enable = true;
+      #
+      #   # media viewing/request
+      #   jellyfin.enable = true;
+      #   jellyseerr.enable = true;
+      #
+      #   # *arr / torrents
+      #   prowlarr.enable = true;
+      #   radarr.enable = true;
+      #   sonarr.enable = true;
+      #   lidarr.enable = true;
+      #   readarr.enable = true;
+      #   opencloud.enable = false;
+      # };
+      #
+      # virtualisation.docker.enable = true;
     })
   ];
 }
