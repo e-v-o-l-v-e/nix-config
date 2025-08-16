@@ -54,6 +54,7 @@
       theme-kitty-init
       theme-nvim-init
       theme-btop-init
+      theme-plasma-init
 
       # enable theme
       theme-global-switch
