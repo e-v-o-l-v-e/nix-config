@@ -61,6 +61,8 @@
         domainSecondary = "jeudefou.com";
       };
 
+      security.sudo.wheelNeedsPassword = false;
+
       # ZFS
       boot.zfs.extraPools = [ "tank" ];
       boot.supportedFilesystems.zfs = true;
@@ -85,12 +87,12 @@
         jellyseerr.enable = true;
 
         # *arr / torrents
-        qbittorrent.enable = false;
+        qbittorrent.enable = true;
 
         prowlarr.enable = true;
         radarr.enable = true;
         sonarr.enable = true;
-      #   lidarr.enable = true;
+        lidarr.enable = true;
       #   readarr.enable = true;
       #   opencloud.enable = false;
       };

@@ -1,4 +1,10 @@
-{ lib, config, username, pkgs, ... }: let
+{
+  lib,
+  config,
+  username,
+  pkgs,
+  ...
+}: let
   cfg = config.server;
   fqdn = cfg.domain;
 
@@ -10,24 +16,6 @@ in {
   services.qbittorrent = {
     inherit webuiPort torrentingPort;
     profileDir = "${config.server.configPath}/qbittorrent";
-
-    serverConfig = {
-      LegalNotice.Accepted = true;
-
-      Preferences = {
-        General.Locale = "en";
-
-        WebUI = {
-          Username = username;
-          Password_PBKDF2 = "@ByteArray(hKJrE1tjS7lk4k99xpL2tw==:Zstd8JKmqVEudK3rJ8yOITJX036grnuyODBg+a86bY7CRBbFL1cpE9iIYxqr3kp5mcBEFROY/3K6Wiq8f0STtQ==)";
-          AuthSubnetWhitelistEnabled = false;
-        };
-
-        Session = {
-          DefaultSavePath = "${cfg.dataPath}/torrents";
-        };
-      };
-    };
 
     user = "qbittorrent";
     group = cfg.mediaGroupName;
@@ -63,7 +51,7 @@ in {
     portMappings = [{
       from = webuiPort;
       to = webuiPort;
-    }];
+      }];
 
     openVPNPorts = [{
       port = torrentingPort;
@@ -72,9 +60,15 @@ in {
   };
 
   systemd.services = lib.mkIf config.services.qbittorrent.enable {
-    qbittorrent.vpnConfinement = {
-      enable = true;
-      vpnNamespace = "qbitvpn";
+    qbittorrent = {
+      vpnConfinement = {
+        enable = true;
+        vpnNamespace = "qbitvpn";
+      };
+
+      serviceConfig = {
+        ExecStop = "${pkgs.coreutils}/bin/kill -s SIGTERM $MAINPID";
+      };
     };
   };
 }
