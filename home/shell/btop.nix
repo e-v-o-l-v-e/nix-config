@@ -33,7 +33,7 @@
         exit
       end
 
-      mv -v btop.conf theme.conf.previous
+      mv btop.conf theme.conf.previous
 
       if test $argv[1] = "light"
         ln -sv theme-light.conf btop.conf

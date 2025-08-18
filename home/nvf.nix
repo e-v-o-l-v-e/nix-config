@@ -164,7 +164,7 @@ in {
           };
         };
 
-        options.termguicolors = true;
+        options.termguicolors = false;
 
         theme = {
           enable = true;

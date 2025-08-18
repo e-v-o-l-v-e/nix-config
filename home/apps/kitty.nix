@@ -45,54 +45,56 @@ in {
     (pkgs.writeScriptBin "theme-kitty-switch" ''
       #!/usr/bin/env fish
 
-      set narg (count $argv)
+      set -l narg (count $argv)
       if test $narg -ge 2
-        echo "need zero or one argument [ dark light list restore <theme name> ]"
-        exit
+          echo "need zero or one argument [ dark light list restore <theme name> ]"
+          exit 1
       end
 
       echo "# KITTY THEME SWITCHING"
       cd $HOME/.config/kitty
 
-      if test narg -eq 0
-        if test $THEME = "light"
-          ln -sv themes/$THEME_KITTY_LIGHT.conf theme.conf
-        else
-          ln -sv themes/$THEME_KITTY_DARK.conf theme.conf
-        end
-      end
-        
+      # No arguments → toggle based on $THEME
+      if test $narg -eq 0
+          if test "$THEME" = "light"
+              ln -sv themes/$THEME_KITTY_LIGHT.conf theme.conf
+          else
+              ln -sv themes/$THEME_KITTY_DARK.conf theme.conf
+          end
 
-      if test $argv[1] = "restore"
-        mv -v theme.conf.previous theme.conf
-        kitten @ load-config
-        exit
+      # One argument
+      else if test $narg -eq 1
+          if test "$argv[1]" = "restore"
+              mv -v theme.conf.previous theme.conf
+              kitten @ load-config
+              exit 0
+          end
+
+          if test "$argv[1]" = "list"
+              for t in themes/*.conf
+                  basename $t .conf
+              end
+              exit 0
+          end
+
+          mv theme.conf theme.conf.previous
+
+          if test "$argv[1]" = "light"
+              ln -sv themes/$THEME_KITTY_LIGHT.conf theme.conf
+          else if test "$argv[1]" = "dark"
+              ln -sv themes/$THEME_KITTY_DARK.conf theme.conf
+          else
+              if test -e themes/$argv[1].conf
+                  ln -sv themes/$argv[1].conf theme.conf
+              else
+                  echo "This theme doesn’t exist, restoring previous"
+                  mv theme.conf.previous theme.conf
+              end
+          end
       end
 
-      if test $argv[1] = "list"
-        for t in ./themes/*
-          basename $t | cut -d "." -f 1
-        end
-        exit
-      end
-
-      mv -v theme.conf theme.conf.previous
-
-      if test $argv[1] = "light"
-        ln -sv themes/$THEME_KITTY_LIGHT.conf theme.conf
-      else if test $argv[1] = "dark"
-        ln -sv themes/$THEME_KITTY_DARK.conf theme.conf
-      else
-        if test -e themes/$argv[1].conf
-          ln -vs themes/$argv[1].conf theme.conf
-        else
-          echo this theme doesnt exist, restoring
-          mv -v theme.conf.previous theme.conf
-        end
-      end
-        
-      # reload
-      kill -SIGUSR1 $(pgrep kitty)
+      # Reload kitty
+      kill -SIGUSR1 (pgrep kitty)
 
       echo ""
     '')
