@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  username,
   pkgs,
   ...
 }: let
@@ -9,7 +8,7 @@
   fqdn = cfg.domain;
 
   webuiPort = 8088;
-  torrentingPort = 18086;
+  torrentingPort = cfg.vpn.forwardedPort;
 
   namespaceAddress = "192.168.15.1";
 in {
@@ -68,6 +67,7 @@ in {
 
       serviceConfig = {
         ExecStop = "${pkgs.coreutils}/bin/kill -s SIGTERM $MAINPID";
+        UMask = "0002";
       };
     };
   };

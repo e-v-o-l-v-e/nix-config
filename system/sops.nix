@@ -56,6 +56,8 @@ in
           inherit (server) sopsFile;
         };
 
+        "slskd.env" = server;
+
         "airvpn/private_key" = common;
         "airvpn/preSharedKey" = common;
       }

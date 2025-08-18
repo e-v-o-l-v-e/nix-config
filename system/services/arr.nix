@@ -37,6 +37,9 @@ let
           '';
         };
       };
+
+
+      systemd.services."${name}".serviceConfig.UMask = "0002";
     };
 in
   lib.mkMerge (map mkArrService arrServices)

@@ -15,8 +15,10 @@ in
     ./jellyfin.nix
     ./jellyseerr.nix
     ./local-content-share.nix
+    ./olivetin.nix
     ./opencloud.nix
     ./qbittorrent.nix
     ./silverbullet.nix
+    ./slskd.nix
   ];
 }

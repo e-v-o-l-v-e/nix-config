@@ -83,5 +83,22 @@ in
       default = 2000;
       description = "Id du groupe auquel appartiendront les services media (arr stack, jellyfin etc)";
     };
+
+    openPorts = lib.mkOption {
+      type = lib.types.listOf lib.types.int;
+      default = [ 80 443 ];
+      description = "List of ports to open";
+    };
+
+    staticAdress = lib.mkEnableOption "Enable static IPv4 address";
+
+    vpn.enable = lib.mkEnableOption "Enable AirVPN over WireGuard";
+
+    vpn.forwardedPort = lib.mkOption {
+      type = types.port;
+      default = null;
+      example = 123456;
+      description = "Port used for port forwading when using vpn, or without (not recommended)";
+    };
   };
 }

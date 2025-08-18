@@ -59,6 +59,9 @@
 
         domain = "imp-network.com";
         domainSecondary = "jeudefou.com";
+
+        vpn.enable = true;
+        vpn.forwardedPort = 18086;      
       };
 
       security.sudo.wheelNeedsPassword = false;
@@ -69,7 +72,6 @@
       networking.hostId = "ea274802";
       environment.systemPackages = [ pkgs.zfs ];
 
-      server.vpn.enable = true;
 
       # # Services #
       services = {
@@ -80,7 +82,7 @@
         silverbullet.enable = true;
 
         # utilities
-        # local-content-share.enable = true;
+        local-content-share.enable = true;
 
         # media viewing/request
         jellyfin.enable = true;
@@ -93,8 +95,8 @@
         radarr.enable = true;
         sonarr.enable = true;
         lidarr.enable = true;
-      #   readarr.enable = true;
-      #   opencloud.enable = false;
+
+        slskd.enable = true;
       };
 
       virtualisation.docker.enable = true;
