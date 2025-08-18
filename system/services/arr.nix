@@ -10,13 +10,12 @@ let
     { name = "sonarr";    port = 8989; }
   ];
 
-  mkArrService = { name, port, extraUser ? false }:
+  mkArrService = { name, port, }:
     let
       fqdn = cfg.domain;
       dataDir = "${cfg.configPath}/${name}";
     in {
       services.${name} = {
-        inherit dataDir;
         settings = {
           update.mechanism = "external";
           server = {
@@ -26,17 +25,15 @@ let
           };
         };
       } // lib.optionalAttrs (name != "prowlarr") {
+        inherit dataDir;
         group = cfg.mediaGroupName;
       };
 
       services.caddy.virtualHosts = lib.mkIf config.services."${name}".enable {
         "${name}.${fqdn}" = {
           extraConfig = ''
-          reverse_proxy http://localhost:${toString port}
-          tls {
-            dns cloudflare {env.CLOUDFLARE_API_TOKEN}
-            resolvers 1.1.1.1
-          }
+            reverse_proxy http://localhost:${toString port}
+            import cfdns
           '';
         };
       };

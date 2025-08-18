@@ -1,6 +1,7 @@
 {
   lib,
   HM,
+  pkgs,
   config,
   ...
 }:
@@ -45,7 +46,7 @@
 
       # Network #
       services.tailscale.enable = true;
-      networking.interfaces.eth0.wakeOnLan.enable = true;
+      # networking.interfaces.eth0.wakeOnLan.enable = true;
 
 
       #=#=#=# SERVER SPECIFIC #=#=#=#
@@ -60,33 +61,41 @@
         domainSecondary = "jeudefou.com";
       };
 
-      # server.vpn.enable = true;
-      #
+      # ZFS
+      boot.zfs.extraPools = [ "tank" ];
+      boot.supportedFilesystems.zfs = true;
+      networking.hostId = "ea274802";
+      environment.systemPackages = [ pkgs.zfs ];
+
+      server.vpn.enable = true;
+
       # # Services #
-      # services = {
-      #   # reverse proxy
-      #   caddy.enable = true;
-      #
-      #   # notes
-      #   silverbullet.enable = true;
-      #
-      #   # utilities
-      #   # local-content-share.enable = true;
-      #
-      #   # media viewing/request
-      #   jellyfin.enable = true;
-      #   jellyseerr.enable = true;
-      #
-      #   # *arr / torrents
-      #   prowlarr.enable = true;
-      #   radarr.enable = true;
-      #   sonarr.enable = true;
+      services = {
+        # reverse proxy
+        caddy.enable = true;
+
+        # notes
+        silverbullet.enable = true;
+
+        # utilities
+        # local-content-share.enable = true;
+
+        # media viewing/request
+        jellyfin.enable = true;
+        jellyseerr.enable = true;
+
+        # *arr / torrents
+        qbittorrent.enable = false;
+
+        prowlarr.enable = true;
+        radarr.enable = true;
+        sonarr.enable = true;
       #   lidarr.enable = true;
       #   readarr.enable = true;
       #   opencloud.enable = false;
-      # };
-      #
-      # virtualisation.docker.enable = true;
+      };
+
+      virtualisation.docker.enable = true;
     })
   ];
 }

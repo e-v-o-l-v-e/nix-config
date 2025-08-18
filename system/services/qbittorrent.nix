@@ -1,4 +1,4 @@
-{ lib, config, username, ... }: let
+{ lib, config, username, pkgs, ... }: let
   cfg = config.server;
   fqdn = cfg.domain;
 
@@ -36,10 +36,15 @@ in {
   services.caddy.virtualHosts = lib.mkIf config.services.qbittorrent.enable {
     "qbittorrent.${fqdn}" = {
       extraConfig = ''
+        import cfdns
         reverse_proxy http://${namespaceAddress}:${toString webuiPort}
       '';
     };
   };
+
+  environment.systemPackages = lib.mkIf cfg.vpn.enable (with pkgs; [
+    wireguard-tools
+  ]);
 
   vpnNamespaces.qbitvpn = {
     inherit (cfg.vpn) enable;

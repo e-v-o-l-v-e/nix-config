@@ -11,18 +11,31 @@ in {
     '';
 
     virtualHosts = {
-      "test.cloud.${fqdn}" = {
-        # serverAliases = [ "www.hydra.example.com" ];
-        extraConfig = ''
-          reverse_proxy http://localhost:9200
-        '';
-      };
+      # "*" = {
+      #   # serverAliases = [ "www.hydra.example.com" ];
+      #   extraConfig = ''
+      #     tls {
+      #       dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+      #     }
+      #   '';
+      # };
       "test.${fqdn}" = {
         extraConfig = ''
           respond "DRUUUUUS"
+
+          import cfdns
         '';
       };
     };
+
+    extraConfig = ''
+      (cfdns) {
+        tls {
+          dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+          resolvers 1.1.1.1
+        }
+      }
+    '';
   };
 
   systemd.services = lib.mkIf config.services.caddy.enable {

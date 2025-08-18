@@ -9,7 +9,7 @@ let
   lm = config.login-manager;
 in
 {
-  config = {
+  config = lib.mkIf (lm != null) {
     services = {
       greetd = {
         enable = lm == "greetd";
