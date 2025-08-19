@@ -4,6 +4,8 @@
     ./btop.nix
     ./fish.nix
     ./git.nix
+    ./gh.nix
+    ./lsd.nix
     ./pay-respects.nix
     ./packages.nix
     ./ssh.nix
