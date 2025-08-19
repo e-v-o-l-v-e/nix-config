@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./btop.nix
     ./fish.nix
