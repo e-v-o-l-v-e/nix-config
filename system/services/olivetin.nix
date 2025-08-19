@@ -40,12 +40,12 @@ in {
     path = with pkgs; [
       fish
     ];
+  };
 
-    services.caddy.virtualHosts = lib.mkIf config.services.olivetin.enable {
-      "olivetin.${fqdn}".extraConfig = ''
-        reverse_proxy http://localhost:${toString port}
-        import cfdns
-      '';
-    };
+  services.caddy.virtualHosts = lib.mkIf config.services.olivetin.enable {
+    "olivetin.${fqdn}".extraConfig = ''
+      reverse_proxy http://localhost:${toString port}
+      import cfdns
+    '';
   };
 }

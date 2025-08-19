@@ -1,12 +1,12 @@
 # list of nvf module options, examples, instruction etc :
 # https://notashelf.github.io/nvf/options.html
 {
-config,
-hostname,
-lib,
-pkgs,
-username,
-...
+  config,
+  hostname,
+  lib,
+  pkgs,
+  username,
+  ...
 }: let
   inherit (config.programs.nvf) maxConfig;
   theme = {
@@ -410,7 +410,7 @@ in {
       };
     };
 
-    programs.fish.functions = {
+    programs.fish.functions = lib.mkIf config.gui.enable {
       "nvim" = {
         argumentNames = [ "argv" ];
         body = ''

@@ -16,8 +16,8 @@ in {
     inherit webuiPort torrentingPort;
     profileDir = "${config.server.configPath}/qbittorrent";
 
-    user = "qbittorrent";
-    group = cfg.mediaGroupName;
+    user = cfg.serverUserName;
+    group = cfg.serverGroupName;
   };
 
   services.caddy.virtualHosts = lib.mkIf config.services.qbittorrent.enable {

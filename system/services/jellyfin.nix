@@ -1,4 +1,5 @@
 {
+  username,
   lib,
   config,
   pkgs,
@@ -13,8 +14,8 @@
 in {
   services.jellyfin = {
     inherit dataDir;
-    user = "jellyfin";
-    group = "media";
+    user = cfg.serverUserName;
+    group = cfg.serverGroupName;
   };
 
   environment.systemPackages = lib.mkIf config.services.jellyfin.enable [
@@ -36,6 +37,18 @@ in {
     extraPackages32 = with pkgs.driversi686Linux; [
       intel-media-driver
       libva-vdpau-driver
+    ];
+  };
+
+  systemd.services = lib.mkIf config.services.jellyfin.enable {
+    jellyfin.serviceConfig.ReadWritePaths = [
+      (cfg.dataPath + "/media") 
+      "/data/media/tv"
+      "/data/media/music"
+      "/data/media/music2"
+      "/data/media"
+      "/data"
+      "/data/media/movies"
     ];
   };
 

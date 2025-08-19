@@ -26,7 +26,8 @@ let
         };
       } // lib.optionalAttrs (name != "prowlarr") {
         inherit dataDir;
-        group = cfg.mediaGroupName;
+        group = cfg.serverGroupName;
+        user = cfg.serverUserName;
       };
 
       services.caddy.virtualHosts = lib.mkIf config.services."${name}".enable {

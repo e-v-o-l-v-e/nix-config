@@ -3,40 +3,33 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   cfg = config.server;
-in
-{
+in {
   config = {
     users.groups = lib.mkIf cfg.enable {
-      "${cfg.mediaGroupName}" = {
-        name = cfg.mediaGroupName;
-        gid = cfg.mediaGroupId;
-        members = [
-          username
-          "jellyfin"
-          "radarr"
-          "sonarr"
-          "lidarr"
-        ];
-      };
+      ${cfg.serverGroupName} = {
+        # name = cfg.serverGroupName;
+        gid = cfg.serverGroupId;
 
-      server = {
-        name = "server";
-        gid = 1001;
         members = [
           username
-          "jellyfin"
-          "radarr"
-          "sonarr"
-          "lidarr"
-          "opencloud"
         ];
       };
     };
 
-    users.users.${username}.linger = cfg.enable;
+    users.users = lib.mkIf cfg.enable {
+      ${cfg.serverUserName} = {
+        name = cfg.serverUserName;
+        uid = cfg.serverUserId;
+
+        isSystemUser = true;
+
+        group = cfg.serverGroupName;
+
+        linger = cfg.enable;
+      };
+    };
   };
 
   options.server = with lib; {
@@ -72,21 +65,33 @@ in
       description = "secondary FQDN";
     };
 
-    mediaGroupName = mkOption {
+    serverGroupName = mkOption {
       type = types.str;
-      default = "media";
+      default = "server";
       description = "Nom du groupe auquel appartiendront les services media (arr stack, jellyfin etc)";
     };
 
-    mediaGroupId = mkOption {
+    serverGroupId = mkOption {
       type = types.int;
-      default = 2000;
+      default = 555;
       description = "Id du groupe auquel appartiendront les services media (arr stack, jellyfin etc)";
+    };
+
+    serverUserName = mkOption {
+      type = types.str;
+      default = "server";
+      description = "Nom du user auquel appartiendront les services media (arr stack, jellyfin etc)";
+    };
+
+    serverUserId = mkOption {
+      type = types.int;
+      default = 555;
+      description = "Id du user auquel appartiendront les services media (arr stack, jellyfin etc)";
     };
 
     openPorts = lib.mkOption {
       type = lib.types.listOf lib.types.int;
-      default = [ 80 443 ];
+      default = [80 443];
       description = "List of ports to open";
     };
 

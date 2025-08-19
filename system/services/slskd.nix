@@ -11,7 +11,8 @@
   slskdDir = "${cfg.dataPath}/torrents/slskd";
 in {
   services.slskd = {
-    group = cfg.mediaGroupName;
+    group = cfg.serverGroupName;
+    user = cfg.serverUserName;
 
     environmentFile = config.sops.secrets."slskd.env".path;
 

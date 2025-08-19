@@ -13,7 +13,7 @@ let
     "audio" "docker" "input" "inputs" "key"
     "kvm" "libvirtd" "lp" "networkmanager"
     "scanner" "uinputs" "users" "video" "wheel"
-    config.server.mediaGroupName
+    config.server.serverGroupName
   ];
 in
 {
