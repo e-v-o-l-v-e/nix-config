@@ -49,9 +49,11 @@ in
       };
       consoleLogLevel = 4; # lib.mkIf perso 3;
 
-      # Needed For Some Steam Games
       kernel.sysctl =  {
+        # Needed For Some Steam Games
         "vm.max_map_count" = lib.mkIf config.programs.steam.enable 2147483642;
+
+        # fix weird crash
         "net.core.rmem_max" = 7500000;
         "net.core.wmem_max" = 7500000;
       };

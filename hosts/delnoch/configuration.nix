@@ -46,7 +46,11 @@
 
       # Network #
       services.tailscale.enable = true;
-      # networking.interfaces.eth0.wakeOnLan.enable = true;
+      networking.interfaces.enp2s0.wakeOnLan.enable = true;
+      networking.interfaces.enp2s0.ipv4.addresses = [{ 
+        address = "192.168.0.216"; 
+        prefixLength = 24;
+      }];
 
 
       #=#=#=# SERVER SPECIFIC #=#=#=#
@@ -62,6 +66,8 @@
 
         vpn.enable = true;
         vpn.forwardedPort = 18086;      
+
+        allowedSubnets = [ "192.168.0.0/24" ];
       };
 
       security.sudo.wheelNeedsPassword = false;

@@ -30,6 +30,24 @@ in {
         linger = cfg.enable;
       };
     };
+
+    networking.firewall = lib.mkIf (cfg.allowedSubnets != [] && cfg.openPortsLocal != []) {
+      # concat all string in a list, separated with "\n"
+      extraCommands = lib.concatStringsSep "\n" (
+        # merge several list in only one
+        lib.concatLists (
+          # map a fonction to a list
+          map (
+            subnet:
+              map (
+                port: "iptables -A INPUT -p tcp -s ${subnet} --dport ${toString port} -j ACCEPT"
+              )
+              cfg.openPortsLocal
+          )
+          cfg.allowedSubnets
+        )
+      );
+    };
   };
 
   options.server = with lib; {
@@ -65,6 +83,36 @@ in {
       description = "secondary FQDN";
     };
 
+    openPorts = lib.mkOption {
+      type = lib.types.listOf lib.types.int;
+      default = [80 443];
+      description = "List of ports to open";
+    };
+
+    allowedSubnets = mkOption {
+      type = types.listOf types.str;
+      default = [];
+      description = "List of subnet allowed to connect to {openPortsLocal}";
+    };
+
+    openPortsLocal = mkOption {
+      type = types.listOf types.port;
+      default = [
+        8096 # jellyfin
+        5055 # jellyseerr
+      ];
+      description = "List of ports accessible by {allowedSubnets}";
+    };
+
+    vpn.enable = lib.mkEnableOption "Enable AirVPN over WireGuard";
+
+    vpn.forwardedPort = lib.mkOption {
+      type = types.port;
+      default = null;
+      example = 123456;
+      description = "Port used for port forwading when using vpn, or without (not recommended)";
+    };
+
     serverGroupName = mkOption {
       type = types.str;
       default = "server";
@@ -87,23 +135,6 @@ in {
       type = types.int;
       default = 555;
       description = "Id du user auquel appartiendront les services media (arr stack, jellyfin etc)";
-    };
-
-    openPorts = lib.mkOption {
-      type = lib.types.listOf lib.types.int;
-      default = [80 443];
-      description = "List of ports to open";
-    };
-
-    staticAdress = lib.mkEnableOption "Enable static IPv4 address";
-
-    vpn.enable = lib.mkEnableOption "Enable AirVPN over WireGuard";
-
-    vpn.forwardedPort = lib.mkOption {
-      type = types.port;
-      default = null;
-      example = 123456;
-      description = "Port used for port forwading when using vpn, or without (not recommended)";
     };
   };
 }
