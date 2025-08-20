@@ -26,7 +26,7 @@ in {
   # ];
 
   # transcoding with vaapi for i3-7100T
-  hardware.graphics = {
+  hardware.graphics = lib.mkIf config.services.jellyfin.enable {
     inherit (config.services.jellyfin) enable;
 
     extraPackages = with pkgs; [

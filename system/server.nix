@@ -107,7 +107,7 @@ in {
     vpn.enable = lib.mkEnableOption "Enable AirVPN over WireGuard";
 
     vpn.forwardedPort = lib.mkOption {
-      type = types.port;
+      type = types.nullOr types.port;
       default = null;
       example = 123456;
       description = "Port used for port forwading when using vpn, or without (not recommended)";

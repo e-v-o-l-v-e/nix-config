@@ -52,7 +52,7 @@ in {
       to = webuiPort;
       }];
 
-    openVPNPorts = [{
+    openVPNPorts = lib.optionals (!isNull torrentingPort) [{
       port = torrentingPort;
       protocol = "both";
     }];

@@ -38,7 +38,7 @@ in {
         "nvidia"
         "intel"
       ];
-      default = "amd";
+      default = null;
       description = "gpu type, to enable relevant drivers, currently only amd does something";
     };
   };

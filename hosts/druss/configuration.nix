@@ -60,6 +60,8 @@
         #=#=#=# SYSTEM #=#=#=#
         laptop.enable = false;
 
+        gpu = "amd";
+
         # nixos version at the time of first install, do not change
         system.stateVersion = "25.05";
 
@@ -75,17 +77,16 @@
 
         # Network #
         services.tailscale.enable = true;
-        server.vpn.enable = false;
-        # networking = {};
-        # networking.interfaces.eth0.wakeOnLan.enable = true;
+        networking.interfaces.enp6s0.wakeOnLan.enable = true;
         hardware.bluetooth.enable = true;
 
-        # services #
-        # server.enable = true;
+        # services testing #
+        server.enable = true;
         #
-        # server.domain = "imp-network.com";
+        server.domain = "imp-network.com";
         #
-        # services.caddy.enable = true;
+        services.caddy.enable = true;
+        services.silverbullet.enable = true;
         # services.radarr.enable = true;
         # services.sonarr.enable = true;
       }
