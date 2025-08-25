@@ -84,6 +84,9 @@
         # reverse proxy
         caddy.enable = true;
 
+        # remote access
+        cloudflared.enable = true;
+
         # notes
         silverbullet.enable = true;
 

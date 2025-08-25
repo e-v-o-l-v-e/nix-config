@@ -52,9 +52,9 @@ in
           owner = config.services.silverbullet.user;
         };
 
-        "wg-airvpn.conf" = {
-          inherit (server) sopsFile;
-        };
+        "wg-airvpn.conf" = server;
+
+        cloudflared-cred = server;
 
         "slskd.env" = server;
 

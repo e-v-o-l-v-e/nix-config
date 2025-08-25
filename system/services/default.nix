@@ -11,6 +11,7 @@ in
   imports = [
     ./arr.nix
     ./caddy.nix
+    ./cloudflared.nix
     ./copyparty.nix
     ./jellyfin.nix
     ./jellyseerr.nix
