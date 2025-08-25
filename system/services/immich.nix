@@ -20,7 +20,7 @@ in {
   services.caddy.virtualHosts = lib.mkIf config.services.immich.enable {
     "immich.${fqdn}" = {
       extraConfig = ''
-        imimmich-port cfdns
+        import cfdns
         reverse_proxy http://localhost:${toString immich-port}
       '';
     };

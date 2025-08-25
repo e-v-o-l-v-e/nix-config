@@ -62,7 +62,6 @@
         ./hosts/${hostname}
         ./system
 
-        inputs.stylix.nixosModules.stylix
         inputs.vpn-confinement.nixosModules.default
       ];
 
@@ -73,7 +72,6 @@
 
         inputs.zen-browser.homeModules.twilight
         inputs.nvf.homeManagerModules.default
-        inputs.stylix.homeModules.stylix
       ];
 
       myHosts = builtins.attrNames (builtins.readDir ./hosts);
@@ -116,11 +114,6 @@
 
     sops-nix = {
       url = "github:mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    stylix = {
-      url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

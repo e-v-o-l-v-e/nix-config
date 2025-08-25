@@ -12,7 +12,7 @@ in
     # boot = lib.mkIf (hostname != "wsl") {
     boot = {
       kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
-      #kernelPackages = pkgs.linuxPackages_latest; #linux Kernel
+      # kernelPackages = pkgs.linuxPackages_latest; #linux Kernel
 
       kernelParams =
         [
