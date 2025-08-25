@@ -20,6 +20,7 @@ in
     ./local-content-share.nix
     ./olivetin.nix
     ./opencloud.nix
+    ./pingvin-share.nix
     ./qbittorrent.nix
     ./silverbullet.nix
     ./slskd.nix

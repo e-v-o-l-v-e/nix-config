@@ -92,6 +92,7 @@
 
         # utilities
         local-content-share.enable = true;
+        pingvin-share.enable = true;
 
         # media viewing/request
         jellyfin.enable = true;
