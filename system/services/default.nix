@@ -14,6 +14,8 @@ in
     ./copyparty.nix
     ./jellyfin.nix
     ./jellyseerr.nix
+    ./immich.nix
+    ./kavita.nix
     ./local-content-share.nix
     ./olivetin.nix
     ./opencloud.nix

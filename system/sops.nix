@@ -58,6 +58,8 @@ in
 
         "slskd.env" = server;
 
+        kavita-token = server;
+
         "airvpn/private_key" = common;
         "airvpn/preSharedKey" = common;
       }

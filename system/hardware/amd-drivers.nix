@@ -34,6 +34,7 @@ in {
   options = {
     gpu = lib.mkOption {
       type = lib.types.enum [
+        null
         "amd"
         "nvidia"
         "intel"

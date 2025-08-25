@@ -93,6 +93,7 @@
         # media viewing/request
         jellyfin.enable = true;
         jellyseerr.enable = true;
+        kavita.enable = true;
 
         # *arr / torrents
         qbittorrent.enable = true;
@@ -103,6 +104,8 @@
         lidarr.enable = true;
 
         slskd.enable = true;
+
+        immich.enable = true;
       };
 
       virtualisation.docker.enable = true;
