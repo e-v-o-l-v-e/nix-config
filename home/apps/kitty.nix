@@ -10,9 +10,8 @@
     initialLight = "Doom_One_Light"; # least unreadable light theme
   };
 in {
-  programs.kitty = {
-    inherit (config.gui) enable;
-
+config = {
+  programs.kitty = lib.mkIf config.programs.kitty.nixConfig.enable {
     enableGitIntegration = true;
 
     settings = {
@@ -38,7 +37,9 @@ in {
     # themeFile = "SpaceGray_Eighties";
   };
 
-  xdg.configFile."kitty/themes".source = pkgs.kitty-themes + "/share/kitty-themes/themes";
+  xdg.configFile = lib.mkIf config.programs.kitty.nixConfig.enable {
+    "kitty/themes".source =  pkgs.kitty-themes + "/share/kitty-themes/themes";
+};
 
   # simple fish script to change the theme
   home.packages = [
@@ -106,4 +107,9 @@ in {
       set -U THEME_KITTY_DARK ${theme.initialDark}
     '')
   ];
+};
+
+options = {
+	programs.kitty.nixConfig.enable = lib.mkEnableOption "Enable nixified kitty config";
+};
 }
