@@ -12,6 +12,8 @@
 {
   config = lib.mkMerge [
     {
+      flakePath = ".dotfiles/nix-config";
+
       #=#=#=# HOME #=#=#=#
       personal.enable = true;
 
@@ -33,16 +35,6 @@
 
       gui.hyprland.enable = true;
 
-      gui.stylix.enable = false;
-      gui.stylix.colorSchemeDark = "tokyo-night-dark";
-      gui.stylix.colorSchemeLight = "one-light";
-
-      gui.stylix.override = true;
-      gui.stylix.overrideColorScheme = 
-        if config.gui.theme == "light"
-        then config.gui.stylix.colorSchemeLight
-        else config.gui.stylix.colorSchemeDark;
-
       programs.waybar.enable = true;
 
       gaming.enable = true;
@@ -59,6 +51,8 @@
       #   # style = "night";
       # };
 
+      programs.kitty.nixConfig.enable = true;
+
       programs.zellij.enable = true;
 
       programs.zen-browser.enable = true;
@@ -66,15 +60,17 @@
       wayland.windowManager.hyprland.enable = false; # manage hyprland settings with home-manager
 
       # home-manager version at the time of first install, do not change
-      home.stateVersion = "24.11";
+      home.stateVersion = "25.05";
     }
     else
     {
       #=#=#=# SYSTEM #=#=#=#
       laptop.enable = true;
 
+	gpu = "amd";
+
       # nixos version at the time of first install, do not change
-      system.stateVersion = "24.11";
+      system.stateVersion = "25.11";
 
       # Desktop #
       login-manager = "greetd";
