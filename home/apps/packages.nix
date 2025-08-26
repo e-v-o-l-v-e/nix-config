@@ -9,6 +9,7 @@
     home.packages = lib.mkMerge [
       (lib.optionals (config.gui.enable) (with pkgs; [
         # packages for personal machine
+        blueman
         cliphist
         # kitty
         localsend

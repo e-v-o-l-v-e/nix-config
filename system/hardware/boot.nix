@@ -60,7 +60,7 @@ in
 
       ## BOOT LOADERS: NOTE USE ONLY 1. either systemd or grub
       # Bootloader SystemD
-      loader.systemd-boot.enable = true;
+      # loader.systemd-boot.enable = true;
 
       loader.efi = {
         #efiSysMountPoint = "/efi"; #this is if you have separate /efi partition
