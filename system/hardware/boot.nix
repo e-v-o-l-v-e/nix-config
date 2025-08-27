@@ -12,7 +12,7 @@ in
     # boot = lib.mkIf (hostname != "wsl") {
     boot = {
       kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
-      #kernelPackages = pkgs.linuxPackages_latest; #linux Kernel
+      # kernelPackages = pkgs.linuxPackages_latest; #linux Kernel
 
       kernelParams =
         [
@@ -60,7 +60,7 @@ in
 
       ## BOOT LOADERS: NOTE USE ONLY 1. either systemd or grub
       # Bootloader SystemD
-      loader.systemd-boot.enable = true;
+      # loader.systemd-boot.enable = true;
 
       loader.efi = {
         #efiSysMountPoint = "/efi"; #this is if you have separate /efi partition

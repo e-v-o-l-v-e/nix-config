@@ -18,13 +18,13 @@ let
 in
 {
   users = {
-    mutableUsers = false;
+    mutableUsers = true;
     users.${username} = {
       isNormalUser = true;
       homeMode = "700";
       inherit extraGroups;
       home = "/home/${username}";
-      hashedPasswordFile = lib.mkIf cfg.enable config.sops.secrets."password-${hostname}".path;
+      #hashedPasswordFile = lib.mkIf cfg.enable config.sops.secrets."password-${hostname}".path;
     };
     defaultUserShell = pkgs.fish;
   };

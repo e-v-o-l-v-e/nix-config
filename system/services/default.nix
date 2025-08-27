@@ -11,12 +11,16 @@ in
   imports = [
     ./arr.nix
     ./caddy.nix
+    ./cloudflared.nix
     ./copyparty.nix
     ./jellyfin.nix
     ./jellyseerr.nix
+    ./immich.nix
+    ./kavita.nix
     ./local-content-share.nix
     ./olivetin.nix
     ./opencloud.nix
+    ./pingvin-share.nix
     ./qbittorrent.nix
     ./silverbullet.nix
     ./slskd.nix

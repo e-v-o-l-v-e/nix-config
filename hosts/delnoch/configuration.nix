@@ -41,6 +41,8 @@
       # nixos version at the time of first install, do not change
       system.stateVersion = "25.05";
 
+      boot.kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_6_6;
+
       # Desktop #
       login-manager = null;
 
@@ -84,15 +86,20 @@
         # reverse proxy
         caddy.enable = true;
 
+        # remote access
+        cloudflared.enable = true;
+
         # notes
         silverbullet.enable = true;
 
         # utilities
         local-content-share.enable = true;
+        pingvin-share.enable = true;
 
         # media viewing/request
         jellyfin.enable = true;
         jellyseerr.enable = true;
+        kavita.enable = true;
 
         # *arr / torrents
         qbittorrent.enable = true;
@@ -103,6 +110,8 @@
         lidarr.enable = true;
 
         slskd.enable = true;
+
+        immich.enable = true;
       };
 
       virtualisation.docker.enable = true;

@@ -52,11 +52,13 @@ in
           owner = config.services.silverbullet.user;
         };
 
-        "wg-airvpn.conf" = {
-          inherit (server) sopsFile;
-        };
+        "wg-airvpn.conf" = server;
+
+        cloudflared-cred = server;
 
         "slskd.env" = server;
+
+        kavita-token = server;
 
         "airvpn/private_key" = common;
         "airvpn/preSharedKey" = common;

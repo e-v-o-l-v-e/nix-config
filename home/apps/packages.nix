@@ -11,7 +11,7 @@
         # packages for personal machine
         blueman
         cliphist
-        kitty
+        # kitty
         localsend
         loupe
         pavucontrol

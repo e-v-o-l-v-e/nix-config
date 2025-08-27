@@ -34,9 +34,11 @@ in {
   options = {
     gpu = lib.mkOption {
       type = lib.types.enum [
+        null
         "amd"
         "nvidia"
         "intel"
+	null
       ];
       default = null;
       description = "gpu type, to enable relevant drivers, currently only amd does something";
