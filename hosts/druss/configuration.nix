@@ -49,6 +49,9 @@
 
         programs.zellij.enable = true;
 
+        programs.kitty.enable = true;
+        programs.kitty.nixConfig.enable = true;
+
         programs.zen-browser.enable = true;
 
         wayland.windowManager.hyprland.enable = false; # manage hyprland settings with home-manager
