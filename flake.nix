@@ -145,5 +145,10 @@
     };
 
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
+
+    local-content-share = {
+      url = "github:e-v-o-l-v-e/local-content-share";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

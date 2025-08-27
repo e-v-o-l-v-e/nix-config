@@ -331,6 +331,26 @@
         "type": "github"
       }
     },
+    "local-content-share": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1756241957,
+        "narHash": "sha256-MDdbw9ethpB4yGaKSjpV2EZYisvdWMT4M8xLOhdzLec=",
+        "owner": "e-v-o-l-v-e",
+        "repo": "local-content-share",
+        "rev": "1c7ce561d19042f9818b29dc51ce45bf8247ffed",
+        "type": "github"
+      },
+      "original": {
+        "owner": "e-v-o-l-v-e",
+        "repo": "local-content-share",
+        "type": "github"
+      }
+    },
     "mnw": {
       "locked": {
         "lastModified": 1748710831,
@@ -437,6 +457,7 @@
         "astal": "astal_2",
         "copyparty": "copyparty",
         "home-manager": "home-manager",
+        "local-content-share": "local-content-share",
         "nixpkgs": "nixpkgs",
         "nvf": "nvf",
         "quickshell": "quickshell",

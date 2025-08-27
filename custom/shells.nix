@@ -59,6 +59,7 @@ in
     nativeBuildInputs = with pkgs; [
       lua-language-server
       lua
+      love
 
       fish
     ];
