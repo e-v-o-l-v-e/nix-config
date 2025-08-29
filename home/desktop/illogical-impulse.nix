@@ -40,7 +40,7 @@
       libportal # libportal library
 
       # Qt6 components
-      qt6.qt5compat
+      # qt6.qt5compat # insecure ?
       qt6.qtimageformats # Includes AVIF support
       qt6.qtmultimedia
       qt6.qtpositioning

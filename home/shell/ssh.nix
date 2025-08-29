@@ -6,16 +6,18 @@
 
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes";
+    enableDefaultConfig = false;
 
     matchBlocks = {
       "github" = {
         host = "github.com";
         identityFile = "~/.ssh/keys/github";
+        addKeysToAgent = "yes";
       };
       "iut" = {
         host = "git.unistra.fr";
         identityFile = "~/.ssh/keys/git_unistra";
+        addKeysToAgent = "yes";
       };
     };
   };

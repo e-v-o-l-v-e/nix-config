@@ -33,7 +33,7 @@ in {
     wireguard-tools
   ]);
 
-  vpnNamespaces.qbitvpn = {
+  vpnNamespaces.qbitvpn = lib.mkIf cfg.vpn.enable {
     inherit (cfg.vpn) enable;
     wireguardConfigFile = config.sops.secrets."wg-airvpn.conf".path;
 

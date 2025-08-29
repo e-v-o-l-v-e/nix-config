@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   imports = [
-    # ./fonts.nix
     ./desktop
     ./hardware
     ./laptop.nix
@@ -14,9 +13,12 @@
   ];
 
   environment.systemPackages = [
-    pkgs.kitty
-    pkgs.vim
+    pkgs.duf
+    pkgs.dust
     pkgs.fish
     pkgs.git
+    pkgs.kitty
+    pkgs.lsd
+    pkgs.vim
   ];
 }

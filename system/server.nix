@@ -1,5 +1,6 @@
 {
   username,
+  pkgs,
   config,
   lib,
   ...
@@ -7,6 +8,10 @@
   cfg = config.server;
 in {
   config = {
+    environment.systemPackages = lib.optionals cfg.enable [
+      pkgs.iotop 
+    ];
+
     users.groups = lib.mkIf cfg.enable {
       ${cfg.serverGroupName} = {
         # name = cfg.serverGroupName;

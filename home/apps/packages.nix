@@ -36,6 +36,10 @@
       ]))
     ];
 
+    nixpkgs.config.permittedInsecurePackages = lib.mkIf (config.personal.enable && config.gui.enable) [
+      "qtwebengine-5.15.19"
+    ];
+
     programs = {
       vesktop.enable = config.personal.enable && config.gui.enable; # need to be enabled for stylix theming to apply
       element-desktop.enable = config.personal.enable && config.gui.enable;

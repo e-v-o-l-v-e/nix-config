@@ -11,7 +11,7 @@
   home.packages = lib.mkIf config.gui.hyprland.enable (
     with pkgs;
     [
-      inputs.ags.packages.${system}.default
+      # inputs.ags.packages.${system}.default
       bc
       brightnessctl
       cava
@@ -19,7 +19,7 @@
       glib
       gnome-system-monitor
       grim
-      gsettings-qt
+      # gsettings-qt
       gtk-engine-murrine
       hypridle
       hyprland
@@ -31,8 +31,8 @@
       hyprshade
       inxi
       libappindicator
-      nwg-displays
-      nwg-look
+      # nwg-displays
+      # nwg-look
       polkit_gnome
       rofi-wayland
       slurp

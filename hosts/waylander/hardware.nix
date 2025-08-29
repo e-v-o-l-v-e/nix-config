@@ -13,7 +13,7 @@
     grub = {
       device = "nodev";
       efiSupport = true;
-      useOSProber = true;
+      useOSProber = false;
     };
     efi = {
       canTouchEfiVariables = true;
