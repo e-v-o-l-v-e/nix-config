@@ -12,7 +12,7 @@
 {
   config = lib.mkMerge [
     {
-      flakePath = ".dotfiles/nix-config";
+      flakePath = "nix-config";
 
       #=#=#=# HOME #=#=#=#
       personal.enable = true;

@@ -143,5 +143,10 @@
       url = "github:e-v-o-l-v-e/local-content-share";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ignis = {
+      url = "github:ignis-sh/ignis";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

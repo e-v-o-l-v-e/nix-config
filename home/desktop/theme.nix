@@ -1,8 +1,11 @@
 { config, pkgs, ... }: {
 
   services.swww.enable = true;
+  services.swww.extraArgs = [ "--no-cache" ];
 
   home.packages = with pkgs; [
+    stow
+
     # CUSTOMS SCRIPTS
     (pkgs.writeScriptBin "theme-global-switch" ''
       #!/usr/bin/env fish

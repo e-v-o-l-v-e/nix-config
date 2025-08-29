@@ -177,6 +177,48 @@
         "type": "github"
       }
     },
+    "ignis": {
+      "inputs": {
+        "ignis-gvc": "ignis-gvc",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1756202507,
+        "narHash": "sha256-znQkYnIzL0NoKma2ltiaOrRpZDQYAJuQA4nPpSV5A+A=",
+        "owner": "ignis-sh",
+        "repo": "ignis",
+        "rev": "3b7be57c28f5325a38207fd6bb73f4469be30734",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ignis-sh",
+        "repo": "ignis",
+        "type": "github"
+      }
+    },
+    "ignis-gvc": {
+      "inputs": {
+        "nixpkgs": [
+          "ignis",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754064086,
+        "narHash": "sha256-ft5KvY2OYrWF+jEsfBL/Zx8Iuo2C10C6COk8wHwZw34=",
+        "owner": "ignis-sh",
+        "repo": "ignis-gvc",
+        "rev": "f2c9f10d8b49cc38106a2f07a51ea959c6aa4e63",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ignis-sh",
+        "repo": "ignis-gvc",
+        "type": "github"
+      }
+    },
     "local-content-share": {
       "inputs": {
         "nixpkgs": [
@@ -278,6 +320,7 @@
         "astal": "astal_2",
         "copyparty": "copyparty",
         "home-manager": "home-manager",
+        "ignis": "ignis",
         "local-content-share": "local-content-share",
         "nixpkgs": "nixpkgs",
         "nvf": "nvf",
