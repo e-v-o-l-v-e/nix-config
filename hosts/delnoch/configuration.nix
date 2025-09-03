@@ -38,6 +38,9 @@
     else
     {
       #=#=#=# SYSTEM #=#=#=#
+
+      boot.loader.systemd-boot.enable = true;
+      
       # nixos version at the time of first install, do not change
       system.stateVersion = "25.05";
 
@@ -48,11 +51,16 @@
 
       # Network #
       services.tailscale.enable = true;
-      networking.interfaces.enp2s0.wakeOnLan.enable = true;
-      networking.interfaces.enp2s0.ipv4.addresses = [{ 
-        address = "192.168.0.216"; 
-        prefixLength = 24;
-      }];
+      networking.interfaces.enp2s0.wakeOnLan.enable = true; 
+      
+      networking.defaultGateway = { address = "192.168.0.254"; interface = "enp2s0"; };
+      networking.interfaces.enp2s0 = {
+        useDHCP = false;
+        ipv4.addresses = [{ 
+          address = "192.168.0.216"; 
+          prefixLength = 24;
+        }];
+      };
 
 
       #=#=#=# SERVER SPECIFIC #=#=#=#
@@ -90,7 +98,7 @@
         cloudflared.enable = true;
 
         # notes
-        silverbullet.enable = true;
+        silverbullet.enable = false; # pkgs kinda broken rn
 
         # utilities
         local-content-share.enable = true;
@@ -113,6 +121,8 @@
 
         immich.enable = true;
       };
+
+      server.docker.silverbullet.enable = true;
 
       virtualisation.docker.enable = true;
     })
