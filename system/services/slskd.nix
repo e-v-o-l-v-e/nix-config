@@ -8,7 +8,7 @@
   fqdn = cfg.domain;
   webuiPort = 5030;
 
-  slskdDir = "${cfg.dataPath}/torrents/slskd";
+  slskdDir = "${cfg.dataPath}/media/music-unmapped";
 in {
   services.slskd = {
     group = cfg.serverGroupName;
@@ -23,8 +23,8 @@ in {
       soulseek.listen_port = cfg.vpn.forwardedPort;
       soulseek.description = "YOLOOO";
 
-      directories.downloads = slskdDir + "/downloads";
-      directories.incomplete = slskdDir + "/incomplete";
+      directories.downloads = slskdDir;
+      directories.incomplete = null;
 
       shares.directories = [
         "${cfg.dataPath}/media/music"

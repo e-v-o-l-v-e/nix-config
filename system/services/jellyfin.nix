@@ -18,13 +18,6 @@ in {
     group = cfg.serverGroupName;
   };
 
-  # # pretty sure this is unnecessary, but it's on the wiki :shrug:
-  # environment.systemPackages = lib.mkIf config.services.jellyfin.enable [
-  #   pkgs.jellyfin
-  #   pkgs.jellyfin-web
-  #   pkgs.jellyfin-ffmpeg
-  # ];
-
   # transcoding with vaapi for i3-7100T
   hardware.graphics = lib.mkIf config.services.jellyfin.enable {
     inherit (config.services.jellyfin) enable;
