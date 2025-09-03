@@ -11,15 +11,16 @@
   home.packages = lib.mkIf config.gui.hyprland.enable (
     with pkgs;
     [
-      # inputs.ags.packages.${system}.default
       bc
+      bibata-cursors
       brightnessctl
       cava
       cpufrequtils
+      fuzzel
       glib
       gnome-system-monitor
       grim
-      # gsettings-qt
+      gsettings-qt
       gtk-engine-murrine
       hypridle
       hyprland

@@ -11,6 +11,8 @@
       network.enable = true;
     };
 
+    addToPythonEnv = true;
+
     extraPackages = with pkgs; [
       python313Packages.pillow
       python313Packages.numpy

@@ -1,8 +1,5 @@
 { config, pkgs, ... }: {
 
-  services.swww.enable = true;
-  services.swww.extraArgs = [ "--no-cache" ];
-
   home.packages = with pkgs; [
     stow
 
