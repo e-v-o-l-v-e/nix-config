@@ -7,6 +7,7 @@
     extraConfig = {
       push.autoSetupRemote = true;
       init.defaultBranch = "main";
+      pull.ff = "only";
 
       # url = {
       #   "ssh://git@ssh.github.com:443/" = {

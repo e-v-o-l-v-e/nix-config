@@ -15,6 +15,7 @@ config,
     lsd
     ripgrep
     vim
+    yazi
     zellij
 
     # nix

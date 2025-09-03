@@ -30,6 +30,7 @@
       hyprlock
       hyprpicker
       hyprshade
+      hyprsunset
       inxi
       libappindicator
       # nwg-displays

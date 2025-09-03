@@ -6,6 +6,7 @@
     ./hypr.nix
     ./ignis.nix
     ./illogical-impulse.nix
+    ./matugen.nix
     ./plasma.nix
     ./theme.nix
   ];
