@@ -32,7 +32,7 @@ in {
       # and just use the themeFile option below
 
       extraConfig = ''
-        include theme.conf
+        include colors.conf
       '';
 
       # themeFile = "SpaceGray_Eighties";

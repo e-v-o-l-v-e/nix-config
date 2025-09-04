@@ -2,6 +2,9 @@
 
   home.packages = with pkgs; [
     stow
+    adwaita-icon-theme
+    adwaita-fonts
+    adwaita-qt
 
     # CUSTOMS SCRIPTS
     (pkgs.writeScriptBin "theme-global-switch" ''
