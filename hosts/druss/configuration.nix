@@ -51,6 +51,9 @@
 
         programs.kitty.enable = true;
         programs.kitty.nixConfig.enable = true;
+        programs.kitty.extraConfig = lib.mkForce ''
+        include theme.conf
+      '';
 
         programs.zen-browser.enable = true;
 
@@ -62,6 +65,9 @@
       else {
         #=#=#=# SYSTEM #=#=#=#
         laptop.enable = false;
+
+
+        boot.loader.systemd-boot.enable = true;
 
         gpu = "amd";
 
@@ -88,8 +94,8 @@
         #
         server.domain = "imp-network.com";
         #
-        services.caddy.enable = true;
-        services.silverbullet.enable = true;
+        services.caddy.enable = false;
+        services.silverbullet.enable = false;
         # services.radarr.enable = true;
         # services.sonarr.enable = true;
       }

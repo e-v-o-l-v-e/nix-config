@@ -2,6 +2,7 @@
   config,
   inputs,
   username,
+  pkgs,
   ...
 }:
 {
@@ -21,6 +22,8 @@
   };
 
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+
+  nixpkgs.config.allowUnfree= true;
 
   programs.home-manager.enable = true;
 
