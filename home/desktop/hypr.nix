@@ -33,8 +33,6 @@
       hyprsunset
       inxi
       libappindicator
-      # nwg-displays
-      # nwg-look
       polkit_gnome
       rofi-wayland
       slurp
@@ -43,6 +41,7 @@
       swww
       wallust
       waybar
+      waypaper
       wlogout
     ]
   );

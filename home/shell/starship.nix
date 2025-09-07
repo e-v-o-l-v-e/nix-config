@@ -1,8 +1,8 @@
-{...}: {
+{ lib, ...}: {
   programs.starship = {
     enable = true;
 
-    settings = {
+    settings = lib.mkIf false {
       add_newline = false;
       command_timeout = 1000;
 

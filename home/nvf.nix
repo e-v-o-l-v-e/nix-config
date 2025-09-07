@@ -17,6 +17,9 @@ in {
   config = {
     programs.nvf = {
       settings.vim = {
+
+        enableLuaLoader = true;
+
         viAlias = true;
         vimAlias = false;
         debugMode = {
@@ -168,9 +171,9 @@ in {
 
         theme = {
           enable = true;
-          name = "tokyonight";
-          style = "night";
-          transparent = false;
+          name = "gruvbox";
+          style = "light";
+          transparent = true;
         };
 
         startPlugins = [
@@ -241,8 +244,8 @@ in {
           hardtime-nvim = {
             enable = true;
             setupOpts = {
-              max_count = 5;
-              restriction_mode = "hint_and_block";
+              max_count = 4;
+              restriction_mode = "hint";
             };
           };
         };
@@ -410,7 +413,7 @@ in {
       };
     };
 
-    programs.fish.functions = lib.mkIf config.gui.enable {
+    programs.fish.functions = lib.mkIf (config.gui.enable && config.programs.nvf.fishIntegration.enable) {
       "nvim" = {
         argumentNames = [ "argv" ];
         body = ''
@@ -451,5 +454,6 @@ in {
 
   options = {
     programs.nvf.maxConfig = lib.mkEnableOption "Enable heavier nvf config"; # // { default = true; };
+    programs.nvf.fishIntegration.enable = lib.mkEnableOption "Enable fish fonction to use defined colorscheme";
   };
 }

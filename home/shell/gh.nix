@@ -15,12 +15,12 @@
       };
     };
 
-    hosts = { 
-      "github.com" = {
-        inherit username;
-        git_protocol = "ssh";
-      };
-    };
+    # hosts = { 
+    #   "github.com" = {
+    #     inherit username;
+    #     git_protocol = "ssh";
+    #   };
+    # };
 
     extensions = with pkgs; [ 
       gh-eco

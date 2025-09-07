@@ -2,9 +2,10 @@
   programs.btop = {
     enable = true;
 
-    extraConfig = ''
-      include theme.conf
-    '';
+    settings = {
+      color_theme = "matugen";
+      theme_background = true;
+    };
   };
 
   home.packages = [
