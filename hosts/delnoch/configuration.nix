@@ -104,6 +104,9 @@
         local-content-share.enable = true;
         pingvin-share.enable = true;
 
+        # cloud
+        opencloud.enable = true;
+
         # media viewing/request
         jellyfin.enable = true;
         jellyseerr.enable = true;
@@ -123,6 +126,9 @@
       };
 
       server.docker.silverbullet.enable = true;
+
+      server.hugo.enable = true;
+      server.hugo.tuto-tailscale.enable = true;
 
       virtualisation.docker.enable = true;
     })

@@ -23,6 +23,7 @@ in
     ./pingvin-share.nix
     ./qbittorrent.nix
     ./silverbullet.nix
+    ./sites.nix
     ./slskd.nix
   ];
 }
