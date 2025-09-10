@@ -55,6 +55,7 @@ config,
     lowfi
     neo-cowsay
     pamixer
+    playerctl
     presenterm
     xdg-utils
   ]);

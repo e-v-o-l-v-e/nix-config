@@ -116,6 +116,7 @@ in {
           clang.enable = true;
           css.enable = maxConfig;
           html.enable = maxConfig;
+          php.enable = maxConfig;
           sql.enable = true;
           kotlin.enable = false;
           ts.enable = false;

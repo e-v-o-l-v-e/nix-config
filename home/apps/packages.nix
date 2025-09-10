@@ -30,7 +30,8 @@
         jellyfin-media-player
         kdePackages.kdeconnect-kde
         libreoffice-qt6-fresh
-        nextcloud-client
+        opencloud-desktop
+        opencloud-desktop-shell-integration-dolphin
         thunderbird
         vesktop
       ]))
