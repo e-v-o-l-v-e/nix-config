@@ -3,6 +3,7 @@
   config,
   username,
   lib,
+  pkgs-stable,
   ...
 }: let
   perso = config.personal.enable;
@@ -31,7 +32,10 @@ in {
     programs.localsend.enable = perso;
 
     # defined in host/${hostname}/configuration.nix
-    services.tailscale = {};
+    services.tailscale = {
+      package = pkgs-stable.tailscale;
+    };
+
     hardware.bluetooth = {};
   };
 }

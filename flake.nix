@@ -19,10 +19,17 @@
         };
       };
 
+      pkgs-stable = import inputs.nixpkgs-stable {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+
       mkSystemConfig =
         hostname:
         nixpkgs.lib.nixosSystem {
-          inherit system pkgs;
+          inherit system pkgs pkgs-stable;
 
           specialArgs = {
             inherit
@@ -94,6 +101,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     # nixpkgs.url = "git+file:///home/evolve/Code/nixpkgs?ref=nixos-local-content-share-init";
 
