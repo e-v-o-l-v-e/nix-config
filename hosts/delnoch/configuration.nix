@@ -106,6 +106,8 @@
 
         # cloud
         opencloud.enable = true;
+        immich.enable = true;
+        matrix-conduit.enable = true;
 
         # media viewing/request
         jellyfin.enable = true;
@@ -121,8 +123,6 @@
         lidarr.enable = true;
 
         slskd.enable = true;
-
-        immich.enable = true;
       };
 
       server.docker.silverbullet.enable = true;
