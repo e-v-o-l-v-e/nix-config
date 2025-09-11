@@ -62,6 +62,8 @@ in
 
         "airvpn/private_key" = common;
         "airvpn/preSharedKey" = common;
+
+        matrix-registration-token = server;
       }
       // getPwd "password-druss" druss
       // getPwd "password-waylander" waylander

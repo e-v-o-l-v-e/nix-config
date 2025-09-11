@@ -18,7 +18,7 @@ in
     ./immich.nix
     ./kavita.nix
     ./local-content-share.nix
-    ./matrix.nix
+    # ./matrix.nix
     ./olivetin.nix
     ./opencloud.nix
     ./pingvin-share.nix

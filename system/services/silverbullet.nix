@@ -22,13 +22,13 @@ in {
 
       envFile = config.sops.secrets.silverbullet-env.path;
 
-      package = pkgs.silverbullet.overrideAttrs (oldAttrs: rec {
-        version = "0.10.4";
-        src = pkgs.fetchurl {
-          url = "https://github.com/silverbulletmd/silverbullet/releases/download/${version}/silverbullet.js";
-          hash = "sha256-ko1zXfvn0rVY+lp9zTZ71BL41h7AOazooBVeqELP3Ps=";
-        };
-      });
+      # package = pkgs.silverbullet.overrideAttrs (oldAttrs: rec {
+      #   version = "0.10.4";
+      #   src = pkgs.fetchurl {
+      #     url = "https://github.com/silverbulletmd/silverbullet/releases/download/${version}/silverbullet.js";
+      #     hash = "sha256-ko1zXfvn0rVY+lp9zTZ71BL41h7AOazooBVeqELP3Ps=";
+      #   };
+      # });
     };
 
     systemd.services = lib.mkIf config.services.silverbullet.enable {

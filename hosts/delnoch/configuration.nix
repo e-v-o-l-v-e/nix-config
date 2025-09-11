@@ -107,7 +107,7 @@
         # cloud
         opencloud.enable = true;
         immich.enable = true;
-        matrix-conduit.enable = true;
+        matrix-conduit.enable = false;
 
         # media viewing/request
         jellyfin.enable = true;
