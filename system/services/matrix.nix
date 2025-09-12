@@ -1,32 +1,54 @@
-{ config, lib, ... }: let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.server;
   fqdn = cfg.domain;
   port = 8008;
 in {
-  services.matrix-conduit = {
-    settings.global = {
-      allow_registration = true;
-      # registration_token = config.sops.secrets.matrix-registration-token.path;
+  config = {
+    services.matrix-conduit = {
+      settings.global = {
+        allow_registration = false;
+        # registration_token = config.sops.secrets.matrix-registration-token.path;
 
-      server_name = "matrix.${fqdn}";
-      address = "0.0.0.0";
-      inherit port;
+        server_name = "matrix.${fqdn}";
+        address = "0.0.0.0";
+        inherit port;
 
-      database_backend = "rocksdb";
+        database_backend = "rocksdb";
+        # database_path = lib.mkForce (cfg.ssdPath + "/matrix/conduit/");
 
-      media = {
-        backend = "filesystem";
-        path = cfg.dataPath + "/matrix/media";
+        # media = {
+        #   backend = "filesystem";
+        #   path = cfg.dataPath + "/matrix/media";
+        # };
+      };
+    };
+
+    environment.systemPackages = lib.optional config.services.matrix-conduit.enable pkgs.element-web;
+
+    # services.coturn = {
+    #   inherit (config.services.matrix-conduit) enable;
+    #
+    #   min-port = 49000;
+    #   max-port = 50000;
+    #
+    #   realm = "turn.${fqdn}";
+    # };
+
+    services.caddy.virtualHosts = {
+      "element.${fqdn}" = {
+        serverAliases = [":8009"];
+        extraConfig = ''
+          root * ${pkgs.element-web.outPath}
+          file_server {
+            index index.html
+          }
+        '';
       };
     };
   };
-
-  # services.caddy.virtualHosts = lib.mkIf config.services.matrix-conduit.enable {
-  #   "conduit.${fqdn}" = {
-  #     extraConfig = ''
-  #       import cfdns
-  #       reverse_proxy http://localhost:${toString port}
-  #     '';
-  #   };
-  # };
 }
