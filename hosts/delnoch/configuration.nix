@@ -44,7 +44,7 @@
       # nixos version at the time of first install, do not change
       system.stateVersion = "25.05";
 
-      boot.kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_6_6;
+      # boot.kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_6_12;
 
       # Desktop #
       login-manager = null;

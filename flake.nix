@@ -29,7 +29,7 @@
       mkSystemConfig =
         hostname:
         nixpkgs.lib.nixosSystem {
-          inherit system pkgs pkgs-stable;
+          inherit system pkgs;
 
           specialArgs = {
             inherit
@@ -37,6 +37,7 @@
               username
               self
               inputs
+              pkgs-stable
               ;
             HM = false;
           };
