@@ -14,7 +14,7 @@ in
       kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
       # kernelPackages = pkgs.linuxPackages_latest; #linux Kernel
 
-      kernelParams =
+      kernelParams = 
         [
           "systemd.mask=systemd-vconsole-setup.service"
           "systemd.mask=dev-tpmrm0.device" # this is to mask that stupid 1.5 mins systemd bug
@@ -29,25 +29,22 @@ in
           "udev.log_priority=3"
         ];
 
-      # enable boot loading styling
-      plymouth.enable = config.gui.stylix.enable;
-
       # This is for OBS Virtual Cam Support
-      #kernelModules = [ "v4l2loopback" ];
-      #  extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+      kernelModules = [ "v4l2loopback" ];
+      extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
 
-      initrd = {
-        availableKernelModules = [
-          "xhci_pci"
-          "ahci"
-          "nvme"
-          "usb_storage"
-          "usbhid"
-          "sd_mod"
-        ];
-        verbose = !perso;
-      };
-      consoleLogLevel = 4; # lib.mkIf perso 3;
+      # initrd = {
+      #   availableKernelModules = [
+      #     "xhci_pci"
+      #     "ahci"
+      #     "nvme"
+      #     "usb_storage"
+      #     "usbhid"
+      #     "sd_mod"
+      #   ];
+      #   # verbose = !perso;
+      # };
+      # consoleLogLevel = 4; # lib.mkIf perso 3;
 
       kernel.sysctl =  {
         # Needed For Some Steam Games

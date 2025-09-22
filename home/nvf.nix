@@ -16,7 +16,13 @@
 in {
   config = {
     programs.nvf = {
+
       settings.vim = {
+        luaConfigPost = ''
+          require("notify").setup({
+            background_colour = "#ffffff",
+          })
+        '';
 
         enableLuaLoader = true;
 
@@ -172,8 +178,8 @@ in {
 
         theme = {
           enable = true;
-          name = "gruvbox";
-          style = "light";
+          # name = "default";
+          # style = "light";
           transparent = true;
         };
 

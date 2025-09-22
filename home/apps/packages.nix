@@ -12,6 +12,8 @@
         blueman
         cliphist
         # kitty
+        gnome-keyring
+        libgnome-keyring
         localsend
         loupe
         pavucontrol

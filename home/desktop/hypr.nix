@@ -11,6 +11,8 @@
   home.packages = lib.mkIf config.gui.hyprland.enable (
     with pkgs;
     [
+      libadwaita
+      adwaita-icon-theme
       bc
       bibata-cursors
       brightnessctl
@@ -22,6 +24,9 @@
       grim
       gsettings-qt
       gtk-engine-murrine
+      gtk4
+      gtk3
+      dconf
       hypridle
       hyprland
       hyprland-qtutils
