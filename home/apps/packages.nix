@@ -29,7 +29,7 @@
         # packages for personal machine
         element-desktop
         finamp
-        jellyfin-media-player
+        #jellyfin-media-player
         kdePackages.kdeconnect-kde
         libreoffice-qt6-fresh
         opencloud-desktop
@@ -39,9 +39,9 @@
       ]))
     ];
 
-    nixpkgs.config.permittedInsecurePackages = lib.mkIf (config.personal.enable && config.gui.enable) [
-      "qtwebengine-5.15.19"
-    ];
+    # nixpkgs.config.permittedInsecurePackages = lib.mkIf (config.personal.enable && config.gui.enable) [
+    #   "qtwebengine-5.15.19"
+    # ];
 
     programs = {
       vesktop.enable = config.personal.enable && config.gui.enable; # need to be enabled for stylix theming to apply

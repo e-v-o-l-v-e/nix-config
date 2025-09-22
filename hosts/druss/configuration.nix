@@ -47,7 +47,7 @@
         programs.nvf.enable = true;
         programs.nvf.maxConfig = true;
 
-        programs.zellij.enable = true;
+        programs.zellij.enable = false;
 
         programs.kitty.enable = true;
         programs.kitty.nixConfig.enable = true;

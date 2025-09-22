@@ -19,12 +19,6 @@
         };
       };
 
-      pkgs-stable = import inputs.nixpkgs-stable {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-      };
 
       mkSystemConfig =
         hostname:
@@ -37,7 +31,6 @@
               username
               self
               inputs
-              pkgs-stable
               ;
             HM = false;
           };
@@ -102,10 +95,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
-
-    # nixpkgs.url = "git+file:///home/evolve/Code/nixpkgs?ref=nixos-local-content-share-init";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
