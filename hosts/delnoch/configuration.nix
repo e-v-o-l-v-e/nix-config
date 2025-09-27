@@ -125,12 +125,11 @@
         slskd.enable = true;
       };
 
+      virtualisation.docker.enable = true;
       server.docker.silverbullet.enable = true;
+      server.docker.silverbullet-public.enable = true;
 
       server.hugo.enable = true;
-      server.hugo.tuto-tailscale.enable = true;
-
-      virtualisation.docker.enable = true;
     })
   ];
 }

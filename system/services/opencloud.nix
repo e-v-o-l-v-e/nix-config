@@ -6,13 +6,17 @@
   cfg = config.server;
   fqdn = cfg.domain;
 
-  port = 9200;
-  url = "https://cloud.${fqdn}";
-
-  co-port = 9980;
+  cloud = {
+    url = "https://cloud.${fqdn}";
+    port = 9200;
+  };
+  collabora = {
+    port = 9980;
+    url = "https://collabora.${fqdn}";
+  };
 in {
   services.opencloud = {
-    inherit url port;
+    inherit (cloud) url port;
     stateDir = "${config.server.dataPath}/opencloud";
     # address = "0.0.0.0";
     user = "opencloud";
@@ -29,10 +33,9 @@ in {
   };
 
   services.collabora-online = {
-    enable = false;
+    inherit (collabora) port;
+    enable = true;
     # inherit (config.services.opencloud) enable;
-
-    port = co-port;
 
     settings = {
       storage.wopi."@allow" = true;
@@ -42,24 +45,27 @@ in {
       # };
     };
 
-    aliasGroups = [{
-      host = url;
-    }];
+    aliasGroups = [
+      {
+        host = cloud.url;
+        aliases = [ collabora.url ];
+      }
+    ];
   };
 
   services.caddy.virtualHosts = lib.mkIf config.services.opencloud.enable {
-    "${url}" = {
+    "${cloud.url}" = {
       extraConfig = ''
         import cfdns
-        reverse_proxy http://localhost:${toString port}
+        reverse_proxy http://localhost:${toString cloud.port}
       '';
     };
 
-    # "collabora.${fqdn}" = {
-    #   extraConfig = ''
-    #     import cfdns
-    #     reverse_proxy http://localhost:${toString co-port}
-    #   '';
-    # };
+    "${collabora.url}" = {
+      extraConfig = ''
+        import cfdns
+        reverse_proxy http://localhost:${toString collabora.port}
+      '';
+    };
   };
 }

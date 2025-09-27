@@ -49,7 +49,7 @@ in
         silverbullet-env = {
           inherit (server) sopsFile;
           # owner = "silverbullet";
-          owner = config.services.silverbullet.user;
+          # owner = config.services.silverbullet.user;
         };
 
         "wg-airvpn.conf" = server;
