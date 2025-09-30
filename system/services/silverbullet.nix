@@ -1,9 +1,12 @@
 {
   lib,
+  pkgs,
   config,
+  username,
   ...
 }: let
   cfg = config.server;
+  scriptDir = cfg.dataPath + "/scripts";
 
   listenPort = 3333;
   listenPortPublic = 3334;
@@ -50,6 +53,7 @@ in {
         environment = {
           #SB_HOSTNAME = "0.0.0.0"; #  already the default with docker
           SB_READ_ONLY = "true";
+          SB_INDEX_PAGE = "index-public";
         };
       };
     };
@@ -60,6 +64,20 @@ in {
           import cfdns
           reverse_proxy http://localhost:${toString listenPort}
         '';
+      };
+    };
+
+    systemd.timers."sb-publish" = {
+      timerConfig = {
+        OnCalendar = "01:00:00";
+        Unit = "sb-publish.service";
+      };
+    };
+    systemd.services."sb-publish" = {
+      script = "${pkgs.fish}/bin/fish ${scriptDir}/sb-public.fish > ${scriptDir}/logs/sb.log";
+      serviceConfig = { 
+        Type = "oneshot";
+        User = username;
       };
     };
   };

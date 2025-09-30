@@ -78,6 +78,8 @@
         vpn.forwardedPort = 18086;      
 
         allowedSubnets = [ "192.168.0.0/24" ];
+
+        openPorts = [ 80 443 2283 ];
       };
 
       security.sudo.wheelNeedsPassword = false;
@@ -103,6 +105,7 @@
         # utilities
         local-content-share.enable = true;
         pingvin-share.enable = true;
+        olivetin.enable = true;
 
         # cloud
         opencloud.enable = true;

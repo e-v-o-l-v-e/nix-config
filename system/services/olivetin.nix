@@ -7,7 +7,7 @@
 }: let
   cfg = config.server;
   fqdn = config.server.domain;
-  scriptDir = cfg.configPath + "/scripts";
+  scriptDir = cfg.dataPath + "/scripts";
   port = 1337;
 in {
   services.olivetin = {
@@ -15,24 +15,13 @@ in {
     group = "users";
 
     settings = {
+      ListenAddressSingleHTTPFrontend = "0.0.0.0:${toString port}";
       actions = [
         {
-          title = "Calmos frerot";
-          shell = "fish ${scriptDir}/bruit.fish";
-          icon = "&#128564;";
-          timeout = 15;
-        }
-        {
-          title = "relance bruit";
-          shell = "fish ${scriptDir}/rebruit.fish";
-          icon = "&#10515;";
-          timeout = 10;
-        }
-        {
-          title = "jeudefou cp";
-          shell = "fish ${scriptDir}/jdf-cp.sh";
+          title = "publish sb";
+          shell = "fish ${scriptDir}/sb-public.fish > ${scriptDir}/logs/sb.log";
           icon = "🗘";
-          timeout = 1;
+          timeout = 5;
         }
       ];
     };
@@ -44,8 +33,8 @@ in {
 
   services.caddy.virtualHosts = lib.mkIf config.services.olivetin.enable {
     "olivetin.${fqdn}".extraConfig = ''
-      reverse_proxy http://localhost:${toString port}
       import cfdns
+      reverse_proxy http://localhost:${toString port}
     '';
   };
 }
