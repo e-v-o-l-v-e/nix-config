@@ -14,6 +14,7 @@ in {
   services.opencloud = {
     enable = true;
     inherit (cloud) url port;
+    address = "0.0.0.0";
     stateDir = "${config.server.dataPath}/opencloud";
     user = "opencloud";
     group = config.server.serverGroupName;
