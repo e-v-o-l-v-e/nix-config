@@ -39,7 +39,7 @@
       inxi
       libappindicator
       polkit_gnome
-      rofi-wayland
+      rofi
       slurp
       swappy
       swaynotificationcenter

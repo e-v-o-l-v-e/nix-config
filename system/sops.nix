@@ -1,5 +1,9 @@
-{ inputs, username, config, lib, ... }:
-let
+{
+  inputs,
+  config,
+  lib,
+  ...
+}: let
   cfg = config.sops-nix;
 
   # Define each sops file path
@@ -20,9 +24,7 @@ let
       key = "password";
     };
   };
-
-in 
-{
+in {
   imports = [
     inputs.sops-nix.nixosModules.sops
   ];
@@ -32,38 +34,29 @@ in
     validateSopsFiles = false;
 
     age = {
-      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+      sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
       keyFile = "/var/lib/sops-nix/key.txt";
       generateKey = true;
     };
 
-    secrets = 
+    secrets =
       {
-        domain = server;
-
         caddy-env = lib.mkIf config.services.caddy.enable {
           inherit (server) sopsFile;
           owner = "caddy";
         };
 
-        silverbullet-env = {
-          inherit (server) sopsFile;
-          # owner = "silverbullet";
-          # owner = config.services.silverbullet.user;
-        };
-
-        "wg-airvpn.conf" = server;
-
-        cloudflared-cred = server;
-
+        # services
+        silverbullet-env = server;
         "slskd.env" = server;
-
         kavita-token = server;
+
+        # network
+        "wg-airvpn.conf" = server;
+        cloudflared-cred = server;
 
         "airvpn/private_key" = common;
         "airvpn/preSharedKey" = common;
-
-        matrix-registration-token = server;
       }
       // getPwd "password-druss" druss
       // getPwd "password-waylander" waylander
@@ -71,4 +64,3 @@ in
       // getPwd "password-test" common;
   };
 }
-

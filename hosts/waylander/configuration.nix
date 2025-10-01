@@ -6,9 +6,8 @@
   ...
 }:
 # this is where the per host configuration happens
-# all options and their default values are set in ./options.nix
-# the username is set globally as the username option's default
-# you can override it per host or change it in ./options.nix to use the same on every machine, current is "evolve"
+# most options are set in the relevant files, those needed by HM and Nixos are in custom/option.nix
+# the username is set globally in flake.nix
 {
   config = lib.mkMerge [
     {
@@ -26,14 +25,9 @@
 
       # gui / theming #
       gui.enable = true;
-      gui.theme = "light";
-
-      # specialisation."light".configuration = {
-      #   gui.theme = "light";
-      #   environment.etc."specialisation".text = "light";
-      # };
 
       gui.hyprland.enable = true;
+      gui.matugen.enable = true;
 
       programs.waybar.enable = true;
 
@@ -47,21 +41,17 @@
         # Apps #
         programs.nvf.enable = true;
         programs.nvf.maxConfig = true;
-        # programs.nvf.settings.vim.theme = lib.mkForce {
-        #   enable = true;
-        #   # name = "tokyonight";
-        #   # style = "night";
-        # };
 
-        programs.kitty.nixConfig.enable = true;
+        programs.kitty.enable = config.gui.enable;
+        programs.kitty.nixConfig.enable = false;
 
-        programs.zellij.enable = false;
+        programs.zellij.enable = false; # better / easier tmux
 
         programs.zen-browser.enable = true;
 
         wayland.windowManager.hyprland.enable = false; # manage hyprland settings with home-manager
 
-        # home-manager version at the time of first install, do not change
+        # home-manager version at the time of first install, do not change when upgrading
         home.stateVersion = "25.05";
       }
       else {
@@ -70,7 +60,7 @@
 
         gpu = "amd";
 
-        # nixos version at the time of first install, do not change
+        # nixos version at the time of nixos install, do not change when upgrading
         system.stateVersion = "25.11";
 
         # Desktop #
@@ -92,19 +82,10 @@
         server.domain = "imp-network.com";
         # services.caddy.enable = true;
 
+        ## BOOTING ##
         # boot.loader.grub.theme = "${pkgs.kdePackages.breeze-grub}/grub/themes/breeze";
         # boot.loader.timeout = lib.mkForce 2;
         # boot.loader.grub.timeoutStyle = "menu";
-
-        # boot.plymouth = {
-        #   enable = true;
-        #   theme = "nixos-bgrt";
-        #   themePackages = with pkgs; [
-        #     plymouth-matrix-theme
-        #     nixos-bgrt-plymouth
-        #     plymouth-proxzima-theme
-        #   ];
-        # };
 
         boot = lib.mkForce {
           plymouth = {

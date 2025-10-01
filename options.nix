@@ -1,6 +1,5 @@
-{ lib, ... }:
-with lib;
-{
+{lib, ...}:
+with lib; {
   options = {
     personal.enable = mkEnableOption "Whether this is a personal device, enable vesktop, libreOffice etc";
 
@@ -29,55 +28,8 @@ with lib;
     };
 
     gui = {
-      enable = mkEnableOption "Enable gui and allow specifics packages";
-
-      theme = mkOption {
-        type = types.enum [
-          "dark"
-          "light"
-        ];
-        default = "dark";
-        description = "initial theme";
-      };
-      
-      font = {
-        size = mkOption {
-          type = types.int;
-          default = 13;
-          example = 15;
-          description = "Terminal font size";
-        };
-      };
-
+      enable = mkEnableOption "Enable gui and allow important packages";
       hyprland.enable = mkEnableOption "Enable hyprland and related packages for my config";
-
-      stylix = {
-        enable = mkEnableOption "Enable theming with stylix";
-
-        colorSchemeLight = mkOption {
-          type = types.str;
-          default = "one-light";
-          description = "Stylix light baseScheme";
-        };
-
-        colorSchemeDark = mkOption {
-          type = types.str;
-          default = "tokyo-night-dark";
-          description = "Stylix dark baseScheme";
-        };
-
-        override = mkEnableOption "Override dark and light schemes";
-
-        overrideColorScheme = mkOption {
-          type = types.nullOr types.str;
-          default = null;
-          # default = "tokyo-night-dark";
-          example = "gruvbox-dark-medium";
-          description = "Stylix baseScheme name to override dark and light";
-        };
-
-        enableSpecialisation = mkEnableOption "Build config for dark and white theme, SLOW";
-      };
     };
 
     gaming = {
@@ -85,9 +37,4 @@ with lib;
       full = mkEnableOption "Enable full gaming stack (e.g. Heroic, gamescope etc)";
     };
   };
-  #
-  # config = {
-  #   specialisation.dark.configuration = { config.gui.theme = "dark"; };
-  #   specialisation.light.configuration = { config.gui.theme = "light"; };
-  # };
 }

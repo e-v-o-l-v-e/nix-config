@@ -1,13 +1,4 @@
-{
-  username,
-  config,
-  lib,
-  ...
-}:
-let
-  cfg = config.server;
-in
-{
+_: {
   imports = [
     ./arr.nix
     ./caddy.nix

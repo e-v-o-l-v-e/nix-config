@@ -5,6 +5,7 @@
     xkb = {
       inherit (config.keyboard) layout variant;
     };
+    autoRepeatInterval = 250;
   };
 
   console.keyMap = if (config.keyboard.layout == "gb") then "uk" else config.keyboard.layout;

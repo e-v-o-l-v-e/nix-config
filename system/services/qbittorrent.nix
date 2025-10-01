@@ -50,9 +50,9 @@ in {
     portMappings = [{
       from = webuiPort;
       to = webuiPort;
-      }];
+    }];
 
-    openVPNPorts = lib.optionals (!isNull torrentingPort) [{
+    openVPNPorts = lib.optionals (!null torrentingPort) [{
       port = torrentingPort;
       protocol = "both";
     }];

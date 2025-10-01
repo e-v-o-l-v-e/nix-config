@@ -178,9 +178,7 @@ in {
 
         theme = {
           enable = true;
-          # name = "default";
-          # style = "light";
-          transparent = true;
+          transparent = true; # use terminal colors
         };
 
         startPlugins = [
@@ -197,33 +195,6 @@ in {
           "solarized-osaka"
           "tokyonight"
         ];
-
-        # theme = {
-        #   name = "tokyonight";;
-        # };
-        #   lib.mkForce (
-        #   let
-        #     light = config.gui.theme == "light";
-        #     # light = false;
-        #   in {
-        #     enable = true;
-        #     # name = "gruvbox";
-        #     # name = "tokyonight";
-        #     name =
-        #       if light
-        #       then "catppuccin"
-        #       else "tokyonight";
-        #     style =
-        #       if light
-        #       then "latte"
-        #       else "night";
-        #       # # then "latte"
-        #       # then "light"
-        #       # else "dark";
-        #     # name = "gruvbox";
-        #     # style = "dark";
-        #   }
-        # );
 
         autopairs.nvim-autopairs.enable = true;
 
@@ -249,7 +220,7 @@ in {
           whichKey.enable = true;
           cheatsheet.enable = true;
           hardtime-nvim = {
-            enable = true;
+            enable = false;
             setupOpts = {
               max_count = 4;
               restriction_mode = "hint";
@@ -419,48 +390,9 @@ in {
         ];
       };
     };
-
-    programs.fish.functions = lib.mkIf (config.gui.enable && config.programs.nvf.fishIntegration.enable) {
-      "nvim" = {
-        argumentNames = [ "argv" ];
-        body = ''
-          command nvim -c "colorscheme $THEME_NVIM" $argv
-        '';
-      };
-    };
-
-    home.packages = [
-      (pkgs.writeScriptBin "theme-nvim-switch" ''
-        #!/usr/bin/env fish
-
-        if test $THEME = "light"
-          set -U THEME_NVIM $THEME_NVIM_LIGHT
-        else
-          set -U THEME_NVIM $THEME_NVIM_DARK
-        end
-
-        for f in (fd nvf /run/user/1000/)
-          nvim --server $f --remote-send ":colorscheme $THEME_NVIM<cr>"
-        end
-      '')
-
-      (pkgs.writeScriptBin "theme-nvim-init" ''
-        #!/usr/bin/env fish
-
-        set -U THEME_NVIM_DARK ${theme.initialDark}
-        set -U THEME_NVIM_LIGHT ${theme.initialLight}
-
-        if test $THEME = "light"
-          set -U THEME_NVIM $THEME_NVIM_LIGHT
-        else
-          set -U THEME_NVIM $THEME_NVIM_DARK
-        end
-      '')
-    ];
   };
 
   options = {
-    programs.nvf.maxConfig = lib.mkEnableOption "Enable heavier nvf config"; # // { default = true; };
-    programs.nvf.fishIntegration.enable = lib.mkEnableOption "Enable fish fonction to use defined colorscheme";
+    programs.nvf.maxConfig = lib.mkEnableOption "Enable heavier nvf config";
   };
 }

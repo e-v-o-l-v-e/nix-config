@@ -1,12 +1,13 @@
-{ config, lib, ... }:
-let
-  cfg = config.server;
-  fqdn = config.server.domain;
-  
-  port = 5055;
-  # configDir = "${cfg.configPath}/jellyseerr";
-in
 {
+  config,
+  lib,
+  ...
+}: let
+  cfg = config.server;
+  fqdn = cfg.domain;
+
+  port = 5055;
+in {
   services.jellyseerr = {
     inherit port;
   };

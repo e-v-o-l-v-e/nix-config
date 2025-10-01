@@ -25,12 +25,6 @@
 
     # gui / theming #
     gui.enable = true;
-    gui.theme = "light";
-
-    # specialisation."light".configuration = {
-    #   gui.theme = "light";
-    #   environment.etc."specialisation".text = "light";
-    # };
 
     programs.kitty.enable = true;
     programs.kitty.nixConfig.enable = false;

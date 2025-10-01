@@ -44,6 +44,11 @@
       dc = "docker compose";
     };
 
+    binds = {
+      "ctrl-r".command = "history-pager";
+      "ctrl-r".mode = "insert";
+    };
+
     shellInit = ''
       set -g fish_greeting ""
     '';

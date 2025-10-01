@@ -13,6 +13,10 @@
   ];
 
   environment.systemPackages = [
+    pkgs.man
+    pkgs.bat-extras.batman
+    pkgs.man-pages
+    pkgs.man-pages-posix
     pkgs.duf
     pkgs.dust
     pkgs.fish

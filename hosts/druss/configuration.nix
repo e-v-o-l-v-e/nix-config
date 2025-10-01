@@ -23,18 +23,8 @@
 
       # Theming #
       gui.enable = true;
-      gui.theme = "light";
-
-      gui.font.size = 13;
 
       programs.waybar.enable = false;
-
-      gui.stylix.enable = false;
-      gui.stylix.colorSchemeDark = "tokyo-night-dark";
-      gui.stylix.colorSchemeLight = "one-light";
-
-      # if you want only one theme you can just uncomment this line
-      # gui.stylix.colorScheme = "gruvbox-dark-medium";
 
       gaming.enable = true;
       gaming.full = true;
