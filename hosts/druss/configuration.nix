@@ -88,6 +88,7 @@
         services.silverbullet.enable = false;
         # services.radarr.enable = true;
         # services.sonarr.enable = true;
+        services.opencloud.enable = true;
       }
     )
   ];

@@ -27,7 +27,6 @@
       gui.enable = true;
 
       gui.hyprland.enable = true;
-      gui.matugen.enable = true;
 
       programs.waybar.enable = true;
 
@@ -50,6 +49,8 @@
         programs.zen-browser.enable = true;
 
         wayland.windowManager.hyprland.enable = false; # manage hyprland settings with home-manager
+
+        gui.matugen.enable = true;
 
         # home-manager version at the time of first install, do not change when upgrading
         home.stateVersion = "25.05";
@@ -111,11 +112,19 @@
 
           initrd.verbose = false;
           initrd.systemd.enable = true;
-          initrd.kernelModules = [ "amdgpu" ];
+          initrd.kernelModules = ["amdgpu"];
 
           loader.grub.gfxmodeEfi = "text";
           loader.grub.gfxpayloadEfi = "text";
           loader.grub.splashImage = null;
+        };
+
+        services.printing.enable = true;
+
+        services.avahi = {
+          enable = true;
+          nssmdns4 = true;
+          openFirewall = true;
         };
       }
     )

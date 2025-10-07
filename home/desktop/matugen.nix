@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  cfg = config.custom.matugen;
+  cfg = config.gui.matugen;
 in {
   config = {
     home.packages = lib.mkIf cfg.enable (with pkgs; [
