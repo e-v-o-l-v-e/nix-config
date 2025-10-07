@@ -41,7 +41,7 @@
         programs.nvf.enable = true;
         programs.nvf.maxConfig = true;
 
-        programs.kitty.enable = config.gui.enable;
+        # programs.kitty.enable = config.gui.enable;
         programs.kitty.nixConfig.enable = false;
 
         programs.zellij.enable = false; # better / easier tmux

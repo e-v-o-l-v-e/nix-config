@@ -36,6 +36,7 @@
         opencloud-desktop-shell-integration-dolphin
         thunderbird
         vesktop
+        zathura
       ]))
     ];
 
