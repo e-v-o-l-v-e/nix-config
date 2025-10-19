@@ -1,6 +1,6 @@
 { pkgs, lib, ... }: {
   programs.btop = {
-    enable = true;
+    enable = false;
 
     settings = {
       color_theme = "matugen";

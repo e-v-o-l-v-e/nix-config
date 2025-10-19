@@ -39,11 +39,8 @@
 
         programs.zellij.enable = false;
 
-        programs.kitty.enable = true;
-        programs.kitty.nixConfig.enable = true;
-        programs.kitty.extraConfig = lib.mkForce ''
-        include theme.conf
-      '';
+        programs.kitty.enable = false;
+        programs.kitty.nixConfig.enable = false;
 
         programs.zen-browser.enable = true;
 
