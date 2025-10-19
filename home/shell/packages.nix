@@ -24,6 +24,7 @@ config,
     sops
 
     # utilities
+    calc
     fzf
     gitui
     gnutar
@@ -54,7 +55,6 @@ config,
     libnotify
     lowfi
     neo-cowsay
-    pamixer
     playerctl
     presenterm
     xdg-utils

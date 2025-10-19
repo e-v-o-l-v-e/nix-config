@@ -22,7 +22,6 @@ in {
           libva-utils
         ];
       };
-      amdgpu.amdvlk.enable = true;
     };
 
     environment.systemPackages = with pkgs; [

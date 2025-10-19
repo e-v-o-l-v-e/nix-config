@@ -8,13 +8,13 @@
 }: let
   port = 8081;
 in {
-  imports = [
-    # ../../custom/modules/local-content-share.nix
-    inputs.local-content-share.nixosModules.local-content-share
-  ];
+  # imports = [
+  #   # ../../custom/modules/local-content-share.nix
+  #   inputs.local-content-share.nixosModules.local-content-share
+  #   # /home/evolve/Code/nixpkgs/nixos/modules/services/misc/local-content-share.nix
+  # ];
 
   services.local-content-share = {
-    enable = true;
     inherit port;
 
     # package = pkgs.callPackage ../../custom/packages/local-content-share.nix { } ;

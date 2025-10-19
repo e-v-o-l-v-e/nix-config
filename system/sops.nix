@@ -46,6 +46,8 @@ in {
           owner = "caddy";
         };
 
+        eduroam = waylander;
+
         # services
         silverbullet-env = server;
         "slskd.env" = server;

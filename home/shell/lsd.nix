@@ -1,7 +1,7 @@
 _: {
   programs.lsd = {
     enable = true;
-    enableFishIntegration = true;
+    enableFishIntegration = false;
 
     settings = { 
       date = "date"; 

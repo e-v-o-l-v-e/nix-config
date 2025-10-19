@@ -20,7 +20,7 @@
         ueberzugpp
         vlc
         wl-clipboard
-        xfce.thunar
+        nautilus
 
         # theming
         flat-remix-icon-theme

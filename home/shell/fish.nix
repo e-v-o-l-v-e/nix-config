@@ -1,4 +1,4 @@
-{ config, ...}:
+{ username, ...}:
 {
   programs.fish = {
     enable = true;
@@ -51,6 +51,7 @@
 
     shellInit = ''
       set -g fish_greeting ""
+      fish_add_path -a /home/${username}/.local/bin
     '';
 
     interactiveShellInit = ''
