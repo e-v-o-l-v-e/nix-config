@@ -9,9 +9,9 @@
   port = 8081;
 in {
   # imports = [
-  #   # ../../custom/modules/local-content-share.nix
+  #   ../../custom/modules/local-content-share.nix
   #   inputs.local-content-share.nixosModules.local-content-share
-  #   # /home/evolve/Code/nixpkgs/nixos/modules/services/misc/local-content-share.nix
+  #   /home/evolve/Code/nixpkgs/nixos/modules/services/misc/local-content-share.nix
   # ];
 
   services.local-content-share = {
