@@ -125,6 +125,7 @@
         sonarr.enable = true;
         lidarr.enable = true;
 
+        navidrome.enable = true;
         slskd.enable = true;
       };
 

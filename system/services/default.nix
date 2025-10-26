@@ -10,6 +10,7 @@ _: {
     ./kavita.nix
     ./local-content-share.nix
     ./matrix.nix
+    ./navidrome.nix
     ./olivetin.nix
     ./opencloud.nix
     ./pingvin-share.nix
