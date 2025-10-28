@@ -1,10 +1,10 @@
 {
   lib,
+  oc,
   pkgs,
   config,
   ...
-}:
-{
+}: {
   config = {
     home.packages = lib.mkMerge [
       (lib.optionals (config.gui.enable) (with pkgs; [
@@ -25,19 +25,21 @@
         # theming
         flat-remix-icon-theme
       ]))
-      (lib.optionals (config.personal.enable && config.gui.enable) (with pkgs; [
-        # packages for personal machine
-        element-desktop
-        finamp
-        #jellyfin-media-player
-        kdePackages.kdeconnect-kde
-        libreoffice-qt6-fresh
-        opencloud-desktop
-        opencloud-desktop-shell-integration-dolphin
-        thunderbird
-        vesktop
-        zathura
-      ]))
+      (lib.optionals (config.personal.enable && config.gui.enable) (with pkgs;
+        [
+          # packages for personal machine
+          element-desktop
+          finamp
+          #jellyfin-media-player
+          kdePackages.kdeconnect-kde
+          libreoffice-qt6-fresh
+          # opencloud-desktop
+          opencloud-desktop-shell-integration-dolphin
+          thunderbird
+          vesktop
+          zathura
+        ]
+        ++ [ oc.opencloud-desktop ]))
     ];
 
     # nixpkgs.config.permittedInsecurePackages = lib.mkIf (config.personal.enable && config.gui.enable) [

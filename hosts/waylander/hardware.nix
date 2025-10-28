@@ -12,43 +12,37 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  #boot.loader.grub.device = "/dev/nvme0n1p1";
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/d7469df8-e49b-458d-bb9c-6751a51dbd79";
+      fsType = "ext4";
     };
-  };
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.useOSProber = false;
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/DCC9-E6E9";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/78775fe4-8070-40a6-b041-48c7db92b0ac";
+      fsType = "ext4";
+    };
+
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/b084febb-84f7-41fb-96a5-8c6b75715ea2"; }
+    ];
 
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "sd_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/41a08f82-4069-4630-9e25-d5519ad147ec";
-    fsType = "ext4";
-  };
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
 
-  fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/369D-7542";
-    fsType = "vfat";
-    options = ["fmask=0022" "dmask=0022"];
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/78775fe4-8070-40a6-b041-48c7db92b0ac";
-    fsType = "ext4";
-  };
-
-  swapDevices = [
-    {device = "/dev/disk/by-uuid/631992f1-b210-4712-a2fe-b556dbdb9041";}
-  ];
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -56,7 +50,4 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

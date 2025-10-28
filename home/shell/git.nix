@@ -1,10 +1,9 @@
-{ username, ... }:
-{
+{username, ...}: {
   programs.git = {
     enable = true;
-    userName = username;
-    userEmail = "elivanoa5@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = username;
+      user.email = "elivanoa5@gmail.com";
       push.autoSetupRemote = true;
       init.defaultBranch = "main";
       pull.ff = "only";

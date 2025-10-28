@@ -1,100 +1,105 @@
 {
   description = "My confiiiiig";
 
-  outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      home-manager,
-      ...
-    }:
-    let
-      username = "evolve";
-      system = "x86_64-linux";
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  }: let
+    username = "evolve";
+    system = "x86_64-linux";
 
-      pkgs = import nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
+    pkgs = import nixpkgs {
+      inherit system;
+      config = {
+        allowUnfree = true;
+      };
+    };
+
+    oc = import inputs.opencloud {
+      inherit system;
+      config = {
+        allowUnfree = true;
+      };
+    };
+
+    mkSystemConfig = hostname:
+      nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+
+        specialArgs = {
+          inherit
+            hostname
+            username
+            self
+            inputs
+            ;
+          HM = false;
+        };
+
+        modules = importModulesNixos hostname;
+      };
+
+    mkHomeConfig = hostname:
+      home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+
+        modules = importModulesHM hostname;
+
+        extraSpecialArgs = {
+          inherit
+            oc
+            hostname
+            username
+            self
+            inputs
+            system
+            ;
+          homeManagerOnly = true;
+          HM = true;
         };
       };
 
+    importModulesNixos = hostname: [
+      ./options.nix
+      ./hosts/${hostname}
+      ./system
 
-      mkSystemConfig =
-        hostname:
-        nixpkgs.lib.nixosSystem {
-          inherit system pkgs;
+      inputs.vpn-confinement.nixosModules.default
+    ];
 
-          specialArgs = {
-            inherit
-              hostname
-              username
-              self
-              inputs
-              ;
-            HM = false;
-          };
+    importModulesHM = hostname: [
+      ./options.nix
+      ./hosts/${hostname}/configuration.nix
+      ./home
 
-          modules = importModulesNixos hostname;
-        };
+      inputs.zen-browser.homeModules.twilight
+      inputs.nvf.homeManagerModules.default
+    ];
 
-      mkHomeConfig =
-        hostname:
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
+    myHosts = builtins.attrNames (builtins.readDir ./hosts);
+  in {
+    # NIXOS CONFIGURATIONS
+    nixosConfigurations = nixpkgs.lib.genAttrs myHosts mkSystemConfig;
 
-          modules = importModulesHM hostname;
+    # HOME-MANAGER CONFIGURATIONS.
+    homeConfigurations = builtins.listToAttrs (
+      builtins.map (host: {
+        name = "${username}@${host}";
+        value = mkHomeConfig host;
+      })
+      myHosts
+    );
 
-          extraSpecialArgs = {
-            inherit
-              hostname
-              username
-              self
-              inputs
-              system
-              ;
-            homeManagerOnly = true;
-            HM = true;
-          };
-        };
-
-      importModulesNixos = hostname: [
-        ./options.nix
-        ./hosts/${hostname}
-        ./system
-
-        inputs.vpn-confinement.nixosModules.default
-      ];
-
-      importModulesHM = hostname: [
-        ./options.nix
-        ./hosts/${hostname}/configuration.nix
-        ./home
-
-        inputs.zen-browser.homeModules.twilight
-        inputs.nvf.homeManagerModules.default
-      ];
-
-      myHosts = builtins.attrNames (builtins.readDir ./hosts);
-    in
-    {
-      # NIXOS CONFIGURATIONS
-      nixosConfigurations = nixpkgs.lib.genAttrs myHosts mkSystemConfig;
-
-      # HOME-MANAGER CONFIGURATIONS.
-      homeConfigurations = builtins.listToAttrs (
-        builtins.map (host: {
-          name = "${username}@${host}";
-          value = mkHomeConfig host;
-        }) myHosts
-      );
-
-      # import shells
-      devShells.${system} = import ./custom/shells.nix { inherit pkgs; };
-    };
+    # import shells
+    devShells.${system} = import ./custom/shells.nix {inherit pkgs;};
+  };
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    opencloud.url = "github:NixOS/nixpkgs?ref=pull/456008/head";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";

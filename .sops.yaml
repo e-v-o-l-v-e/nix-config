@@ -3,7 +3,7 @@ keys:
   - &evolve age18gl43fja78cy38dld5jvh7y7d3ylpzxlw5lgayhw563jy0z944ts0u20sv
   hosts:
   - &druss age1e2kjkwzrhwgayswkvaw86cgantjyvpa2k9kylmcu3fgkswnkagjqgpxl0z    
-  - &waylander age13yhfkex5rj6jksg7z72mrdd2gxw28ne2rgal0wp54ck8ampvxeqskga4tz
+  - &waylander age1atqm9px5qq450ut4j5n57m9du3alh44ue5qmad3gmdfq67vvjd9q2v0x7g
   - &delnoch age1ct9xzz3530zdf9h4ay8vmwusxwecu52stlpv3dh9cauwyp4haysqf4mhu4
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$

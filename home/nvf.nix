@@ -46,7 +46,7 @@ in {
         searchCase = "smart";
         options = {
           cursorlineopt = "line";
-          shiftwidth = 2;
+          shiftwidth = 4;
           scrolloff = 10;
         };
 
