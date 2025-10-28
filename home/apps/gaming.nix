@@ -12,7 +12,6 @@ in {
       pkgs.wine
       pkgs.umu-launcher
       pkgs.protonup
-      pkgs.amdvlk
       pkgs.vkd3d
       pkgs.vkd3d-proton
       pkgs.dxvk_2
