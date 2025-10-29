@@ -29,7 +29,7 @@ in {
 
     src = prev.caddy.src;
 
-    vendorHash = "sha256-BCGtkEGcRQXSM70Gy4sFp6/nUyBktkIsec3wkkb7xFU=";
+    vendorHash = "sha256-JX+8fbOjG+/tbP5wZX9AHQ6ff5oLfx3VxV6uq1H/2Qs=sha256-JX+8fbOjG+/tbP5wZX9AHQ6ff5oLfx3VxV6uq1H/2Qs=";
 
     overrideModAttrs = (_: {
       preBuild = ''

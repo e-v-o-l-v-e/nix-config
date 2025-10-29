@@ -10,6 +10,7 @@ in {
   config = {
     environment.systemPackages = lib.optionals cfg.enable [
       pkgs.iotop 
+      pkgs.smartmontools
     ];
 
     users.groups = lib.mkIf cfg.enable {
