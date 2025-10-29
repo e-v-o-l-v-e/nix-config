@@ -15,7 +15,8 @@
   };
 in {
   config = {
-    programs.nvf = {
+    programs = {
+      nvf = {
 
       settings.vim = {
         luaConfigPost = ''
@@ -390,9 +391,19 @@ in {
         ];
       };
     };
+
+      fish.functions = {
+        "nvim" = {
+          argumentNames = [ "argv" ];
+          body = ''
+            command nvim -c "colorscheme $nvim_theme" $argv
+          '';
+        };
+      };
+    };
   };
 
-  options = {
-    programs.nvf.maxConfig = lib.mkEnableOption "Enable heavier nvf config";
-  };
+    options = {
+        programs.nvf.maxConfig = lib.mkEnableOption "Enable heavier nvf config";
+    };
 }
