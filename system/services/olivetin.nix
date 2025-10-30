@@ -23,6 +23,12 @@ in {
           icon = "🗘";
           timeout = 5;
         }
+        {
+          title = "import unmapped";
+          shell = "fish ${scriptDir}/beet-import-unmapped.fish";
+          icon = "󰋺";
+          timeout = 5;
+        }
       ];
     };
 
