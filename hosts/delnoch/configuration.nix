@@ -114,7 +114,7 @@
 
         # media viewing/request
         jellyfin.enable = true;
-        jellyseerr.enable = true;
+        jellyseerr.enable = false;
         kavita.enable = true;
 
         # *arr / torrents
@@ -132,6 +132,8 @@
       virtualisation.docker.enable = true;
       server.docker.silverbullet.enable = true;
       server.docker.silverbullet-public.enable = true;
+
+      server.docker.jellyseerr.enable = true;
 
       server.hugo.enable = true;
     })
