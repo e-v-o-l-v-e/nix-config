@@ -7,6 +7,25 @@ let
   '';
 in
 {
+  nvim-shell = pkgs.mkShell {
+    name = "nvim configuration shell";
+    nativeBuildInputs = with pkgs; [
+      neovim
+      lua
+      lua-language-server
+      gcc
+      tree-sitter
+      laravel
+      fish
+      clang
+      cmake
+      ccls
+      gnumake
+    ];
+
+    shellHook = useFish;
+  };
+
   c = pkgs.mkShell {
     name = "c programming shell";
     nativeBuildInputs = with pkgs; [

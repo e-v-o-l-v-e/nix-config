@@ -17,8 +17,10 @@
 
     # fonts
     carlito
-    fira
-    fira-code
+    # fira
+    # fira-code
+    nerd-fonts.fira-code
+    nerd-fonts.fira-mono
     font-awesome
     jetbrains-mono
     monoid

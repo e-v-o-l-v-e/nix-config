@@ -20,6 +20,15 @@ in
       "private_keys/git_unistra" = {
         path = "${sshkeydir}/git_unistra";
       };
+
+      "ssh-key/private" = {
+        path = "${sshkeydir}/waylander";
+        sopsFile = ../secrets/waylander.yaml;
+      };
+      "ssh-key/public" = {
+        path = "${sshkeydir}/waylander.pub";
+        sopsFile = ../secrets/waylander.yaml;
+      };
     };
   };
 }

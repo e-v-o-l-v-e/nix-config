@@ -26,6 +26,7 @@ in {
     users.users.${username}.openssh.authorizedKeys.keys = [
       (builtins.readFile "${secretsDir}/public_keys/github.pub")
       (builtins.readFile "${secretsDir}/public_keys/git_unistra.pub")
+      (builtins.readFile "${secretsDir}/public_keys/waylander.pub")
     ];
 
     programs.localsend.enable = perso;

@@ -13,6 +13,7 @@ config,
     fd
     git
     lsd
+    neovim
     ripgrep
     vim
     yazi

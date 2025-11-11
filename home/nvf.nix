@@ -9,10 +9,6 @@
   ...
 }: let
   inherit (config.programs.nvf) maxConfig;
-  theme = {
-    initialLight = "base16-ia-light";
-    initialDark = "tokyonight-moon";
-  };
 in {
   config = {
     programs = {
@@ -47,7 +43,7 @@ in {
         searchCase = "smart";
         options = {
           cursorlineopt = "line";
-          shiftwidth = 4;
+          shiftwidth = 2;
           scrolloff = 10;
         };
 

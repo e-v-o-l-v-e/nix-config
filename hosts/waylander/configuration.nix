@@ -17,6 +17,13 @@
       personal.enable = true;
 
       sops-nix.enable = true;
+      # sops = let
+      #   secretsDir = ../../secrets;
+      #   waylander_host.sopsFile = "${secretsDir}/waylander.yaml";
+      # in  {
+      #   "ssh-key/private" = waylander_host;
+      #   "ssh-key/public" = waylander_host;
+      # };
 
       keyboard = {
         layout = "gb";

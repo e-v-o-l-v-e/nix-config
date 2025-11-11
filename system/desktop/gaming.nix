@@ -12,7 +12,7 @@ in
     gamemode.enable = cfg.full;
 
     nix-ld = {
-      enable = cfg.full;
+      enable = cfg.enable;
       libraries = with pkgs; [
         freetype
         wine
@@ -20,8 +20,8 @@ in
         wineWowPackages.full
         wineWow64Packages.full
         protonup
-        amdvlk
         mesa
+        glib
         vulkan-tools
         vulkan-loader
         # Add any missing dynamic libraries for unpackaged
