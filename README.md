@@ -5,12 +5,8 @@ This flake holds the config (nixos and/or home-manager) for all my machines.
 > [!Warning]
 > WIP, up to date as of august 13
 
-> [!Note]
-> I am in the process of, finally, writting something to allow easy
-> switch between dark and light theme, as stylix is bloated as fuck, ultra slow,
-> aaaaand i'm tired of rebuilding 10 times a day just the switch to dark or
-> light, so I removed it and am replacing it with fish scripts
-> (pkgs.writeScriptBin in home.packages) and environment variable
+> [!Note] Note (november 19)
+> I moved my dotfiles outside of nix : https://github.com/e-v-o-l-v-e/dotfiles
 
 ## CONFIG
 
