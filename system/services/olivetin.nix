@@ -26,6 +26,7 @@ in {
         {
           title = "import unmapped";
           shell = "fish ${scriptDir}/beet-import-unmapped.fish";
+          # shell = "fish /data/scripts/beet-import-unmapped.fish";
           icon = "󰋺";
           timeout = 5;
         }
@@ -34,6 +35,7 @@ in {
 
     path = with pkgs; [
       fish
+      beets
     ];
   };
 

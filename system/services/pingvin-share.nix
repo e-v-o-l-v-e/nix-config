@@ -1,22 +1,42 @@
 { config, lib, ... }: let
   cfg = config.server;
   fqdn = cfg.domain;
-  frontend.port = 4000;
-  backend.port = 4001;
-  hostname = "share.${fqdn}";
-in {
-  services.pingvin-share = {
-    inherit frontend backend;
+  listenPort = 4000;
 
-    dataDir = cfg.dataPath + "/pingvin-share";
+  version = "v1.13.4";
+in {
+  config = {
+
+    virtualisation.oci-containers.containers = {
+      docker-pingvin-share-x = lib.mkIf cfg.docker.pingvin-share-x.enable {
+        autoStart = true;
+        serviceName = "docker-pingvin-share-x";
+
+        pull = "missing";
+        image = "smp46/pingvin-share-x:${version}";
+
+        user = "0:0";
+
+        ports = [ "${toString listenPort}:3000" ];
+
+        volumes = [
+          "${cfg.dataPath}/pingvin-share-x:/opt/app/backend/data:rw,z"
+          "${cfg.dataPath}/pingvin-share-x/images:/opt/app/frontend/public/img:rw,z"
+        ];      
+      };
+    };
+
+    services.caddy.virtualHosts = lib.mkIf cfg.docker.pingvin-share-x.enable {
+      "share.${fqdn}" = {
+        extraConfig = ''
+          import cfdns
+          reverse_proxy http://localhost:${toString listenPort}
+        '';
+      };
+    };
   };
 
-  # services.caddy.virtualHosts = lib.mkIf config.services.pingvin-share.enable {
-  #   hostname = {
-  #     extraConfig = ''
-  #       import cfdns
-  #       reverse_proxy http://localhost:${toString frontend.port}
-  #     '';
-  #   };
-  # };
+  options = {
+    server.docker.pingvin-share-x.enable = lib.mkEnableOption "Enable pingvin-share-x docker container";
+  };
 }

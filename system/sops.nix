@@ -52,6 +52,7 @@ in {
         silverbullet-env = server;
         "slskd.env" = server;
         kavita-token = server;
+        navidrome-env = server;
 
         # network
         "wg-airvpn.conf" = server;

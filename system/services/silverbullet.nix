@@ -6,11 +6,12 @@
   ...
 }: let
   cfg = config.server;
+  fqdn = cfg.domain;
   scriptDir = cfg.dataPath + "/scripts";
 
   listenPort = 3333;
   listenPortPublic = 3334;
-  fqdn = cfg.domain;
+  version = "v2";
 in {
   config = {
     virtualisation.oci-containers.containers = {
@@ -19,7 +20,7 @@ in {
         serviceName = "docker-silverbullet";
 
         pull = "newer";
-        image = "ghcr.io/silverbulletmd/silverbullet:v2";
+        image = "zefhemel/silverbullet:${version}";
 
         ports = ["${toString listenPort}:3000"];
 
@@ -42,7 +43,8 @@ in {
         serviceName = "docker-silverbullet-public";
 
         pull = "newer";
-        image = "ghcr.io/silverbulletmd/silverbullet:v2";
+        # image = "ghcr.io/silverbulletmd/silverbullet:v2";
+        image = "zefhemel/silverbullet:${version}";
 
         ports = ["${toString listenPortPublic}:3000"];
 

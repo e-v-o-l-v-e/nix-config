@@ -11,5 +11,5 @@
     direnv hook fish | source
   '';
 
-  home.packages = with pkgs; [ direnv nix-direnv hollywood ];
+  home.packages = with pkgs; [ direnv nix-direnv ];
 }

@@ -16,20 +16,14 @@ in {
         serviceName = "docker-jellyseerr";
 
         pull = "newer";
-        # image = "ghcr.io/jellyseerr/jellyseerr:latest";
         image = "fallenbagel/jellyseerr:latest";
 
         ports = ["${toString listenPort}:5055"];
-
-        # Mount your Jellyseerr config directory
         volumes = [
           "${cfg.configPath}/jellyseerr:/app/config"
         ];
 
-        # environment = {
-        #   NODE_ENV = "production";
-        # Add other env vars here, e.g. email settings
-        # };
+        extraOptions = [ "--network=host" ];
       };
     };
 

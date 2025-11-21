@@ -37,10 +37,4 @@
       monospace = ["FiraCode Nerd Font Mono" "DaddyTime Nerd Font Mono"];
     };
   };
-
-  imports = [
-    inputs.dankMaterialShell.homeModules.dankMaterialShell.default
-  ];
-
-  programs.dankMaterialShell.enable = true;
 }

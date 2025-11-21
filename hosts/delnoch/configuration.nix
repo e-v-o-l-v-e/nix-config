@@ -26,7 +26,7 @@
     ( if HM then {
       #=#=#=# HOME #=#=#=#
       # Apps #
-      programs.nvf.enable = true;
+      programs.nvf.enable = false;
       programs.nvf.maxConfig = true;
 
       programs.zellij.enable = false;
@@ -104,7 +104,6 @@
 
         # utilities
         local-content-share.enable = true;
-        pingvin-share.enable = true;
         olivetin.enable = true;
 
         # cloud
@@ -134,6 +133,10 @@
       server.docker.silverbullet-public.enable = true;
 
       server.docker.jellyseerr.enable = true;
+
+      server.docker.pingvin-share-x.enable = true;
+
+      server.docker.bentopdf.enable = true;
 
       server.hugo.enable = true;
     })

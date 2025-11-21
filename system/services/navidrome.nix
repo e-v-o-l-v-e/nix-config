@@ -20,6 +20,8 @@ in {
     };
 
     openFirewall = true;
+
+    environmentFile = config.sops.secrets.navidrome-env.path;
   };
 
   environment.systemPackages = lib.mkIf config.services.navidrome.enable [pkgs.beets];

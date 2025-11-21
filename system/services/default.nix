@@ -4,6 +4,7 @@ _: {
     ./caddy.nix
     ./cloudflared.nix
     ./copyparty.nix
+    ./bentopdf.nix
     ./jellyfin.nix
     ./jellyseerr.nix
     ./immich.nix

@@ -3,7 +3,7 @@ let
   cfg = config.server;
 
   arrServices = [
-    { name = "lidarr";    port = 8686; }
+    # { name = "lidarr";    port = 8686; }
     { name = "prowlarr";  port = 9696; }
     { name = "radarr";    port = 7878; }
     { name = "readarr";   port = 8787; }

@@ -43,10 +43,10 @@ in {
   virtualisation.oci-containers.containers = lib.mkIf config.services.jellyfin.enable {
     jellyfin_vue = {
       autoStart = true;
-      serviceName = "vue";
+      serviceName = "docker-vue";
 
       pull = "always";
-      image = "ghcr.io/jellyfin/jellyfin-vue:unstable";
+      image = "ghcr.io/jellyfin/jellyfin-vue:unstable.2025-10-29.961f50e";
 
       ports = ["${toString ports.vue}:8080"];
 
