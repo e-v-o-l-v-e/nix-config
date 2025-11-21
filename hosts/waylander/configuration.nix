@@ -45,7 +45,7 @@
       then {
         #=#=#=# HOME #=#=#=#
         # Apps #
-        programs.nvf.enable = true;
+        programs.nvf.enable = false;
         programs.nvf.maxConfig = true;
 
         # programs.kitty.enable = config.gui.enable;

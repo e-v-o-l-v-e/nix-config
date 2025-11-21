@@ -13,11 +13,18 @@ config,
     fd
     git
     lsd
-    neovim
     ripgrep
     vim
     yazi
     zellij
+
+    # neovim
+    neovim
+    # lua
+    lua5_1
+    luarocks
+    lua-language-server
+    # tree-sitter-grammars.tree-sitter-norg
 
     # nix
     nh

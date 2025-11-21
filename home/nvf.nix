@@ -65,7 +65,7 @@ in {
 
         debugger = {
           nvim-dap = {
-            enable = maxConfig;
+            enable = false;
             ui.enable = true;
             # sources = {
             #   java = "vscode-extensions.vscjava.vscode-java-pack";

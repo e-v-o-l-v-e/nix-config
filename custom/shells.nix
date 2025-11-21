@@ -10,17 +10,18 @@ in
   nvim-shell = pkgs.mkShell {
     name = "nvim configuration shell";
     nativeBuildInputs = with pkgs; [
-      neovim
-      lua
-      lua-language-server
-      gcc
-      tree-sitter
-      laravel
-      fish
+      ccls
       clang
       cmake
-      ccls
+      fish
+      gcc
       gnumake
+      laravel
+      lua
+      lua-language-server
+      neovim
+      nixd
+      tree-sitter
     ];
 
     shellHook = useFish;
@@ -44,6 +45,7 @@ in
       pkg-config
       valgrind
       zlib
+      ccls
 
       fish
     ];
