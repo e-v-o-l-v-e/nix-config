@@ -137,6 +137,7 @@
       server.docker.pingvin-share-x.enable = true;
 
       server.docker.bentopdf.enable = true;
+      server.docker.spliit.enable = true;
 
       server.hugo.enable = true;
     })

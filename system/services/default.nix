@@ -1,13 +1,13 @@
 _: {
   imports = [
     ./arr.nix
+    ./bentopdf.nix
     ./caddy.nix
     ./cloudflared.nix
     ./copyparty.nix
-    ./bentopdf.nix
+    ./immich.nix
     ./jellyfin.nix
     ./jellyseerr.nix
-    ./immich.nix
     ./kavita.nix
     ./local-content-share.nix
     ./matrix.nix
@@ -19,5 +19,6 @@ _: {
     ./silverbullet.nix
     ./sites.nix
     ./slskd.nix
+    ./spliit.nix
   ];
 }
