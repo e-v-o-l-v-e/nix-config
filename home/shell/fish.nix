@@ -3,6 +3,8 @@
   programs.fish = {
     enable = true;
 
+    generateCompletions = false;
+
     shellAbbrs = {
       # shell
       ls = "lsd";
@@ -64,10 +66,10 @@
 
     functions = {
       "ssh" = {
-        argumentNames = [ "argv" ];
+        argumentNames = [ "arguments" ];
         body = ''
           set -lx TERM xterm-256color
-          command ssh $argv
+          command ssh $arguments
         '';
       };
     };
