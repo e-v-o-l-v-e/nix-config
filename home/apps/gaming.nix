@@ -11,7 +11,7 @@ in {
       pkgs.steam-run
       pkgs.wine
       pkgs.umu-launcher
-      pkgs.protonup
+      pkgs.protonup-ng
       pkgs.vkd3d
       pkgs.vkd3d-proton
       pkgs.dxvk_2

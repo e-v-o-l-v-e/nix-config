@@ -19,7 +19,7 @@ in
         wine64
         wineWowPackages.full
         wineWow64Packages.full
-        protonup
+        protonup-ng
         mesa
         glib
         vulkan-tools

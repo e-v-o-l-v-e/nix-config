@@ -392,7 +392,7 @@ in {
         "nvim" = {
           argumentNames = [ "argv" ];
           body = ''
-            command nvim -c "colorscheme $nvim_theme" $argv
+            command nvim $argv -c "colorscheme $nvim_theme"
           '';
         };
       };
