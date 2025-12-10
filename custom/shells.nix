@@ -23,8 +23,6 @@ in
       nixd
       tree-sitter
     ];
-
-    shellHook = useFish;
   };
 
   c = pkgs.mkShell {
@@ -49,8 +47,6 @@ in
 
       fish
     ];
-
-    shellHook = useFish;
   };
 
   dart = pkgs.mkShell {
@@ -72,7 +68,6 @@ in
 
       fish
     ];
-    shellHook = useFish;
   };
 
   lua = pkgs.mkShell {
@@ -84,7 +79,6 @@ in
 
       fish
     ];
-    shellHook = useFish;
   };
 
   python = pkgs.mkShell {
@@ -98,6 +92,5 @@ in
 
       fish
     ];
-    shellHook = useFish;
   };
 }
