@@ -22,9 +22,7 @@ in {
           "${cfg.ssdPath}/spliit/database:/var/lib/postgresql/data"
         ];
 
-        environmentFiles = [
-          config.sops.secrets.spliit-env.path
-        ];
+        # environmentFiles = [ config.sops.secrets.spliit-env.path ];
 
         environment = {
           TZ = "Europe/Paris";
@@ -46,7 +44,7 @@ in {
         #   "${toString listenPort}:3000"
         # ];
 
-        environmentFiles = [ config.sops.secrets.spliit-env.path ];
+        # environmentFiles = [ config.sops.secrets.spliit-env.path ];
 
         environment = {
           TZ = "Europe/Paris";
