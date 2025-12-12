@@ -11,7 +11,13 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "uas" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+
+  # fixes network wtfing under load
+  boot.extraModulePackages = [ 
+    pkgs.linuxKernel.packages.linux_6_12.r8168
+  ];
+  boot.blacklistedKernelModules = [ "r8169" ];
+  boot.kernelParams = [ "pcie_aspm=off" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/a76a5006-37ef-4055-94a1-2da71ced4ea8";
