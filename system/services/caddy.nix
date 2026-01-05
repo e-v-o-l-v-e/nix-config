@@ -10,24 +10,6 @@ in {
       acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
     '';
 
-    virtualHosts = {
-      # "*" = {
-      #   # serverAliases = [ "www.hydra.example.com" ];
-      #   extraConfig = ''
-      #     tls {
-      #       dns cloudflare {env.CLOUDFLARE_API_TOKEN}
-      #     }
-      #   '';
-      # };
-      "test.${fqdn}" = {
-        extraConfig = ''
-          respond "DRUUUUUS"
-
-          import cfdns
-        '';
-      };
-    };
-
     extraConfig = ''
       (cfdns) {
         tls {

@@ -113,7 +113,6 @@
 
         # media viewing/request
         jellyfin.enable = true;
-        jellyseerr.enable = false;
         kavita.enable = true;
 
         # *arr / torrents
@@ -132,7 +131,7 @@
       server.docker.silverbullet.enable = true;
       server.docker.silverbullet-public.enable = true;
 
-      server.docker.jellyseerr.enable = true;
+      server.docker.seerr.enable = true;
 
       server.docker.pingvin-share-x.enable = true;
 

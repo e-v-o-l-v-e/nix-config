@@ -11,6 +11,7 @@
 
   listenPort = 3333;
   listenPortPublic = 3334;
+  listenPortPublicEdit = 3335;
   version = "v2";
 in {
   config = {
@@ -58,13 +59,39 @@ in {
           SB_INDEX_PAGE = "index-public";
         };
       };
+
+      docker-silverbullet-public-edit = lib.mkIf cfg.docker.silverbullet-public.enable {
+        autoStart = false;
+        serviceName = "docker-silverbullet-public-edit";
+
+        pull = "newer";
+        # image = "ghcr.io/silverbulletmd/silverbullet:v2";
+        image = "zefhemel/silverbullet:${version}";
+
+        ports = ["${toString listenPortPublicEdit}:3000"];
+
+        volumes = [
+          "${cfg.ssdPath}/silverbullet/public:/space"
+        ];
+
+        environment = {
+          #SB_HOSTNAME = "0.0.0.0"; #  already the default with docker
+          SB_INDEX_PAGE = "index-public";
+        };
+      };
     };
 
     services.caddy.virtualHosts = lib.mkIf (config.services.silverbullet.enable || cfg.docker.silverbullet.enable) {
-      "silverbullet.${fqdn}" = {
+      "silverbullet.${fqdn}" = lib.mkIf false {
         extraConfig = ''
           import cfdns
           reverse_proxy http://localhost:${toString listenPort}
+        '';
+      };
+      "sbe.${fqdn}" = {
+        extraConfig = ''
+          import cfdns
+          reverse_proxy http://localhost:${toString listenPortPublicEdit}
         '';
       };
     };

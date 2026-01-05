@@ -105,7 +105,7 @@ in {
       type = types.listOf types.port;
       default = [
         8096 # jellyfin
-        5055 # jellyseerr
+        5055 # seerr
       ];
       description = "List of ports accessible by {allowedSubnets}";
     };

@@ -7,7 +7,7 @@ _: {
     ./copyparty.nix
     ./immich.nix
     ./jellyfin.nix
-    ./jellyseerr.nix
+    ./seerr.nix
     ./kavita.nix
     ./local-content-share.nix
     ./matrix.nix

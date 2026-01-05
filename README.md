@@ -150,7 +150,7 @@ Optional specific theming
         ├── caddy.nix
         ├── copyparty.nix
         ├── jellyfin.nix
-        ├── jellyseerr.nix
+        ├── seerr.nix
         ├── local-content-share.nix
         ├── opencloud.nix
         ├── qbittorrent.nix

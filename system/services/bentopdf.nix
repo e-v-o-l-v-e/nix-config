@@ -16,7 +16,7 @@ in {
         serviceName = "docker-bentopdf";
 
         pull = "newer";
-        image = "fallenbagel/bentopdf:latest";
+        image = "bentopdf/bentopdf-simple:latest";
 
         ports = ["${toString listenPort}:8080"];
       };
