@@ -3,17 +3,14 @@
   programs.fish = {
     enable = true;
 
-    generateCompletions = false;
+    generateCompletions = true;
 
     shellAbbrs = {
       # shell
       ls = "lsd";
+      ll = "lsd -l";
       rm = "trash put";
-
-      "bh" = {
-        position = "anywhere";
-        expansion = "| bat -phelp";
-      };
+      ks = "kitten ssh";
 
       # editing
       n = "nvim";
@@ -36,11 +33,6 @@
       # nix
       nr = "nix run nixpkgs#";
       ns = "nix shell nixpkgs#";
-
-      # hypr
-      nl0 = "hyprshade off";
-      nl = "hyprshade toggle bluefilter";
-      nl2 = "hyprshade toggle blue-light-filter";
 
       # docker
       dc = "docker compose";
