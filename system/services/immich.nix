@@ -24,5 +24,11 @@ in {
         reverse_proxy http://localhost:${toString immich-port}
       '';
     };
+    "immich.ts.${fqdn}" = {
+      extraConfig = ''
+        import cfdns
+        reverse_proxy http://localhost:${toString immich-port}
+      '';
+    };
   };
 }

@@ -30,6 +30,11 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  services.fstrim.enable = false;
+  systemd.services.fstrim.serviceConfig.TimeoutStartSec = "10s";
+  systemd.services.fstrim.restartIfChanged = false;
+  systemd.services.fstrim.unitConfig.DefaultDependencies = "no";
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

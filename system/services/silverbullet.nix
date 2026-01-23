@@ -12,7 +12,7 @@
   listenPort = 3333;
   listenPortPublic = 3334;
   listenPortPublicEdit = 3335;
-  version = "v2";
+  version = "latest";
 in {
   config = {
     virtualisation.oci-containers.containers = {

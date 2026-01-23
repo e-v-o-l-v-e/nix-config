@@ -121,7 +121,7 @@
         prowlarr.enable = true;
         radarr.enable = true;
         sonarr.enable = true;
-        lidarr.enable = true;
+        lidarr.enable = false;
 
         navidrome.enable = true;
         slskd.enable = true;
@@ -139,6 +139,11 @@
       server.docker.spliit.enable = true;
 
       server.hugo.enable = true;
+
+      systemd.settings.Manager = {
+        DefaultTimeoutStartSec = "30s";
+        DefaultTimeoutStopSec = "30s";
+      };
     })
   ];
 }

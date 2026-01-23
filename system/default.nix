@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   imports = [
     ./desktop
     ./hardware
@@ -16,6 +16,7 @@
     pkgs.man
     pkgs.bat-extras.batman
     pkgs.man-pages
+    pkgs.mediainfo
     pkgs.man-pages-posix
     pkgs.duf
     pkgs.dust
