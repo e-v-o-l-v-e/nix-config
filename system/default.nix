@@ -12,18 +12,18 @@
     ./user.nix
   ];
 
-  environment.systemPackages = [
-    pkgs.man
-    pkgs.bat-extras.batman
-    pkgs.man-pages
-    pkgs.mediainfo
-    pkgs.man-pages-posix
-    pkgs.duf
-    pkgs.dust
-    pkgs.fish
-    pkgs.git
-    pkgs.kitty
-    pkgs.lsd
-    pkgs.vim
+  environment.systemPackages = with pkgs; [
+    bat-extras.batman
+    duf
+    dust
+    fish
+    git
+    kitty
+    lsd
+    man
+    man-pages
+    man-pages-posix
+    parted
+    vim
   ];
 }

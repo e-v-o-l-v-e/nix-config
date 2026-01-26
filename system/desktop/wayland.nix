@@ -17,6 +17,8 @@ in {
     niri.enable = true;
   };
 
+  services.desktopManager.gnome.enable = false;
+
   environment.systemPackages = lib.optionals config.programs.niri.enable [
     pkgs.alacritty pkgs.fuzzel pkgs.swaylock pkgs.mako pkgs.swayidle pkgs.xwayland-satellite
   ];

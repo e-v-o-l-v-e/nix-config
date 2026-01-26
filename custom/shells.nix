@@ -93,4 +93,17 @@ in
       fish
     ];
   };
+
+  php = pkgs.mkShell {
+    name = "php-programming-shell";
+    nativeBuildInputs = with pkgs; [
+      laravel
+      php
+      phpactor
+      php84Extensions.sqlite3
+      php84Packages.composer
+      sqlite
+      sqlitebrowser
+    ];
+  };
 }

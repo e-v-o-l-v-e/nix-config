@@ -20,6 +20,8 @@ in
         inherit (cfg) enable;
       };
     };
+
+    security.polkit.enable = true;
   };
 
   options = {

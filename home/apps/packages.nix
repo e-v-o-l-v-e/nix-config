@@ -11,8 +11,10 @@
         # packages for personal machine
         blueman
         cliphist
+        better-control
         # kitty
         gnome-keyring
+        gparted
         libgnome-keyring
         localsend
         loupe
@@ -21,6 +23,7 @@
         vlc
         wl-clipboard
         nautilus
+        ydotool
 
         # theming
         flat-remix-icon-theme
@@ -30,7 +33,7 @@
           # packages for personal machine
           element-desktop
           finamp
-          #jellyfin-media-player
+          jellyfin-desktop
           kdePackages.kdeconnect-kde
           libreoffice-qt6-fresh
           # opencloud-desktop

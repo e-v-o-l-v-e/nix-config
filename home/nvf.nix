@@ -390,9 +390,13 @@ in {
 
       fish.functions = {
         "nvim" = {
-          argumentNames = [ "argv" ];
           body = ''
             command nvim $argv -c "colorscheme $nvim_theme"
+          '';
+        };
+        "nvimc" = {
+          body = ''
+            command nvim $argv
           '';
         };
       };

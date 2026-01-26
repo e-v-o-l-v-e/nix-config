@@ -21,11 +21,10 @@ in
         };
       };
 
-      displayManager = lib.mkIf (lm == "sddm") {
+      displayManager = lib.mkIf (lm == "sddm" || lm == "gdm") {
         enable = true;
-        sddm = {
-          enable = true;
-        };
+        sddm.enable = lm == "sddm";
+        gdm.enable = lm == "gdm";
       };
     };
 
@@ -41,6 +40,7 @@ in
       type = lib.types.enum [
         "greetd"
         "sddm"
+        "gdm"
         null
       ];
       default = "greetd";

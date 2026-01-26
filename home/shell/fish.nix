@@ -10,6 +10,7 @@
       ls = "lsd";
       ll = "lsd -l";
       rm = "trash put";
+      man = "batman";
       ks = "kitten ssh";
 
       # editing

@@ -20,6 +20,7 @@ config,
 
     # neovim
     neovim
+    fish-lsp
     # lua
     lua5_1
     luarocks
@@ -58,6 +59,7 @@ config,
   ]
   ++ lib.optionals config.personal.enable (with pkgs; [
     cava
+    discordo
     fastfetch
     jellyfin-tui
     libnotify
