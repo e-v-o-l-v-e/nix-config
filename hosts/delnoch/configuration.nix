@@ -55,7 +55,7 @@
       
       networking.defaultGateway = { address = "192.168.0.254"; interface = "enp2s0"; };
       networking.interfaces.enp2s0 = {
-        useDHCP = false;
+        # useDHCP = false;
         ipv4.addresses = [{ 
           address = "192.168.0.216"; 
           prefixLength = 24;
@@ -143,6 +143,31 @@
       systemd.settings.Manager = {
         DefaultTimeoutStartSec = "30s";
         DefaultTimeoutStopSec = "30s";
+      };
+
+
+
+      # fixes network wtfing under load
+      boot.extraModulePackages = [ 
+        pkgs.linuxKernel.packages.linux_6_12.r8168
+      ];
+      boot.blacklistedKernelModules = [ "r8169" ];
+      boot.kernelParams = [ "pcie_aspm=off" ];
+
+      systemd.services.disable-enp2s0-offloads = {
+        description = "Disable Realtek offloads on enp2s0";
+        wantedBy = [ "multi-user.target" ];
+        after = [ "network-pre.target" ];
+        wants = [ "network-pre.target" ];
+
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = ''
+            ${pkgs.ethtool}/bin/ethtool -K enp2s0 \
+            rx off tx off tso off gso off gro off
+            '';
+          RemainAfterExit = true;
+        };
       };
     })
   ];
