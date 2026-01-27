@@ -24,6 +24,7 @@ in
       homeMode = "700";
       inherit extraGroups;
       home = "/home/${username}";
+      linger = true;
     };
     defaultUserShell = pkgs.fish;
   };

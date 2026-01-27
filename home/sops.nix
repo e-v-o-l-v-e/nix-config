@@ -11,7 +11,7 @@ in
   config.sops = lib.mkIf cfg.enable {
     age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
     defaultSopsFile = ../secrets/common.yaml;
-    validateSopsFiles = false;
+    validateSopsFiles = true;
 
     secrets = {
       "private_keys/github" = {

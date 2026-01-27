@@ -29,9 +29,10 @@ in {
     };
   };
 
-  environment.systemPackages = lib.mkIf cfg.vpn.enable (with pkgs; [
-    wireguard-tools
-  ]);
+  environment.systemPackages = [ 
+    pkgs.qbittorrent-cli 
+  ] ++ lib.optional cfg.vpn.enable 
+    pkgs.wireguard-tools;
 
   vpnNamespaces.qbitvpn = lib.mkIf cfg.vpn.enable {
     inherit (cfg.vpn) enable;
