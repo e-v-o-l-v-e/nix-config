@@ -16,6 +16,8 @@ in {
       pkgs.vkd3d-proton
       pkgs.dxvk_2
       pkgs.directx-headers
+
+      pkgs.ryubing
     ];
 
   # home.sessionVariables = {

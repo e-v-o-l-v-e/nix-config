@@ -34,7 +34,7 @@
       then {
         #=#=#=# HOME #=#=#=#
         # Apps #
-        programs.nvf.enable = true;
+        programs.nvf.enable = false;
         programs.nvf.maxConfig = true;
 
         programs.zellij.enable = false;
@@ -46,6 +46,8 @@
 
         wayland.windowManager.hyprland.enable = false; # manage hyprland settings with home-manager
 
+        flakePath = "nix-config-old";
+
         # home-manager version at the time of first install, do not change
         home.stateVersion = "25.05";
       }
@@ -53,8 +55,9 @@
         #=#=#=# SYSTEM #=#=#=#
         laptop.enable = false;
 
-
         boot.loader.systemd-boot.enable = true;
+        boot.kernelModules = [ "i2c-dev" ];
+        hardware.i2c.enable = true;
 
         gpu = "amd";
 
@@ -65,7 +68,6 @@
         login-manager = "sddm";
 
         programs.hyprland.enable = false;
-
         services.desktopManager.plasma6.enable = true;
 
         # Apps #
@@ -77,15 +79,10 @@
         hardware.bluetooth.enable = true;
 
         # services testing #
-        server.enable = true;
-        #
+        server.enable = false;
         server.domain = "imp-network.com";
-        #
-        services.caddy.enable = false;
-        services.silverbullet.enable = false;
-        # services.radarr.enable = true;
-        # services.sonarr.enable = true;
-        services.opencloud.enable = true;
+
+        virtualisation.docker.enable = false;
       }
     )
   ];
