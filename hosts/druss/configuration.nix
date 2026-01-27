@@ -46,7 +46,7 @@
 
         wayland.windowManager.hyprland.enable = false; # manage hyprland settings with home-manager
 
-        flakePath = "nix-config-old";
+        flakePath = "nix-config";
 
         # home-manager version at the time of first install, do not change
         home.stateVersion = "25.05";

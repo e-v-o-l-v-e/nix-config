@@ -213,22 +213,6 @@
         "type": "github"
       }
     },
-    "opencloud": {
-      "locked": {
-        "lastModified": 1762457069,
-        "narHash": "sha256-GB9uH4wPNl2HPqCHy9pLeWsV3cUNS18WvPZdSwFdTcY=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "b9c22a91106e84e5cd3839107ce9dc519eb9f6b6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "pull/456008/head",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "copyparty": "copyparty",
@@ -236,7 +220,6 @@
         "local-content-share": "local-content-share",
         "nixpkgs": "nixpkgs",
         "nvf": "nvf",
-        "opencloud": "opencloud",
         "sops-nix": "sops-nix",
         "vpn-confinement": "vpn-confinement",
         "zen-browser": "zen-browser"
