@@ -3,10 +3,15 @@
 This flake holds the config (nixos and/or home-manager) for all my machines.
 
 > [!Warning]
-> WIP, up to date as of august 13
+> WIP, readme up to date as of august 13
 
 > [!Note] Note (november 19)
 > I moved my dotfiles outside of nix : https://github.com/e-v-o-l-v-e/dotfiles
+
+
+## Notice
+
+I'm currently rewriting my config to flake parts in the flake-part branch
 
 ## CONFIG
 
