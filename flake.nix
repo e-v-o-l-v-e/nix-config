@@ -17,13 +17,6 @@
       };
     };
 
-    oc = import inputs.opencloud {
-      inherit system;
-      config = {
-        allowUnfree = true;
-      };
-    };
-
     mkSystemConfig = hostname:
       nixpkgs.lib.nixosSystem {
         inherit system pkgs;
@@ -49,7 +42,6 @@
 
         extraSpecialArgs = {
           inherit
-            oc
             hostname
             username
             self
@@ -98,8 +90,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    opencloud.url = "github:NixOS/nixpkgs?ref=pull/456008/head";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";

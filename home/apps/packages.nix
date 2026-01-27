@@ -1,6 +1,5 @@
 {
   lib,
-  oc,
   pkgs,
   config,
   ...
@@ -36,13 +35,16 @@
           jellyfin-desktop
           kdePackages.kdeconnect-kde
           libreoffice-qt6-fresh
-          # opencloud-desktop
+          opencloud-desktop
           opencloud-desktop-shell-integration-dolphin
           thunderbird
           vesktop
           zathura
-        ]
-        ++ [ oc.opencloud-desktop ]))
+
+          # P41
+          android-studio
+          android-tools
+        ]))
     ];
 
     # nixpkgs.config.permittedInsecurePackages = lib.mkIf (config.personal.enable && config.gui.enable) [
