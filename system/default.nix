@@ -16,6 +16,7 @@
     bat-extras.batman
     duf
     dust
+    ethtool
     fish
     git
     kitty
