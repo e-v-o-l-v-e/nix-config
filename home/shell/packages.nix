@@ -25,11 +25,13 @@ config,
     lua5_1
     luarocks
     lua-language-server
+    tree-sitter
     # tree-sitter-grammars.tree-sitter-norg
 
     # nix
     nh
     nixd
+    nil
     sops
 
     # utilities
@@ -41,6 +43,7 @@ config,
     linux-manual 
     man-pages
     man-pages-posix
+    openssl
     ripgrep-all
     tree
     wget

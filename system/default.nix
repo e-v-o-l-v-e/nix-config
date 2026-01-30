@@ -24,6 +24,7 @@
     man
     man-pages
     man-pages-posix
+    openssl
     parted
     vim
   ];
