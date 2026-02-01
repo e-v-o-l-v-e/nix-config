@@ -1,26 +1,5 @@
 {
   "nodes": {
-    "copyparty": {
-      "inputs": {
-        "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1768525886,
-        "narHash": "sha256-7aIlzj1cd58XnGat/Nd29LF4AO4d+e4IBTs2mWy5OYc=",
-        "owner": "9001",
-        "repo": "copyparty",
-        "rev": "5d7cf80ff0923dae348c48cea0a2306af39b5fce",
-        "type": "github"
-      },
-      "original": {
-        "owner": "9001",
-        "repo": "copyparty",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -39,6 +18,24 @@
     },
     "flake-parts": {
       "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib"
+      },
+      "locked": {
+        "lastModified": 1768135262,
+        "narHash": "sha256-PVvu7OqHBGWN16zSi6tEmPwwHQ4rLPU9Plvs8/1TUBY=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "80daad04eddbbf5a4d883996a73f3f542fa437ac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_2": {
+      "inputs": {
         "nixpkgs-lib": [
           "nvf",
           "nixpkgs"
@@ -55,21 +52,6 @@
       "original": {
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "type": "github"
-      }
-    },
-    "flake-utils": {
-      "locked": {
-        "lastModified": 1678901627,
-        "narHash": "sha256-U02riOqrKKzwjsxc/400XnElV+UtPUQWpANPlyazjH0=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "93a2b84fc4b70d9e089d029deacc3583435c2ed6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
         "type": "github"
       }
     },
@@ -115,23 +97,18 @@
         "type": "github"
       }
     },
-    "local-content-share": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
+    "import-tree": {
       "locked": {
-        "lastModified": 1760458420,
-        "narHash": "sha256-w5wNoao8sWOd78LYUJOm0COUr315p0yN8AgWp0yT6e4=",
-        "owner": "e-v-o-l-v-e",
-        "repo": "local-content-share",
-        "rev": "9dd8007feead5f663d74c8fa27619ebb101743eb",
+        "lastModified": 1763762820,
+        "narHash": "sha256-ZvYKbFib3AEwiNMLsejb/CWs/OL/srFQ8AogkebEPF0=",
+        "owner": "vic",
+        "repo": "import-tree",
+        "rev": "3c23749d8013ec6daa1d7255057590e9ca726646",
         "type": "github"
       },
       "original": {
-        "owner": "e-v-o-l-v-e",
-        "repo": "local-content-share",
+        "owner": "vic",
+        "repo": "import-tree",
         "type": "github"
       }
     },
@@ -174,24 +151,39 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1768305791,
-        "narHash": "sha256-AIdl6WAn9aymeaH/NvBj0H9qM+XuAuYbGMZaP0zcXAQ=",
-        "owner": "nixos",
+        "lastModified": 1769461804,
+        "narHash": "sha256-msG8SU5WsBUfVVa/9RPLaymvi5bI8edTavbIq3vRlhI=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1412caf7bf9e660f2f962917c14b1ea1c3bc695e",
+        "rev": "bfc1b8a4574108ceef22f02bafcf6611380c100d",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
+        "owner": "NixOS",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-lib": {
+      "locked": {
+        "lastModified": 1765674936,
+        "narHash": "sha256-k00uTP4JNfmejrCLJOwdObYC9jHRrr/5M/a/8L2EIdo=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "2075416fcb47225d9b68ac469a5c4801a9c4dd85",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
         "type": "github"
       }
     },
     "nvf": {
       "inputs": {
         "flake-compat": "flake-compat",
-        "flake-parts": "flake-parts",
+        "flake-parts": "flake-parts_2",
         "mnw": "mnw",
         "ndg": "ndg",
         "nixpkgs": [
@@ -215,9 +207,9 @@
     },
     "root": {
       "inputs": {
-        "copyparty": "copyparty",
+        "flake-parts": "flake-parts",
         "home-manager": "home-manager",
-        "local-content-share": "local-content-share",
+        "import-tree": "import-tree",
         "nixpkgs": "nixpkgs",
         "nvf": "nvf",
         "sops-nix": "sops-nix",
