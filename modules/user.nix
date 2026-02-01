@@ -1,24 +1,13 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   flake.nixosModules.user =
     let
-      username = "evolve";
+      inherit (config.meta) username;
 
       extraGroups = [
-        "audio"
-        "docker"
-        "input"
-        "inputs"
-        "key"
-        "kvm"
-        "libvirtd"
-        "lp"
-        "networkmanager"
-        "scanner"
-        "uinputs"
-        "users"
-        "video"
-        "wheel"
+        "audio" "docker" "input" "inputs" "key" 
+        "kvm" "libvirtd" "lp" "networkmanager" 
+        "scanner" "uinputs" "users" "video" "wheel"
       ];
     in
     {
