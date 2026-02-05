@@ -14,6 +14,7 @@
 
   environment.systemPackages = with pkgs; [
     bat-extras.batman
+    clang
     duf
     dust
     ethtool
