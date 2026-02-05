@@ -31,6 +31,8 @@ config,
     # nix
     nh
     nixd
+    nixfmt
+    alejandra
     nil
     sops
 
