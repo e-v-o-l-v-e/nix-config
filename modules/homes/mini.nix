@@ -1,4 +1,4 @@
-{ config, self, inputs, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 let
   inherit (config.meta) username;
 in
@@ -6,18 +6,18 @@ in
   flake.homeConfigurations.mini = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = pkgs;
     modules = [
-      self.homeModules.miniHome
+      inputs.self.modules.homeManager.miniHome
     ];
   };
 
-  flake.homeModules.miniHome = {
+  flake.modules.homeManager.miniHome = {
     inherit username;
     homeDirectory = "/home/${username}";
 
     nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
     imports = [
-      self.homeModules.fish
+      inputs.self.modules.homeManager.fish
     ];
 
     programs.home-manager.enable = true;

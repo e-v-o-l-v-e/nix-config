@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  flake.homeModules.fish = let
+  flake.modules.homeManager.fish = let
     username = config.meta.username;
   in  {
 

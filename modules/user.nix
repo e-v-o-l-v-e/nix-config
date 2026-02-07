@@ -1,12 +1,13 @@
 { config, pkgs, ... }:
+let
+  inherit (config.meta) username;
+in
 {
-  flake.nixosModules.user =
+  flake.modules.nixos.user =
     let
-      inherit (config.meta) username;
-
       extraGroups = [
-        "audio" "docker" "input" "inputs" "key" 
-        "kvm" "libvirtd" "lp" "networkmanager" 
+        "audio" "docker" "input" "inputs" "key"
+        "kvm" "libvirtd" "lp" "networkmanager"
         "scanner" "uinputs" "users" "video" "wheel"
       ];
     in
@@ -34,4 +35,13 @@
       #   "password-${hostname}".neededForUsers = true;
       # };
     };
+
+  flake.modules.homeManager.user = {
+  home = {
+    inherit username;
+    homeDirectory = "/home/${username}";
+
+    inherit (config) keyboard;
+  };
+  };
 }
