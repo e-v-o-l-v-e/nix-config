@@ -137,14 +137,14 @@
 
       server.docker.bentopdf.enable = true;
       server.docker.spliit.enable = true;
+      server.docker.heyform.enable = false;
 
       server.hugo.enable = true;
 
       systemd.settings.Manager = {
-        DefaultTimeoutStartSec = "30s";
-        DefaultTimeoutStopSec = "30s";
+        DefaultTimeoutStartSec = "90s";
+        DefaultTimeoutStopSec = "90s";
       };
-
 
 
       # fixes network wtfing under load

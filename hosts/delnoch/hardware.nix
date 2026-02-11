@@ -31,7 +31,7 @@
     };
 
   services.fstrim.enable = false;
-  systemd.services.fstrim.serviceConfig.TimeoutStartSec = "10s";
+  systemd.services.fstrim.serviceConfig.TimeoutStartSec = "30s";
   systemd.services.fstrim.restartIfChanged = false;
   systemd.services.fstrim.unitConfig.DefaultDependencies = "no";
 

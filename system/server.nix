@@ -9,8 +9,11 @@
 in {
   config = {
     environment.systemPackages = lib.optionals cfg.enable [
+      pkgs.ffmpeg_7-full
       pkgs.iotop 
+      pkgs.mediainfo
       pkgs.smartmontools
+      pkgs.wakeonlan
     ];
 
     users.groups = lib.mkIf cfg.enable {

@@ -25,6 +25,6 @@ in {
   systemd.services = lib.mkIf config.services.caddy.enable {
     caddy.serviceConfig.EnvironmentFile = config.sops.secrets.caddy-env.path;
     caddy.serviceConfig.AmbientCapabilities = "CAP_NET_BIND_SERVICE";
-    caddy.serviceConfig.TimeoutStartSec = "5s";
+    caddy.serviceConfig.TimeoutStartSec = "10s";
   };
 }
