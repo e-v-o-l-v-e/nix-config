@@ -13,10 +13,6 @@
   services.kanata = {
     keyboards = {
       internalKeyboard = {
-        devices = [
-          "/dev/input/event1"
-          "/dev/input/event4"
-        ];
         extraDefCfg = "process-unmapped-keys yes";
         config = ''
           (deflocalkeys-linux
@@ -24,7 +20,7 @@
           )
           (defsrc
              caps esc a s d f j k l ;
-            conf
+             conf
           )
           (defvar
              tap-time 149
