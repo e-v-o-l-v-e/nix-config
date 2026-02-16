@@ -10,7 +10,6 @@
         # packages for personal machine
         blueman
         cliphist
-        better-control
         # kitty
         gnome-keyring
         gparted
