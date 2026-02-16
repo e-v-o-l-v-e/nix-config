@@ -1,47 +1,6 @@
 { pkgs, self, ... }:
 {
   flake.modules.homeManager = {
-    cli-core = {
-      home.packages = with pkgs; [
-        bat
-        curl
-        dust
-        fd
-        git
-        gnutar
-        lsd
-        openssh
-        ripgrep
-        unzip
-        vim
-        wget
-        zip
-      ];
-    };
-
-    cli-utils = {
-      home.packages = with pkgs; [
-        btop
-        calc
-        duf
-        fastfetch
-        fzf
-        imagemagick
-        jq
-        libnotify
-        linux-manual
-        man-pages
-        man-pages-posix
-        openssl
-        pciutils
-        playerctl
-        trashy
-        tree
-        xdg-utils
-        yazi
-      ];
-    };
-
     cli-personal = {
       home.packages = with pkgs; [
         cava
@@ -80,7 +39,6 @@
       home.packages = with pkgs; [
         blueman
         cliphist
-        better-control
         kitty
         gnome-keyring
         gparted

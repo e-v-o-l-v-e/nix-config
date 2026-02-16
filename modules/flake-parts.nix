@@ -1,4 +1,4 @@
-{ inputs, lib, ... }:
+{ inputs, ... }:
 {
   imports = [
     inputs.flake-parts.flakeModules.modules
@@ -12,14 +12,5 @@
       "aarch64-linux"
       "x86_64-darwin"
     ];
-  };
-
-  options = {
-    meta = {
-      username = lib.mkOption {
-        type = lib.types.str;
-        default = "evolve";
-      };
-    };
   };
 }

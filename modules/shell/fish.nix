@@ -1,9 +1,6 @@
 { config, ... }:
 {
-  flake.modules.homeManager.fish = let
-    username = config.meta.username;
-  in  {
-
+  flake.modules.homeManager.shell-fish = {
     programs.fish = {
       enable = true;
 
@@ -50,7 +47,6 @@
 
       shellInit = ''
         set -g fish_greeting ""
-        fish_add_path -a /home/${username}/.local/bin
       '';
 
       interactiveShellInit = ''
