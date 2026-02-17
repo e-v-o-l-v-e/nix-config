@@ -1,4 +1,4 @@
-{ config, ... }:
+_:
 {
   flake.modules.homeManager.shell-fish = {
     programs.fish = {
@@ -50,11 +50,7 @@
       '';
 
       interactiveShellInit = ''
-        fish_vi_key_bindings
-        # zellij -l welcome
-        # if test "$TERM" = "xterm-kitty" -a -z "$ZELLIJ"
-        #   exec zellij --layout welcome
-        # end
+        fish_hybrid_key_bindings
       '';
 
       functions = {

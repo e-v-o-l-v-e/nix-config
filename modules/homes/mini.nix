@@ -3,27 +3,29 @@
   config,
   ...
 }:
+let
+  username = "evolve";
+  system = "x86_64-linux";
+  stateVersion = "26.05";
+in
 {
-  flake.homeConfigurations.mini = inputs.home-manager.lib.homeManagerConfiguration {
-    modules = [
-      inputs.self.modules.homeManager.miniHome
-    ];
+  flake.homeConfigurations = inputs.self.lib.mkHomeManager {
+    inherit username system stateVersion;
   };
 
-  flake.modules.homeManager.miniHome =
+  flake.modules.homeManager.mini =
     { pkgs, config, ... }:
     {
-      inherit pkgs;
-
-      homeDirectory = "/home/${config.preferences.username}";
-
-      nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+      home = {
+        inherit username;
+        homeDirectory = "/home/${username}";
+      };
 
       imports = [
         inputs.self.modules.homeManager.shell
       ];
 
       programs.home-manager.enable = true;
-      home.stateVersion = "26.05";
+      programs.man.generateCaches = false;
     };
 }
