@@ -31,10 +31,13 @@ in {
       ${cfg.serverUserName} = {
         name = cfg.serverUserName;
         uid = cfg.serverUserId;
+        group = cfg.serverGroupName;
 
         isSystemUser = true;
 
-        group = cfg.serverGroupName;
+
+        subUidRanges = [{ startUid = 100000; count = 65536; }];
+        subGidRanges = [{ startGid = 100000; count = 65536; }];
 
         linger = cfg.enable;
       };

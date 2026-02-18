@@ -3,7 +3,7 @@
   fqdn = cfg.domain;
   listenPort = 4000;
 
-  version = "v1.13.4";
+  version = "v1.13.5";
 in {
   config = {
 

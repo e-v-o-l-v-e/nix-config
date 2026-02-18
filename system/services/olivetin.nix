@@ -9,13 +9,6 @@
   fqdn = config.server.domain;
   scriptDir = cfg.dataPath + "/scripts";
   port = 1337;
-
-  silence = level: {
-    title = "silence ${toString level}";
-    shell = "fish ${scriptDir}/bruit.fish ${toString level}";
-    icon = (toString level);
-    timeout = 5;
-  };
 in {
   services.olivetin = {
     user = username;
@@ -25,29 +18,41 @@ in {
       ListenAddressSingleHTTPFrontend = "0.0.0.0:${toString port}";
       actions = [
         {
-          title = "import unmapped";
+          title = "Import unmapped";
           shell = "fish ${scriptDir}/beet-import-unmapped.fish";
           icon = "󰋺";
-          timeout = 5;
         }
         {
-          title = "publish sb";
+          title = "Publish SB";
           shell = "fish ${scriptDir}/sb-public.fish > ${scriptDir}/logs/sb.log";
           icon = "🗘";
-          timeout = 5;
         }
-        (silence (-3))
-        (silence (-2))
-        (silence (-1))
-        (silence (1))
-        (silence (2))
-        (silence (3))
+        {
+          title = "Adjust Silence Level";
+          icon = "🤫";
+          shell = "fish ${scriptDir}/bruit.fish {{level}}";
+          arguments = [
+            {
+              name = "level";
+              type = "select";
+              choices = [
+                { title = "Level 3 (Total Silence)"; value = "3"; }
+                { title = "Level 2"; value = "2"; }
+                { title = "Level 1"; value = "1"; }
+                { title = "Level -1"; value = "-1"; }
+                { title = "Level -2"; value = "-2"; }
+                { title = "Level -3 (Full Power)"; value = "-3"; }
+              ];
+            }
+          ];
+        }
       ];
     };
 
     path = with pkgs; [
       fish
-        beets
+      beets
+      qbittorrent-cli
     ];
   };
 
@@ -55,6 +60,6 @@ in {
     "olivetin.${fqdn}".extraConfig = ''
       import cfdns
       reverse_proxy http://localhost:${toString port}
-  '';
+    '';
   };
 }

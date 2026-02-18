@@ -137,7 +137,6 @@
 
       server.docker.bentopdf.enable = true;
       server.docker.spliit.enable = true;
-      server.docker.heyform.enable = false;
 
       server.hugo.enable = true;
 
