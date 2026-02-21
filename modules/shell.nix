@@ -37,6 +37,7 @@
         ];
 
         home.packages = with pkgs; [
+          bc
           calc
           duf
           fastfetch

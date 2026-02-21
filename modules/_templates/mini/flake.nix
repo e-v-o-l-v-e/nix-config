@@ -15,11 +15,11 @@
     let
       username = "evolve";
       system = "x86_64-linux";
-      conf = "mini";
+      hostname = "mini";
     in
     {
       homeConfigurations = evolve.lib.mkHomeManager {
-        inherit username system conf;
+        inherit username system hostname;
       };
     };
 }

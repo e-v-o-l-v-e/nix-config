@@ -212,10 +212,23 @@
         "import-tree": "import-tree",
         "nixpkgs": "nixpkgs",
         "nvf": "nvf",
+        "secrets": "secrets",
         "sops-nix": "sops-nix",
         "vpn-confinement": "vpn-confinement",
         "zen-browser": "zen-browser"
       }
+    },
+    "secrets": {
+      "flake": false,
+      "locked": {
+        "path": "./secrets",
+        "type": "path"
+      },
+      "original": {
+        "path": "./secrets",
+        "type": "path"
+      },
+      "parent": []
     },
     "sops-nix": {
       "inputs": {

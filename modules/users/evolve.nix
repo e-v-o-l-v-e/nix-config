@@ -6,6 +6,7 @@ in
   flake.modules.nixos.${username} = {
 
     users.users.${username} = {
+      name = username;
 
       home = "/home/${username}";
       isNormalUser = true;

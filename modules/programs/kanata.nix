@@ -1,5 +1,5 @@
 _: {
-  flake.modules.nixos.kanta = {
+  flake.modules.nixos.kanata = {
     services.kanata = {
       keyboards = {
         internalKeyboard = {

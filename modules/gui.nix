@@ -6,18 +6,19 @@
       {
         home.packages = with pkgs; [
           blueman
+          brightnessctl
           cliphist
-          kitty
           gnome-keyring
           gparted
+          kitty
           libgnome-keyring
           localsend
           loupe
+          nautilus
           pavucontrol
           ueberzugpp
           vlc
           wl-clipboard
-          nautilus
           ydotool
         ];
       };
@@ -26,13 +27,11 @@
       { pkgs, ... }:
       {
         imports = [
-          inputs.self.modules.homeManager.fish
-          inputs.self.modules.homeManager.lsd
+          inputs.self.modules.homeManager.zen-browser
         ];
 
         home.packages = with pkgs; [
           element-desktop
-          finamp
           jellyfin-desktop
           kdePackages.kdeconnect-kde
           libreoffice-qt6-fresh
@@ -41,6 +40,37 @@
           thunderbird
           vesktop
           zathura
+        ];
+      };
+
+    gui-desktop =
+      { pkgs, ... }:
+      {
+        home.packages = with pkgs; [
+          grim
+          rofi
+          slurp
+          swappy
+          swaynotificationcenter
+          swww
+          waybar
+          waypaper
+          wlogout
+        ];
+      };
+
+    gui-theming =
+      { pkgs, ... }:
+      {
+        home.packages = with pkgs; [
+          adwaita-icon-theme
+          bibata-cursors
+          dconf
+          gsettings-qt
+          gtk-engine-murrine
+          gtk3
+          gtk4
+          libadwaita
         ];
       };
   };

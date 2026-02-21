@@ -6,9 +6,9 @@
 }:
 let
   defaultUsername = "evolve";
-  defaultHMConf = "mini";
+  defaultHostname = "mini";
   defaultSystem = "x86_64-linux";
-  defaultHMStateVersion = "26.05";
+  defaultStateVersion = "26.05";
 in
 {
   # Helper functions for creating system / home-manager / user configurations
@@ -21,27 +21,47 @@ in
   config.flake.lib = {
 
     mkNixos =
-      system: name:
+      {
+        hostname ? defaultHostname,
+        system ? defaultSystem,
+        stateVersion ? defaultStateVersion,
+        ...
+      }:
       inputs.nixpkgs.lib.nixosSystem {
         modules = [
-          inputs.self.modules.nixos.${name}
-          { nixpkgs.hostPlatform = lib.mkDefault system; }
+
+          inputs.self.modules.nixos.${hostname}
+
+          # default stuff
+          inputs.self.modules.nixos.appimage
+          inputs.self.modules.nixos.boot
+          inputs.self.modules.nixos.kernel
+          inputs.self.modules.nixos.keyboard
+          inputs.self.modules.nixos.nh
+
+          {
+            nixpkgs.hostPlatform = lib.mkDefault system;
+            networking.hostName = hostname;
+            system = {
+              inherit stateVersion;
+            };
+          }
         ];
       };
 
     mkHomeManager =
       {
         username ? defaultUsername,
-        conf ? defaultHMConf,
+        hostname ? defaultHostname,
         system ? defaultSystem,
-        stateVersion ? defaultHMStateVersion,
+        stateVersion ? defaultStateVersion,
         ...
       }:
       {
         ${username} = inputs.home-manager.lib.homeManagerConfiguration {
           pkgs = inputs.nixpkgs.legacyPackages.${system};
           modules = [
-            inputs.self.modules.homeManager.${conf}
+            inputs.self.modules.homeManager.${hostname}
             {
               nixpkgs.config.allowUnfree = true;
               nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];

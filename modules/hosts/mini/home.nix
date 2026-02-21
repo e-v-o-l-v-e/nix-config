@@ -1,7 +1,7 @@
 { inputs, ... }:
 let
   username = "evolve";
-  conf = "mini";
+  hostname = "mini";
   system = "x86_64-linux";
   stateVersion = "26.05";
 in
@@ -9,7 +9,7 @@ in
   flake.homeConfigurations = inputs.self.lib.mkHomeManager {
     inherit
       username
-      conf
+      hostname
       system
       stateVersion
       ;
