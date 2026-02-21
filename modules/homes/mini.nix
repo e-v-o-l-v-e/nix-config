@@ -1,31 +1,26 @@
-{
-  inputs,
-  config,
-  ...
-}:
+{ inputs, ... }:
 let
   username = "evolve";
+  conf = "mini";
   system = "x86_64-linux";
   stateVersion = "26.05";
 in
 {
   flake.homeConfigurations = inputs.self.lib.mkHomeManager {
-    inherit username system stateVersion;
+    inherit
+      username
+      conf
+      system
+      stateVersion
+      ;
   };
 
-  flake.modules.homeManager.mini =
-    { pkgs, config, ... }:
-    {
-      home = {
-        inherit username;
-        homeDirectory = "/home/${username}";
-      };
+  flake.modules.homeManager.mini = {
+    imports = [
+      inputs.self.modules.homeManager.cli-core
+    ];
 
-      imports = [
-        inputs.self.modules.homeManager.shell
-      ];
-
-      programs.home-manager.enable = true;
-      programs.man.generateCaches = false;
-    };
+    programs.home-manager.enable = true;
+    programs.man.generateCaches = false;
+  };
 }

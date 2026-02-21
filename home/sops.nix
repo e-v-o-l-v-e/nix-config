@@ -1,15 +1,21 @@
-{ inputs, username, lib, config, ... }:
+{
+  inputs,
+  username,
+  config,
+  ...
+}:
 let
   cfg = config.sops-nix;
   sshkeydir = "/home/${username}/.ssh/keys";
-in 
+in
 {
   imports = [
     inputs.sops-nix.homeManagerModules.sops
   ];
 
-  config.sops = lib.mkIf cfg.enable {
-    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+  config.sops = {
+    enable = true;
+    age.keyFile = "$HOME/.config/sops/age/keys.txt";
     defaultSopsFile = ../secrets/common.yaml;
     validateSopsFiles = true;
 

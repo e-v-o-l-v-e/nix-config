@@ -5,6 +5,8 @@
     inputs.home-manager.flakeModules.home-manager
   ];
 
+  debug = true;
+
   config = {
     systems = [
       "x86_64-linux"

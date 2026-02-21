@@ -90,10 +90,6 @@
         server.domain = "imp-network.com";
         # services.caddy.enable = true;
 
-        ## BOOTING ##
-        # boot.loader.grub.theme = "${pkgs.kdePackages.breeze-grub}/grub/themes/breeze";
-        # boot.loader.timeout = lib.mkForce 2;
-        # boot.loader.grub.timeoutStyle = "menu";
 
         boot = lib.mkForce {
           plymouth = {

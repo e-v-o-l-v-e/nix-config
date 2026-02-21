@@ -1,8 +1,14 @@
+{ inputs, ... }:
 {
   flake.modules.homeManager = {
     cli-core =
       { pkgs, ... }:
       {
+        imports = [
+          inputs.self.modules.homeManager.fish
+          inputs.self.modules.homeManager.lsd
+        ];
+
         home.packages = with pkgs; [
           bat
           btop
@@ -25,6 +31,11 @@
     cli-utils =
       { pkgs, ... }:
       {
+        imports = [
+          inputs.self.modules.homeManager.cli-core
+          inputs.self.modules.homeManager.fish
+        ];
+
         home.packages = with pkgs; [
           calc
           duf
@@ -48,6 +59,12 @@
     cli-personal =
       { pkgs, ... }:
       {
+        imports = [
+          inputs.self.modules.homeManager.cli-core
+          inputs.self.modules.homeManager.cli-utils
+          inputs.self.modules.homeManager.zoxide
+        ];
+
         home.packages = with pkgs; [
           cava
           discordo

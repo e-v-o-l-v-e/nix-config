@@ -6,9 +6,9 @@
 }:
 let
   defaultUsername = "evolve";
+  defaultHMConf = "mini";
   defaultSystem = "x86_64-linux";
   defaultHMStateVersion = "26.05";
-  defaultHMConf = "mini";
 in
 {
   # Helper functions for creating system / home-manager / user configurations
@@ -32,8 +32,8 @@ in
     mkHomeManager =
       {
         username ? defaultUsername,
-        system ? defaultSystem,
         conf ? defaultHMConf,
+        system ? defaultSystem,
         stateVersion ? defaultHMStateVersion,
         ...
       }:
@@ -47,52 +47,14 @@ in
               nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
               home = {
                 inherit username stateVersion;
+                homeDirectory = "/home/${username}";
+                sessionPath = [
+                  "$HOME/.local/bin"
+                ];
               };
             }
           ];
         };
       };
-
-    mkUser = username: isAdmin: {
-      nixos."${username}" =
-        { lib, pkgs, ... }:
-        {
-          users.users."${username}" = {
-            isNormalUser = true;
-            home = "/home/${username}";
-            extraGroups = [
-              # TODO modularise
-              "audio"
-              "docker"
-              "input"
-              "inputs"
-              "key"
-              "kvm"
-              "libvirtd"
-              "lp"
-              "networkmanager"
-              "scanner"
-              "uinputs"
-              "users"
-              "video"
-              "wheel"
-            ]
-            ++ lib.optional isAdmin "wheel";
-
-            shell = pkgs.fish;
-          };
-          programs.fish.enable = true;
-
-          home-manager.users."${username}" = {
-            imports = [
-              inputs.self.modules.homeManager."${username}"
-            ];
-          };
-        };
-
-      homeManager."${username}" = {
-        home.username = "${username}";
-      };
-    };
   };
 }
