@@ -14,27 +14,25 @@ in
     stateVersion = "25.05";
   };
 
-  flake.modules.nixos.waylander =
-    { config, ... }:
-    {
-      imports = with inputs.self.modules.nixos; [
-        # user
-        evolve
+  flake.modules.nixos.waylander = {
+    imports = with inputs.self.modules.nixos; [
+      # user
+      evolve
 
-        # system
-        nixos-core
-        gpu-amd
-        kanata
+      # system
+      nixos-core
+      gpu-amd
+      kanata
 
-        # desktop
-        hyprland
+      # desktop
+      hyprland
 
-        # programs
-        sops
-      ];
+      # programs
+      sops
+    ];
 
-      system.stateVersion = "25.11";
-    };
+    system.stateVersion = "25.11";
+  };
 
   flake.modules.homeManager.waylander = {
     imports = with inputs.self.modules.homeManager; [
