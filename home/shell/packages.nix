@@ -38,6 +38,7 @@ config,
 
     # utilities
     calc
+    ffmpeg
     fzf
     gitui
     gnutar
