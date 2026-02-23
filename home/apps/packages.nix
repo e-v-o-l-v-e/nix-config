@@ -34,6 +34,7 @@
           jellyfin-desktop
           kdePackages.kdeconnect-kde
           libreoffice-qt6-fresh
+          networkmanager_dmenu
           opencloud-desktop
           opencloud-desktop-shell-integration-dolphin
           signal-desktop
