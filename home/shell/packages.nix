@@ -43,7 +43,7 @@ config,
     gitui
     gnutar
     imagemagick
-    linux-manual 
+    # linux-manual 
     man-pages
     man-pages-posix
     openssl

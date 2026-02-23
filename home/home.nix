@@ -30,4 +30,6 @@
   programs.man.generateCaches = false;
 
   programs.home-manager.enable = true;
+
+  programs.zen-browser.suppressXdgMigrationWarning = true;
 }
