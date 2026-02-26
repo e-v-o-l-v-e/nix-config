@@ -17,8 +17,8 @@ in
         freetype
         wine
         wine64
-        wineWowPackages.full
-        wineWow64Packages.full
+        # wineWowPackages.full
+        # wineWow64Packages.full
         protonup-ng
         mesa
         glib
