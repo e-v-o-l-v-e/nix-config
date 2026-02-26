@@ -33,7 +33,10 @@
       {
         imports = [
           inputs.self.modules.homeManager.cli-core
+
+          inputs.self.modules.homeManager.starship
           inputs.self.modules.homeManager.fish
+          inputs.self.modules.homeManager.pay-respects
         ];
 
         home.packages = with pkgs; [
@@ -63,7 +66,9 @@
         imports = [
           inputs.self.modules.homeManager.cli-core
           inputs.self.modules.homeManager.cli-utils
+
           inputs.self.modules.homeManager.zoxide
+          inputs.self.modules.homeManager.nix-index
         ];
 
         home.packages = with pkgs; [
