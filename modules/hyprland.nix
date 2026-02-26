@@ -1,8 +1,14 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 {
-  flake.modules.nixos.hyprland = {
-    programs.hyprland.enable = true;
-  };
+  flake.modules.nixos.hyprland =
+    { pkgs, ... }:
+    {
+      programs.hyprland.enable = true;
+
+      services.greetd.settings.default_session = {
+        command = "${lib.getExe pkgs.tuigreet} --time --cmd start-hyprland";
+      };
+    };
 
   flake.modules.homeManager.hyprland =
     { pkgs, ... }:
