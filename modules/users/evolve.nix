@@ -17,9 +17,10 @@ in
         "${inputs.secrets}/public_keys/waylander.pub"
       ];
 
+      # TODO modularize
       extraGroups = [
-        "audio" "docker" "input" "inputs" "key" "kvm" 
-        "libvirtd" "lp" "networkmanager" "scanner" 
+        "audio" "docker" "input" "inputs" "key" "kvm"
+        "libvirtd" "lp" "networkmanager" "scanner"
         "uinputs" "users" "video" "wheel"
       ];
     };
