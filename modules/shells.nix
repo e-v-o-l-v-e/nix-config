@@ -106,7 +106,6 @@
             packages = with pkgs; [
               bun
               openssl
-              postman
               prisma
               prisma-engines
               prisma-language-server
