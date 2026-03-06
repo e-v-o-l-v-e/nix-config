@@ -4,14 +4,6 @@ let
 in
 {
   config = {
-    programs.light = {
-      inherit (cfg) enable;
-      brightnessKeys = {
-        step = 5;
-        enable = true;
-      };
-    };
-
     services = lib.mkForce {
       upower = {
         inherit (cfg) enable;
