@@ -1,7 +1,6 @@
 {
   inputs,
   lib,
-  config,
   ...
 }:
 let
@@ -29,8 +28,7 @@ in
       }:
       inputs.nixpkgs.lib.nixosSystem {
         modules = [
-
-          inputs.self.modules.nixos.${hostname}
+          inputs.self.modules.nixos."${hostname}"
 
           # default stuff
           inputs.self.modules.nixos.appimage
@@ -38,13 +36,16 @@ in
           inputs.self.modules.nixos.kernel
           inputs.self.modules.nixos.keyboard
           inputs.self.modules.nixos.nh
+          inputs.self.modules.nixos.nix
 
           {
-            nixpkgs.hostPlatform = lib.mkDefault system;
+            nixpkgs.config.allowUnfree = true;
             networking.hostName = hostname;
+            nixpkgs.hostPlatform = lib.mkDefault system;
             system = {
               inherit stateVersion;
             };
+
           }
         ];
       };
@@ -57,24 +58,24 @@ in
         stateVersion ? defaultStateVersion,
         ...
       }:
-      {
-        ${username} = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = inputs.nixpkgs.legacyPackages.${system};
-          modules = [
-            inputs.self.modules.homeManager.${hostname}
-            {
-              nixpkgs.config.allowUnfree = true;
-              nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-              home = {
-                inherit username stateVersion;
-                homeDirectory = "/home/${username}";
-                sessionPath = [
-                  "$HOME/.local/bin"
-                ];
-              };
-            }
-          ];
-        };
+      inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+
+        modules = [
+          inputs.self.modules.homeManager.${hostname}
+          inputs.self.modules.homeManager.${username} or { }
+          {
+            nixpkgs.config.allowUnfree = true;
+            nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+            home = {
+              inherit username stateVersion;
+              homeDirectory = "/home/${username}";
+              sessionPath = [
+                "$HOME/.local/bin"
+              ];
+            };
+          }
+        ];
       };
   };
 }

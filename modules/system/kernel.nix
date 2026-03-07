@@ -1,12 +1,7 @@
-{
-  inputs,
-  lib,
-  config,
-  ...
-}:
+{ lib, ... }:
 {
   flake.modules.nixos.kernel =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       boot = {
         kernelPackages = pkgs.linuxPackages_zen; # zen kernel
