@@ -64,9 +64,9 @@ in
         modules = [
           inputs.self.modules.homeManager.${hostname}
           inputs.self.modules.homeManager.${username} or { }
+          inputs.self.modules.homeManager.nix
           {
             nixpkgs.config.allowUnfree = true;
-            nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
             home = {
               inherit username stateVersion;
               homeDirectory = "/home/${username}";
