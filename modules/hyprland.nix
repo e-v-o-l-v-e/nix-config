@@ -3,7 +3,14 @@
   flake.modules.nixos.hyprland =
     { pkgs, ... }:
     {
-      programs.hyprland.enable = true;
+      imports = [
+        inputs.self.modules.nixos.wayland
+      ];
+
+      programs.hyprland = {
+        enable = true;
+        xwayland.enable = true;
+      };
 
       services.greetd.settings.default_session = {
         command = "${lib.getExe pkgs.tuigreet} --time --cmd start-hyprland";
