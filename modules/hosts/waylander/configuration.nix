@@ -48,6 +48,8 @@ in
       ]
       ++ map (user: inputs.self.modules.nixos.${user}) users;
 
+    boot.loader.timeout = 0;
+
     system.stateVersion = "25.11";
   };
 

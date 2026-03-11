@@ -37,6 +37,7 @@
           libreoffice-qt6-fresh
           opencloud-desktop
           opencloud-desktop-shell-integration-dolphin
+          stow
           thunderbird
           vesktop
           zathura

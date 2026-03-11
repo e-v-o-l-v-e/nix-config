@@ -12,6 +12,12 @@
               proton-ge-bin
             ];
           };
+
+          kernel.sysctl = {
+            # Needed for steam games
+            "vm.max_map_count" = 2147483642;
+          };
+
         };
 
       gaming = {

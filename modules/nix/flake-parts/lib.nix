@@ -33,11 +33,13 @@ in
           # default stuff
           appimage
           boot
+          fonts
           kernel
           keyboard
+          locales
           nh
           nix
-          locales
+          time
 
           {
             nixpkgs.config.allowUnfree = true;

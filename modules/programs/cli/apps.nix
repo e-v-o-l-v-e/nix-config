@@ -20,6 +20,7 @@
           lsd
           openssh
           ripgrep
+          stow
           tree
           unzip
           vim
@@ -72,6 +73,10 @@
 
           inputs.self.modules.homeManager.zoxide
           inputs.self.modules.homeManager.nix-index
+
+
+          inputs.self.modules.homeManager.gh
+          inputs.self.modules.homeManager.direnv
         ];
 
         home.packages = with pkgs; [

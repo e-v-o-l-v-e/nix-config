@@ -13,7 +13,6 @@ _: {
             plymouth-proxzima-theme
           ];
         };
-        loader.timeout = 0;
         kernelParams = [
           "splash"
           "quiet"
