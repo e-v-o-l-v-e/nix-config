@@ -33,6 +33,11 @@
       flake = false;
     };
 
+    packages = {
+      url = "path:./packages";
+      flake = false;
+    };
+
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
 
     devshell.url = "github:numtide/devshell";

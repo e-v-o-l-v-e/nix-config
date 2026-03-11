@@ -239,6 +239,18 @@
         "type": "github"
       }
     },
+    "packages": {
+      "flake": false,
+      "locked": {
+        "path": "./packages",
+        "type": "path"
+      },
+      "original": {
+        "path": "./packages",
+        "type": "path"
+      },
+      "parent": []
+    },
     "root": {
       "inputs": {
         "devshell": "devshell",
@@ -247,6 +259,7 @@
         "import-tree": "import-tree",
         "nixpkgs": "nixpkgs_2",
         "nvf": "nvf",
+        "packages": "packages",
         "secrets": "secrets",
         "sops-nix": "sops-nix",
         "vpn-confinement": "vpn-confinement",

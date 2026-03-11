@@ -31,7 +31,9 @@ in
     };
 
     homeManager.nix = {
-      inherit nixPath;
+      # nix = {
+      #   inherit nixPath;
+      # };
     };
   };
 }

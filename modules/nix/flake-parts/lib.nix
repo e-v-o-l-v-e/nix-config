@@ -27,16 +27,17 @@ in
         ...
       }:
       inputs.nixpkgs.lib.nixosSystem {
-        modules = [
+        modules = with inputs.self.modules.nixos; [
           inputs.self.modules.nixos."${hostname}"
 
           # default stuff
-          inputs.self.modules.nixos.appimage
-          inputs.self.modules.nixos.boot
-          inputs.self.modules.nixos.kernel
-          inputs.self.modules.nixos.keyboard
-          inputs.self.modules.nixos.nh
-          inputs.self.modules.nixos.nix
+          appimage
+          boot
+          kernel
+          keyboard
+          nh
+          nix
+          locales
 
           {
             nixpkgs.config.allowUnfree = true;
@@ -67,6 +68,7 @@ in
           inputs.self.modules.homeManager.nix
           {
             nixpkgs.config.allowUnfree = true;
+            nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
             home = {
               inherit username stateVersion;
               homeDirectory = "/home/${username}";
