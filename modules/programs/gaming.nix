@@ -46,8 +46,6 @@
             inputs.self.modules.homeManager.steam
             inputs.self.modules.homeManager.heroic
           ];
-
-          home.packages = [ pkgs.steam-run ];
         };
 
       gamingFull =

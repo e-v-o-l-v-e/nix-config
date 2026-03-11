@@ -41,8 +41,10 @@
 
         home.packages = with pkgs; [
           bc
+          bat-extras.batman
           calc
           duf
+          ethtool
           fastfetch
           fzf
           imagemagick
@@ -52,6 +54,7 @@
           man-pages
           man-pages-posix
           openssl
+          parted
           pciutils
           playerctl
           trashy
