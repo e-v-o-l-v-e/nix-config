@@ -47,6 +47,7 @@
           duf
           ethtool
           fastfetch
+          ffmpeg
           fzf
           imagemagick
           jq
@@ -74,7 +75,6 @@
           inputs.self.modules.homeManager.zoxide
           inputs.self.modules.homeManager.nix-index
 
-
           inputs.self.modules.homeManager.gh
           inputs.self.modules.homeManager.direnv
         ];
@@ -86,23 +86,6 @@
           lowfi
           presenterm
           sops
-        ];
-      };
-
-    cli-nvim =
-      { pkgs, ... }:
-      {
-        home.packages = with pkgs; [
-          alejandra
-          fish-lsp
-          lua-language-server
-          lua5_1
-          luarocks
-          neovim
-          nil
-          nixd
-          nixfmt
-          tree-sitter
         ];
       };
   };

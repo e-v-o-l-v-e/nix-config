@@ -5,7 +5,7 @@
 }:
 let
   defaultUsername = "evolve";
-  defaultHostname = "mini";
+  defaultConfig = "mini";
   defaultSystem = "x86_64-linux";
   defaultStateVersion = "26.05";
 in
@@ -21,7 +21,7 @@ in
 
     mkNixos =
       {
-        hostname ? defaultHostname,
+        hostname,
         system ? defaultSystem,
         stateVersion ? defaultStateVersion,
         ...
@@ -48,6 +48,7 @@ in
             system = {
               inherit stateVersion;
             };
+            environment.systemPackages = [ pkgs.vim ];
 
           }
         ];
@@ -55,8 +56,8 @@ in
 
     mkHomeManager =
       {
+        hostname,
         username ? defaultUsername,
-        hostname ? defaultHostname,
         system ? defaultSystem,
         stateVersion ? defaultStateVersion,
         ...
@@ -65,10 +66,12 @@ in
         pkgs = inputs.nixpkgs.legacyPackages.${system};
 
         modules = [
-          inputs.self.modules.homeManager.${hostname}
-          inputs.self.modules.homeManager.${username} or { }
+          inputs.self.modules.homeManager.${hostname} or { }
+          inputs.self.modules.homeManager."${username}@${hostname}" or { }
           inputs.self.modules.homeManager.nix
           {
+            programs.home-manager.enable = true;
+            programs.man.generateCaches = false;
             nixpkgs.config.allowUnfree = true;
             nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
             home = {

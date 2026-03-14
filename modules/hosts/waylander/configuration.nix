@@ -13,7 +13,7 @@ in
 
   flake.homeConfigurations = builtins.listToAttrs (
     map (username: {
-      name = username;
+      name = "${username}@${hostname}";
       value = inputs.self.lib.mkHomeManager {
         inherit username hostname system;
         stateVersion = "26.05";
@@ -53,13 +53,13 @@ in
     system.stateVersion = "25.11";
   };
 
-  flake.modules.homeManager.waylander = {
+  flake.modules.homeManager."evolve@${hostname}" = {
     imports = with inputs.self.modules.homeManager; [
       # shell
       cli-core
       cli-utils
       cli-personal
-      cli-nvim
+      neovim
 
       # desktop
       gui-common
@@ -69,10 +69,6 @@ in
       # programs
       nh
       steam
-
-      # misc
     ];
-
-    inherit hostname;
   };
 }
