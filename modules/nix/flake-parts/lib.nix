@@ -31,15 +31,12 @@ in
           inputs.self.modules.nixos."${hostname}"
 
           # default stuff
+          defaults
+
           appimage
-          boot
           fonts
-          kernel
-          keyboard
-          locales
           nh
           nix
-          time
 
           {
             nixpkgs.config.allowUnfree = true;
@@ -48,8 +45,6 @@ in
             system = {
               inherit stateVersion;
             };
-            environment.systemPackages = [ pkgs.vim ];
-
           }
         ];
       };
@@ -80,6 +75,9 @@ in
               sessionPath = [
                 "$HOME/.local/bin"
               ];
+              sessionVariables = {
+                EDITOR = lib.mkDefault "vim";
+              };
             };
           }
         ];

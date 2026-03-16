@@ -1,9 +1,19 @@
-{ inputs, ... }:
+{ lib, ... }:
 {
   flake.modules.homeManager.neovim =
     { pkgs, ... }:
     {
+      # programs.neovim = {
+      #   enable = true;
+      #   defaultEditor = true;
+      # };
+
+      home.sessionVariables = {
+        EDITOR = "nvim";
+      };
+
       home.packages = with pkgs; [
+        # neovim
         neovim
 
         # core

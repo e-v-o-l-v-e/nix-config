@@ -27,6 +27,7 @@ in
       [
         # system
         gpu-amd
+        greetd
 
         # programs
         gaming
@@ -39,6 +40,8 @@ in
 
         # desktop
         hyprland
+        fonts
+        wayland
 
         # nix
         sops
@@ -64,7 +67,10 @@ in
       # desktop
       gui-common
       gui-personnal
+      gui-desktop
+      gui-theming
       hyprland
+      fonts
 
       # programs
       nh

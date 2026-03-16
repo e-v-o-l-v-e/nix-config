@@ -1,6 +1,8 @@
 _: {
   flake.modules.nixos.kanata = {
     services.kanata = {
+      enable = true;
+
       keyboards = {
         internalKeyboard = {
           extraDefCfg = "process-unmapped-keys yes";

@@ -7,6 +7,8 @@
         kernelPackages = pkgs.linuxPackages_zen; # zen kernel
         # kernelPackages = pkgs.linuxPackages_latest;  # default kernel
 
+        environment.systemPackages = [ pkgs.linux-firmware ];
+
         kernelParams = [
           "systemd.mask=systemd-vconsole-setup.service"
           "systemd.mask=dev-tpmrm0.device" # this is to mask that stupid 1.5 mins systemd bug

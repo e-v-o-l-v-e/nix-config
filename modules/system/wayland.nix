@@ -5,9 +5,11 @@
       xdg.portal = {
         enable = true;
         wlr.enable = false;
+
         extraPortals = [
           pkgs.xdg-desktop-portal-gtk
         ];
+
         configPackages = [
           pkgs.xdg-desktop-portal-gtk
           pkgs.xdg-desktop-portal
@@ -23,7 +25,11 @@
         enable32Bit = true;
       };
 
-      security.polkit.enable = config.programs.niri.enable or config.programs.hyprland.enable;
+      security.polkit.enable = true;
       services.gnome.gnome-keyring.enable = config.programs.niri.enable;
+
+      environment.systemPackages = with pkgs; [
+        xwayland-satellite
+      ];
     };
 }
