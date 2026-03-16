@@ -69,6 +69,9 @@ in
       # programs
       nh
       steam
+
+      # perso
+      sops
     ];
   };
 }

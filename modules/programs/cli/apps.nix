@@ -68,15 +68,17 @@
     cli-personal =
       { pkgs, ... }:
       {
-        imports = [
-          inputs.self.modules.homeManager.cli-core
-          inputs.self.modules.homeManager.cli-utils
+        imports = with inputs.self.modules.homeManager; [
+          cli-core
+          cli-utils
 
-          inputs.self.modules.homeManager.zoxide
-          inputs.self.modules.homeManager.nix-index
+          zoxide
+          nix-index
 
-          inputs.self.modules.homeManager.gh
-          inputs.self.modules.homeManager.direnv
+          direnv
+          gh
+          git
+          ssh
         ];
 
         home.packages = with pkgs; [

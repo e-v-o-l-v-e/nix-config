@@ -1,14 +1,7 @@
-{
-  inputs,
-  lib,
-  config,
-  ...
-}:
+{ inputs, ... }:
 let
   secrets = inputs.secrets;
   common.sopsFile = "${secrets}/common.yaml";
-
-  sshkeydir = "${config.home.homeDirectory}/.ssh/keys";
 in
 {
   flake.modules.nixos.sops = {
@@ -29,33 +22,38 @@ in
     };
   };
 
-  flake.modules.homeManager.sops = {
+  flake.modules.homeManager.sops =
+    { config, ... }:
+    let
+      sshkeydir = "${config.home.homeDirectory}/.ssh/keys";
+    in
+    {
 
-    imports = [
-      inputs.sops-nix.homeManagerModules.sops
-    ];
+      imports = [
+        inputs.sops-nix.homeManagerModules.sops
+      ];
 
-    sops = {
-      age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-      defaultSopsFile = common.sopsFile;
-      validateSopsFiles = true;
+      sops = {
+        age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+        defaultSopsFile = common.sopsFile;
+        validateSopsFiles = true;
 
-      secrets = {
-        "private_keys/github" = {
-          path = "${sshkeydir}/github";
-        };
-        "private_keys/git_unistra" = {
-          path = "${sshkeydir}/git_unistra";
-        };
-        "ssh-key/private" = {
-          path = "${sshkeydir}/waylander";
-          sopsFile = "${secrets}/waylander.yaml";
-        };
-        "ssh-key/public" = {
-          path = "${sshkeydir}/waylander.pub";
-          sopsFile = "${secrets}/waylander.yaml";
+        secrets = {
+          "private_keys/github" = {
+            path = "${sshkeydir}/github";
+          };
+          "private_keys/git_unistra" = {
+            path = "${sshkeydir}/git_unistra";
+          };
+          "ssh-key/private" = {
+            path = "${sshkeydir}/waylander";
+            sopsFile = "${secrets}/waylander.yaml";
+          };
+          "ssh-key/public" = {
+            path = "${sshkeydir}/waylander.pub";
+            sopsFile = "${secrets}/waylander.yaml";
+          };
         };
       };
     };
-  };
 }

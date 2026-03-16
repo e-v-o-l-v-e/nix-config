@@ -53,15 +53,15 @@ _: {
           fish_hybrid_key_bindings
         '';
 
-        functions = {
-          "ssh" = {
-            argumentNames = [ "arguments" ];
-            body = ''
-              set -lx TERM xterm-256color
-              command ssh $arguments
-            '';
-          };
-        };
+        # functions = {
+        #   "ssh" = {
+        #     argumentNames = [ "arguments" ];
+        #     body = ''
+        #       set -lx TERM xterm-256color
+        #       command ssh $arguments
+        #     '';
+        #   };
+        # };
       };
     };
   };
