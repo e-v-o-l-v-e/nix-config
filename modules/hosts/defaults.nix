@@ -18,9 +18,13 @@
           pkgs.vim
           pkgs.fish
         ];
+
         variables = {
           EDITOR = lib.mkOverride 999 "vim";
         };
       };
+
+      hardware.enableAllFirmware = true;
+      hardware.enableRedistributableFirmware = true;
     };
 }

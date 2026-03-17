@@ -1,13 +1,12 @@
-{ lib, ... }:
 {
   flake.modules.nixos.kernel =
-    { pkgs, config, ... }:
+    { pkgs, ... }:
     {
+      environment.systemPackages = [ pkgs.linux-firmware ];
+
       boot = {
         kernelPackages = pkgs.linuxPackages_zen; # zen kernel
         # kernelPackages = pkgs.linuxPackages_latest;  # default kernel
-
-        environment.systemPackages = [ pkgs.linux-firmware ];
 
         kernelParams = [
           "systemd.mask=systemd-vconsole-setup.service"
