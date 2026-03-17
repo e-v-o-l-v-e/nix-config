@@ -1,8 +1,12 @@
 {
-  flake.modules.homeManager.starship = {
-    programs.starship = {
-      enable = true;
-      enableFishIntegration = true;
+  flake.modules.homeManager.starship =
+    { pkgs, ... }:
+    {
+      programs.starship = {
+        enable = true;
+        enableFishIntegration = true;
+      };
+
+      home.packages = [ pkgs.starship ];
     };
-  };
 }

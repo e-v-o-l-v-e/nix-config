@@ -49,6 +49,7 @@
       {
         home.packages = with pkgs; [
           grim
+          networkmanager_dmenu
           rofi
           slurp
           swappy
