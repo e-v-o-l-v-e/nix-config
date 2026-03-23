@@ -4,7 +4,6 @@
     { pkgs, ... }:
     {
       imports = with inputs.self.modules.nixos; [
-        boot
         kernel
         keyboard
         locales

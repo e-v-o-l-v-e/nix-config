@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 {
   flake.modules.nixos.net = {
     imports = [
@@ -8,6 +8,8 @@
     networking = {
       networkmanager.enable = true;
       wireless.enable = true;
+
+      useDHCP = lib.mkDefault true;
 
       nameservers = [
         "1.1.1.1"

@@ -1,8 +1,4 @@
-{
-  inputs,
-  lib,
-  ...
-}:
+{ inputs, lib, ... }:
 let
   defaultUsername = "evolve";
   defaultConfig = "mini";
@@ -11,7 +7,6 @@ let
 in
 {
   # Helper functions for creating system / home-manager / user configurations
-
   options.flake.lib = lib.mkOption {
     type = lib.types.attrsOf lib.types.unspecified;
     default = { };

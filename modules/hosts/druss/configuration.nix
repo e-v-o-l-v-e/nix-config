@@ -1,29 +1,29 @@
-{ inputs, ... }:
+{ self, ... }:
 let
-  hostname = "waylander";
+  hostname = "druss";
   system = "x86_64-linux";
   mainUser = "evolve";
   users = [ mainUser ];
 in
 {
-  flake.nixosConfigurations.${hostname} = inputs.self.lib.mkNixos {
+  flake.nixosConfigurations.${hostname} = self.lib.mkNixos {
     inherit hostname system;
-    stateVersion = "25.11";
+    stateVersion = "25.05";
   };
 
   flake.homeConfigurations = builtins.listToAttrs (
     map (username: {
       name = "${username}@${hostname}";
-      value = inputs.self.lib.mkHomeManager {
+      value = self.lib.mkHomeManager {
         inherit username hostname system;
-        stateVersion = "26.05";
+        stateVersion = "25.05";
       };
     }) users
   );
 
-  flake.modules.nixos.waylander = {
+  flake.modules.nixos.druss = {
     imports =
-      with inputs.self.modules.nixos;
+      with self.modules.nixos;
       [
         # system
         gpu-amd
@@ -31,16 +31,15 @@ in
 
         # programs
         gaming
-        kanata
 
         # network
+        tailscale
         bluetooth
         printing
-        tailscale
 
         # desktop
-        greetd
-        hyprland
+        plasma
+        sddm
         wayland
 
         # nix
@@ -49,13 +48,13 @@ in
         # misc
         plymouth
       ]
-      ++ map (user: inputs.self.modules.nixos.${user}) users;
+      ++ map (user: self.modules.nixos.${user}) users;
 
     boot.loader.timeout = 0;
   };
 
   flake.modules.homeManager."evolve@${hostname}" = {
-    imports = with inputs.self.modules.homeManager; [
+    imports = with self.modules.homeManager; [
       # shell
       cli-core
       cli-utils
@@ -67,12 +66,11 @@ in
       gui-personnal
       gui-desktop
       gui-theming
-      hyprland
       fonts
 
       # programs
       nh
-      steam
+      gamingFull
 
       # perso
       sops
