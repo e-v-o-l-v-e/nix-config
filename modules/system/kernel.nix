@@ -1,11 +1,11 @@
-{
+{ lib, ... }: {
   flake.modules.nixos.kernel =
     { pkgs, ... }:
     {
       environment.systemPackages = [ pkgs.linux-firmware ];
 
       boot = {
-        kernelPackages = pkgs.linuxPackages_zen; # zen kernel
+        kernelPackages = lib.mkDefault pkgs.linuxPackages_zen; # zen kernel
         # kernelPackages = pkgs.linuxPackages_latest;  # default kernel
 
         kernelParams = [
