@@ -40,7 +40,7 @@ let
       };
 
 
-      systemd.services."${name}".serviceConfig.UMask = "0002";
+      systemd.services."${name}".serviceConfig.UMask = lib.mkForce "0002";
     };
 in
   lib.mkMerge (map mkArrService arrServices)

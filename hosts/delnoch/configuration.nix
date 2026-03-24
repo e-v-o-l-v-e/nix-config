@@ -168,6 +168,25 @@
           RemainAfterExit = true;
         };
       };
+
+      services.samba = {
+        enable = true;
+        securityType = "user";
+        openFirewall = true;
+        settings = {
+          "media" = {
+            "path" = "/data/media/";
+            "browseable" = "yes";
+            "read only" = "yes";
+            "guest ok" = "no";
+            "valid users" = "@smbusers";
+            "force user" = "server";
+            "force group" = "server";
+          };
+        };
+      };
+
+      users.groups.smbusers = {};
     })
   ];
 }
