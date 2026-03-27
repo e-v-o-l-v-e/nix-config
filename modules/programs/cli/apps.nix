@@ -79,6 +79,7 @@
           gh
           git
           ssh
+          zk
         ];
 
         home.packages = with pkgs; [
