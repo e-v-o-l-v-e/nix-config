@@ -54,7 +54,7 @@
           slurp
           swappy
           swaynotificationcenter
-          swww
+          awww
           waybar
           waypaper
           wlogout
