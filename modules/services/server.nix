@@ -11,10 +11,20 @@
     in
     {
       config = {
-        environment.systemPackages = lib.optionals cfg.enable [
-          pkgs.btop
-          pkgs.iotop
-          pkgs.smartmontools
+        environment.systemPackages = with pkgs; [
+          bat-extras.batman
+          btop
+          dust
+          ethtool
+          gcc
+          git
+          iotop
+          man-pages
+          man-pages-posix
+          nix-index
+          openssl
+          pay-respects
+          smartmontools
         ];
 
         users.groups = lib.mkIf cfg.enable {
