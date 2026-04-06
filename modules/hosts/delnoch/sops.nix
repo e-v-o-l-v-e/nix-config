@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ self, inputs, ... }:
 let
   delnoch.sopsFile = "${inputs.secrets}/delnoch.yaml";
   common.sopsFile = "${inputs.secrets}/common.yaml";
@@ -6,27 +6,17 @@ let
 in
 {
   flake.modules.nixos.delnoch-sops = {
-
     imports = [
-      inputs.modules.nixos.sops
-    ];
-
-    sops.password = delnoch;
-  };
-
-  flake.modules.homeManager.delnoch-sops = {
-
-    imports = [
-      inputs.modules.homeManager.sops
+      self.modules.nixos.sops
     ];
 
     sops.secrets = {
+      password = delnoch // {
+        neededForUsers = true;
+      };
 
       # services
-      caddy-env = {
-        inherit (server) sopsFile;
-        owner = "caddy";
-      };
+      caddy-env = server // { owner = "caddy"; };
       silverbullet-env = server;
       kavita-token = server;
       navidrome-env = server;
