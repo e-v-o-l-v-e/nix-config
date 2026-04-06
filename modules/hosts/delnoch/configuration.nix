@@ -53,7 +53,6 @@ in
           matrix
           olivetin
           pingvin-share
-          sites
           spliit
 
           # network
