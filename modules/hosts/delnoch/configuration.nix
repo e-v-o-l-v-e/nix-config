@@ -135,8 +135,6 @@ in
         spliit.enable = true;
       };
 
-      server.hugo.enable = true;
-
       security.sudo.wheelNeedsPassword = false;
 
       systemd.settings.Manager = {
