@@ -4,54 +4,89 @@
       config,
       lib,
       pkgs,
+      username,
       ...
     }:
     let
       cfg = config.server;
-      fqdn = cfg.domain;
-      scriptDir = "${cfg.dataPath}/scripts";
+      fqdn = config.server.domain;
+      scriptDir = cfg.dataPath + "/scripts";
       port = 1337;
-
-      silence = level: {
-        title = "silence ${toString level}";
-        shell = "fish ${scriptDir}/bruit.fish ${toString level}";
-        icon = toString level;
-        timeout = 5;
-      };
     in
     {
-      # olivetin has known CVEs in nixpkgs — override if you need a newer version
-      nixpkgs.config.permittedInsecurePackages = lib.optional config.services.olivetin.enable pkgs.olivetin.name;
-
       services.olivetin = {
-        user = "evolve";
+        user = username;
         group = "users";
+
+        package = pkgs.olivetin-3k;
+
         settings = {
           ListenAddressSingleHTTPFrontend = "0.0.0.0:${toString port}";
           actions = [
             {
-              title = "import unmapped";
+              title = "Import unmapped";
               shell = "fish ${scriptDir}/beet-import-unmapped.fish";
               icon = "󰋺";
-              timeout = 5;
             }
             {
-              title = "publish sb";
+              title = "Publish SB";
               shell = "fish ${scriptDir}/sb-public.fish > ${scriptDir}/logs/sb.log";
               icon = "🗘";
-              timeout = 5;
             }
-            (silence (-3))
-            (silence (-2))
-            (silence (-1))
-            (silence 1)
-            (silence 2)
-            (silence 3)
+            {
+              title = "Adjust Silence Level";
+              icon = "🤫";
+              shell = "fish ${scriptDir}/bruit.fish {{level}}";
+              arguments = [
+                {
+                  name = "level";
+                  type = "select";
+                  choices = [
+                    {
+                      title = "Level 3 (Total Silence)";
+                      value = "3";
+                    }
+                    {
+                      title = "Level 2";
+                      value = "2";
+                    }
+                    {
+                      title = "Level 1";
+                      value = "1";
+                    }
+                    {
+                      title = "Level -1";
+                      value = "-1";
+                    }
+                    {
+                      title = "Level -2";
+                      value = "-2";
+                    }
+                    {
+                      title = "Level -3 (Full Power)";
+                      value = "-3";
+                    }
+                  ];
+                }
+              ];
+            }
+            {
+              title = "wake druss";
+              shell = "${lib.getExe pkgs.wakeonlan} f0:2f:74:ad:7b:a6";
+              icon = "󰀠 ";
+            }
+            {
+              title = "wake new-delnoch";
+              shell = "${lib.getExe pkgs.wakeonlan} 54:bf:64:73:0e:9b";
+              icon = "󰀠 ";
+            }
           ];
         };
+
         path = with pkgs; [
           fish
           beets
+          qbittorrent-cli
         ];
       };
 
