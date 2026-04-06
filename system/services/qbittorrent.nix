@@ -8,7 +8,7 @@
   fqdn = cfg.domain;
 
   webuiPort = 8088;
-  torrentingPort = cfg.vpn.forwardedPort;
+  torrentingPort = 52106;
 
   namespaceAddress = "192.168.15.1";
 in {
@@ -31,8 +31,7 @@ in {
 
   environment.systemPackages = [ 
     pkgs.qbittorrent-cli 
-  ] ++ lib.optional cfg.vpn.enable 
-    pkgs.wireguard-tools;
+  ] ++ lib.optional cfg.vpn.enable pkgs.wireguard-tools;
 
   vpnNamespaces.qbitvpn = lib.mkIf cfg.vpn.enable {
     inherit (cfg.vpn) enable;

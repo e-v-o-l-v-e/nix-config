@@ -75,7 +75,7 @@
         domainSecondary = "jeudefou.com";
 
         vpn.enable = true;
-        vpn.forwardedPort = 18086;      
+        vpn.forwardedPort = 52106;      
 
         allowedSubnets = [ "192.168.0.0/24" ];
 
@@ -170,7 +170,7 @@
       };
 
       services.samba = {
-        enable = true;
+        enable = false;
         securityType = "user";
         openFirewall = true;
         settings = {
@@ -186,7 +186,7 @@
         };
       };
 
-      users.groups.smbusers = {};
+      users.groups.smbusers = lib.mkIf config.services.samba.enable {};
     })
   ];
 }

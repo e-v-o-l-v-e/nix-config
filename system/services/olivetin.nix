@@ -50,12 +50,12 @@ in {
         }
         {
             title = "wake druss";
-            shell = "wakeonlan f0:2f:74:ad:7b:a6";
+            shell = "${lib.getExe pkgs.wakeonlan} f0:2f:74:ad:7b:a6";
             icon = "󰀠 ";
         }
         {
             title = "wake new-delnoch";
-            shell = "wakeonlan 54:bf:64:73:0e:9b";
+            shell = "${lib.getExe pkgs.wakeonlan} 54:bf:64:73:0e:9b";
             icon = "󰀠 ";
         }
       ];
