@@ -109,13 +109,20 @@ in
       services = {
         caddy.enable = true;
         cloudflared.enable = true;
+
         local-content-share.enable = true;
-        olivetin.enable = true;
         opencloud.enable = true;
-        immich.enable = true;
+
         matrix-conduit.enable = true;
+
+        immich.enable = true;
         jellyfin.enable = true;
         kavita.enable = true;
+        olivetin = {
+          enable = true;
+          user = mainUser;
+        };
+
         qbittorrent.enable = true;
         prowlarr.enable = true;
         radarr.enable = true;

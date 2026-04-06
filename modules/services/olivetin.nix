@@ -4,7 +4,6 @@
       config,
       lib,
       pkgs,
-      username,
       ...
     }:
     let
@@ -15,8 +14,8 @@
     in
     {
       services.olivetin = {
-        user = username;
-        group = "users";
+        user = lib.mkDefault "evolve";
+        group = lib.mkDefault "users";
 
         package = pkgs.olivetin-3k;
 
