@@ -36,6 +36,7 @@
 
         # else
         fish-lsp
+        marksman
       ];
 
       programs.fish.functions = {
