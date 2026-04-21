@@ -5,18 +5,18 @@
       cfg = config.server;
       fqdn = cfg.domain;
       listenPort = 5055;
-      version = "2.7.3";
+      version = "latest";
     in
     {
       config = {
         virtualisation.oci-containers.containers = {
           seerr = lib.mkIf cfg.docker.seerr.enable {
             autoStart = true;
-            serviceName = "docker-seerr";
             pull = "newer";
-            image = "ghcr.io/fallenbagel/jellyseerr:${version}";
+            image = "ghcr.io/seerr-team/seerr:${version}";
             ports = [ "${toString listenPort}:5055" ];
             volumes = [ "${cfg.configPath}/seerr:/app/config" ];
+            user = "986:988";
             extraOptions = [ "--network=host" ];
           };
         };
@@ -28,7 +28,7 @@
           '';
         };
 
-        systemd.services."docker-seerr".stopIfChanged = false;
+        systemd.services."podman-seerr".stopIfChanged = false;
 
         users.users.seerr = {
           name = "seerr";
@@ -44,12 +44,6 @@
         };
         users.groups.seerr = { };
 
-        systemd.services."podman-seerr".serviceConfig = {
-          RuntimeDirectory = "seerr";
-          RuntimeDirectoryMode = "0750";
-          User = "seerr";
-          Group = "seerr";
-        };
       };
 
       options.server.docker.seerr.enable = lib.mkEnableOption "jellyseerr docker container";

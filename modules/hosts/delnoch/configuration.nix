@@ -43,8 +43,9 @@ in
           arr
           qbittorrent
           slskd
+          tidarr
 
-          # docker services
+          # notes
           silverbullet
 
           # utilities
@@ -140,6 +141,7 @@ in
         pingvin-share-x.enable = true;
         bentopdf.enable = true;
         spliit.enable = true;
+        tidarr.enable = true;
       };
 
       security.sudo.wheelNeedsPassword = false;
