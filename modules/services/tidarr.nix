@@ -5,6 +5,7 @@
       cfg = config.server;
       fqdn = cfg.domain;
       listenPort = 8484;
+      version = "1.2.1";
     in
     {
       config = {
@@ -13,7 +14,7 @@
             autoStart = true;
             serviceName = "podman-tidarr";
             pull = "newer";
-            image = "cstaelen/tidarr";
+            image = "cstaelen/tidarr:${version}";
             user = "${toString cfg.serverUserId}:${toString cfg.serverGroupId}";
             ports = [ "${toString listenPort}:8484" ];
             volumes = [
