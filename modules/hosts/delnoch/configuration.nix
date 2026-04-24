@@ -23,7 +23,7 @@ in
 
           # server base
           server
-          docker
+          podman
 
           # reverse proxy
           caddy
