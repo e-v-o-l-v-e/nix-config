@@ -54,7 +54,6 @@
           slurp
           swappy
           awww
-          swww
           waybar
           waypaper
           wlogout
