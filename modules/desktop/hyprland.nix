@@ -38,6 +38,8 @@
         hyprshade
         hyprsunset
 
+        swaynotificationcenter
+
         wlogout
       ];
 

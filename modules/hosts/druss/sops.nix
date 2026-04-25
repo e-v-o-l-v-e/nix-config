@@ -9,7 +9,7 @@ in
       self.modules.nixos.sops
     ];
 
-    secrets.password = druss // {
+    sops.secrets.password = druss // {
       neededForUsers = true;
     };
   };

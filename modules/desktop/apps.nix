@@ -53,8 +53,8 @@
           rofi
           slurp
           swappy
-          swaynotificationcenter
           awww
+          swww
           waybar
           waypaper
           wlogout

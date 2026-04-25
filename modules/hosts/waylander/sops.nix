@@ -9,7 +9,7 @@ in
       self.modules.nixos.sops
     ];
 
-    secrets.password = waylander // {
+    sops.secrets.password = waylander // {
       neededForUsers = true;
     };
   };

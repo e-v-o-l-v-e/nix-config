@@ -25,7 +25,7 @@ in
         extraGroups = [
           "audio" "docker" "input" "inputs" "key" "kvm"
           "libvirtd" "lp" "networkmanager" "scanner"
-          "uinputs" "users" "video" "wheel"
+          "uinputs" "users" "video" "wheel" "render"
         ];
       };
 

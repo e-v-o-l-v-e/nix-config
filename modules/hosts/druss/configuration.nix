@@ -43,12 +43,15 @@ in
         wayland
 
         # nix
-        sops
+        druss-sops
 
         # misc
         plymouth
+        podman
       ]
       ++ map (user: self.modules.nixos.${user}) users;
+
+    users.users."${mainUser}".extraGroups = [ "podman" ];
 
     boot.loader.timeout = 0;
   };
