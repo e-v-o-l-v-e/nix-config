@@ -39,7 +39,7 @@ in
 
         # desktop
         plasma
-        sddm
+        plasma-login-manager
         wayland
 
         # nix
@@ -48,15 +48,20 @@ in
         # misc
         plymouth
         podman
+        user
       ]
       ++ map (user: self.modules.nixos.${user}) users;
+
+    user = mainUser;
+
+    services.displayManager.autoLogin.user = mainUser;
 
     users.users."${mainUser}".extraGroups = [ "podman" ];
 
     boot.loader.timeout = 0;
   };
 
-  flake.modules.homeManager."evolve@${hostname}" = {
+  flake.modules.homeManager."${mainUser}@${hostname}" = {
     imports = with self.modules.homeManager; [
       # shell
       cli-core
