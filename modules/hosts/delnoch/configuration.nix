@@ -11,6 +11,16 @@ in
     stateVersion = "25.05";
   };
 
+  flake.homeConfigurations = builtins.listToAttrs (
+    map (username: {
+      name = "${username}@${hostname}";
+      value = self.lib.mkHomeManager {
+        inherit username hostname system;
+        stateVersion = "26.05";
+      };
+    }) users
+  );
+
   flake.modules.nixos.delnoch =
     { pkgs, lib, ... }:
     {
@@ -41,6 +51,7 @@ in
 
           # download
           arr
+          beets
           qbittorrent
           slskd
           tidarr
@@ -151,4 +162,12 @@ in
         DefaultTimeoutStopSec = "30s";
       };
     };
+
+  flake.modules.homeManager."evolve@${hostname}" = {
+    imports = with self.modules.homeManager; [
+      cli-core
+      cli-utils
+      neovim
+    ];
+  };
 }
