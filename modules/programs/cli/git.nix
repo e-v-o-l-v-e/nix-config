@@ -8,7 +8,7 @@
 
         settings = {
           user.name = config.home.username;
-          user.email = "git@catch.imp-network.com";
+          user.email = "evolve@imp-network.com";
           push.autoSetupRemote = true;
           init.defaultBranch = "main";
           pull.ff = "only";
