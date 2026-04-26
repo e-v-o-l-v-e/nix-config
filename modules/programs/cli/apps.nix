@@ -4,9 +4,10 @@
     cli-core =
       { pkgs, ... }:
       {
-        imports = [
-          inputs.self.modules.homeManager.fish
-          inputs.self.modules.homeManager.lsd
+        imports = with inputs.self.modules.homeManager; [
+          fish
+          git
+          lsd
         ];
 
         home.packages = with pkgs; [
@@ -32,12 +33,14 @@
     cli-utils =
       { pkgs, ... }:
       {
-        imports = [
-          inputs.self.modules.homeManager.cli-core
+        imports = with inputs.self.modules.homeManager; [
+          cli-core
 
-          inputs.self.modules.homeManager.starship
-          inputs.self.modules.homeManager.fish
-          inputs.self.modules.homeManager.pay-respects
+          starship
+          fish
+          nh
+          pay-respects
+          zoxide
         ];
 
         home.packages = with pkgs; [
@@ -59,6 +62,7 @@
           parted
           pciutils
           playerctl
+          tmux
           trashy
           xdg-utils
           yazi
@@ -72,7 +76,6 @@
           cli-core
           cli-utils
 
-          zoxide
           nix-index
 
           direnv
