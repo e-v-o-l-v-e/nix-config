@@ -48,6 +48,7 @@ in
           # cloud
           immich
           opencloud
+          paperless
 
           # download
           arr
@@ -123,11 +124,13 @@ in
         cloudflared.enable = true;
 
         local-content-share.enable = true;
+
+        immich.enable = true;
         opencloud.enable = true;
+        paperless.enable = true;
 
         matrix-conduit.enable = true;
 
-        immich.enable = true;
         jellyfin.enable = true;
         kavita.enable = true;
         olivetin.enable = true;

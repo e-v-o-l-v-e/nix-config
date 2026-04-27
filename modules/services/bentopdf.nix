@@ -5,6 +5,7 @@
       cfg = config.server;
       fqdn = cfg.domain;
       listenPort = 4903;
+      version = "2.8.4";
     in
     {
       config = {
@@ -13,7 +14,7 @@
             autoStart = true;
             serviceName = "docker-bentopdf";
             pull = "newer";
-            image = "bentopdf/bentopdf-simple:latest";
+            image = "bentopdfteam/bentopdf-simple:${version}";
             ports = [ "${toString listenPort}:8080" ];
           };
         };
