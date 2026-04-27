@@ -6,7 +6,6 @@
       {
         imports = with inputs.self.modules.homeManager; [
           fish
-          git
           lsd
         ];
 
@@ -77,11 +76,12 @@
           cli-utils
 
           nix-index
-
           direnv
+
           gh
           git
           ssh
+
           zk
         ];
 

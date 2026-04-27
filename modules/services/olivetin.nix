@@ -7,6 +7,8 @@
       ...
     }:
     let
+      # REQUIRED MODULE : [ beets server ]
+
       cfg = config.server;
       fqdn = config.server.domain;
       scriptDir = cfg.dataPath + "/scripts";
@@ -14,8 +16,8 @@
     in
     {
       services.olivetin = {
-        user = lib.mkDefault "evolve";
-        group = lib.mkDefault "users";
+        user = cfg.serverUserName;
+        group = cfg.serverGroupName;
 
         package = pkgs.olivetin-3k;
 
@@ -24,8 +26,9 @@
           actions = [
             {
               title = "Import unmapped";
-              shell = "fish ${scriptDir}/beet-import-unmapped.fish";
+              shell = "beet-import";
               icon = "󰋺";
+              timeout = 3000;
             }
             {
               title = "Publish SB";
@@ -85,7 +88,9 @@
         path = with pkgs; [
           fish
           beets
+          config.beets.importPackage
           qbittorrent-cli
+          sudo
         ];
       };
 

@@ -130,10 +130,7 @@ in
         immich.enable = true;
         jellyfin.enable = true;
         kavita.enable = true;
-        olivetin = {
-          enable = true;
-          user = mainUser;
-        };
+        olivetin.enable = true;
 
         qbittorrent.enable = true;
         prowlarr.enable = true;
@@ -167,7 +164,10 @@ in
     imports = with self.modules.homeManager; [
       cli-core
       cli-utils
+
       neovim
+      ssh
+      git
     ];
   };
 }

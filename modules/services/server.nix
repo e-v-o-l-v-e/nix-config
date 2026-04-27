@@ -77,10 +77,34 @@
           description = "path to the data dir";
         };
 
+        mediaPath = mkOption {
+          type = types.str;
+          default = config.server.dataPath + "/media";
+          description = "path to the media dir";
+        };
+
+        musicPath = mkOption {
+          type = types.str;
+          default = config.server.mediaPath + "/music";
+          description = "path to music dir";
+        };
+
+        musicUnmappedPath = mkOption {
+          type = types.str;
+          default = config.server.mediaPath + "/music-unmapped";
+          description = "path to unmapped music dir";
+        };
+
         ssdPath = mkOption {
           type = types.str;
           default = "/ssd";
           description = "path to the ssd data dir, for small frequently accessed files";
+        };
+
+        logPath = mkOption {
+          type = types.str;
+          default = config.server.ssdPath + "/logs";
+          description = "path to the log dir";
         };
 
         domain = mkOption {
@@ -119,13 +143,15 @@
           description = "ports accessible from allowedSubnets";
         };
 
-        vpn.enable = mkEnableOption "AirVPN over WireGuard";
+        vpn = {
+          enable = mkEnableOption "AirVPN over WireGuard";
 
-        vpn.forwardedPort = mkOption {
-          type = types.nullOr types.port;
-          default = null;
-          example = 18086;
-          description = "port forwarded by the VPN provider";
+          forwardedPort = mkOption {
+            type = types.nullOr types.port;
+            default = null;
+            example = 18086;
+            description = "port forwarded by the VPN provider";
+          };
         };
 
         serverGroupName = mkOption {

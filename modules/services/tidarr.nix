@@ -19,6 +19,7 @@
             ports = [ "${toString listenPort}:8484" ];
             environment = {
               TIDDL_AUTH = "4N3n6Q1x95LL5K7p;oKOXfJW371cX6xaZ0PyhgGNBdNLlBZd4AKKYougMjik=";
+              PLAYLIST_ALBUMS = "true";
             };
             volumes = [
               "${cfg.configPath}/tidarr:/shared"
