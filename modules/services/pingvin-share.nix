@@ -5,7 +5,7 @@
       cfg = config.server;
       fqdn = cfg.domain;
       listenPort = 4000;
-      version = "v1.15.2";
+      version = "v1.16.3";
     in
     {
       config = {
@@ -13,7 +13,7 @@
           docker-pingvin-share-x = lib.mkIf cfg.docker.pingvin-share-x.enable {
             autoStart = true;
             serviceName = "docker-pingvin-share-x";
-            pull = "missing";
+            pull = "newer";
             image = "smp46/pingvin-share-x:${version}";
             user = "0:0";
             ports = [ "${toString listenPort}:3000" ];

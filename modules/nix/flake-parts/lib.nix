@@ -40,6 +40,7 @@ in
             system = {
               inherit stateVersion;
             };
+            documentation.man.cache.enable = false;
           }
         ];
       };

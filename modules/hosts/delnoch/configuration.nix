@@ -156,6 +156,8 @@ in
       };
 
       security.sudo.wheelNeedsPassword = false;
+      security.tpm2.enable = false;
+      systemd.tpm2.enable = false;
 
       systemd.settings.Manager = {
         DefaultTimeoutStartSec = "30s";

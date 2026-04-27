@@ -42,7 +42,7 @@
           };
         };
 
-        systemd.services.create-spliit-pod = {
+        systemd.services.create-spliit-pod = lib.mkIf cfg.docker.spliit.enable {
           serviceConfig.Type = "oneshot";
           wantedBy = [
             "docker-spliit-db.service"

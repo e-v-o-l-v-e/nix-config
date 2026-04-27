@@ -63,15 +63,6 @@
               '';
             };
 
-        systemd.services."docker-silverbullet" = lib.mkIf cfg.docker.silverbullet.enable {
-          serviceConfig.TimeoutStopSec = lib.mkForce 30;
-          serviceConfig.TimeoutStartSec = lib.mkForce 30;
-        };
-        systemd.services."docker-silverbullet-public" = lib.mkIf cfg.docker.silverbullet-public.enable {
-          serviceConfig.TimeoutStopSec = lib.mkForce 30;
-          serviceConfig.TimeoutStartSec = lib.mkForce 30;
-        };
-
         systemd.timers."sb-publish" = {
           timerConfig = {
             OnCalendar = "01:00:00";
