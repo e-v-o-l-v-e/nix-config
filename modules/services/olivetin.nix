@@ -34,11 +34,13 @@
               title = "Publish SB";
               shell = "fish ${scriptDir}/sb-public.fish > ${scriptDir}/logs/sb.log";
               icon = "🗘";
+              timeout = 300;
             }
             {
               title = "Adjust Silence Level";
               icon = "🤫";
               shell = "fish ${scriptDir}/bruit.fish {{level}}";
+              timeout = 300;
               arguments = [
                 {
                   name = "level";
@@ -93,6 +95,46 @@
           sudo
         ];
       };
+
+      security.sudo.extraRules = lib.mkIf config.services.olivetin.enable [
+        {
+          users = [ cfg.serverUserName ];
+          commands = [
+            {
+              command = "/run/current-system/sw/bin/systemctl stop sonarr radarr prowlarr slskd";
+              options = [ "NOPASSWD" ];
+            }
+            {
+              command = "/run/current-system/sw/bin/systemctl start sonarr radarr prowlarr slskd";
+              options = [ "NOPASSWD" ];
+            }
+            {
+              command = "/run/current-system/sw/bin/systemctl stop qbittorrent";
+              options = [ "NOPASSWD" ];
+            }
+            {
+              command = "/run/current-system/sw/bin/systemctl start qbittorrent";
+              options = [ "NOPASSWD" ];
+            }
+            {
+              command = "/run/current-system/sw/bin/systemctl stop sonarr radarr prowlarr slskd qbittorrent";
+              options = [ "NOPASSWD" ];
+            }
+            {
+              command = "/run/current-system/sw/bin/systemctl start sonarr radarr prowlarr slskd qbittorrent";
+              options = [ "NOPASSWD" ];
+            }
+            {
+              command = "/run/current-system/sw/bin/systemctl stop jellyfin";
+              options = [ "NOPASSWD" ];
+            }
+            {
+              command = "/run/current-system/sw/bin/systemctl start jellyfin";
+              options = [ "NOPASSWD" ];
+            }
+          ];
+        }
+      ];
 
       services.caddy.virtualHosts = lib.mkIf config.services.olivetin.enable {
         "olivetin.${fqdn}".extraConfig = ''
