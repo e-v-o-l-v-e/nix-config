@@ -171,6 +171,7 @@ in
       cli-utils
 
       neovim
+      sops
       ssh
       git
     ];

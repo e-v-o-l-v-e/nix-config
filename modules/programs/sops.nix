@@ -4,23 +4,27 @@ let
   common.sopsFile = "${secrets}/common.yaml";
 in
 {
-  flake.modules.nixos.sops = {
+  flake.modules.nixos.sops =
+    { pkgs, ... }:
+    {
 
-    imports = [
-      inputs.sops-nix.nixosModules.sops
-    ];
+      imports = [
+        inputs.sops-nix.nixosModules.sops
+      ];
 
-    sops = {
-      defaultSopsFile = common.sopsFile;
-      validateSopsFiles = true;
+      sops = {
+        defaultSopsFile = common.sopsFile;
+        validateSopsFiles = true;
 
-      age = {
-        sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-        keyFile = "/var/lib/sops-nix/key.txt";
-        generateKey = true;
+        age = {
+          sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+          keyFile = "/var/lib/sops-nix/key.txt";
+          generateKey = true;
+        };
       };
+
+      environment.systemPackages = [ pkgs.sops ];
     };
-  };
 
   flake.modules.homeManager.sops =
     { config, ... }:
