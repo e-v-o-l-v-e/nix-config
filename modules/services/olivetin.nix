@@ -45,32 +45,16 @@
                 {
                   name = "level";
                   type = "select";
-                  choices = [
-                    {
-                      title = "Level 3 (Total Silence)";
-                      value = "3";
-                    }
-                    {
-                      title = "Level 2";
-                      value = "2";
-                    }
-                    {
-                      title = "Level 1";
-                      value = "1";
-                    }
-                    {
-                      title = "Level -1";
-                      value = "-1";
-                    }
-                    {
-                      title = "Level -2";
-                      value = "-2";
-                    }
-                    {
-                      title = "Level -3 (Full Power)";
-                      value = "-3";
-                    }
-                  ];
+                  choices =
+                    [ {
+                        title = "Level 3 (Total Silence)";
+                        value = "3";
+                      } ] 
+                    ++ map (n: { title = "Level ${toString n}"; value = n; }) [ 2 1 (-1) (-2) ]
+                    ++ [ {
+                        title = "Level -3 (Full Power)";
+                        value = "-3";
+                      } ];
                 }
               ];
             }
@@ -99,40 +83,24 @@
       security.sudo.extraRules = lib.mkIf config.services.olivetin.enable [
         {
           users = [ cfg.serverUserName ];
-          commands = [
-            {
-              command = "/run/current-system/sw/bin/systemctl stop sonarr radarr prowlarr slskd";
-              options = [ "NOPASSWD" ];
-            }
-            {
-              command = "/run/current-system/sw/bin/systemctl start sonarr radarr prowlarr slskd";
-              options = [ "NOPASSWD" ];
-            }
-            {
-              command = "/run/current-system/sw/bin/systemctl stop qbittorrent";
-              options = [ "NOPASSWD" ];
-            }
-            {
-              command = "/run/current-system/sw/bin/systemctl start qbittorrent";
-              options = [ "NOPASSWD" ];
-            }
-            {
-              command = "/run/current-system/sw/bin/systemctl stop sonarr radarr prowlarr slskd qbittorrent";
-              options = [ "NOPASSWD" ];
-            }
-            {
-              command = "/run/current-system/sw/bin/systemctl start sonarr radarr prowlarr slskd qbittorrent";
-              options = [ "NOPASSWD" ];
-            }
-            {
-              command = "/run/current-system/sw/bin/systemctl stop jellyfin";
-              options = [ "NOPASSWD" ];
-            }
-            {
-              command = "/run/current-system/sw/bin/systemctl start jellyfin";
-              options = [ "NOPASSWD" ];
-            }
-          ];
+          commands =
+            builtins.concatMap
+              (services: [
+                {
+                  command = "/run/current-system/sw/bin/systemctl start ${services}";
+                  options = [ "NOPASSWD" ];
+                }
+                {
+                  command = "/run/current-system/sw/bin/systemctl stop ${services}";
+                  options = [ "NOPASSWD" ];
+                }
+              ])
+              [
+                "sonarr radarr prowlarr slskd"
+                "qbittorrent"
+                "sonarr radarr prowlarr slskd qbittorrent"
+                "jellyfin"
+              ];
         }
       ];
 
