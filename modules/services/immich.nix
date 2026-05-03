@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.immich =
-    { config, lib, ... }:
+    { config, lib, pkgs, ... }:
     let
       cfg = config.server;
       fqdn = cfg.domain;
@@ -19,6 +19,21 @@
         inherit (config.services.immich) enable;
         port = proxy-port;
         immichUrl = "http://localhost:${toString immich-port}";
+      };
+
+      systemd.services.immich-collation-refresh = {
+        description = "Refresh immich PostgreSQL collation version";
+        after = [ "postgresql.service" ];
+        wantedBy = [ "multi-user.target" ];
+        path = [ config.services.postgresql.package ];
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+          User = "immich";
+        };
+        script = ''
+          psql immich -c "ALTER DATABASE immich REFRESH COLLATION VERSION;"
+        '';
       };
 
       services.caddy.virtualHosts = lib.mkIf config.services.immich.enable {
