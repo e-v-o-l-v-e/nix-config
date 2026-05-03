@@ -11,6 +11,12 @@
       cfg = config.server;
     in
     {
+      nixpkgs.overlays = [
+        (_: prev: {
+          paperless-ngx = prev.paperless-ngx.overrideAttrs { doCheck = false; dontUsePytestCheck = true; };
+        })
+      ];
+
       services.paperless = {
         passwordFile = config.sops.secrets.paperless-password-file.path;
         dataDir = "${cfg.ssdPath}/paperless";
