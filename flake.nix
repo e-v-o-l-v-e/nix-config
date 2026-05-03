@@ -35,6 +35,9 @@
 
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
 
-    devshell.url = "github:numtide/devshell";
+    devshell = {
+      url = "github:numtide/devshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }
