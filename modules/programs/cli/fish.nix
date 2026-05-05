@@ -4,7 +4,7 @@
       fish = {
         enable = true;
 
-        generateCompletions = true;
+        generateCompletions = false;
 
         shellAbbrs = {
           # shell
