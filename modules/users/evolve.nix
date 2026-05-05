@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ self, ... }:
 let
   username = "evolve";
 in
@@ -16,9 +16,9 @@ in
         shell = pkgs.fish;
 
         openssh.authorizedKeys.keyFiles = [
-          "${inputs.secrets}/public_keys/github.pub"
-          "${inputs.secrets}/public_keys/git_unistra.pub"
-          "${inputs.secrets}/public_keys/waylander.pub"
+          "${self}/secrets/public_keys/github.pub"
+          "${self}/secrets/public_keys/git_unistra.pub"
+          "${self}/secrets/public_keys/waylander.pub"
         ];
 
         # TODO modularize

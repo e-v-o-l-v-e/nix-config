@@ -635,7 +635,6 @@
         "import-tree": "import-tree",
         "nixpkgs": "nixpkgs",
         "nvf": "nvf",
-        "secrets": "secrets",
         "sops-nix": "sops-nix",
         "vimjoyer": "vimjoyer",
         "vpn-confinement": "vpn-confinement",
@@ -665,18 +664,6 @@
         "repo": "rust-overlay",
         "type": "github"
       }
-    },
-    "secrets": {
-      "flake": false,
-      "locked": {
-        "path": "./secrets",
-        "type": "path"
-      },
-      "original": {
-        "path": "./secrets",
-        "type": "path"
-      },
-      "parent": []
     },
     "smfh": {
       "inputs": {

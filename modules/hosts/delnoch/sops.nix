@@ -1,8 +1,8 @@
-{ self, inputs, ... }:
+{ self, ... }:
 let
-  delnoch.sopsFile = "${inputs.secrets}/delnoch.yaml";
-  common.sopsFile = "${inputs.secrets}/common.yaml";
-  server.sopsFile = "${inputs.secrets}/server.yaml";
+  delnoch.sopsFile = "${self}/secrets/delnoch.yaml";
+  common.sopsFile = "${self}/secrets/common.yaml";
+  server.sopsFile = "${self}/secrets/server.yaml";
 in
 {
   flake.modules.nixos.delnoch-sops = {
@@ -16,7 +16,9 @@ in
       };
 
       # services
-      caddy-env = server // { owner = "caddy"; };
+      caddy-env = server // {
+        owner = "caddy";
+      };
       silverbullet-env = server;
       kavita-token = server;
       navidrome-env = server;

@@ -1,6 +1,6 @@
-{ inputs, ... }:
+{ inputs, self, ... }:
 let
-  secrets = inputs.secrets;
+  secrets = "${self}/secrets";
   common.sopsFile = "${secrets}/common.yaml";
 in
 {

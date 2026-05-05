@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ self, ... }:
 {
   # REQUIRE MODULE [ server ]
   flake.modules.nixos.paperless =
@@ -34,8 +34,8 @@
         environmentFile = config.sops.secrets.paperless-env.path;
       };
 
-      sops.secrets.paperless-password-file.sopsFile = "${inputs.secrets}/server.yaml";
-      sops.secrets.paperless-env.sopsFile = "${inputs.secrets}/server.yaml";
+      sops.secrets.paperless-password-file.sopsFile = "${self}/secrets/server.yaml";
+      sops.secrets.paperless-env.sopsFile = "${self}/secrets/server.yaml";
 
       systemd.tmpfiles.rules =
         let

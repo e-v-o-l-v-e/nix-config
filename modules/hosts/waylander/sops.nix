@@ -1,6 +1,6 @@
-{ self, inputs, ... }:
+{ self, ... }:
 let
-  waylander.sopsFile = "${inputs.secrets}/waylander.yaml";
+  waylander.sopsFile = "${self}/secrets/waylander.yaml";
 in
 {
   flake.modules.nixos.waylander-sops = {

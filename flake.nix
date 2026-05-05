@@ -28,11 +28,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    secrets = {
-      url = "path:./secrets";
-      flake = false;
-    };
-
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
 
     devshell = {

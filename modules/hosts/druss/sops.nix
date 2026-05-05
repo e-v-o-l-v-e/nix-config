@@ -1,6 +1,6 @@
-{ self, inputs, ... }:
+{ self, ... }:
 let
-  druss.sopsFile = "${inputs.secrets}/druss.yaml";
+  druss.sopsFile = "${self}/secrets/druss.yaml";
 in
 {
   flake.modules.nixos.druss-sops = {
