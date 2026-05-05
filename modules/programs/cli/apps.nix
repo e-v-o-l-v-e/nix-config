@@ -33,10 +33,9 @@
       { pkgs, ... }:
       {
         imports = with inputs.self.modules.homeManager; [
-          cli-core
+          # cli-core
 
           starship
-          fish
           nh
           pay-respects
           zoxide
@@ -49,6 +48,7 @@
           duf
           ethtool
           fastfetch
+          file
           ffmpeg
           fzf
           imagemagick
@@ -57,10 +57,13 @@
           linux-manual
           man-pages
           man-pages-posix
+          mediainfo
           openssl
           parted
           pciutils
           playerctl
+          poppler # yazi pdf preview
+          resvg # yazi svg preview
           tmux
           trashy
           xdg-utils
@@ -72,8 +75,8 @@
       { pkgs, ... }:
       {
         imports = with inputs.self.modules.homeManager; [
-          cli-core
-          cli-utils
+          # cli-core
+          # cli-utils
 
           nix-index
           direnv

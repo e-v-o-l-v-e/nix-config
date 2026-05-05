@@ -42,6 +42,7 @@ in
         greetd
         hyprland
         wayland
+        niri-vimjoyer
 
         # nix
         sops
