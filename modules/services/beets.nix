@@ -155,7 +155,7 @@
             -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \
             -o -iname '*.lrc' -o -iname '*.log' -o -iname '*.nfo' \
             \) -delete
-          find ${musicUnmappedDir}/ -type d -empty -delete
+          find ${musicUnmappedDir} -mindepth 1 -type d -empty -delete
         '';
       };
     in
