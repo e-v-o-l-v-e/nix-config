@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ self, ... }:
 {
   flake.modules.homeManager = {
     gui-common =
@@ -27,7 +27,8 @@
       { pkgs, ... }:
       {
         imports = [
-          inputs.self.modules.homeManager.zen-browser
+          self.modules.homeManager.zen-browser
+          self.modules.homeManager.mime
         ];
 
         home.packages = with pkgs; [
