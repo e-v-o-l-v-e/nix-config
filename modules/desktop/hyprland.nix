@@ -12,6 +12,8 @@
         xwayland.enable = true;
       };
 
+      security.pam.services.hyprlock = { };
+
       services.greetd.settings.default_session = {
         command = "${lib.getExe pkgs.tuigreet} --time --cmd start-hyprland";
       };
