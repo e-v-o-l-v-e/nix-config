@@ -70,6 +70,7 @@ in
       gui-theming
       hyprland
       fonts
+      quickshell
 
       # programs
       nh
