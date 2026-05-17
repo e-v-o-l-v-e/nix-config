@@ -38,6 +38,7 @@
             environment = {
               SB_READ_ONLY = "true";
               SB_INDEX_PAGE = "index-public";
+              SB_DISABLE_SERVICE_WORKER = "true";
             };
           };
 

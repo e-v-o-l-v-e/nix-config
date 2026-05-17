@@ -24,6 +24,7 @@
         profileDir = "${cfg.configPath}/qbittorrent";
         user = cfg.serverUserName;
         group = cfg.serverGroupName;
+        extraArgs = [ "--confirm-legal-notice" ];
       };
 
       services.caddy.virtualHosts = lib.mkIf config.services.qbittorrent.enable {
@@ -69,9 +70,20 @@
             enable = true;
             vpnNamespace = "qbitvpn";
           };
+
+          # Bind the daemon lifecycle to the qbitvpn namespace setup
+          after = [
+            "qbitvpn.service"
+            "network-online.target"
+          ];
+          requires = [ "qbitvpn.service" ];
+
           serviceConfig = {
-            ExecStop = "${pkgs.coreutils}/bin/kill -s SIGTERM $MAINPID";
             UMask = "0002";
+            Restart = "on-failure";
+            RestartSec = "10s";
+            # delete the lockfile before starting
+            # ExecStartPre = "${pkgs.coreutils}/bin/rm -f ${cfg.configPath}/qbittorrent/qBittorrent/config/lockfile";
           };
         };
       };

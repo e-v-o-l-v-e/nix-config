@@ -37,8 +37,8 @@
 
           services.caddy.virtualHosts = lib.mkIf config.services.${name}.enable {
             "${name}.${fqdn}".extraConfig = ''
-              reverse_proxy http://localhost:${toString port}
               import cfdns
+              reverse_proxy http://localhost:${toString port}
             '';
           };
 

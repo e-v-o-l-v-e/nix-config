@@ -28,7 +28,7 @@
         runVend = true;
         subPackages = [ "cmd/caddy" ];
         src = pkgs.caddy.src;
-        vendorHash = "sha256-5wcj1IMYR/9p8twzlPbNHnpImAOnh5wuudnItwYBFeA=";
+        vendorHash = "sha256-bMOD8ybBsFrq8cNGNMXFVtT69HxezXV624Az1fp970M=";
         overrideModAttrs = (
           _: {
             preBuild = ''
