@@ -79,6 +79,7 @@ in
 
       # ZFS
       boot.zfs.extraPools = [ "tank" ];
+      boot.zfs.forceImportRoot = false;
       boot.supportedFilesystems.zfs = true;
       networking.hostId = "ea274802";
       environment.systemPackages = [ pkgs.zfs ];
