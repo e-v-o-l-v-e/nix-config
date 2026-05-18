@@ -40,7 +40,7 @@
             };
           };
           logging = {
-            level = "debug"; # optional, enable debug logging
+            # level = "debug"; # optional, enable debug logging
             bad_put_request_content = true; # only if level=debug
             request_header_on_debug = true; # only if level=debug
             request_content_on_debug = true; # only if level=debug
