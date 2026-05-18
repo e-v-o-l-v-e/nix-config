@@ -48,6 +48,7 @@ in
           # cloud
           immich
           opencloud
+          radicale
           paperless
 
           # download
@@ -127,6 +128,7 @@ in
 
         immich.enable = true;
         opencloud.enable = true;
+        radicale.enable = true;
         paperless.enable = true;
 
         matrix-conduit.enable = true;
