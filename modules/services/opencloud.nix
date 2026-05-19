@@ -54,8 +54,14 @@
       services.caddy.virtualHosts = lib.mkIf config.services.opencloud.enable {
         "${cloud.url}".extraConfig = ''
           import cfdns
-          reverse_proxy http://localhost:${toString cloud.port}
           encode gzip
+
+          reverse_proxy http://localhost:${toString cloud.port}
+
+          # fix double header for vdirsyncer
+          header {
+            -Server
+          }
         '';
         "${collabora.url}" = lib.mkIf config.services.collabora-online.enable {
           extraConfig = ''
