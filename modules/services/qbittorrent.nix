@@ -80,10 +80,10 @@
 
           serviceConfig = {
             UMask = "0002";
-            Restart = "on-failure";
+            Restart = "no";
             RestartSec = "10s";
             # delete the lockfile before starting
-            # ExecStartPre = "${pkgs.coreutils}/bin/rm -f ${cfg.configPath}/qbittorrent/qBittorrent/config/lockfile";
+            ExecStartPre = "${pkgs.coreutils}/bin/rm -f ${cfg.configPath}/qbittorrent/qBittorrent/config/lockfile";
           };
         };
       };

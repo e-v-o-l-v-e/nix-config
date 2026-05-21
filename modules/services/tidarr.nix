@@ -5,7 +5,7 @@
       cfg = config.server;
       fqdn = cfg.domain;
       listenPort = 8484;
-      version = "1.2.2";
+      version = "1.2.3";
     in
     {
       config = {

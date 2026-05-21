@@ -1,4 +1,6 @@
+{ self, ... }:
 {
+  # REQUIRED MODULES [ sops ]
   flake.modules.nixos.beets =
     {
       pkgs,
@@ -52,7 +54,12 @@
         match:
           strong_rec_thresh: 0.20
 
-        plugins: embedart scrub lastgenre info musicbrainz lyrics substitute hook
+        plugins: embedart scrub lastgenre info tidal musicbrainz lyrics substitute hook 
+
+        tidal:
+          client_id: ZXxzWHD4WUMddowe
+          token_file: tidal_token.json
+          data_source_mismatch_penalty: 0.4
 
         substitute:
           '^(Bigflo & Oli)$': '\1'
