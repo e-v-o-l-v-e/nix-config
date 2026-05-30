@@ -58,7 +58,7 @@
 
         tidal:
           client_id: ZXxzWHD4WUMddowe
-          token_file: tidal_token.json
+          token_file: ${cfg.configPath}/beets/tidal_token.json
           data_source_mismatch_penalty: 0.4
 
         substitute:
@@ -138,7 +138,7 @@
         hook:
           hooks:
             - event: cli_exit
-              command: ${post-script}/bin/beets-post-script
+              command: ${post-script}/bin/beets-post-script >/dev/null 2>&1 < /dev/null &
       '';
 
       beet-import = pkgs.writeShellApplication {
