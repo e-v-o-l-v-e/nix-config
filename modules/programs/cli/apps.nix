@@ -92,8 +92,11 @@
           cava
           discordo
           jellyfin-tui
+          khal
           lowfi
           presenterm
+          python3
+          vdirsyncer
           sops
         ];
       };
