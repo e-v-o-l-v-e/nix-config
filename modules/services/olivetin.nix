@@ -27,13 +27,13 @@
             {
               title = "Import unmapped";
               shell = "beet-import";
-              icon = "󰋺";
+              icon = "🎵";
               timeout = 3000;
             }
             {
               title = "Publish SB";
               shell = "fish ${scriptDir}/sb-public.fish > ${scriptDir}/logs/sb.log";
-              icon = "🗘";
+              icon = "📨";
               timeout = 300;
             }
             {
@@ -61,12 +61,12 @@
             {
               title = "wake druss";
               shell = "${lib.getExe pkgs.wakeonlan} f0:2f:74:ad:7b:a6";
-              icon = "󰀠 ";
+              icon = "🚀";
             }
             {
               title = "wake new-delnoch";
               shell = "${lib.getExe pkgs.wakeonlan} 54:bf:64:73:0e:9b";
-              icon = "󰀠 ";
+              icon = "🚀";
             }
           ];
         };
