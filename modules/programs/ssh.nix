@@ -8,7 +8,7 @@
       enable = true;
       enableDefaultConfig = false;
 
-      matchBlocks = {
+      settings = {
         "github" = {
           host = "github.com";
           identityFile = "~/.ssh/keys/github";
