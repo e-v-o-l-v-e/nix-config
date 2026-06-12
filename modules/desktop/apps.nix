@@ -18,6 +18,7 @@
           pavucontrol
           ueberzugpp
           vlc
+          wf-recorder
           wl-clipboard
           ydotool
         ];
