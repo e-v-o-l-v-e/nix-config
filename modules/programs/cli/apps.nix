@@ -63,6 +63,7 @@
           pciutils
           playerctl
           poppler # yazi pdf preview
+          pulseaudio
           resvg # yazi svg preview
           tmux
           trashy
