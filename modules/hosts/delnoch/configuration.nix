@@ -82,7 +82,7 @@ in
       boot.zfs.forceImportRoot = false;
       boot.supportedFilesystems.zfs = true;
       networking.hostId = "ea274802";
-      environment.systemPackages = [ pkgs.zfs ];
+      environment.systemPackages = [ pkgs.zfs pkgs.wakeonlan ];
 
       # Network
       networking.defaultGateway = {
