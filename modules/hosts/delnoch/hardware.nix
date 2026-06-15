@@ -1,6 +1,11 @@
 {
   flake.modules.nixos.delnoch =
-    { config, lib, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     {
       hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
@@ -34,7 +39,7 @@
       };
 
       services.fstrim.enable = false;
-      swapDevices = [ ];
+      swapDevices = [ { device = "/swapfile"; } ];
 
       # Disable Realtek offloads on enp2s0 to prevent network drops
       systemd.services.disable-enp2s0-offloads = {
