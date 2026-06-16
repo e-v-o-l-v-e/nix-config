@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.wayland =
-    { pkgs, config, ... }:
+    { pkgs, config, lib, ... }:
     {
       xdg.portal = {
         enable = true;
@@ -26,7 +26,7 @@
       };
 
       security.polkit.enable = true;
-      services.gnome.gnome-keyring.enable = config.programs.niri.enable;
+      services.gnome.gnome-keyring.enable = config.programs.hyprland.enable || config.programs.niri.enable;
 
       environment.systemPackages = with pkgs; [
         xwayland-satellite
