@@ -9,6 +9,11 @@
       enableDefaultConfig = false;
 
       settings = {
+        "forgejo" = {
+          host = "git.imp-network.com";
+          identityFile = "~/.ssh/keys/forgejo";
+          addKeysToAgent = "yes";
+        };
         "github" = {
           host = "github.com";
           identityFile = "~/.ssh/keys/github";

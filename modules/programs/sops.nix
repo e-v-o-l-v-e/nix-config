@@ -43,6 +43,9 @@ in
         validateSopsFiles = true;
 
         secrets = {
+          "private_keys/forgejo" = {
+            path = "${sshkeydir}/forgejo";
+          };
           "private_keys/github" = {
             path = "${sshkeydir}/github";
           };
