@@ -50,6 +50,7 @@ in
           opencloud
           radicale
           paperless
+          forgejo
 
           # download
           arr
@@ -131,6 +132,7 @@ in
         opencloud.enable = true;
         radicale.enable = true;
         paperless.enable = true;
+        forgejo.enable = true;
 
         matrix-conduit.enable = true;
 
