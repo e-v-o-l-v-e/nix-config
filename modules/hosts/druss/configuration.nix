@@ -56,7 +56,11 @@ in
 
     services.displayManager.autoLogin.user = mainUser;
 
-    users.users."${mainUser}".extraGroups = [ "podman" ];
+    virtualisation.docker.enable = true;
+    users.users."${mainUser}".extraGroups = [
+      "podman"
+      "docker"
+    ];
 
     boot.loader.timeout = 0;
   };
