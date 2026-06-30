@@ -1,3 +1,6 @@
+> [!WARNING]
+> THIS REPO HAS BEEN MIGRATED TO https://git.imp-network.com/evolve/nix-config
+
 # My Flake
 
 This flake holds the config (nixos and/or home-manager) for all my machines.
